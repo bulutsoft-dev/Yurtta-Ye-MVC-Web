@@ -2,38 +2,66 @@
 @{
     ViewData["Title"] = "Menü Sorgula";
 }
+
 <h2>Menü Sorgula</h2>
+
 <form asp-action="Index" method="post">
     <div class="form-group">
         <label asp-for="CityId">Şehir</label>
         <select asp-for="CityId" class="form-control" asp-items="@Model.Cities"></select>
         <span asp-validation-for="CityId" class="text-danger"></span>
     </div>
+
     <div class="form-group">
         <label>Öğün</label>
         <div>
-            <input type="radio" asp-for="MealType" value="Breakfast" /> Sabah
-            <input type="radio" asp-for="MealType" value="Dinner" /> Akşam
+            <div class="form-check form-check-inline">
+                <input type="radio" asp-for="MealType" value="Breakfast" class="form-check-input" />
+                <label class="form-check-label" for="MealType">Sabah</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input type="radio" asp-for="MealType" value="Dinner" class="form-check-input" />
+                <label class="form-check-label" for="MealType">Akşam</label>
+            </div>
         </div>
         <span asp-validation-for="MealType" class="text-danger"></span>
     </div>
+
     <div class="form-group">
         <label asp-for="Date">Tarih</label>
         <input type="date" asp-for="Date" class="form-control" />
         <span asp-validation-for="Date" class="text-danger"></span>
     </div>
+
     <button type="submit" class="btn btn-primary">Sorgula</button>
 </form>
 
-@if (Model.ErrorMessage != null)
+@if (!string.IsNullOrEmpty(Model.ErrorMessage))
 {
     <div class="alert alert-warning mt-3">@Model.ErrorMessage</div>
 }
 else if (Model.Menu != null)
 {
-    <div class="card mt-3">
+    <div class="card mt-4">
         <div class="card-header">
-            <h5>@Model.Menu.Date.ToString("dd.MM.yyyy") - @(Model.Menu.MealType == "Breakfast" ? "Sabah" : "Akşam")</h5>
+            <h5>
+                @{
+                    DateTime? menuDate = null;
+                    if (DateTime.TryParse(Model.Menu.Date, out var parsed))
+                    {
+                        menuDate = parsed;
+                    }
+                }
+                @if (menuDate != null)
+                {
+                    <text>@menuDate.Value.ToString("dd.MM.yyyy")</text>
+                }
+                else
+                {
+                    <text>Tarih geçersiz</text>
+                }
+
+            </h5>
         </div>
         <div class="card-body">
             @foreach (var category in Model.Menu.Items.Select(i => i.Category).Distinct())
@@ -42,7 +70,7 @@ else if (Model.Menu != null)
                 <ul>
                     @foreach (var item in Model.Menu.Items.Where(i => i.Category == category))
                     {
-                        <li>@item.Name (@(string.IsNullOrEmpty(item.Gram) ? "Belirtilmemiş" : item.Gram))</li>
+                        <li>@item.Name (@(string.IsNullOrWhiteSpace(item.Gram) ? "Belirtilmemiş" : item.Gram))</li>
                     }
                 </ul>
             }

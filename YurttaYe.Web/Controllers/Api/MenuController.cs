@@ -1,9 +1,7 @@
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Threading.Tasks;
 using YurttaYe.Core.Models.Dtos;
-using YurttaYe.Core.Models.Entities;
+using YurttaYe.Core.Services;
 
 namespace YurttaYe.Web.Controllers.Api
 {
@@ -19,50 +17,54 @@ namespace YurttaYe.Web.Controllers.Api
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetMenus(int cityId, string mealType, DateTime date)
+        public async Task<IActionResult> GetAll([FromQuery] int? cityId, [FromQuery] string? mealType, [FromQuery] string? date)
         {
-            try
+            var menus = await _menuService.GetAllMenusAsync();
+            var dtos = menus.Select(m => new MenuDto
             {
-                var menu = await _menuService.GetMenuAsync(cityId, mealType, date);
-                return Ok(menu);
-            }
-            catch (Exception ex)
-            {
-                return NotFound(new { message = ex.Message });
-            }
+                Id = m.Id,
+                CityId = m.CityId,
+                MealType = m.MealType,
+                Date = m.Date.ToString("yyyy-MM-dd"),
+                Energy = m.Energy,
+                Items = m.Items.Select(i => new MenuItemDto
+                {
+                    Category = i.Category,
+                    Name = i.Name,
+                    Gram = i.Gram
+                }).ToList()
+            });
+
+            if (cityId.HasValue)
+                dtos = dtos.Where(m => m.CityId == cityId.Value);
+            if (!string.IsNullOrEmpty(mealType))
+                dtos = dtos.Where(m => m.MealType == mealType);
+            if (!string.IsNullOrEmpty(date) && DateTime.TryParse(date, out var parsedDate))
+                dtos = dtos.Where(m => DateTime.Parse(m.Date).Date == parsedDate.Date);
+
+            return Ok(dtos);
         }
 
-        [HttpPost]
-        [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> CreateMenu([FromBody] MenuDto dto)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
         {
-            if (!ModelState.IsValid)
+            var menu = await _menuService.GetMenuByIdAsync(id);
+            if (menu == null) return NotFound();
+            var dto = new MenuDto
             {
-                return BadRequest(ModelState);
-            }
-
-            try
-            {
-                var menu = new Menu
+                Id = menu.Id,
+                CityId = menu.CityId,
+                MealType = menu.MealType,
+                Date = menu.Date.ToString("yyyy-MM-dd"),
+                Energy = menu.Energy,
+                Items = menu.Items.Select(i => new MenuItemDto
                 {
-                    CityId = dto.CityId,
-                    MealType = dto.MealType,
-                    Date = dto.Date,
-                    Energy = dto.Energy,
-                    Items = dto.Items.Select(i => new MenuItem
-                    {
-                        Category = i.Category,
-                        Name = i.Name,
-                        Gram = i.Gram
-                    }).ToList()
-                };
-                await _menuService.AddMenuAsync(menu);
-                return CreatedAtAction(nameof(GetMenus), new { id = menu.Id }, menu);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { message = ex.Message });
-            }
+                    Category = i.Category,
+                    Name = i.Name,
+                    Gram = i.Gram
+                }).ToList()
+            };
+            return Ok(dto);
         }
     }
 }

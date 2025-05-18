@@ -1,8 +1,6 @@
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using YurttaYe.Core.Models.Dtos;
-using YurttaYe.Core.Models.Entities;
 using YurttaYe.Core.Services;
 
 namespace YurttaYe.Web.Controllers.Api
@@ -19,25 +17,28 @@ namespace YurttaYe.Web.Controllers.Api
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetCities()
+        public async Task<IActionResult> GetAll()
         {
             var cities = await _cityService.GetAllCitiesAsync();
-            var result = cities.Select(c => new CityDto { Id = c.Id, Name = c.Name });
-            return Ok(result);
+            var dtos = cities.Select(c => new CityDto
+            {
+                Id = c.Id,
+                Name = c.Name
+            });
+            return Ok(dtos);
         }
 
-        [HttpPost]
-        [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> CreateCity([FromBody] CityDto dto)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
         {
-            if (!ModelState.IsValid)
+            var city = await _cityService.GetCityByIdAsync(id);
+            if (city == null) return NotFound();
+            var dto = new CityDto
             {
-                return BadRequest(ModelState);
-            }
-
-            var city = new City { Name = dto.Name };
-            await _cityService.AddCityAsync(city);
-            return CreatedAtAction(nameof(GetCities), new { id = city.Id }, city);
+                Id = city.Id,
+                Name = city.Name
+            };
+            return Ok(dto);
         }
     }
 }
