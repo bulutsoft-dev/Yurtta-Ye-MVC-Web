@@ -1,6 +1,15 @@
-namespace YurttaYe.Core.Models.Dtos;
+using System;
+using System.Collections.Generic;
 
-public class MenuDto
+namespace YurttaYe.Core.Models.Dtos
 {
-    
+    public class MenuDto
+    {
+        public int Id { get; set; }
+        public int CityId { get; set; }
+        public string MealType { get; set; } = string.Empty;
+        public DateTime Date { get; set; }
+        public string Energy { get; set; } = string.Empty;
+        public List<MenuItemDto> Items { get; set; } = new();
+    }
 }
