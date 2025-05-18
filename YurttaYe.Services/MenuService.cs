@@ -5,7 +5,6 @@ using YurttaYe.Core.Models.Dtos;
 using YurttaYe.Core.Models.Entities;
 using YurttaYe.Core.Services;
 using YurttaYe.Data.Repositories;
-using YurttaYe.Data.Repositories.Interfaces;
 
 namespace YurttaYe.Services
 {
