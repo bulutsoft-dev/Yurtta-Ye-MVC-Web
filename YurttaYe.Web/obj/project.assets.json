@@ -1630,7 +1630,10 @@
         },
         "runtime": {
           "bin/placeholder/YurttaYe.Core.dll": {}
-        }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       },
       "YurttaYe.Data/1.0.0": {
         "type": "project",
