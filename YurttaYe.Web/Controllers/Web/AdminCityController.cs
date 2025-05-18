@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using YurttaYe.Core.Models.Entities;
 using YurttaYe.Core.Models.ViewModels;
-using YurttaYe.Core.Services;
 
 namespace YurttaYe.Web.Controllers.Web
 {
