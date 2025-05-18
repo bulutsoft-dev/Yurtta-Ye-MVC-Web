@@ -1,0 +1,233 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/YurttaYe.Web.csproj": {}
+  },
+  "projects": {
+    "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Core/YurttaYe.Core.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Core/YurttaYe.Core.csproj",
+        "projectName": "YurttaYe.Core",
+        "projectPath": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Core/YurttaYe.Core.csproj",
+        "packagesPath": "/home/furkanblt/.nuget/packages/",
+        "outputPath": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Core/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/furkanblt/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/var/run/host/usr/lib/dotnet/sdk/8.0.116/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Data/YurttaYe.Data.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Data/YurttaYe.Data.csproj",
+        "projectName": "YurttaYe.Data",
+        "projectPath": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Data/YurttaYe.Data.csproj",
+        "packagesPath": "/home/furkanblt/.nuget/packages/",
+        "outputPath": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Data/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/furkanblt/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/var/run/host/usr/lib/dotnet/sdk/8.0.116/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Services/YurttaYe.Services.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Services/YurttaYe.Services.csproj",
+        "projectName": "YurttaYe.Services",
+        "projectPath": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Services/YurttaYe.Services.csproj",
+        "packagesPath": "/home/furkanblt/.nuget/packages/",
+        "outputPath": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Services/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/furkanblt/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/var/run/host/usr/lib/dotnet/sdk/8.0.116/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/YurttaYe.Web.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/YurttaYe.Web.csproj",
+        "projectName": "YurttaYe.Web",
+        "projectPath": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/YurttaYe.Web.csproj",
+        "packagesPath": "/home/furkanblt/.nuget/packages/",
+        "outputPath": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/furkanblt/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Core/YurttaYe.Core.csproj": {
+                "projectPath": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Core/YurttaYe.Core.csproj"
+              },
+              "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Data/YurttaYe.Data.csproj": {
+                "projectPath": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Data/YurttaYe.Data.csproj"
+              },
+              "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Services/YurttaYe.Services.csproj": {
+                "projectPath": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Services/YurttaYe.Services.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/var/run/host/usr/lib/dotnet/sdk/8.0.116/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

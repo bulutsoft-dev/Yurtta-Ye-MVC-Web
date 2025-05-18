@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\YurttaYe.Core\YurttaYe.Core.csproj" />
+      <ProjectReference Include="..\YurttaYe.Data\YurttaYe.Data.csproj" />
+      <ProjectReference Include="..\YurttaYe.Services\YurttaYe.Services.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Views\Admin\City\" />
+    </ItemGroup>
+
+</Project>
