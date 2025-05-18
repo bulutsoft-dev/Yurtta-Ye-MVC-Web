@@ -20,6 +20,13 @@
       </PackageReference>
       <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.5" />
       <PackageReference Include="Swashbuckle.AspNetCore" Version="6.7.3" />
+        <PackageReference Include="EPPlus" Version="7.0.10" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Pages\AdminMenu\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\AdminMenu\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\AdminMenu\Index.cshtml" />
     </ItemGroup>
 
 </Project>
