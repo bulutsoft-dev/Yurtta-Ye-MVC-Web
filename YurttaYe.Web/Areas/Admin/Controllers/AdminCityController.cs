@@ -5,8 +5,9 @@ using YurttaYe.Core.Models.Entities;
 using YurttaYe.Core.Models.ViewModels;
 using YurttaYe.Core.Services;
 
-namespace YurttaYe.Web.Controllers.Web
+namespace YurttaYe.Web.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     [Authorize(Roles = "Admin")]
     public class AdminCityController : Controller
     {
@@ -51,7 +52,7 @@ namespace YurttaYe.Web.Controllers.Web
 
         public async Task<IActionResult> Edit(int id)
         {
-            var city = (await _cityService.GetAllCitiesAsync()).FirstOrDefault(c => c.Id == id);
+            var city = await _cityService.GetCityByIdAsync(id);
             if (city == null) return NotFound();
 
             var model = new AdminCityViewModel { Id = city.Id, Name = city.Name };
@@ -64,7 +65,7 @@ namespace YurttaYe.Web.Controllers.Web
             if (ModelState.IsValid)
             {
                 var city = new City { Id = model.Id, Name = model.Name };
-                await _cityService.AddCityAsync(city); // Note: UpdateCityAsync eklenecek
+                await _cityService.UpdateCityAsync(city);
                 TempData["Success"] = "Şehir başarıyla güncellendi.";
                 return RedirectToAction(nameof(Index));
             }
@@ -77,7 +78,7 @@ namespace YurttaYe.Web.Controllers.Web
         {
             try
             {
-                // Note: DeleteCityAsync eklenecek
+                await _cityService.DeleteCityAsync(id);
                 TempData["Success"] = "Şehir başarıyla silindi.";
             }
             catch

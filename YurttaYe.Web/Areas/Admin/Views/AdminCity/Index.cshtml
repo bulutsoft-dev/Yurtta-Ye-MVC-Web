@@ -3,8 +3,8 @@
 ViewData["Title"] = "Şehir Yönetimi";
 }
 <h2>Şehir Yönetimi</h2>
-<a asp-action="Create" class="btn btn-success mb-3">Yeni Şehir</a>
-<form asp-action="Index" method="get" class="mb-3">
+<a asp-area="Admin" asp-controller="AdminCity" asp-action="Create" class="btn btn-success mb-3">Yeni Şehir</a>
+<form asp-area="Admin" asp-controller="AdminCity" asp-action="Index" method="get" class="mb-3">
     <div class="input-group">
         <input type="text" name="search" class="form-control" placeholder="Şehir ara..." />
         <button type="submit" class="btn btn-primary">Ara</button>
@@ -23,8 +23,8 @@ ViewData["Title"] = "Şehir Yönetimi";
     <tr>
         <td>@city.Name</td>
         <td>
-            <a asp-action="Edit" asp-route-id="@city.Id" class="btn btn-primary btn-sm">Düzenle</a>
-            <form asp-action="Delete" asp-route-id="@city.Id" method="post" style="display:inline;">
+            <a asp-area="Admin" asp-controller="AdminCity" asp-action="Edit" asp-route-id="@city.Id" class="btn btn-primary btn-sm">Düzenle</a>
+            <form asp-area="Admin" asp-controller="AdminCity" asp-action="Delete" asp-route-id="@city.Id" method="post" style="display:inline;">
                 <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Silmek istiyor musunuz?')">Sil</button>
             </form>
         </td>
@@ -42,7 +42,6 @@ ViewData["Title"] = "Şehir Yönetimi";
 <div class="alert alert-danger mt-3">@TempData["Error"]</div>
 }
 
-@section Scripts {
 <script>
     $(document).ready(function () {
         $('#cityTable').DataTable({
@@ -50,4 +49,3 @@ ViewData["Title"] = "Şehir Yönetimi";
         });
     });
 </script>
-}

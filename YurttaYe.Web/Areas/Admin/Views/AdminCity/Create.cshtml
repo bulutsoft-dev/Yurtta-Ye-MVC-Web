@@ -1,10 +1,9 @@
 @model YurttaYe.Core.Models.ViewModels.AdminCityViewModel
 @{
-    ViewData["Title"] = "Şehir Düzenle";
+    ViewData["Title"] = "Yeni Şehir";
 }
-<h2>Şehir Düzenle</h2>
-<form asp-action="Edit" method="post">
-    <input type="hidden" asp-for="Id" />
+<h2>Yeni Şehir</h2>
+<form asp-area="Admin" asp-controller="AdminCity" asp-action="Create" method="post">
     <div class="form-group">
         <label asp-for="Name">Şehir Adı</label>
         <input asp-for="Name" class="form-control" />
@@ -22,6 +21,4 @@
     <div class="alert alert-danger mt-3">@TempData["Error"]</div>
 }
 
-@section Scripts {
     <partial name="_ValidationScriptsPartial" />
-}

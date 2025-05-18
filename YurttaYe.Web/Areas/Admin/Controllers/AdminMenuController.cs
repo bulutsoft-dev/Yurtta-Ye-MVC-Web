@@ -9,8 +9,9 @@ using YurttaYe.Core.Services;
 using System.IO;
 using OfficeOpenXml;
 
-namespace YurttaYe.Web.Controllers.Web
+namespace YurttaYe.Web.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     [Authorize(Roles = "Admin")]
     public class AdminMenuController : Controller
     {
@@ -41,7 +42,6 @@ namespace YurttaYe.Web.Controllers.Web
                 }).ToList()
             });
 
-            // Filtreleme
             if (!string.IsNullOrEmpty(cityFilter))
                 model = model.Where(m => m.CityName.Contains(cityFilter, StringComparison.OrdinalIgnoreCase));
             if (!string.IsNullOrEmpty(mealTypeFilter))
@@ -207,7 +207,6 @@ namespace YurttaYe.Web.Controllers.Web
                         Items = new List<MenuItem>()
                     };
 
-                    // Örnek: 5. sütundan itibaren yemek öğeleri (kategori, isim, gramaj)
                     for (int col = 5; col <= worksheet.Dimension.Columns; col += 3)
                     {
                         var category = worksheet.Cells[row, col].Value?.ToString();

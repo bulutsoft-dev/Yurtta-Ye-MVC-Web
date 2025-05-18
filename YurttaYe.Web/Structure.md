@@ -1,5 +1,5 @@
 YurttaYe-MVC/
-├── YurttaYe.Core/                          // Class Library: Modeller ve Arayüzler
+├── YurttaYe.Core/                      # Class Library: Modeller, DTO'lar, Arayüzler
 │   ├── Models/
 │   │   ├── Entities/
 │   │   │   ├── City.cs
@@ -18,13 +18,15 @@ YurttaYe-MVC/
 │   │   │   ├── IMenuService.cs
 │   │   │   ├── ICityService.cs
 │   ├── YurttaYe.Core.csproj
-├── YurttaYe.Services/                      // Class Library: İş Mantığı
+│
+├── YurttaYe.Services/                  # Class Library: İş Mantığı (Business Logic)
 │   ├── MenuService.cs
 │   ├── CityService.cs
 │   ├── YurttaYe.Services.csproj
-├── YurttaYe.Data/                          // Class Library: Veri Erişimi
+│
+├── YurttaYe.Data/                      # Class Library: Veri Erişimi ve EF Core
 │   ├── AppDbContext.cs
-│   ├── Migrations/                        // EF Core migration dosyaları
+│   ├── Migrations/
 │   ├── SeedData.cs
 │   ├── Repositories/
 │   │   ├── MenuRepository.cs
@@ -33,29 +35,41 @@ YurttaYe-MVC/
 │   │   │   ├── IMenuRepository.cs
 │   │   │   ├── ICityRepository.cs
 │   ├── YurttaYe.Data.csproj
-├── YurttaYe.Web/                           // MVC: Controller, View, Statik Dosyalar
+│
+├── YurttaYe.Web/                       # ASP.NET Core MVC Web Projesi
+│   ├── Areas/
+│   │   ├── Admin/
+│   │   │   ├── Controllers/
+│   │   │   │   ├── AdminMenuController.cs
+│   │   │   │   ├── AdminCityController.cs
+│   │   │   ├── Views/
+│   │   │   │   ├── AdminMenu/
+│   │   │   │   │   ├── Index.cshtml
+│   │   │   │   │   ├── Create.cshtml
+│   │   │   │   │   ├── Edit.cshtml
+│   │   │   │   │   ├── Upload.cshtml
+│   │   │   │   ├── AdminCity/
+│   │   │   │   │   ├── Index.cshtml
+│   │   │   │   │   ├── Create.cshtml
+│   │   │   │   │   ├── Edit.cshtml
+│
 │   ├── Controllers/
 │   │   ├── Api/
 │   │   │   ├── MenuController.cs
 │   │   │   ├── CityController.cs
 │   │   ├── Web/
 │   │   │   ├── HomeController.cs
-│   │   │   ├── AdminMenuController.cs
-│   │   │   ├── AdminCityController.cs
+│   │   │   ├── AccountController.cs
+│
 │   ├── Views/
 │   │   ├── Home/
 │   │   │   ├── Index.cshtml
-│   │   ├── Admin/
-│   │   │   ├── Menu/
-│   │   │   │   ├── Index.cshtml
-│   │   │   │   ├── Create.cshtml
-│   │   │   │   ├── Edit.cshtml
-│   │   │   ├── City/
-│   │   │   │   ├── Index.cshtml
-│   │   │   │   ├── Create.cshtml
+│   │   ├── Account/
+│   │   │   ├── Login.cshtml
 │   │   ├── Shared/
 │   │   │   ├── _Layout.cshtml
 │   │   │   ├── _ValidationScriptsPartial.cshtml
+│
 │   ├── wwwroot/
 │   │   ├── css/
 │   │   │   ├── site.css
@@ -65,12 +79,17 @@ YurttaYe-MVC/
 │   │   │   ├── bootstrap/
 │   │   │   ├── jquery/
 │   │   │   ├── datatables/
+│
 │   ├── Middleware/
 │   │   ├── ExceptionMiddleware.cs
+│
 │   ├── Program.cs
 │   ├── appsettings.json
+│   ├── libman.json
 │   ├── YurttaYe.Web.csproj
-├── YurttaYe-MVC.sln                    // Çözüm dosyası
+│
+├── YurttaYe-MVC.sln                    # Çözüm dosyası
+
 
 YurttaYe-Mobile/
 ├── lib/

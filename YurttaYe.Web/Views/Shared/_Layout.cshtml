@@ -24,10 +24,10 @@
                         @if (User.IsInRole("Admin"))
                         {
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="AdminMenu" asp-action="Index">Menü Yönetimi</a>
+                                <a class="nav-link" asp-area="Admin" asp-controller="AdminMenu" asp-action="Index">Menü Yönetimi</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="AdminCity" asp-action="Index">Şehir Yönetimi</a>
+                                <a class="nav-link" asp-area="Admin" asp-controller="AdminCity" asp-action="Index">Şehir Yönetimi</a>
                             </li>
                         }
                     </ul>

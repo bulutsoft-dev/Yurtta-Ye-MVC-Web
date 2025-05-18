@@ -25,20 +25,20 @@ namespace YurttaYe.Web.Controllers.Web
         }
 
         [HttpGet]
-        public IActionResult Login()
+        public IActionResult Login(string returnUrl = null)
         {
+            ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(string username, string password)
+        public async Task<IActionResult> Login(string username, string password, string returnUrl = null)
         {
             var user = await _userManager.FindByNameAsync(username);
             if (user != null && await _userManager.CheckPasswordAsync(user, password))
             {
                 await _signInManager.SignInAsync(user, isPersistent: false);
 
-                // JWT Token oluştur
                 var claims = new[]
                 {
                     new Claim(ClaimTypes.Name, username),
@@ -53,7 +53,9 @@ namespace YurttaYe.Web.Controllers.Web
                     expires: DateTime.Now.AddHours(1),
                     signingCredentials: creds);
 
-                return RedirectToAction("Index", "AdminMenu");
+                if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                    return Redirect(returnUrl);
+                return RedirectToAction("Index", "AdminMenu", new { area = "Admin" });
             }
 
             ViewBag.Error = "Geçersiz kullanıcı adı veya şifre.";

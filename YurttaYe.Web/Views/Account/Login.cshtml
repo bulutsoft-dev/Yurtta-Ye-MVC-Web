@@ -3,6 +3,7 @@
 }
 <h2>Giriş Yap</h2>
 <form asp-action="Login" method="post">
+    <input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]" />
     <div class="form-group">
         <label for="username">Kullanıcı Adı</label>
         <input type="text" name="username" class="form-control" />

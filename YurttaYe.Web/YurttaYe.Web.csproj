@@ -24,4 +24,14 @@
         <PackageReference Include="EPPlus" Version="7.0.10" />
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Views\Admin\City\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Admin\City\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Admin\City\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Admin\Menu\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Admin\Menu\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Admin\Menu\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Admin\Menu\Upload.cshtml" />
+    </ItemGroup>
+
 </Project>
