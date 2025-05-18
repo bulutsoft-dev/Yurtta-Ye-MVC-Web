@@ -1641,7 +1641,8 @@
         "dependencies": {
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "8.0.8",
           "Microsoft.EntityFrameworkCore": "8.0.8",
-          "Microsoft.EntityFrameworkCore.SqlServer": "8.0.8"
+          "Microsoft.EntityFrameworkCore.SqlServer": "8.0.8",
+          "YurttaYe.Core": "1.0.0"
         },
         "compile": {
           "bin/placeholder/YurttaYe.Data.dll": {}
@@ -1653,6 +1654,10 @@
       "YurttaYe.Services/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "YurttaYe.Core": "1.0.0",
+          "YurttaYe.Data": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/YurttaYe.Services.dll": {}
         },

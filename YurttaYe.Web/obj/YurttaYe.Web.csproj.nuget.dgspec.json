@@ -81,7 +81,11 @@
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Core/YurttaYe.Core.csproj": {
+                "projectPath": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Core/YurttaYe.Core.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -148,7 +152,14 @@
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Core/YurttaYe.Core.csproj": {
+                "projectPath": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Core/YurttaYe.Core.csproj"
+              },
+              "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Data/YurttaYe.Data.csproj": {
+                "projectPath": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Data/YurttaYe.Data.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
