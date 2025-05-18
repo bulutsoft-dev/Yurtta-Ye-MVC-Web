@@ -24,7 +24,7 @@ namespace YurttaYe.Services
                 Id = menu.Id,
                 CityId = menu.CityId,
                 MealType = menu.MealType,
-                Date = menu.Date,
+                Date = menu.Date.ToString("yyyy-MM-dd"),
                 Energy = menu.Energy,
                 Items = menu.Items.Select(i => new MenuItemDto
                 {
