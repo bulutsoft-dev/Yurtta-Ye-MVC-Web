@@ -20,9 +20,25 @@ namespace YurttaYe.Services
             return await _cityRepository.GetAllCitiesAsync();
         }
 
+        public async Task<City> GetCityByIdAsync(int id)
+        {
+            return await _cityRepository.GetCityByIdAsync(id)
+                   ?? throw new Exception("Şehir bulunamadı.");
+        }
+
         public async Task AddCityAsync(City city)
         {
             await _cityRepository.AddCityAsync(city);
+        }
+
+        public async Task UpdateCityAsync(City city)
+        {
+            await _cityRepository.UpdateCityAsync(city);
+        }
+
+        public async Task DeleteCityAsync(int id)
+        {
+            await _cityRepository.DeleteCityAsync(id);
         }
     }
 }
