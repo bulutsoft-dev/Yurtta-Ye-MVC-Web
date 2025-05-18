@@ -68,15 +68,21 @@ app.UseRouting();
 app.UseCors("AllowFlutter");
 app.UseAuthentication();
 app.UseAuthorization();
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    name: "admin",
+    pattern: "Admin/{controller}/{action=Index}/{id?}");
 
 // Seed database
 using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    SeedData.Initialize(context);
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+    await SeedData.Initialize(context, userManager);
 }
 
 app.Run();
