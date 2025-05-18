@@ -7,26 +7,21 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\YurttaYe.Core\YurttaYe.Core.csproj" />
-      <ProjectReference Include="..\YurttaYe.Data\YurttaYe.Data.csproj" />
-      <ProjectReference Include="..\YurttaYe.Services\YurttaYe.Services.csproj" />
+        <ProjectReference Include="..\YurttaYe.Core\YurttaYe.Core.csproj" />
+        <ProjectReference Include="..\YurttaYe.Data\YurttaYe.Data.csproj" />
+        <ProjectReference Include="..\YurttaYe.Services\YurttaYe.Services.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.8" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.8">
-        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        <PrivateAssets>all</PrivateAssets>
-      </PackageReference>
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.5" />
-      <PackageReference Include="Swashbuckle.AspNetCore" Version="6.7.3" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.8" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.8">
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
+        <!-- DÜZELTİLDİ: EF Core ile uyumlu sürüme çekildi -->
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.8" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.7.3" />
         <PackageReference Include="EPPlus" Version="7.0.10" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <_ContentIncludedByDefault Remove="Pages\AdminMenu\Create.cshtml" />
-      <_ContentIncludedByDefault Remove="Pages\AdminMenu\Edit.cshtml" />
-      <_ContentIncludedByDefault Remove="Pages\AdminMenu\Index.cshtml" />
     </ItemGroup>
 
 </Project>

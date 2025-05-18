@@ -36,18 +36,10 @@
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.Relational.dll
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.Sqlite.dll
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.SqlServer.dll
-/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/Microsoft.Extensions.Caching.Abstractions.dll
-/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/Microsoft.Extensions.Caching.Memory.dll
-/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/Microsoft.Extensions.Configuration.Abstractions.dll
-/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/Microsoft.Extensions.DependencyInjection.dll
-/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/Microsoft.Extensions.DependencyModel.dll
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/Microsoft.Extensions.Identity.Core.dll
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/Microsoft.Extensions.Identity.Stores.dll
-/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/Microsoft.Extensions.Logging.dll
-/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/Microsoft.Extensions.Logging.Abstractions.dll
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/Microsoft.Extensions.Options.dll
-/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/Microsoft.Extensions.Primitives.dll
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/Microsoft.Identity.Client.dll
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/Microsoft.Identity.Client.Extensions.Msal.dll
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/Microsoft.IdentityModel.Abstractions.dll
@@ -73,16 +65,12 @@
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/System.Composition.Runtime.dll
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/System.Composition.TypedParts.dll
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/System.Configuration.ConfigurationManager.dll
-/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/System.Diagnostics.DiagnosticSource.dll
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/System.Drawing.Common.dll
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/System.IdentityModel.Tokens.Jwt.dll
-/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/System.IO.Pipelines.dll
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/System.Memory.Data.dll
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/System.Runtime.Caching.dll
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/System.Security.Cryptography.ProtectedData.dll
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/System.Security.Permissions.dll
-/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/System.Text.Encodings.Web.dll
-/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/System.Text.Json.dll
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/System.Windows.Extensions.dll
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/cs/Microsoft.CodeAnalysis.resources.dll
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/de/Microsoft.CodeAnalysis.resources.dll
@@ -149,7 +137,6 @@
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/runtimes/linux-mips64/native/libe_sqlite3.so
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/runtimes/linux-musl-arm/native/libe_sqlite3.so
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/runtimes/linux-musl-arm64/native/libe_sqlite3.so
-/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/runtimes/linux-musl-s390x/native/libe_sqlite3.so
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/runtimes/linux-musl-x64/native/libe_sqlite3.so
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/runtimes/linux-ppc64le/native/libe_sqlite3.so
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/runtimes/linux-s390x/native/libe_sqlite3.so
@@ -165,7 +152,6 @@
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/runtimes/win-x86/native/e_sqlite3.dll
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/runtimes/win/lib/net6.0/System.Runtime.Caching.dll
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/runtimes/win/lib/net6.0/System.Security.Cryptography.ProtectedData.dll
-/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/runtimes/browser/lib/net8.0/System.Text.Encodings.Web.dll
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/runtimes/win/lib/net6.0/System.Windows.Extensions.dll
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/YurttaYe.Core.dll
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/YurttaYe.Data.dll
@@ -195,3 +181,4 @@
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/Microsoft.IO.RecyclableMemoryStream.dll
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/runtimes/win/lib/net7.0/Microsoft.Win32.SystemEvents.dll
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/runtimes/win/lib/net7.0/System.Drawing.Common.dll
+/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/libman.json

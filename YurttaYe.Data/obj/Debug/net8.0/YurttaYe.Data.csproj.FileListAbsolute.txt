@@ -14,3 +14,5 @@
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Data/obj/Debug/net8.0/refint/YurttaYe.Data.dll
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Data/obj/Debug/net8.0/YurttaYe.Data.pdb
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Data/obj/Debug/net8.0/ref/YurttaYe.Data.dll
+/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Data/bin/Debug/net8.0/YurttaYe.Data.runtimeconfig.json
+/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Data/obj/Debug/net8.0/YurttaYe.Data.genruntimeconfig.cache
