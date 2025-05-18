@@ -6,6 +6,7 @@ using YurttaYe.Data;
 using YurttaYe.Data.Repositories;
 using YurttaYe.Services;
 using YurttaYe.Web.Middleware;
+using YurttaYe.Web.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,7 +32,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFlutter", policy =>
-        policy.WithOrigins("http://localhost:8080", "http://localhost:4200")
+        policy.AllowAnyOrigin() // Geliştirme için tüm origin'lere izin ver
             .AllowAnyMethod()
             .AllowAnyHeader());
 });
@@ -42,6 +43,7 @@ builder.Services.AddScoped<IMenuService, MenuService>();
 builder.Services.AddScoped<ICityService, CityService>();
 builder.Services.AddScoped<IMenuRepository, MenuRepository>();
 builder.Services.AddScoped<ICityRepository, CityRepository>();
+builder.Services.AddHttpClient<ApiService>();
 
 // 6. Swagger
 builder.Services.AddSwaggerGen();
