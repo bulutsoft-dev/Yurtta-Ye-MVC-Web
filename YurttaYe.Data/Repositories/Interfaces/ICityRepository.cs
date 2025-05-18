@@ -1,6 +1,12 @@
-namespace YurttaYe.Data.Repositories.Interfaces;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using YurttaYe.Core.Models.Entities;
 
-public class ICityRepository
+namespace YurttaYe.Data.Repositories
 {
-    
+    public interface ICityRepository
+    {
+        Task<List<City>> GetAllCitiesAsync();
+        Task AddCityAsync(City city);
+    }
 }
