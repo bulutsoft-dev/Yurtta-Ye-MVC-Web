@@ -1096,7 +1096,10 @@
         },
         "runtime": {
           "bin/placeholder/YurttaYe.Data.dll": {}
-        }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       }
     }
   },
