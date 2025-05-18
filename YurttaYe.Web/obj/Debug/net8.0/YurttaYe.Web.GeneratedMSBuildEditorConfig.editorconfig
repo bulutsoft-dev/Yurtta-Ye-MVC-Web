@@ -18,8 +18,8 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web
 build_property._RazorSourceGeneratorDebug = 
 
-[/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/Views/Account/Login/Login.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9Mb2dpbi9Mb2dpbi5jc2h0bWw=
+[/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/Views/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9Mb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/Views/Admin/City/Create.cshtml]
