@@ -1,6 +1,6 @@
 @model IEnumerable<YurttaYe.Core.Models.ViewModels.AdminMenuViewModel>
 @{
-    ViewData["Title"] = "Menü Yönetimi";
+ViewData["Title"] = "Menü Yönetimi";
 }
 <h2>Menü Yönetimi</h2>
 <a asp-area="Admin" asp-controller="AdminMenu" asp-action="Create" class="btn btn-success mb-3">Yeni Menü</a>
@@ -12,7 +12,7 @@
                 <option value="">Tüm Şehirler</option>
                 @foreach (var city in ViewBag.Cities)
                 {
-                    <option value="@city.Value">@city.Text</option>
+                <option value="@city.Value">@city.Text</option>
                 }
             </select>
         </div>
@@ -21,7 +21,7 @@
                 <option value="">Tüm Öğünler</option>
                 @foreach (var meal in ViewBag.MealTypes)
                 {
-                    <option value="@meal.Value">@meal.Text</option>
+                <option value="@meal.Value">@meal.Text</option>
                 }
             </select>
         </div>
@@ -35,54 +35,54 @@
 </form>
 <table class="table table-bordered" id="menuTable">
     <thead>
-        <tr>
-            <th>Şehir</th>
-            <th>Öğün</th>
-            <th>Tarih</th>
-            <th>Enerji</th>
-            <th>Yemekler</th>
-            <th>İşlemler</th>
-        </tr>
+    <tr>
+        <th>Şehir</th>
+        <th>Öğün</th>
+        <th>Tarih</th>
+        <th>Enerji</th>
+        <th>Yemekler</th>
+        <th>İşlemler</th>
+    </tr>
     </thead>
     <tbody>
-        @foreach (var menu in Model)
-        {
-            <tr>
-                <td>@menu.CityName</td>
-                <td>@(menu.MealType == "Breakfast" ? "Sabah" : "Akşam")</td>
-                <td>@menu.Date.ToString("dd.MM.yyyy")</td>
-                <td>@menu.Energy</td>
-                <td>
-                    @foreach (var item in menu.Items)
-                    {
-                        <div>@item.Category: @item.Name (@item.Gram)</div>
-                    }
-                </td>
-                <td>
-                    <a asp-area="Admin" asp-controller="AdminMenu" asp-action="Edit" asp-route-id="@menu.Id" class="btn btn-primary btn-sm">Düzenle</a>
-                    <form asp-area="Admin" asp-controller="AdminMenu" asp-action="Delete" asp-route-id="@menu.Id" method="post" style="display:inline;">
-                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Silmek istiyor musunuz?')">Sil</button>
-                    </form>
-                </td>
-            </tr>
-        }
+    @foreach (var menu in Model)
+    {
+    <tr>
+        <td>@menu.CityName</td>
+        <td>@(menu.MealType == "Breakfast" ? "Sabah" : "Akşam")</td>
+        <td>@menu.Date.ToString("dd.MM.yyyy")</td>
+        <td>@menu.Energy</td>
+        <td>
+            @foreach (var item in menu.Items)
+            {
+            <div>@item.Category: @item.Name (@item.Gram)</div>
+            }
+        </td>
+        <td>
+            <a asp-area="Admin" asp-controller="AdminMenu" asp-action="Edit" asp-route-id="@menu.Id" class="btn btn-primary btn-sm">Düzenle</a>
+            <form asp-area="Admin" asp-controller="AdminMenu" asp-action="Delete" asp-route-id="@menu.Id" method="post" style="display:inline;">
+                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Silmek istiyor musunuz?')">Sil</button>
+            </form>
+        </td>
+    </tr>
+    }
     </tbody>
 </table>
 
 @if (TempData["Success"] != null)
 {
-    <div class="alert alert-success mt-3">@TempData["Success"]</div>
+<div class="alert alert-success mt-3">@TempData["Success"]</div>
 }
 @if (TempData["Error"] != null)
 {
-    <div class="alert alert-danger mt-3">@TempData["Error"]</div>
+<div class="alert alert-danger mt-3">@TempData["Error"]</div>
 }
 
-    <script>
-        $(document).ready(function () {
-            $('#menuTable').DataTable({
-                "pageLength": 10,
-                "order": [[2, "desc"]]
-            });
+<script>
+    $(document).ready(function () {
+        $('#menuTable').DataTable({
+            "pageLength": 10,
+            "order": [[2, "desc"]]
         });
-    </script>
+    });
+</script>
