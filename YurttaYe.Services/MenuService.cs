@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using YurttaYe.Core.Models.Dtos;
 using YurttaYe.Core.Models.Entities;
-using YurttaYe.Core.Services;
 using YurttaYe.Data.Repositories;
 
 namespace YurttaYe.Services

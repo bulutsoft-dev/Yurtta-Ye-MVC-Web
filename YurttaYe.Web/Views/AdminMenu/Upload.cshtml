@@ -1,0 +1,26 @@
+@model dynamic
+@{
+    ViewData["Title"] = "Toplu Menü Yükle";
+}
+<h2>Toplu Menü Yükle</h2>
+<p>Excel dosyanız şu formatta olmalı: Şehir, Öğün, Tarih, Enerji, [Kategori, Yemek, Gramaj]... (tekrarlanabilir)</p>
+<form asp-action="Upload" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="file">Excel Dosyası</label>
+        <input type="file" name="file" class="form-control" accept=".xlsx,.xls" />
+    </div>
+    <button type="submit" class="btn btn-primary">Yükle</button>
+</form>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success mt-3">@TempData["Success"]</div>
+}
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger mt-3">@TempData["Error"]</div>
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

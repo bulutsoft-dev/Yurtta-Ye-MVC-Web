@@ -1,0 +1,16 @@
+/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Data/bin/Debug/net8.0/YurttaYe.Data.deps.json
+/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Data/bin/Debug/net8.0/YurttaYe.Data.dll
+/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Data/bin/Debug/net8.0/YurttaYe.Data.pdb
+/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Data/bin/Debug/net8.0/YurttaYe.Core.dll
+/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Data/bin/Debug/net8.0/YurttaYe.Core.pdb
+/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Data/obj/Debug/net8.0/YurttaYe.Data.csproj.AssemblyReference.cache
+/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Data/obj/Debug/net8.0/YurttaYe.Data.GeneratedMSBuildEditorConfig.editorconfig
+/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Data/obj/Debug/net8.0/YurttaYe.Data.AssemblyInfoInputs.cache
+/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Data/obj/Debug/net8.0/YurttaYe.Data.AssemblyInfo.cs
+/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Data/obj/Debug/net8.0/YurttaYe.Data.csproj.CoreCompileInputs.cache
+/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Data/obj/Debug/net8.0/YurttaYe.Data.sourcelink.json
+/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Data/obj/Debug/net8.0/YurttaYe.Data.csproj.CopyComplete
+/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Data/obj/Debug/net8.0/YurttaYe.Data.dll
+/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Data/obj/Debug/net8.0/refint/YurttaYe.Data.dll
+/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Data/obj/Debug/net8.0/YurttaYe.Data.pdb
+/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Data/obj/Debug/net8.0/ref/YurttaYe.Data.dll

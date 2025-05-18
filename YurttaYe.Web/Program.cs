@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using YurttaYe.Core.Services;
 using YurttaYe.Data;
 using YurttaYe.Data.Repositories;
 using YurttaYe.Services;

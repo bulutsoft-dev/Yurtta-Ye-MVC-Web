@@ -1,56 +1,90 @@
-﻿@model YurttaYe.Core.Models.ViewModels.MenuViewModel
+﻿@model IEnumerable<YurttaYe.Core.Models.ViewModels.AdminMenuViewModel>
 @{
-    ViewData["Title"] = "Menü Sorgula";
+    ViewData["Title"] = "Menü Yönetimi";
 }
-<h2>Menü Sorgula</h2>
-<form asp-action="Index" method="post">
-    <div class="form-group">
-        <label asp-for="CityId">Şehir</label>
-        <select asp-for="CityId" class="form-control" asp-items="@Model.Cities"></select>
-        <span asp-validation-for="CityId" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label>Öğün</label>
-        <div>
-            <input type="radio" asp-for="MealType" value="Breakfast" /> Sabah
-            <input type="radio" asp-for="MealType" value="Dinner" /> Akşam
+<h2>Menü Yönetimi</h2>
+<a asp-action="Create" class="btn btn-success mb-3">Yeni Menü</a>
+<a asp-action="Upload" class="btn btn-info mb-3">Toplu Yükle</a>
+<form asp-action="Index" method="get" class="mb-3">
+    <div class="row">
+        <div class="col-md-4">
+            <select name="cityFilter" class="form-control">
+                <option value="">Tüm Şehirler</option>
+                @foreach (var city in ViewBag.Cities)
+                {
+                    <option value="@city.Value">@city.Text</option>
+                }
+            </select>
         </div>
-        <span asp-validation-for="MealType" class="text-danger"></span>
+        <div class="col-md-3">
+            <select name="mealTypeFilter" class="form-control">
+                <option value="">Tüm Öğünler</option>
+                @foreach (var meal in ViewBag.MealTypes)
+                {
+                    <option value="@meal.Value">@meal.Text</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-3">
+            <input type="date" name="dateFilter" class="form-control" />
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary w-100">Filtrele</button>
+        </div>
     </div>
-    <div class="form-group">
-        <label asp-for="Date">Tarih</label>
-        <input type="date" asp-for="Date" class="form-control" />
-        <span asp-validation-for="Date" class="text-danger"></span>
-    </div>
-    <button type="submit" class="btn btn-primary">Sorgula</button>
 </form>
-
-@if (Model.ErrorMessage != null)
-{
-    <div class="alert alert-warning mt-3">@Model.ErrorMessage</div>
-}
-else if (Model.Menu != null)
-{
-    <div class="card mt-3">
-        <div class="card-header">
-            <h5>@Model.Menu.Date.ToString("dd.MM.yyyy") - @(Model.Menu.MealType == "Breakfast" ? "Sabah" : "Akşam")</h5>
-        </div>
-        <div class="card-body">
-            @foreach (var category in Model.Menu.Items.Select(i => i.Category).Distinct())
-            {
-                <h6>@category</h6>
-                <ul>
-                    @foreach (var item in Model.Menu.Items.Where(i => i.Category == category))
+<table class="table table-bordered" id="menuTable">
+    <thead>
+        <tr>
+            <th>Şehir</th>
+            <th>Öğün</th>
+            <th>Tarih</th>
+            <th>Enerji</th>
+            <th>Yemekler</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var menu in Model)
+        {
+            <tr>
+                <td>@menu.CityName</td>
+                <td>@(menu.MealType == "Breakfast" ? "Sabah" : "Akşam")</td>
+                <td>@menu.Date.ToString("dd.MM.yyyy")</td>
+                <td>@menu.Energy</td>
+                <td>
+                    @foreach (var item in menu.Items)
                     {
-                        <li>@item.Name (@(string.IsNullOrEmpty(item.Gram) ? "Belirtilmemiş" : item.Gram))</li>
+                        <div>@item.Category: @item.Name (@item.Gram)</div>
                     }
-                </ul>
-            }
-            <p><strong>Enerji:</strong> @Model.Menu.Energy</p>
-        </div>
-    </div>
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@menu.Id" class="btn btn-primary btn-sm">Düzenle</a>
+                    <form asp-action="Delete" asp-route-id="@menu.Id" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Silmek istiyor musunuz?')">Sil</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success mt-3">@TempData["Success"]</div>
+}
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger mt-3">@TempData["Error"]</div>
 }
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(document).ready(function () {
+            $('#menuTable').DataTable({
+                "pageLength": 10,
+                "order": [[2, "desc"]]
+            });
+        });
+    </script>
 }
