@@ -1,13 +1,15 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using YurttaYe.Core.Models.Entities;
 
 namespace YurttaYe.Data
 {
     public static class SeedData
     {
-        public static void Initialize(AppDbContext context)
+        public static async Task Initialize(AppDbContext context, UserManager<IdentityUser> userManager)
         {
             context.Database.EnsureCreated();
 
@@ -37,6 +39,14 @@ namespace YurttaYe.Data
             };
             context.Menus.Add(menu);
             context.SaveChanges();
+
+            // Admin kullanıcısı oluştur
+            var adminUser = new IdentityUser { UserName = "admin@yurttaye.com", Email = "admin@yurttaye.com" };
+            var result = await userManager.CreateAsync(adminUser, "Admin123!");
+            if (result.Succeeded)
+            {
+                await userManager.AddToRoleAsync(adminUser, "Admin");
+            }
         }
     }
 }
