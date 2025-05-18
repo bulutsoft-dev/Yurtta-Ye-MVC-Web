@@ -1,8 +1,56 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model YurttaYe.Core.Models.ViewModels.MenuViewModel
+@{
+    ViewData["Title"] = "Menü Sorgula";
+}
+<h2>Menü Sorgula</h2>
+<form asp-action="Index" method="post">
+    <div class="form-group">
+        <label asp-for="CityId">Şehir</label>
+        <select asp-for="CityId" class="form-control" asp-items="@Model.Cities"></select>
+        <span asp-validation-for="CityId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Öğün</label>
+        <div>
+            <input type="radio" asp-for="MealType" value="Breakfast" /> Sabah
+            <input type="radio" asp-for="MealType" value="Dinner" /> Akşam
+        </div>
+        <span asp-validation-for="MealType" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Date">Tarih</label>
+        <input type="date" asp-for="Date" class="form-control" />
+        <span asp-validation-for="Date" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Sorgula</button>
+</form>
+
+@if (Model.ErrorMessage != null)
+{
+    <div class="alert alert-warning mt-3">@Model.ErrorMessage</div>
+}
+else if (Model.Menu != null)
+{
+    <div class="card mt-3">
+        <div class="card-header">
+            <h5>@Model.Menu.Date.ToString("dd.MM.yyyy") - @(Model.Menu.MealType == "Breakfast" ? "Sabah" : "Akşam")</h5>
+        </div>
+        <div class="card-body">
+            @foreach (var category in Model.Menu.Items.Select(i => i.Category).Distinct())
+            {
+                <h6>@category</h6>
+                <ul>
+                    @foreach (var item in Model.Menu.Items.Where(i => i.Category == category))
+                    {
+                        <li>@item.Name (@(string.IsNullOrEmpty(item.Gram) ? "Belirtilmemiş" : item.Gram))</li>
+                    }
+                </ul>
+            }
+            <p><strong>Enerji:</strong> @Model.Menu.Energy</p>
+        </div>
+    </div>
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
