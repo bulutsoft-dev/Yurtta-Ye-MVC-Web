@@ -44,27 +44,5 @@ namespace YurttaYe.Web.Controllers.Api
 
             return Ok(dtos);
         }
-
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
-        {
-            var menu = await _menuService.GetMenuByIdAsync(id);
-            if (menu == null) return NotFound();
-            var dto = new MenuDto
-            {
-                Id = menu.Id,
-                CityId = menu.CityId,
-                MealType = menu.MealType,
-                Date = menu.Date.ToString("yyyy-MM-dd"),
-                Energy = menu.Energy,
-                Items = menu.Items.Select(i => new MenuItemDto
-                {
-                    Category = i.Category,
-                    Name = i.Name,
-                    Gram = i.Gram
-                }).ToList()
-            };
-            return Ok(dto);
-        }
     }
 }

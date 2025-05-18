@@ -27,18 +27,5 @@ namespace YurttaYe.Web.Controllers.Api
             });
             return Ok(dtos);
         }
-
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
-        {
-            var city = await _cityService.GetCityByIdAsync(id);
-            if (city == null) return NotFound();
-            var dto = new CityDto
-            {
-                Id = city.Id,
-                Name = city.Name
-            };
-            return Ok(dto);
-        }
     }
 }

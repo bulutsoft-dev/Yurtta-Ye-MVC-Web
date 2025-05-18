@@ -31,10 +31,11 @@ builder.Services.ConfigureApplicationCookie(options =>
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFlutter", policy =>
-        policy.WithOrigins("http://localhost:8080")
-              .AllowAnyMethod()
-              .AllowAnyHeader());
+        policy.WithOrigins("http://localhost:8080", "http://localhost:4200")
+            .AllowAnyMethod()
+            .AllowAnyHeader());
 });
+
 
 // 5. Dependency Injection
 builder.Services.AddScoped<IMenuService, MenuService>();
