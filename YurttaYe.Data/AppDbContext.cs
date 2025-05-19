@@ -18,15 +18,38 @@ namespace YurttaYe.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Menu>()
-                .HasMany(m => m.Items)
-                .WithOne(i => i.Menu)
-                .HasForeignKey(i => i.MenuId);
+            modelBuilder.Entity<City>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).ValueGeneratedOnAdd(); // Auto-increment
+                entity.Property(e => e.Name).IsRequired();
+            });
 
-            modelBuilder.Entity<Menu>()
-                .HasOne(m => m.City)
-                .WithMany()
-                .HasForeignKey(m => m.CityId);
+            modelBuilder.Entity<Menu>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).ValueGeneratedOnAdd(); // Auto-increment
+                entity.Property(e => e.MealType).IsRequired();
+                entity.Property(e => e.Date).IsRequired();
+                entity.Property(e => e.Energy).IsRequired();
+                entity.HasOne(e => e.City)
+                    .WithMany()
+                    .HasForeignKey(e => e.CityId)
+                    .IsRequired();
+                entity.HasMany(e => e.Items)
+                    .WithOne(i => i.Menu)
+                    .HasForeignKey(i => i.MenuId)
+                    .IsRequired();
+            });
+
+            modelBuilder.Entity<MenuItem>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).ValueGeneratedOnAdd(); // Auto-increment
+                entity.Property(e => e.Category).IsRequired();
+                entity.Property(e => e.Name).IsRequired();
+                entity.Property(e => e.Gram).IsRequired();
+            });
         }
     }
 }
