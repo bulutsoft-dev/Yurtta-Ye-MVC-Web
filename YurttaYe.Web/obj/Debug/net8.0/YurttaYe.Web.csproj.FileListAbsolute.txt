@@ -184,3 +184,5 @@
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/libman.json
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/Npgsql.dll
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll
+/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/DotNetEnv.dll
+/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/Sprache.dll
