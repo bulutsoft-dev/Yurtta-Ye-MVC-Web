@@ -21,6 +21,7 @@
         </PackageReference>
         <!-- DÜZELTİLDİ: EF Core ile uyumlu sürüme çekildi -->
         <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.8" />
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.8" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.7.3" />
         <PackageReference Include="EPPlus" Version="7.0.10" />
     </ItemGroup>

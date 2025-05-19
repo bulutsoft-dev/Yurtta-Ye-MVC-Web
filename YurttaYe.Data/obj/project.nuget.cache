@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "345ApwqkNO8=",
+  "dgSpecHash": "rjbNIHQt9uA=",
   "success": true,
   "projectFilePath": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Data/YurttaYe.Data.csproj",
   "expectedPackageFiles": [
@@ -51,6 +51,8 @@
     "/home/furkanblt/.nuget/packages/microsoft.sqlserver.server/1.0.0/microsoft.sqlserver.server.1.0.0.nupkg.sha512",
     "/home/furkanblt/.nuget/packages/microsoft.win32.systemevents/6.0.0/microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "/home/furkanblt/.nuget/packages/mono.texttemplating/2.2.1/mono.texttemplating.2.2.1.nupkg.sha512",
+    "/home/furkanblt/.nuget/packages/npgsql/8.0.4/npgsql.8.0.4.nupkg.sha512",
+    "/home/furkanblt/.nuget/packages/npgsql.entityframeworkcore.postgresql/8.0.8/npgsql.entityframeworkcore.postgresql.8.0.8.nupkg.sha512",
     "/home/furkanblt/.nuget/packages/system.codedom/4.4.0/system.codedom.4.4.0.nupkg.sha512",
     "/home/furkanblt/.nuget/packages/system.collections.immutable/6.0.0/system.collections.immutable.6.0.0.nupkg.sha512",
     "/home/furkanblt/.nuget/packages/system.composition/6.0.0/system.composition.6.0.0.nupkg.sha512",

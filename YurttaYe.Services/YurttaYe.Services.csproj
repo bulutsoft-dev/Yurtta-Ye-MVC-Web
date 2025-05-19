@@ -8,4 +8,7 @@
         <ProjectReference Include="..\YurttaYe.Core\YurttaYe.Core.csproj" />
         <ProjectReference Include="..\YurttaYe.Data\YurttaYe.Data.csproj" />
     </ItemGroup>
+    <ItemGroup>
+      <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.8" />
+    </ItemGroup>
 </Project>

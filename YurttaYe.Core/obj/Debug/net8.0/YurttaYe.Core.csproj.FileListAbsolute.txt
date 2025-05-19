@@ -10,3 +10,4 @@
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Core/obj/Debug/net8.0/refint/YurttaYe.Core.dll
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Core/obj/Debug/net8.0/YurttaYe.Core.pdb
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Core/obj/Debug/net8.0/ref/YurttaYe.Core.dll
+/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Core/obj/Debug/net8.0/YurttaYe.Core.csproj.AssemblyReference.cache

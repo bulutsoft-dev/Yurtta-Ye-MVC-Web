@@ -14,8 +14,17 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 // 2. EF Core (SQLite)
+//builder.Services.AddDbContext<AppDbContext>(options =>
+//    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// PostgreSQL Database Connection String
+var connectionString = Environment.GetEnvironmentVariable("DATABASE_CONNECTION_STRING");
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+{
+    options.UseNpgsql(connectionString); // PostgreSQL için Npgsql kullanılıyor
+});
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
 
 // 3. Identity + Cookie Authentication
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
@@ -76,13 +85,13 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 // 10. Seed verisi
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
-    var context = services.GetRequiredService<AppDbContext>();
-    var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
-    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-    await SeedData.Initialize(context, userManager, roleManager);
-}
+//using (var scope = app.Services.CreateScope())
+//{
+//    var services = scope.ServiceProvider;
+//    var context = services.GetRequiredService<AppDbContext>();
+//    var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
+//    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+//    await SeedData.Initialize(context, userManager, roleManager);
+//}
 
 app.Run();
