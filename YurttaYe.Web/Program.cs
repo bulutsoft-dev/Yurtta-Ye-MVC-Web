@@ -9,6 +9,7 @@ using YurttaYe.Web.Middleware;
 using YurttaYe.Web.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+DotNetEnv.Env.Load();
 
 // 1. MVC + Razor View desteği
 builder.Services.AddControllersWithViews();
@@ -85,13 +86,15 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 // 10. Seed verisi
-//using (var scope = app.Services.CreateScope())
-//{
-//    var services = scope.ServiceProvider;
-//    var context = services.GetRequiredService<AppDbContext>();
-//    var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
-//    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-//    await SeedData.Initialize(context, userManager, roleManager);
-//}
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<AppDbContext>();
+    var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
+    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+
+    await SeedData.Initialize(context, userManager, roleManager);
+}
+
 
 app.Run();
