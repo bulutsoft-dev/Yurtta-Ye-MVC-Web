@@ -25,7 +25,7 @@
                 </div>
 
                 <!-- Hidden Meal Type -->
-                <input type="hidden" asp-for="MealType" id="MealType" value="@(Model.MealType ?? "Breakfast")" />
+                <input type="hidden" asp-for="MealType" id="MealType" value="@(Model.MealType ?? "Kahvaltı")" />
 
                 <!-- Date Picker with Navigation -->
                 <div class="sm:col-span-2">
@@ -57,8 +57,8 @@
             <!-- Meal Type Toggle -->
             <div class="sm:col-span-2 mt-6">
                 <div class="flex space-x-4">
-                    <button type="button" id="breakfastBtn" class="flex-1 py-3 px-6 rounded-lg text-sm font-medium transition-colors @(Model.MealType == "Breakfast" ? "bg-blue-600 text-white hover:bg-blue-700" : "bg-stone-200 text-stone-700 hover:bg-stone-300")">Sabah</button>
-                    <button type="button" id="dinnerBtn" class="flex-1 py-3 px-6 rounded-lg text-sm font-medium transition-colors @(Model.MealType == "Dinner" ? "bg-blue-600 text-white hover:bg-blue-700" : "bg-stone-200 text-stone-700 hover:bg-stone-300")">Akşam</button>
+                    <button type="button" id="breakfastBtn" class="flex-1 py-3 px-6 rounded-lg text-sm font-medium transition-colors @(Model.MealType == "Kahvaltı" ? "bg-blue-600 text-white hover:bg-blue-700" : "bg-stone-200 text-stone-700 hover:bg-stone-300")">Sabah</button>
+                    <button type="button" id="dinnerBtn" class="flex-1 py-3 px-6 rounded-lg text-sm font-medium transition-colors @(Model.MealType == "Akşam Yemeği" ? "bg-blue-600 text-white hover:bg-blue-700" : "bg-stone-200 text-stone-700 hover:bg-stone-300")">Akşam</button>
                 </div>
             </div>
         </div>
@@ -82,7 +82,7 @@
             <div class="bg-stone-100 rounded-xl shadow-md mb-12 border border-stone-200">
                 <div class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-6 rounded-t-xl">
                     <h2 class="text-xl font-semibold tracking-tight">
-                        @(Model.MealType == "Breakfast" ? "Sabah Kahvaltısı" : "Akşam Yemeği") - @formattedDate
+                        @(Model.MealType == "Kahvaltı" ? "Sabah Kahvaltısı" : "Akşam Yemeği") - @formattedDate
                     </h2>
                     <p class="text-sm mt-1 text-blue-100">@Model.Cities.FirstOrDefault(c => c.Value == Model.CityId.ToString())?.Text</p>
                 </div>
@@ -152,12 +152,12 @@
 
         // Yemek türü seçimi
         document.getElementById("breakfastBtn").addEventListener("click", function () {
-            document.getElementById("MealType").value = "Breakfast";
+            document.getElementById("MealType").value = "Kahvaltı";
             document.getElementById("menuForm").submit();
         });
 
         document.getElementById("dinnerBtn").addEventListener("click", function () {
-            document.getElementById("MealType").value = "Dinner";
+            document.getElementById("MealType").value = "Akşam Yemeği";
             document.getElementById("menuForm").submit();
         });
     </script>

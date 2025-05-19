@@ -27,12 +27,12 @@ namespace YurttaYe.Web.Controllers.Web
             var cities = await _cityService.GetAllCitiesAsync();
 
             // Read defaults from configuration
-            var defaultCity = _configuration["Defaults:City"] ?? "İstanbul";
-            var breakfastHours = _configuration["Defaults:BreakfastHours"] ?? "00:00-12:00";
+            var defaultCity = _configuration["Defaults:City"] ?? "Manisa";
+            var breakfastHours = _configuration["Defaults:BreakfastHours"] ?? "23:30-12:00";
             var dinnerHours = _configuration["Defaults:DinnerHours"] ?? "12:00-23:30";
 
             // Parse time ranges
-            string mealType = "Breakfast"; // Fallback
+            string mealType = "Kahvaltı"; // Fallback
             try
             {
                 var now = DateTime.Now.TimeOfDay;
@@ -50,17 +50,17 @@ namespace YurttaYe.Web.Controllers.Web
                 // Determine meal type based on current time
                 if (now >= breakfastStart && now <= breakfastEnd)
                 {
-                    mealType = "Breakfast";
+                    mealType = "Kahvaltı";
                 }
                 else if (now >= dinnerStart && now <= dinnerEnd)
                 {
-                    mealType = "Dinner";
+                    mealType = "Akşam Yemeği";
                 }
             }
             catch
             {
                 // Fallback to Breakfast if parsing fails
-                mealType = "Breakfast";
+                mealType = "Kahvaltı";
             }
 
             var model = new MenuViewModel
@@ -107,28 +107,6 @@ namespace YurttaYe.Web.Controllers.Web
                 }
             }
             return View(model);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> GetMenuPartial(MenuViewModel model)
-        {
-            if (model.CityId <= 0 || model.Date == default || string.IsNullOrEmpty(model.MealType))
-            {
-                model.ErrorMessage = "Lütfen tüm alanları doldurunuz.";
-                return PartialView("_MenuPartial", model);
-            }
-
-            try
-            {
-                var menuDto = await _menuService.GetMenuAsync(model.CityId, model.MealType, model.Date);
-                model.Menu = menuDto;
-            }
-            catch (Exception ex)
-            {
-                model.ErrorMessage = "Menü getirilirken bir hata oluştu: " + ex.Message;
-            }
-
-            return PartialView("_MenuPartial", model);
         }
     }
 }
