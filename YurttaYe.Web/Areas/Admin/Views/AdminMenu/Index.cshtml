@@ -1,88 +1,103 @@
-@model IEnumerable<YurttaYe.Core.Models.ViewModels.AdminMenuViewModel>
-@{
-ViewData["Title"] = "Menü Yönetimi";
-}
-<h2>Menü Yönetimi</h2>
-<a asp-area="Admin" asp-controller="AdminMenu" asp-action="Create" class="btn btn-success mb-3">Yeni Menü</a>
-<a asp-area="Admin" asp-controller="AdminMenu" asp-action="Upload" class="btn btn-info mb-3">Toplu Yükle</a>
-<form asp-area="Admin" asp-controller="AdminMenu" asp-action="Index" method="get" class="mb-3">
-    <div class="row">
-        <div class="col-md-4">
-            <select name="cityFilter" class="form-control">
-                <option value="">Tüm Şehirler</option>
-                @foreach (var city in ViewBag.Cities)
-                {
-                <option value="@city.Value">@city.Text</option>
-                }
-            </select>
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menüler</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="container mx-auto p-6">
+        <h2 class="text-2xl font-bold mb-6">Menüler</h2>
+
+        @if (TempData["Success"] != null)
+        {
+            <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4 rounded">
+                @TempData["Success"]
+            </div>
+        }
+        @if (TempData["Error"] != null)
+        {
+            <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4 rounded">
+                @TempData["Error"]
+            </div>
+        }
+
+        <form method="get" asp-area="Admin" asp-controller="AdminMenu" asp-action="Index" class="mb-6 grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Şehir</label>
+                <select name="cityFilter" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="">Tümü</option>
+                    @foreach (var city in ViewBag.Cities)
+                    {
+                        <option value="@city.Value" selected="@(city.Value == ViewBag.CityFilter ? "selected" : null)">@city.Text</option>
+                    }
+                </select>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Yemek Türü</label>
+                <select name="mealTypeFilter" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="">Tümü</option>
+                    @foreach (var mealType in ViewBag.MealTypes)
+                    {
+                        <option value="@mealType.Value" selected="@(mealType.Value == ViewBag.MealTypeFilter ? "selected" : null)">@mealType.Text</option>
+                    }
+                </select>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Tarih</label>
+                <input type="date" name="dateFilter" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" value="@ViewBag.DateFilter" />
+            </div>
+            <div class="flex items-end">
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 w-full pointer-events-auto">Filtrele</button>
+            </div>
+        </form>
+
+        <div class="bg-white shadow rounded-lg overflow-hidden">
+            <table class="w-full">
+                <thead class="bg-gray-200">
+                    <tr>
+                        <th class="p-3 text-left">Şehir</th>
+                        <th class="p-3 text-left">Yemek Türü</th>
+                        <th class="p-3 text-left">Tarih</th>
+                        <th class="p-3 text-left">Enerji</th>
+                        <th class="p-3 text-left">Öğeler</th>
+                        <th class="p-3 text-left">İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var menu in Model)
+                    {
+                        <tr class="border-b">
+                            <td class="p-3">@menu.CityName</td>
+                            <td class="p-3">@menu.MealType</td>
+                            <td class="p-3">@menu.Date.ToString("dd.MM.yyyy")</td>
+                            <td class="p-3">@menu.Energy</td>
+                            <td class="p-3">
+                                <ul class="list-disc pl-5">
+                                    @foreach (var item in menu.Items)
+                                    {
+                                        <li>@item.Category: @item.Name (@item.Gram)</li>
+                                    }
+                                </ul>
+                            </td>
+                            <td class="p-3 flex gap-2">
+                                <a asp-area="Admin" asp-controller="AdminMenu" asp-action="Edit" asp-route-id="@menu.Id" class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 pointer-events-auto">Düzenle</a>
+                                <form asp-area="Admin" asp-controller="AdminMenu" asp-action="Delete" asp-route-id="@menu.Id" method="post" class="inline" onsubmit="return confirm('Bu menüyü silmek istediğinize emin misiniz?');">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 pointer-events-auto">Sil</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
         </div>
-        <div class="col-md-3">
-            <select name="mealTypeFilter" class="form-control">
-                <option value="">Tüm Öğünler</option>
-                @foreach (var meal in ViewBag.MealTypes)
-                {
-                <option value="@meal.Value">@meal.Text</option>
-                }
-            </select>
-        </div>
-        <div class="col-md-3">
-            <input type="date" name="dateFilter" class="form-control" />
-        </div>
-        <div class="col-md-2">
-            <button type="submit" class="btn btn-primary w-100">Filtrele</button>
+
+        <div class="mt-6 flex gap-4">
+            <a asp-area="Admin" asp-controller="AdminMenu" asp-action="Create" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 pointer-events-auto">Yeni Menü Ekle</a>
+            <a asp-area="Admin" asp-controller="AdminMenu" asp-action="Upload" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 pointer-events-auto">Excel Yükle</a>
         </div>
     </div>
-</form>
-<table class="table table-bordered" id="menuTable">
-    <thead>
-    <tr>
-        <th>Şehir</th>
-        <th>Öğün</th>
-        <th>Tarih</th>
-        <th>Enerji</th>
-        <th>Yemekler</th>
-        <th>İşlemler</th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var menu in Model)
-    {
-    <tr>
-        <td>@menu.CityName</td>
-        <td>@(menu.MealType == "Breakfast" ? "Sabah" : "Akşam")</td>
-        <td>@menu.Date.ToString("dd.MM.yyyy")</td>
-        <td>@menu.Energy</td>
-        <td>
-            @foreach (var item in menu.Items)
-            {
-            <div>@item.Category: @item.Name (@item.Gram)</div>
-            }
-        </td>
-        <td>
-            <a asp-area="Admin" asp-controller="AdminMenu" asp-action="Edit" asp-route-id="@menu.Id" class="btn btn-primary btn-sm">Düzenle</a>
-            <form asp-area="Admin" asp-controller="AdminMenu" asp-action="Delete" asp-route-id="@menu.Id" method="post" style="display:inline;">
-                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Silmek istiyor musunuz?')">Sil</button>
-            </form>
-        </td>
-    </tr>
-    }
-    </tbody>
-</table>
-
-@if (TempData["Success"] != null)
-{
-<div class="alert alert-success mt-3">@TempData["Success"]</div>
-}
-@if (TempData["Error"] != null)
-{
-<div class="alert alert-danger mt-3">@TempData["Error"]</div>
-}
-
-<script>
-    $(document).ready(function () {
-        $('#menuTable').DataTable({
-            "pageLength": 10,
-            "order": [[2, "desc"]]
-        });
-    });
-</script>
+</body>
+</html>
