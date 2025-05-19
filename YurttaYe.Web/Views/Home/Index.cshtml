@@ -3,82 +3,162 @@
     ViewData["Title"] = "Menü Sorgula";
 }
 
-<h2>Menü Sorgula</h2>
+<div class="min-h-screen bg-stone-50 font-sans">
+    <!-- Header -->
+    <header class="bg-stone-100 py-10 shadow-sm">
+        <h1 class="text-4xl md:text-5xl font-semibold text-center text-stone-900 tracking-tight">KYK Yemek Menüsü</h1>
+        <p class="text-center text-stone-600 mt-3 text-base md:text-lg">Şehir ve tarih seçerek yurt yemek listesini keşfedin</p>
+    </header>
 
-<form asp-action="Index" method="post">
-    <div class="form-group">
-        <label asp-for="CityId">Şehir</label>
-        <select asp-for="CityId" class="form-control" asp-items="@Model.Cities"></select>
-        <span asp-validation-for="CityId" class="text-danger"></span>
-    </div>
+    <!-- Main content -->
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- Form card -->
+        <div class="bg-gradient-to-b from-stone-50 to-stone-100 rounded-xl shadow-md p-8 mb-12 border border-stone-200">
+            <form asp-action="Index" method="post" class="grid gap-6 sm:grid-cols-1" id="menuForm">
+                <!-- City Selection -->
+                <div>
+                    <label for="CityId" class="block text-sm font-medium text-stone-700 mb2">Şehir</label>
+                    <select asp-for="CityId" id="CityId" class="block w-full rounded-lg border-stone-300 focus:border-blue-600 focus:ring focus:ring-blue-200 py-3 px-4 text-sm placeholder-stone-400" asp-items="@Model.Cities">
+                        <option value="">Şehir Seçin</option>
+                    </select>
+                    <span asp-validation-for="CityId" class="text-red-600 text-xs mt-1 font-medium"></span>
+                </div>
 
-    <div class="form-group">
-        <label>Öğün</label>
-        <div>
-            <div class="form-check form-check-inline">
-                <input type="radio" asp-for="MealType" value="Breakfast" class="form-check-input" />
-                <label class="form-check-label" for="MealType">Sabah</label>
+                <!-- Hidden Meal Type -->
+                <input type="hidden" asp-for="MealType" id="MealType" value="@(Model.MealType ?? "Breakfast")" />
+
+                <!-- Date Picker with Navigation -->
+                <div class="sm:col-span-2">
+                    <label for="Date" class="block text-sm font-medium text-stone-700 mb-2">Tarih</label>
+                    <div class="flex items-center space-x-4">
+                        <button type="button" id="prevDate" class="p-3 rounded-full bg-stone-200 hover:bg-stone-300 transition-colors" aria-label="Önceki tarih">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-stone-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                            </svg>
+                        </button>
+                        <div class="relative flex-1">
+                            <input type="text" asp-for="Date" id="Date" value="@Model.Date.ToString("yyyy-MM-dd")" class="flatpickr block w-full rounded-lg border-stone-300 focus:border-blue-600 focus:ring focus:ring-blue-200 py-3 px-4 text-sm" readonly />
+                            <span class="absolute right-4 top-3 text-stone-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                </svg>
+                            </span>
+                        </div>
+                        <button type="button" id="nextDate" class="p-3 rounded-full bg-stone-200 hover:bg-stone-300 transition-colors" aria-label="Sonraki tarih">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-stone-700" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <span asp-validation-for="Date" class="text-red-600 text-xs mt-1 font-medium"></span>
+                </div>
+            </form>
+
+            <!-- Meal Type Toggle -->
+            <div class="sm:col-span-2 mt-6">
+                <div class="flex space-x-4">
+                    <button type="button" id="breakfastBtn" class="flex-1 py-3 px-6 rounded-lg text-sm font-medium transition-colors @(Model.MealType == "Breakfast" ? "bg-blue-600 text-white hover:bg-blue-700" : "bg-stone-200 text-stone-700 hover:bg-stone-300")">Sabah</button>
+                    <button type="button" id="dinnerBtn" class="flex-1 py-3 px-6 rounded-lg text-sm font-medium transition-colors @(Model.MealType == "Dinner" ? "bg-blue-600 text-white hover:bg-blue-700" : "bg-stone-200 text-stone-700 hover:bg-stone-300")">Akşam</button>
+                </div>
             </div>
-            <div class="form-check form-check-inline">
-                <input type="radio" asp-for="MealType" value="Dinner" class="form-check-input" />
-                <label class="form-check-label" for="MealType">Akşam</label>
+        </div>
+
+        <!-- Hata -->
+        @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+        {
+            <div class="bg-red-50 border-l-4 border-red-600 text-red-800 p-4 rounded-lg mb-12" id="errorAlert">
+                <strong>Hata:</strong> @Model.ErrorMessage
+                <button onclick="document.getElementById('errorAlert').remove()" class="float-right text-red-700 hover:text-red-900">✕</button>
             </div>
-        </div>
-        <span asp-validation-for="MealType" class="text-danger"></span>
+        }
+
+        <!-- Menü Göster -->
+        @if (Model.Menu != null)
+        {
+            string formattedDate = DateTime.TryParse(Model.Menu.Date, out var parsedDate)
+                ? parsedDate.ToString("dd MMMM yyyy dddd", new System.Globalization.CultureInfo("tr-TR"))
+                : string.Empty;
+
+            <div class="bg-stone-100 rounded-xl shadow-md mb-12 border border-stone-200">
+                <div class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-6 rounded-t-xl">
+                    <h2 class="text-xl font-semibold tracking-tight">
+                        @(Model.MealType == "Breakfast" ? "Sabah Kahvaltısı" : "Akşam Yemeği") - @formattedDate
+                    </h2>
+                    <p class="text-sm mt-1 text-blue-100">@Model.Cities.FirstOrDefault(c => c.Value == Model.CityId.ToString())?.Text</p>
+                </div>
+                <div class="p-8">
+                    <div class="space-y-6">
+                        @foreach (var category in Model.Menu.Items.Select(i => i.Category).Distinct())
+                        {
+                            <div>
+                                <h3 class="text-sm font-medium text-blue-800 bg-stone-200 px-3 py-2 rounded-lg mb-3">@category</h3>
+                                <ul class="space-y-3">
+                                    @foreach (var item in Model.Menu.Items.Where(i => i.Category == category))
+                                    {
+                                        <li class="text-stone-900 text-sm flex items-center">
+                                            <span class="font-medium">@item.Name</span>
+                                            @if (!string.IsNullOrWhiteSpace(item.Gram))
+                                            {
+                                                <span class="ml-3 text-stone-600 text-xs bg-stone-200 px-2 py-1 rounded-lg">(@item.Gram)</span>
+                                            }
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        }
+
+                        <div class="text-sm font-medium text-stone-700 border-t border-stone-200 pt-4">
+                            Toplam Enerji: <span class="text-amber-800 bg-amber-100 px-3 py-1 rounded-full ml-2">@Model.Menu.Energy</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
     </div>
-
-    <div class="form-group">
-        <label asp-for="Date">Tarih</label>
-        <input type="date" asp-for="Date" class="form-control" />
-        <span asp-validation-for="Date" class="text-danger"></span>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Sorgula</button>
-</form>
-
-@if (!string.IsNullOrEmpty(Model.ErrorMessage))
-{
-    <div class="alert alert-warning mt-3">@Model.ErrorMessage</div>
-}
-else if (Model.Menu != null)
-{
-    <div class="card mt-4">
-        <div class="card-header">
-            <h5>
-                @{
-                    DateTime? menuDate = null;
-                    if (DateTime.TryParse(Model.Menu.Date, out var parsed))
-                    {
-                        menuDate = parsed;
-                    }
-                }
-                @if (menuDate != null)
-                {
-                    <text>@menuDate.Value.ToString("dd.MM.yyyy")</text>
-                }
-                else
-                {
-                    <text>Tarih geçersiz</text>
-                }
-
-            </h5>
-        </div>
-        <div class="card-body">
-            @foreach (var category in Model.Menu.Items.Select(i => i.Category).Distinct())
-            {
-                <h6>@category</h6>
-                <ul>
-                    @foreach (var item in Model.Menu.Items.Where(i => i.Category == category))
-                    {
-                        <li>@item.Name (@(string.IsNullOrWhiteSpace(item.Gram) ? "Belirtilmemiş" : item.Gram))</li>
-                    }
-                </ul>
-            }
-            <p><strong>Enerji:</strong> @Model.Menu.Energy</p>
-        </div>
-    </div>
-}
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+
+    <!-- Flatpickr -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <script>
+        flatpickr("#Date", {
+            dateFormat: "Y-m-d",
+            maxDate: "today",
+            locale: "tr"
+        });
+
+        // Tarih navigasyonu
+        document.getElementById("prevDate").addEventListener("click", function () {
+            changeDate(-1);
+        });
+
+        document.getElementById("nextDate").addEventListener("click", function () {
+            changeDate(1);
+        });
+
+        function changeDate(offset) {
+            const dateInput = document.getElementById("Date");
+            const currentDate = new Date(dateInput.value);
+            if (!isNaN(currentDate)) {
+                currentDate.setDate(currentDate.getDate() + offset);
+                dateInput.value = currentDate.toISOString().split('T')[0];
+                document.getElementById("menuForm").submit();
+            }
+        }
+
+        // Yemek türü seçimi
+        document.getElementById("breakfastBtn").addEventListener("click", function () {
+            document.getElementById("MealType").value = "Breakfast";
+            document.getElementById("menuForm").submit();
+        });
+
+        document.getElementById("dinnerBtn").addEventListener("click", function () {
+            document.getElementById("MealType").value = "Dinner";
+            document.getElementById("menuForm").submit();
+        });
+    </script>
 }
