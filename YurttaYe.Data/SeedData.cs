@@ -18,7 +18,34 @@ namespace YurttaYe.Data
                 await roleManager.CreateAsync(new IdentityRole("Admin"));
             }
 
-            if (!context.Cities.Any())
+            var adminEmail = Environment.GetEnvironmentVariable("ADMIN_EMAIL");
+            var adminPassword = Environment.GetEnvironmentVariable("ADMIN_PASSWORD");
+
+            if (string.IsNullOrWhiteSpace(adminEmail) || string.IsNullOrWhiteSpace(adminPassword))
+            {
+                throw new Exception("ADMIN_EMAIL ve ADMIN_PASSWORD ortam değişkenleri tanımlı olmalıdır.");
+            }
+
+            var adminUser = await userManager.FindByEmailAsync(adminEmail);
+            if (adminUser == null)
+            {
+                adminUser = new IdentityUser { UserName = adminEmail, Email = adminEmail };
+                var result = await userManager.CreateAsync(adminUser, adminPassword);
+                if (result.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(adminUser, "Admin");
+                }
+                else
+                {
+                    throw new Exception("Admin kullanıcısı oluşturulamadı: " + string.Join(", ", result.Errors.Select(e => e.Description)));
+                }
+            }
+        }
+
+
+        public static async Task dumydata(AppDbContext context)
+        {
+                        if (!context.Cities.Any())
             {
                 var city = new City { Name = "İstanbul" };
                 context.Cities.Add(city);
@@ -150,17 +177,6 @@ namespace YurttaYe.Data
 
                 context.Menus.AddRange(menuList);
                 context.SaveChanges();
-            }
-
-            var adminUser = await userManager.FindByEmailAsync("admin@yurttaye.com");
-            if (adminUser == null)
-            {
-                adminUser = new IdentityUser { UserName = "admin@yurttaye.com", Email = "admin@yurttaye.com" };
-                var result = await userManager.CreateAsync(adminUser, "Admin123!");
-                if (result.Succeeded)
-                {
-                    await userManager.AddToRoleAsync(adminUser, "Admin");
-                }
             }
         }
     }

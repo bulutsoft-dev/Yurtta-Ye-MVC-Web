@@ -10,7 +10,7 @@ using YurttaYe.Web.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 DotNetEnv.Env.Load();
-
+ConfigurationDebugViewContext. .
 // 1. MVC + Razor View desteği
 builder.Services.AddControllersWithViews();
 
