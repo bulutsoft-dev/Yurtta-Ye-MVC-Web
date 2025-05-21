@@ -1,164 +1,156 @@
 ﻿@model YurttaYe.Core.Models.ViewModels.MenuViewModel
 @{
-    ViewData["Title"] = "Menü Sorgula";
+ViewData["Title"] = "Menü Sorgula";
+Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="min-h-screen bg-stone-50 font-sans">
-    <!-- Header -->
-    <header class="bg-stone-100 py-10 shadow-sm">
-        <h1 class="text-4xl md:text-5xl font-semibold text-center text-stone-900 tracking-tight">KYK Yemek Menüsü</h1>
-        <p class="text-center text-stone-600 mt-3 text-base md:text-lg">Şehir ve tarih seçerek yurt yemek listesini keşfedin</p>
-    </header>
+<!-- Header -->
+<header class="bg-primary py-10 text-center">
+    <div class="flex justify-center items-center space-x-2 mb-3">
+        <i class="fas fa-utensils w-8 h-8 text-accent"></i>
+        <h1 class="text-3xl font-bold text-primary">KYK Yemek Menüsü</h1>
+    </div>
+    <p class="text-primary text-lg">Şehir ve tarih seçerek yurt yemek listesini keşfedin</p>
+</header>
 
-    <!-- Main content -->
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <!-- Form card -->
-        <div class="bg-gradient-to-b from-stone-50 to-stone-100 rounded-xl shadow-md p-8 mb-12 border border-stone-200">
-            <form asp-action="Index" method="post" class="grid gap-6 sm:grid-cols-1" id="menuForm">
-                <!-- City Selection -->
-                <div>
-                    <label for="CityId" class="block text-sm font-medium text-stone-700 mb2">Şehir</label>
-                    <select asp-for="CityId" id="CityId" class="block w-full rounded-lg border-stone-300 focus:border-blue-600 focus:ring focus:ring-blue-200 py-3 px-4 text-sm placeholder-stone-400" asp-items="@Model.Cities">
-                        <option value="">Şehir Seçin</option>
-                    </select>
-                    <span asp-validation-for="CityId" class="text-red-600 text-xs mt-1 font-medium"></span>
+<!-- Main Content Container -->
+<div class="max-w-3xl mx-auto px-4 py-10">
+    <!-- Form Card -->
+    <div class="bg-card rounded-lg shadow-sm p-6 mb-8 border border-card">
+        <form asp-action="Index" method="post" class="grid gap-6 sm:grid-cols-2" id="menuForm">
+            <!-- Hidden Meal Type -->
+            <input type="hidden" asp-for="MealType" id="MealType" value="@(Model.MealType ?? "Kahvaltı")" />
+
+            <!-- City Selection -->
+            <div>
+                <label for="CityId" class="block text-lg font-medium text-primary mb-2">
+                    <i class="fas fa-city mr-1 text-accent"></i> Şehir
+                </label>
+                <select asp-for="CityId" id="CityId" class="block w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-secondary focus:border-accent focus:ring focus:ring-teal-200 dark:focus:ring-teal-500 py-3 px-4 text-lg dark:text-white" asp-items="@Model.Cities">
+                    <option value="">Şehir Seçin</option>
+                </select>
+                <span asp-validation-for="CityId" class="text-red-600 dark:text-red-400 text-sm mt-1 block"></span>
+            </div>
+
+            <!-- Date Picker -->
+            <div>
+                <label for="Date" class="block text-lg font-medium text-primary mb-2">
+                    <i class="fas fa-calendar-alt mr-1 text-accent"></i> Tarih
+                </label>
+                <div class="relative">
+                    <input type="text" asp-for="Date" id="Date" value="@Model.Date.ToString("yyyy-MM-dd")" class="flatpickr block w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-secondary focus:border-accent focus:ring focus:ring-teal-200 dark:focus:ring-teal-500 py-3 px-4 text-lg dark:text-white" readonly />
+                    <span class="absolute right-4 top-3 text-gray-400 dark:text-gray-400">
+                        <i class="fas fa-calendar-day h-5 w-5"></i>
+                    </span>
                 </div>
-
-                <!-- Hidden Meal Type -->
-                <input type="hidden" asp-for="MealType" id="MealType" value="@(Model.MealType ?? "Kahvaltı")" />
-
-                <!-- Date Picker with Navigation -->
-                <div class="sm:col-span-2">
-                    <label for="Date" class="block text-sm font-medium text-stone-700 mb-2">Tarih</label>
-                    <div class="flex items-center space-x-4">
-                        <button type="button" id="prevDate" class="p-3 rounded-full bg-stone-200 hover:bg-stone-300 transition-colors" aria-label="Önceki tarih">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-stone-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                            </svg>
-                        </button>
-                        <div class="relative flex-1">
-                            <input type="text" asp-for="Date" id="Date" value="@Model.Date.ToString("yyyy-MM-dd")" class="flatpickr block w-full rounded-lg border-stone-300 focus:border-blue-600 focus:ring focus:ring-blue-200 py-3 px-4 text-sm" readonly />
-                            <span class="absolute right-4 top-3 text-stone-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                </svg>
-                            </span>
-                        </div>
-                        <button type="button" id="nextDate" class="p-3 rounded-full bg-stone-200 hover:bg-stone-300 transition-colors" aria-label="Sonraki tarih">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-stone-700" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                            </svg>
-                        </button>
-                    </div>
-                    <span asp-validation-for="Date" class="text-red-600 text-xs mt-1 font-medium"></span>
-                </div>
-            </form>
+                <span asp-validation-for="Date" class="text-red-600 dark:text-red-400 text-sm mt-1 block"></span>
+            </div>
 
             <!-- Meal Type Toggle -->
-            <div class="sm:col-span-2 mt-6">
-                <div class="flex space-x-4">
-                    <button type="button" id="breakfastBtn" class="flex-1 py-3 px-6 rounded-lg text-sm font-medium transition-colors @(Model.MealType == "Kahvaltı" ? "bg-blue-600 text-white hover:bg-blue-700" : "bg-stone-200 text-stone-700 hover:bg-stone-300")">Sabah</button>
-                    <button type="button" id="dinnerBtn" class="flex-1 py-3 px-6 rounded-lg text-sm font-medium transition-colors @(Model.MealType == "Akşam Yemeği" ? "bg-blue-600 text-white hover:bg-blue-700" : "bg-stone-200 text-stone-700 hover:bg-stone-300")">Akşam</button>
+            <div class="sm:col-span-2 mt-4">
+                <div class="flex space-x-4 justify-center">
+                    <button type="button" id="breakfastBtn" class="flex-1 max-w-xs py-3 px-6 rounded-lg text-lg font-medium transition-colors @(Model.MealType == "Kahvaltı" ? "bg-accent text-white" : "bg-secondary text-primary hover:bg-accent hover:text-white")">
+                        <i class="fas fa-coffee mr-1"></i> Kahvaltı
+                    </button>
+                    <button type="button" id="dinnerBtn" class="flex-1 max-w-xs py-3 px-6 rounded-lg text-lg font-medium transition-colors @(Model.MealType == "Akşam Yemeği" ? "bg-accent text-white" : "bg-secondary text-primary hover:bg-accent hover:text-white")">
+                        <i class="fas fa-utensils mr-1"></i> Akşam Yemeği
+                    </button>
                 </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Error Message -->
+    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+    {
+    <div class="bg-red-50 dark:bg-red-900/50 border-l-4 border-red-600 dark:border-red-500 text-red-800 dark:text-red-300 p-4 rounded-lg mb-8" id="errorAlert">
+        <strong>Hata:</strong> @Model.ErrorMessage
+        <button onclick="document.getElementById('errorAlert').remove()" class="float-right text-red-700 dark:text-red-200 hover:text-red-900 dark:hover:text-red-100">✕</button>
+    </div>
+    }
+
+    <!-- Menu Display -->
+    @if (Model.Menu != null)
+    {
+    string formattedDate = DateTime.TryParse(Model.Menu.Date, out var parsedDate)
+    ? parsedDate.ToString("dd MMMM yyyy dddd", new System.Globalization.CultureInfo("tr-TR"))
+    : string.Empty;
+
+    <div class="bg-card rounded-lg shadow-sm p-6 mb-8 border border-card">
+        <h2 class="text-2xl font-bold text-primary mb-4 flex items-center">
+            <i class="fas fa-utensils mr-2 text-accent"></i> @(Model.MealType == "Kahvaltı" ? "Kahvaltı" : "Akşam Yemeği") - @formattedDate
+        </h2>
+        <p class="text-lg text-primary mb-4">@Model.Cities.FirstOrDefault(c => c.Value == Model.CityId.ToString())?.Text</p>
+        <div class="space-y-6">
+            @foreach (var category in Model.Menu.Items.Select(i => i.Category).Distinct())
+            {
+            <div>
+                <h3 class="text-lg font-medium text-primary mb-3">@category</h3>
+                <ul class="space-y-2">
+                    @foreach (var item in Model.Menu.Items.Where(i => i.Category == category))
+                    {
+                    <li class="text-primary text-lg flex items-center">
+                        <i class="fas fa-utensil-spoon mr-2 text-accent"></i>
+                        <span>@item.Name</span>
+                        @if (!string.IsNullOrWhiteSpace(item.Gram))
+                        {
+                        <span class="ml-2 text-sm text-gray-500 dark:text-gray-400">(@item.Gram)</span>
+                        }
+                    </li>
+                    }
+                </ul>
+            </div>
+            }
+            <div class="text-lg font-medium text-primary border-t border-gray-300 dark:border-gray-600 pt-4">
+                Toplam Enerji: <span class="text-accent ml-2"><i class="fas fa-bolt mr-1"></i> @Model.Menu.Energy</span>
             </div>
         </div>
+    </div>
+    }
 
-        <!-- Hata -->
-        @if (!string.IsNullOrEmpty(Model.ErrorMessage))
-        {
-            <div class="bg-red-50 border-l-4 border-red-600 text-red-800 p-4 rounded-lg mb-12" id="errorAlert">
-                <strong>Hata:</strong> @Model.ErrorMessage
-                <button onclick="document.getElementById('errorAlert').remove()" class="float-right text-red-700 hover:text-red-900">✕</button>
-            </div>
-        }
-
-        <!-- Menü Göster -->
-        @if (Model.Menu != null)
-        {
-            string formattedDate = DateTime.TryParse(Model.Menu.Date, out var parsedDate)
-                ? parsedDate.ToString("dd MMMM yyyy dddd", new System.Globalization.CultureInfo("tr-TR"))
-                : string.Empty;
-
-            <div class="bg-stone-100 rounded-xl shadow-md mb-12 border border-stone-200">
-                <div class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-6 rounded-t-xl">
-                    <h2 class="text-xl font-semibold tracking-tight">
-                        @(Model.MealType == "Kahvaltı" ? "Sabah Kahvaltısı" : "Akşam Yemeği") - @formattedDate
-                    </h2>
-                    <p class="text-sm mt-1 text-blue-100">@Model.Cities.FirstOrDefault(c => c.Value == Model.CityId.ToString())?.Text</p>
-                </div>
-                <div class="p-8">
-                    <div class="space-y-6">
-                        @foreach (var category in Model.Menu.Items.Select(i => i.Category).Distinct())
-                        {
-                            <div>
-                                <h3 class="text-sm font-medium text-blue-800 bg-stone-200 px-3 py-2 rounded-lg mb-3">@category</h3>
-                                <ul class="space-y-3">
-                                    @foreach (var item in Model.Menu.Items.Where(i => i.Category == category))
-                                    {
-                                        <li class="text-stone-900 text-sm flex items-center">
-                                            <span class="font-medium">@item.Name</span>
-                                            @if (!string.IsNullOrWhiteSpace(item.Gram))
-                                            {
-                                                <span class="ml-3 text-stone-600 text-xs bg-stone-200 px-2 py-1 rounded-lg">(@item.Gram)</span>
-                                            }
-                                        </li>
-                                    }
-                                </ul>
-                            </div>
-                        }
-
-                        <div class="text-sm font-medium text-stone-700 border-t border-stone-200 pt-4">
-                            Toplam Enerji: <span class="text-amber-800 bg-amber-100 px-3 py-1 rounded-full ml-2">@Model.Menu.Energy</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        }
+    <!-- Mobile App Promotion Card -->
+    <div class="bg-card rounded-lg shadow-sm p-6 border border-card">
+        <div class="flex items-center space-x-2 mb-3">
+            <i class="fas fa-mobile-alt w-6 h-6 text-accent"></i>
+            <h2 class="text-xl font-semibold text-primary">YurttaYe Mobil Uygulaması</h2>
+        </div>
+        <p class="text-primary text-lg mb-4">
+            Yurt yemek menüsünü her zaman, her yerde keşfedin! Mobil uygulamamızı indirerek menülere kolayca erişebilirsiniz.
+        </p>
+        <div class="flex flex-col sm:flex-row sm:space-x-4 space-y-3 sm:space-y-0">
+            <a href="https://play.google.com/store/apps/details?id=com.yurttaye.yurttaye" target="_blank" class="flex-1 py-3 px-6 rounded-lg text-lg font-medium text-white bg-accent hover:bg-teal-600 transition-colors text-center" aria-label="Google Play'den YurttaYe uygulamasını indir">
+                <i class="fab fa-google-play mr-1"></i> Google Play'den İndir
+            </a>
+            <a href="https://play.google.com/apps/testing/com.yurttaye.yurttaye" target="_blank" class="flex-1 py-3 px-6 rounded-lg text-lg font-medium text-primary bg-secondary hover:bg-accent hover:text-white transition-colors text-center" aria-label="YurttaYe test sürümünü deneyin">
+                <i class="fas fa-vial mr-1"></i> Test Sürümünü Deneyin
+            </a>
+        </div>
+        <p class="text-red-600 dark:text-red-400 text-sm mt-3">
+            Uyarı: Test sürümü deneysel özellikler içerebilir ve kararsız olabilir.
+        </p>
     </div>
 </div>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+<partial name="_ValidationScriptsPartial" />
+<!-- Flatpickr -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+    flatpickr("#Date", {
+        dateFormat: "Y-m-d",
+        maxDate: "today",
+        locale: "tr"
+    });
 
-    <!-- Flatpickr -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    document.getElementById("breakfastBtn").addEventListener("click", function () {
+        document.getElementById("MealType").value = "Kahvaltı";
+        document.getElementById("menuForm").submit();
+    });
 
-    <script>
-        flatpickr("#Date", {
-            dateFormat: "Y-m-d",
-            maxDate: "today",
-            locale: "tr"
-        });
-
-        // Tarih navigasyonu
-        document.getElementById("prevDate").addEventListener("click", function () {
-            changeDate(-1);
-        });
-
-        document.getElementById("nextDate").addEventListener("click", function () {
-            changeDate(1);
-        });
-
-        function changeDate(offset) {
-            const dateInput = document.getElementById("Date");
-            const currentDate = new Date(dateInput.value);
-            if (!isNaN(currentDate)) {
-                currentDate.setDate(currentDate.getDate() + offset);
-                dateInput.value = currentDate.toISOString().split('T')[0];
-                document.getElementById("menuForm").submit();
-            }
-        }
-
-        // Yemek türü seçimi
-        document.getElementById("breakfastBtn").addEventListener("click", function () {
-            document.getElementById("MealType").value = "Kahvaltı";
-            document.getElementById("menuForm").submit();
-        });
-
-        document.getElementById("dinnerBtn").addEventListener("click", function () {
-            document.getElementById("MealType").value = "Akşam Yemeği";
-            document.getElementById("menuForm").submit();
-        });
-    </script>
+    document.getElementById("dinnerBtn").addEventListener("click", function () {
+        document.getElementById("MealType").value = "Akşam Yemeği";
+        document.getElementById("menuForm").submit();
+    });
+</script>
 }
