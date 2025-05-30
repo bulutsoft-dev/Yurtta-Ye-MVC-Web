@@ -3,55 +3,15 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="google-site-verification" content="bku8zcxmPbYBtX3OnPrf-miY5w0Xy-wko_pfKpsQPmA" />
-    <title>@ViewData["Title"] - KYK Yurt Yemek Menüsü | YurttaYe</title>
-    <meta name="description" content="YurttaYe ile KYK yurtlarında sunulan günlük yemek menülerini kolayca sorgulayın. Mobil uygulama ile her zaman menülere erişin." />
-    <meta name="keywords" content="KYK yurt yemek menüsü, YurttaYe, menü sorgulama, yurt yemekleri, Türkiye yurt menüleri" />
-    <meta name="robots" content="index, follow" />
-    <meta name="author" content="Furkan Bulut" />
-    <link rel="canonical" href="https://www.yurttaye.com" />
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="@ViewData['Title'] - KYK Yurt Yemek Menüsü | YurttaYe" />
-    <meta property="og:description" content="YurttaYe ile KYK yurtlarında sunulan günlük yemek menülerini kolayca sorgulayın. Mobil uygulama ile her zaman menülere erişin." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://www.yurttaye.com" />
-    <meta property="og:image" content="https://www.yurttaye.com/images/og-image.jpg" />
-    <meta property="og:site_name" content="YurttaYe" />
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="@ViewData['Title'] - KYK Yurt Yemek Menüsü | YurttaYe" />
-    <meta name="twitter:description" content="YurttaYe ile KYK yurtlarında sunulan günlük yemek menülerini kolayca sorgulayın." />
-    <meta name="twitter:image" content="https://www.yurttaye.com/images/og-image.jpg" />
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com" defer></script>
+    <title>@ViewData["Title"] - YurttaYe</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <!-- Alpine.js for interactivity -->
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js" defer></script>
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <!-- Structured Data (Schema.org) -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "YurttaYe",
-        "url": "https://www.yurttaye.com",
-        "description": "KYK yurtlarında sunulan yemek menülerini sorgulayın ve mobil uygulamamızla menülere kolayca erişin.",
-        "publisher": {
-            "@type": "Organization",
-            "name": "YurttaYe",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "https://www.yurttaye.com/images/logo.png"
-            }
-        },
-        "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://www.yurttaye.com/search?q={search_term_string}",
-            "query-input": "required name=search_term_string"
-        }
-    }
-    </script>
+<meta name="google-site-verification" content="bku8zcxmPbYBtX3OnPrf-miY5w0Xy-wko_pfKpsQPmA" />
     <style>
         /* Custom Theme Variables */
         :root {
@@ -117,38 +77,38 @@
 </head>
 <body class="font-sans antialiased">
 <!-- Navbar -->
-<header role="banner">
-    <nav class="bg-secondary shadow-lg sticky top-0 z-50" aria-label="Ana Menü">
+<header>
+    <nav class="bg-secondary shadow-lg sticky top-0 z-50">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center py四年">
+            <div class="flex justify-between items-center py-4">
                 <!-- Logo -->
-                <a class="text-2xl font-bold text-primary hover:text-accent transition-colors" href="/" aria-label="YurttaYe Anasayfası">YurttaYe</a>
+                <a class="text-2xl font-bold text-primary hover:text-accent transition-colors" href="/">YurttaYe</a>
                 <!-- Mobile Menu Toggle -->
                 <div class="flex items-center space-x-4 lg:hidden">
-                    <button x-on:click="darkMode = !darkMode; localStorage.setItem('darkMode', darkMode)" class="text-secondary hover:text-accent focus:outline-none" aria-label="Koyu modu aç/kapat">
-                        <i x-show="!darkMode" class="fas fa-sun w-6 h-6" aria-hidden="true"></i>
-                        <i x-show="darkMode" class="fas fa-moon w-6 h-6" aria-hidden="true"></i>
+                    <button x-on:click="darkMode = !darkMode; localStorage.setItem('darkMode', darkMode)" class="text-secondary hover:text-accent focus:outline-none" aria-label="Tema değiştir">
+                        <i x-show="!darkMode" class="fas fa-sun w-6 h-6"></i>
+                        <i x-show="darkMode" class="fas fa-moon w-6 h-6"></i>
                     </button>
-                    <button x-on:click="navOpen = !navOpen" class="text-secondary hover:text-accent focus:outline-none" aria-label="Mobil menüyü aç/kapat">
-                        <i class="fas fa-bars w-6 h-6" aria-hidden="true"></i>
+                    <button x-on:click="navOpen = !navOpen" class="text-secondary hover:text-accent focus:outline-none" aria-label="Menüyü aç/kapat">
+                        <i class="fas fa-bars w-6 h-6"></i>
                     </button>
                 </div>
                 <!-- Desktop Menu -->
-                <div class="hidden lg:flex lg:items-center lg:space-x-6" role="navigation">
+                <div class="hidden lg:flex lg:items-center lg:space-x-6">
                     <ul class="flex space-x-6">
                         <li>
-                            <a class="text-secondary hover:text-accent transition-colors" href="/" asp-controller="Home" asp-action="Index">Menü Sorgula</a>
+                            <a class="text-secondary hover:text-accent transition-colors" asp-controller="Home" asp-action="Index">Menü Sorgula</a>
                         </li>
                         <li>
-                            <a href="https://play.google.com/store/apps/details?id=com.yurttaye.yurttaye" target="_blank" rel="noopener noreferrer" class="text-secondary hover:text-accent transition-colors">Google Play'den İndir</a>
+                            <a href="https://play.google.com/store/apps/details?id=com.yurttaye.yurttaye" target="_blank" class="text-secondary hover:text-accent transition-colors">Google Play'den İndir</a>
                         </li>
                         @if (User.IsInRole("Admin"))
                         {
                         <li>
-                            <a class="text-secondary hover:text-accent transition-colors" href="/Admin/AdminMenu" asp-area="Admin" asp-controller="AdminMenu" asp-action="Index">Menü Yönetimi</a>
+                            <a class="text-secondary hover:text-accent transition-colors" asp-area="Admin" asp-controller="AdminMenu" asp-action="Index">Menü Yönetimi</a>
                         </li>
                         <li>
-                            <a class="text-secondary hover:text-accent transition-colors" href="/Admin/AdminCity" asp-area="Admin" asp-controller="AdminCity" asp-action="Index">Şehir Yönetimi</a>
+                            <a class="text-secondary hover:text-accent transition-colors" asp-area="Admin" asp-controller="AdminCity" asp-action="Index">Şehir Yönetimi</a>
                         </li>
                         }
                     </ul>
@@ -156,19 +116,19 @@
                         @if (User.Identity.IsAuthenticated)
                         {
                         <li>
-                            <a class="text-secondary hover:text-accent transition-colors" href="/Account/Logout" asp-controller="Account" asp-action="Logout">Çıkış Yap</a>
+                            <a class="text-secondary hover:text-accent transition-colors" asp-controller="Account" asp-action="Logout">Çıkış</a>
                         </li>
                         }
                         else
                         {
                         <li>
-                            <a class="text-secondary hover:text-accent transition-colors" href="/Account/Login" asp-controller="Account" asp-action="Login">Giriş Yap</a>
+                            <a class="text-secondary hover:text-accent transition-colors" asp-controller="Account" asp-action="Login">Giriş</a>
                         </li>
                         }
                     </ul>
-                    <button x-on:click="darkMode = !darkMode; localStorage.setItem('darkMode', darkMode)" class="text-secondary hover:text-accent focus:outline-none" aria-label="Koyu modu aç/kapat">
-                        <i x-show="!darkMode" class="fas fa-sun w-6 h-6" aria-hidden="true"></i>
-                        <i x-show="darkMode" class="fas fa-moon w-6 h-6" aria-hidden="true"></i>
+                    <button x-on:click="darkMode = !darkMode; localStorage.setItem('darkMode', darkMode)" class="text-secondary hover:text-accent focus:outline-none" aria-label="Tema değiştir">
+                        <i x-show="!darkMode" class="fas fa-sun w-6 h-6"></i>
+                        <i x-show="darkMode" class="fas fa-moon w-6 h-6"></i>
                     </button>
                 </div>
             </div>
@@ -176,30 +136,30 @@
             <div x-show="navOpen" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-4" class="lg:hidden">
                 <ul class="flex flex-col space-y-4 py-4">
                     <li>
-                        <a class="text-secondary hover:text-accent transition-colors" href="/" asp-controller="Home" asp-action="Index">Menü Sorgula</a>
+                        <a class="text-secondary hover:text-accent transition-colors" asp-controller="Home" asp-action="Index">Menü Sorgula</a>
                     </li>
                     <li>
-                        <a href="https://play.google.com/store/apps/details?id=com.yurttaye.yurttaye" target="_blank" rel="noopener noreferrer" class="text-secondary hover:text-accent transition-colors">Google Play'den İndir</a>
+                        <a href="https://play.google.com/store/apps/details?id=com.yurttaye.yurttaye" target="_blank" class="text-secondary hover:text-accent transition-colors">Google Play'den İndir</a>
                     </li>
                     @if (User.IsInRole("Admin"))
                     {
                     <li>
-                        <a class="text-secondary hover:text-accent transition-colors" href="/Admin/AdminMenu" asp-area="Admin" asp-controller="AdminMenu" asp-action="Index">Menü Yönetimi</a>
+                        <a class="text-secondary hover:text-accent transition-colors" asp-area="Admin" asp-controller="AdminMenu" asp-action="Index">Menü Yönetimi</a>
                     </li>
                     <li>
-                        <a class="text-secondary hover:text-accent transition-colors" href="/Admin/AdminCity" asp-area="Admin" asp-controller="AdminCity" asp-action="Index">Şehir Yönetimi</a>
+                        <a class="text-secondary hover:text-accent transition-colors" asp-area="Admin" asp-controller="AdminCity" asp-action="Index">Şehir Yönetimi</a>
                     </li>
                     }
                     @if (User.Identity.IsAuthenticated)
                     {
                     <li>
-                        <a class="text-secondary hover:text-accent transition-colors" href="/Account/Logout" asp-controller="Account" asp-action="Logout">Çıkış Yap</a>
+                        <a class="text-secondary hover:text-accent transition-colors" asp-controller="Account" asp-action="Logout">Çıkış</a>
                     </li>
                     }
                     else
                     {
                     <li>
-                        <a class="text-secondary hover:text-accent transition-colors" href="/Account/Login" asp-controller="Account" asp-action="Login">Giriş Yap</a>
+                        <a class="text-secondary hover:text-accent transition-colors" asp-controller="Account" asp-action="Login">Giriş</a>
                     </li>
                     }
                 </ul>
@@ -216,14 +176,14 @@
 </div>
 
 <!-- Footer -->
-<footer class="bg-secondary shadow-lg text-primary" role="contentinfo">
+<footer class="bg-secondary shadow-lg text-primary">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <!-- About -->
             <div>
                 <h3 class="text-lg font-semibold text-primary mb-4">YurttaYe Hakkında</h3>
                 <p class="text-secondary text-sm">
-                    YurttaYe, Türkiye’deki KYK yurtlarında sunulan yemek menülerini kolayca keşfetmenizi sağlar. Mobil uygulamamızla her zaman, her yerde menülere erişebilirsiniz.
+                    YurttaYe, KYK yurtlarında sunulan yemek menülerini kolayca keşfetmenizi sağlar. Mobil uygulamamızla her zaman, her yerde menülere erişebilirsiniz.
                 </p>
             </div>
             <!-- Links -->
@@ -231,16 +191,15 @@
                 <h3 class="text-lg font-semibold text-primary mb-4">Hızlı Bağlantılar</h3>
                 <ul class="space-y-2 text-sm">
                     <li><a href="/" class="text-secondary hover:text-accent transition-colors">Menü Sorgula</a></li>
-                    <li><a href="https://play.google.com/store/apps/details?id=com.yurttaye.yurttaye" target="_blank" rel="noopener noreferrer" class="text-secondary hover:text-accent transition-colors">Google Play</a></li>
-                    <li><a href="https://play.google.com/apps/testing/com.yurttaye.yurttaye" target="_blank" rel="noopener noreferrer" class="text-secondary hover:text-accent transition-colors">Test Sürümü</a></li>
-                    <li><a href="/sitemap.xml" class="text-secondary hover:text-accent transition-colors">Site Haritası</a></li>
+                    <li><a href="https://play.google.com/store/apps/details?id=com.yurttaye.yurttaye" class="text-secondary hover:text-accent transition-colors">Google Play</a></li>
+                    <li><a href="https://play.google.com/apps/testing/com.yurttaye.yurttaye" class="text-secondary hover:text-accent transition-colors">Test Sürümü</a></li>
                     @if (User.Identity.IsAuthenticated)
                     {
-                    <li><a href="/Account/Logout" asp-controller="Account" asp-action="Logout" class="text-secondary hover:text-accent transition-colors">Çıkış Yap</a></li>
+                    <li><a asp-controller="Account" asp-action="Logout" class="text-secondary hover:text-accent transition-colors">Çıkış</a></li>
                     }
                     else
                     {
-                    <li><a href="/Account/Login" asp-controller="Account" asp-action="Login" class="text-secondary hover:text-accent transition-colors">Giriş Yap</a></li>
+                    <li><a asp-controller="Account" asp-action="Login" class="text-secondary hover:text-accent transition-colors">Giriş</a></li>
                     }
                 </ul>
             </div>
@@ -248,28 +207,28 @@
             <div>
                 <h3 class="text-lg font-semibold text-primary mb-4">Bizi Takip Edin</h3>
                 <div class="flex space-x-4">
-                    <a href="https://www.furkanbulut.software/" target="_blank" rel="noopener noreferrer" class="text-secondary hover:text-accent transition-colors" aria-label="Furkan Bulut Web Sitesi">
-                        <i class="fas fa-globe w-6 h-6" aria-hidden="true"></i>
+                    <a href="https://www.furkanbulut.software/" target="_blank" class="text-secondary hover:text-accent transition-colors" aria-label="Furkan Bulut Web Sitesi">
+                        <i class="fas fa-globe w-6 h-6"></i>
                     </a>
-                    <a href="https://twitter.com/yurttaye" target="_blank" rel="noopener noreferrer" class="text-secondary hover:text-accent transition-colors" aria-label="YurttaYe Twitter">
-                        <i class="fab fa-twitter w-6 h-6" aria-hidden="true"></i>
+                    <a href="#" class="text-secondary hover:text-accent transition-colors" aria-label="Twitter">
+                        <i class="fab fa-twitter w-6 h-6"></i>
                     </a>
-                    <a href="https://instagram.com/yurttaye" target="_blank" rel="noopener noreferrer" class="text-secondary hover:text-accent transition-colors" aria-label="YurttaYe Instagram">
-                        <i class="fab fa-instagram w-6 h-6" aria-hidden="true"></i>
+                    <a href="#" class="text-secondary hover:text-accent transition-colors" aria-label="Instagram">
+                        <i class="fab fa-instagram w-6 h-6"></i>
                     </a>
                 </div>
             </div>
         </div>
         <div class="border-t border-accent mt-8 pt-4 text-center">
             <p class="text-secondary text-sm">© 2025 YurttaYe. Tüm hakları saklıdır.</p>
-            <p class="text-secondary text-sm mt-2">Geliştirici: <a href="https://www.furkanbulut.software/" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline">Furkan Bulut</a></p>
+            <p class="text-secondary text-sm mt-2">Geliştirici: <a href="https://www.furkanbulut.software/" target="_blank" class="text-accent hover:underline">Furkan Bulut</a></p>
         </div>
     </div>
 </footer>
 
 <!-- Scripts -->
-<script src="~/lib/jquery/jquery.min.js" defer></script>
-<script src="~/js/site.js" asp-append-version="true" defer></script>
+<script src="~/lib/jquery/jquery.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
 @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
