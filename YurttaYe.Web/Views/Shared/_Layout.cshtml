@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-site-verification" content="bku8zcxmPbYBtX3OnPrf-miY5w0Xy-wko_pfKpsQPmA" />
     <title>@ViewData["Title"] - KYK Yurt Yemek Menüsü | YurttaYe</title>
     <meta name="description" content="YurttaYe ile KYK yurtlarında sunulan günlük yemek menülerini kolayca sorgulayın. Mobil uygulama ile her zaman menülere erişin." />
     <meta name="keywords" content="KYK yurt yemek menüsü, YurttaYe, menü sorgulama, yurt yemekleri, Türkiye yurt menüleri" />
@@ -21,7 +22,7 @@
     <meta name="twitter:title" content="@ViewData['Title'] - KYK Yurt Yemek Menüsü | YurttaYe" />
     <meta name="twitter:description" content="YurttaYe ile KYK yurtlarında sunulan günlük yemek menülerini kolayca sorgulayın." />
     <meta name="twitter:image" content="https://www.yurttaye.com/images/og-image.jpg" />
-    <!-- Tailwind CSS (consider hosting locally for performance) -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com" defer></script>
     <!-- Alpine.js for interactivity -->
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js" defer></script>
@@ -52,45 +53,66 @@
     }
     </script>
     <style>
-        /* Custom Theme Variables (unchanged for brevity) */
+        /* Custom Theme Variables */
         :root {
-            --bg-primary: #fafaf9;
-            --bg-secondary: #f5f5f4;
-            --bg-card: #ffffff;
-            --text-primary: #1f2937;
-            --text-secondary: #6b7280;
-            --accent: #059669;
-            --accent-hover: #047857;
-            --border: #e5e7eb;
-            --border-card: #e5e7eb;
-            --button-primary: #2563eb;
-            --button-primary-hover: #1d4ed8;
-            --error-bg: #fef2f2;
-            --error-text: #991b1b;
-            --error-border: #dc2626;
+            --bg-primary: #fafaf9; /* stone-50 */
+            --bg-secondary: #f5f5f4; /* stone-100 */
+            --bg-card: #ffffff; /* white */
+            --text-primary: #1f2937; /* stone-800 */
+            --text-secondary: #6b7280; /* stone-500 */
+            --accent: #059669; /* emerald-600 */
+            --accent-hover: #047857; /* emerald-700 */
+            --border: #e5e7eb; /* stone-200 */
+            --border-card: #e5e7eb; /* stone-200 */
+            --button-primary: #2563eb; /* blue-600 */
+            --button-primary-hover: #1d4ed8; /* blue-700 */
+            --error-bg: #fef2f2; /* red-50 */
+            --error-text: #991b1b; /* red-800 */
+            --error-border: #dc2626; /* red-600 */
         }
         .dark {
-            --bg-primary: #1f2937;
-            --bg-secondary: #374151;
-            --bg-card: #2d3748;
-            --text-primary: #e5e7eb;
-            --text-secondary: #9ca3af;
-            --accent: #10b981;
-            --accent-hover: #059669;
-            --border: #4b5563;
-            --border-card: #4b5563;
-            --button-primary: #3b82f6;
-            --button-primary-hover: #2563eb;
-            --error-bg: #7f1d1d;
-            --error-text: #f87171;
-            --error-border: #f87171;
+            --bg-primary: #1f2937; /* gray-800 */
+            --bg-secondary: #374151; /* gray-700 */
+            --bg-card: #2d3748; /* gray-800 */
+            --text-primary: #e5e7eb; /* gray-200 */
+            --text-secondary: #9ca3af; /* gray-400 */
+            --accent: #10b981; /* emerald-500 */
+            --accent-hover: #059669; /* emerald-600 */
+            --border: #4b5563; /* gray-600 */
+            --border-card: #4b5563; /* gray-600 */
+            --button-primary: #3b82f6; /* blue-500 */
+            --button-primary-hover: #2563eb; /* blue-600 */
+            --error-bg: #7f1d1d; /* red-900/30 */
+            --error-text: #f87171; /* red-400 */
+            --error-border: #f87171; /* red-400 */
         }
+
+        /* Base Styles */
         body {
             background-color: var(--bg-primary);
             color: var(--text-primary);
             transition: background-color 0.3s ease, color 0.3s ease;
         }
-        /* Other styles unchanged for brevity */
+        .bg-secondary { background-color: var(--bg-secondary); }
+        .bg-card { background-color: var(--bg-card); }
+        .text-primary { color: var(--text-primary); }
+        .text-secondary { color: var(--text-secondary); }
+        .border-accent { border-color: var(--accent); }
+        .bg-accent { background-color: var(--accent); }
+        .hover\:bg-accent:hover { background-color: var(--accent-hover); }
+        .text-accent { color: var(--accent); }
+        .hover\:text-accent:hover { color: var(--accent-hover); }
+        .border-card { border-color: var(--border-card); }
+        .bg-button-primary { background-color: var(--button-primary); }
+        .hover\:bg-button-primary:hover { background-color: var(--button-primary-hover); }
+        .error-bg { background-color: var(--error-bg); }
+        .error-text { color: var(--error-text); }
+        .error-border { border-color: var(--error-border); }
+
+        /* Smooth transitions for theme toggle */
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
     </style>
 </head>
 <body class="font-sans antialiased">
@@ -98,7 +120,7 @@
 <header role="banner">
     <nav class="bg-secondary shadow-lg sticky top-0 z-50" aria-label="Ana Menü">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center py-4">
+            <div class="flex justify-between items-center py四年">
                 <!-- Logo -->
                 <a class="text-2xl font-bold text-primary hover:text-accent transition-colors" href="/" aria-label="YurttaYe Anasayfası">YurttaYe</a>
                 <!-- Mobile Menu Toggle -->
@@ -201,7 +223,7 @@
             <div>
                 <h3 class="text-lg font-semibold text-primary mb-4">YurttaYe Hakkında</h3>
                 <p class="text-secondary text-sm">
-                    YurttaYe, Türkiye’deki KYK yurtlarında sunulan günlük yemek menülerini kolayca keşfetmenizi sağlar. Mobil uygulamamızla her zaman, her yerde menülere erişebilirsiniz.
+                    YurttaYe, Türkiye’deki KYK yurtlarında sunulan yemek menülerini kolayca keşfetmenizi sağlar. Mobil uygulamamızla her zaman, her yerde menülere erişebilirsiniz.
                 </p>
             </div>
             <!-- Links -->
