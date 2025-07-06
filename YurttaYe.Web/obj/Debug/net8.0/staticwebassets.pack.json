@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets/YurttaYe.Web.bundle.scp.css"
     },
     {
+      "Id": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/wwwroot/app-ads.txt",
+      "PackagePath": "staticwebassets/app-ads.txt"
+    },
+    {
       "Id": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/wwwroot/css/site.css",
       "PackagePath": "staticwebassets/css/site.css"
     },

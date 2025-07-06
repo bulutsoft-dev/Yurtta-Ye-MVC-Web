@@ -169,7 +169,6 @@
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/obj/Debug/net8.0/scopedcss/Views/Shared/_Layout.cshtml.rz.scp.css
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/obj/Debug/net8.0/scopedcss/bundle/YurttaYe.Web.styles.css
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/obj/Debug/net8.0/scopedcss/projectbundle/YurttaYe.Web.bundle.scp.css
-/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/obj/Debug/net8.0/YurttaYe.Web.csproj.CopyComplete
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/obj/Debug/net8.0/YurttaYe.Web.dll
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/obj/Debug/net8.0/refint/YurttaYe.Web.dll
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/obj/Debug/net8.0/YurttaYe.Web.pdb
@@ -186,3 +185,4 @@
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/DotNetEnv.dll
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/Sprache.dll
+/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/obj/Debug/net8.0/YurttaYe.A66095F0.Up2Date

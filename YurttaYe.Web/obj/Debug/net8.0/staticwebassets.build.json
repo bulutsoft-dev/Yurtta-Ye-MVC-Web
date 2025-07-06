@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "BaOXfdz7Nd0nfDvd4sp/Oa6j+m+899jIE1SP1NP1TGc=",
+  "Hash": "+042sRyQPS1TYvLxp1jUGlUbVXgrc/RGqbmBfp6UXaQ=",
   "Source": "YurttaYe.Web",
   "BasePath": "_content/YurttaYe.Web",
   "Mode": "Default",
@@ -53,6 +53,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/obj/Debug/net8.0/scopedcss/projectbundle/YurttaYe.Web.bundle.scp.css"
+    },
+    {
+      "Identity": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/wwwroot/app-ads.txt",
+      "SourceId": "YurttaYe.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/wwwroot/",
+      "BasePath": "_content/YurttaYe.Web",
+      "RelativePath": "app-ads.txt",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/app-ads.txt"
     },
     {
       "Identity": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/wwwroot/css/site.css",

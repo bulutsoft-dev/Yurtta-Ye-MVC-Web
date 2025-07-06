@@ -11,8 +11,8 @@
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Services/bin/Debug/net8.0/YurttaYe.Data.dll
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Services/bin/Debug/net8.0/YurttaYe.Core.pdb
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Services/bin/Debug/net8.0/YurttaYe.Data.pdb
-/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Services/obj/Debug/net8.0/YurttaYe.Services.csproj.CopyComplete
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Services/obj/Debug/net8.0/YurttaYe.Services.dll
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Services/obj/Debug/net8.0/refint/YurttaYe.Services.dll
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Services/obj/Debug/net8.0/YurttaYe.Services.pdb
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Services/obj/Debug/net8.0/ref/YurttaYe.Services.dll
+/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Services/obj/Debug/net8.0/YurttaYe.53D2B2F0.Up2Date
