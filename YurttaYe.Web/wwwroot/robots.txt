@@ -5,5 +5,3 @@ Allow: /favicon.ico
 Allow: /css/
 Allow: /js/
 Allow: /lib/
-
-Disallow: / 
