@@ -4,15 +4,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="min-h-screen bg-primary">
-    <!-- Header -->
-    <header class="text-center py-10">
-        <h1 class="text-4xl md:text-5xl font-bold text-primary tracking-tight">KYK Yemek Menüsü</h1>
-        <p class="text-secondary mt-3 text-lg">Şehir ve tarih seçerek yurt yemek listesini keşfedin.</p>
-    </header>
-
+<div class="min-h-screen">
     <!-- Main content -->
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
         <!-- Mobile App Promotion Card -->
         <div class="bg-card rounded-lg shadow-lg p-6 mb-8 border border-card">
             <div class="flex items-center space-x-4 mb-4">
@@ -35,36 +29,67 @@
             </p>
         </div>
         
-        <!-- Form card -->
-        <div class="bg-card rounded-xl shadow-lg p-6 mb-8 border border-card">
-            <form asp-action="Index" method="post" class="space-y-6" id="menuForm">
-                <!-- City and Date Selection -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label for="CityId" class="block text-sm font-medium text-primary mb-2">Şehir</label>
-                        <select asp-for="CityId" id="CityId" class="block w-full rounded-lg border border-border focus:border-accent focus:ring-accent py-3 px-4 bg-secondary text-primary" asp-items="@Model.Cities">
-                            <option value="">Şehir Seçin</option>
-                        </select>
-                        <span asp-validation-for="CityId" class="text-red-500 text-xs mt-1"></span>
-                    </div>
-                    <div>
-                        <label for="Date" class="block text-sm font-medium text-primary mb-2">Tarih</label>
-                        <div class="relative">
-                            <input type="text" asp-for="Date" id="Date" value="@Model.Date.ToString("yyyy-MM-dd")" class="flatpickr block w-full rounded-lg border border-border focus:border-accent focus:ring-accent py-3 px-4 bg-secondary text-primary" readonly/>
-                            <span class="absolute right-4 top-1/2 -translate-y-1/2 text-primary">
-                                <i class="fas fa-calendar-alt"></i>
-                            </span>
+        <!-- Form -->
+        <div class="space-y-4">
+            @{
+                var selectedDate = Model.Date;
+                var culture = new System.Globalization.CultureInfo("tr-TR");
+                var firstDayOfMonth = new DateTime(selectedDate.Year, selectedDate.Month, 1);
+                var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
+                var datesToShow = Enumerable.Range(0, lastDayOfMonth.Day)
+                    .Select(i => firstDayOfMonth.AddDays(i))
+                    .ToList();
+            }
+            <form asp-action="Index" method="post" class="space-y-4" id="menuForm" data-meal-theme="@(Model.MealType == "Kahvaltı" ? "morning" : "evening")">
+                <!-- City Selection -->
+                <div>
+                    <label for="CityId" class="block text-sm font-medium text-primary mb-2">Şehir</label>
+                    <select asp-for="CityId" id="CityId" class="block w-full rounded-lg border border-border focus:border-accent focus:ring-accent py-3 px-4 bg-secondary text-primary" asp-items="@Model.Cities">
+                        <option value="">Şehir Seçin</option>
+                    </select>
+                    <span asp-validation-for="CityId" class="text-red-500 text-xs mt-1"></span>
+                </div>
+
+                <!-- New Date Picker -->
+                <div>
+                    <div class="date-selector">
+                        <div class="flex items-center justify-between mb-4">
+                            <button type="button" id="prevDateBtn" class="p-2 w-10 h-10 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                                <i class="fas fa-chevron-left text-sm"></i>
+                            </button>
+                            <div class="text-center cursor-pointer" id="date-display-trigger">
+                                <p class="text-sm text-secondary">@culture.TextInfo.ToTitleCase(culture.DateTimeFormat.GetDayName(selectedDate.DayOfWeek))</p>
+                                <p class="text-xl font-bold text-primary">@selectedDate.ToString("d MMMM yyyy", culture)</p>
+                            </div>
+                            <button type="button" id="nextDateBtn" class="p-2 w-10 h-10 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                                <i class="fas fa-chevron-right text-sm"></i>
+                            </button>
+                        </div>
+                        <div class="flex justify-start space-x-2 overflow-x-auto pb-2 px-2 hide-scrollbar date-strip-container">
+                            @foreach (var date in datesToShow)
+                            {
+                                bool isSelected = date.Date == selectedDate.Date;
+                                var dayAbbr = culture.DateTimeFormat.GetAbbreviatedDayName(date.DayOfWeek).ToUpper();
+                                <button type="button" class="date-strip-item flex-shrink-0 w-14 h-16 rounded-lg flex flex-col items-center justify-center transition-colors @(isSelected ? "selected shadow" : "")" data-date="@date.ToString("yyyy-MM-dd")">
+                                    <span class="text-xs font-semibold opacity-75">@dayAbbr</span>
+                                    <span class="text-lg font-bold">@date.Day</span>
+                                </button>
+                            }
                         </div>
                     </div>
                 </div>
 
-                <!-- Hidden Meal Type -->
+                <!-- Hidden Inputs -->
+                <input type="hidden" asp-for="Date" id="Date" value="@Model.Date.ToString("yyyy-MM-dd")"/>
                 <input type="hidden" asp-for="MealType" id="MealType" value="@(Model.MealType ?? "Kahvaltı")"/>
 
                 <!-- Meal Type Toggle -->
-                <div class="flex rounded-lg bg-secondary p-1 border border-border">
-                    <button type="button" id="breakfastBtn" class="meal-type-btn flex-1 py-2 text-sm font-semibold rounded-md transition-colors" data-meal-type="Kahvaltı">Sabah</button>
-                    <button type="button" id="dinnerBtn" class="meal-type-btn flex-1 py-2 text-sm font-semibold rounded-md transition-colors" data-meal-type="Akşam Yemeği">Akşam</button>
+                <div>
+                    <label class="block text-sm font-medium text-primary mb-2">Öğün</label>
+                    <div class="grid grid-cols-2 gap-4">
+                        <button type="button" id="breakfastBtn" class="btn meal-type-btn w-full" data-meal-type="Kahvaltı">Sabah</button>
+                        <button type="button" id="dinnerBtn" class="btn meal-type-btn w-full" data-meal-type="Akşam Yemeği">Akşam</button>
+                    </div>
                 </div>
             </form>
         </div>
@@ -131,34 +156,118 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://npmcdn.com/flatpickr/dist/l10n/tr.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            flatpickr("#Date", {
-                dateFormat: "Y-m-d",
-                maxDate: "today",
-                locale: "tr",
-                onChange: function(selectedDates, dateStr, instance) {
-                    document.getElementById("menuForm").submit();
+            const form = document.getElementById("menuForm");
+            const dateInput = document.getElementById("Date");
+
+            // Scroll selected date into view
+            const selectedDateElement = document.querySelector('.date-strip-item.selected');
+            if (selectedDateElement) {
+                selectedDateElement.scrollIntoView({ behavior: 'auto', inline: 'center', block: 'nearest' });
+            }
+
+            function submitWithDate(newDateStr) {
+                const newDate = new Date(newDateStr);
+                const today = new Date();
+                
+                newDate.setHours(0, 0, 0, 0);
+                today.setHours(0, 0, 0, 0);
+
+                if (newDate > today) {
+                    return; // Prevent selecting future dates
                 }
+
+                dateInput.value = newDateStr;
+                form.submit();
+            }
+
+            // Initialize flatpickr on the date display
+            const dateDisplayTrigger = document.getElementById('date-display-trigger');
+            if (dateDisplayTrigger) {
+                flatpickr(dateDisplayTrigger, {
+                    defaultDate: dateInput.value,
+                    maxDate: "today",
+                    locale: "tr",
+                    dateFormat: "Y-m-d",
+                    onChange: function(selectedDates, dateStr, instance) {
+                        submitWithDate(dateStr);
+                    }
+                });
+            }
+
+            document.getElementById('prevDateBtn').addEventListener('click', function() {
+                const currentDate = new Date(dateInput.value);
+                currentDate.setDate(currentDate.getDate() - 1);
+                submitWithDate(currentDate.toISOString().split('T')[0]);
             });
 
+            document.getElementById('nextDateBtn').addEventListener('click', function() {
+                const currentDate = new Date(dateInput.value);
+                currentDate.setDate(currentDate.getDate() + 1);
+                submitWithDate(currentDate.toISOString().split('T')[0]);
+            });
+
+            // Drag to scroll for date strip
+            const dateStrip = document.querySelector('.hide-scrollbar');
+            let isDragging = false; 
+
+            if (dateStrip) {
+                let isDown = false;
+                let startX;
+                let scrollLeft;
+                
+                dateStrip.addEventListener('mousedown', (e) => {
+                    isDown = true;
+                    isDragging = false; 
+                    startX = e.pageX - dateStrip.offsetLeft;
+                    scrollLeft = dateStrip.scrollLeft;
+                });
+                
+                dateStrip.addEventListener('mousemove', (e) => {
+                    if(!isDown) return;
+                    e.preventDefault();
+                    isDragging = true;
+                    dateStrip.classList.add('grabbing');
+                    const x = e.pageX - dateStrip.offsetLeft;
+                    const walk = (x - startX) * 2; 
+                    dateStrip.scrollLeft = scrollLeft - walk;
+                });
+                
+                window.addEventListener('mouseup', () => {
+                    isDown = false;
+                    dateStrip.classList.remove('grabbing');
+                });
+                
+                document.querySelectorAll('.date-strip-item').forEach(button => {
+                    button.addEventListener('click', function(e) {
+                        if (isDragging) {
+                            e.preventDefault();
+                            return;
+                        }
+                        submitWithDate(this.dataset.date);
+                    });
+                });
+            }
+
             const mealTypeInput = document.getElementById("MealType");
-            const form = document.getElementById("menuForm");
             const mealTypeButtons = document.querySelectorAll('.meal-type-btn');
+            const formContainer = document.getElementById('menuForm');
 
             function updateButtonStyles() {
                 const currentMealType = mealTypeInput.value;
+                formContainer.dataset.mealTheme = currentMealType === 'Kahvaltı' ? 'morning' : 'evening';
+                
                 mealTypeButtons.forEach(btn => {
+                    btn.classList.remove('btn-primary', 'btn-outline');
                     if (btn.dataset.mealType === currentMealType) {
-                        btn.classList.add('bg-button-primary', 'text-white');
-                        btn.classList.remove('text-primary');
+                        btn.classList.add('btn-primary');
                     } else {
-                        btn.classList.remove('bg-button-primary', 'text-white');
-                        btn.classList.add('text-primary');
+                        btn.classList.add('btn-outline');
                     }
                 });
             }

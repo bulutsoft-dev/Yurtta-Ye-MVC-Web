@@ -155,6 +155,76 @@
             background-color: var(--kyk-secondary);
         }
 
+        /* Utility to hide scrollbar */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Drag to scroll cursor */
+        .grabbing {
+            cursor: grabbing;
+        }
+
+        /* Meal-type Dynamic Colors */
+        :root {
+            --breakfast-primary: #FF8A65;
+            --dinner-primary: #1E3A8A;
+            --unselected-bg: #E2E8F0;
+            --unselected-text: #475569;
+            --unselected-hover-bg: #CBD5E1;
+        }
+        .dark {
+            --unselected-bg-dark: #334155;
+            --unselected-text-dark: #E2E8F0;
+            --unselected-hover-bg-dark: #475569;
+        }
+        .date-strip-item {
+            background-color: var(--unselected-bg);
+            color: var(--unselected-text);
+        }
+        .dark .date-strip-item {
+            background-color: var(--unselected-bg-dark);
+            color: var(--unselected-text-dark);
+        }
+        .date-strip-item:hover {
+            background-color: var(--unselected-hover-bg);
+        }
+        .dark .date-strip-item:hover {
+            background-color: var(--unselected-hover-bg-dark);
+        }
+        [data-meal-theme="morning"] .date-strip-item.selected,
+        [data-meal-theme="morning"] .meal-type-btn.btn-primary {
+            background-color: var(--breakfast-primary);
+            border-color: var(--breakfast-primary);
+            color: white;
+        }
+        [data-meal-theme="morning"] .meal-type-btn.btn-outline {
+            color: var(--breakfast-primary);
+            border-color: var(--breakfast-primary);
+        }
+        [data-meal-theme="morning"] .meal-type-btn.btn-outline:hover {
+            background-color: var(--breakfast-primary);
+            color: white;
+        }
+        [data-meal-theme="evening"] .date-strip-item.selected,
+        [data-meal-theme="evening"] .meal-type-btn.btn-primary {
+            background-color: var(--dinner-primary);
+            border-color: var(--dinner-primary);
+            color: white;
+        }
+        [data-meal-theme="evening"] .meal-type-btn.btn-outline {
+            color: var(--dinner-primary);
+            border-color: var(--dinner-primary);
+        }
+        [data-meal-theme="evening"] .meal-type-btn.btn-outline:hover {
+            background-color: var(--dinner-primary);
+            color: white;
+        }
+
         /* Time-based Themes */
         .theme-morning {
              --bg-primary: linear-gradient(120deg, #FFFDE7, #FFF3E0); /* Light yellow to light orange */
