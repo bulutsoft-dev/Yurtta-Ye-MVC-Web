@@ -6,7 +6,7 @@ namespace YurttaYe.Core.Models.ViewModels
     {
         public MenuDto Menu { get; set; }
         public string Title { get; set; }
-        public string Emoji { get; set; }
+        public string IconClass { get; set; }
         public string GradientStart { get; set; }
         public string GradientEnd { get; set; }
         public string CategoryColor { get; set; }

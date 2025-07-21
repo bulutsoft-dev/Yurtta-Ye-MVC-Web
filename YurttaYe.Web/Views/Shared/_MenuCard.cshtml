@@ -1,8 +1,8 @@
 @model YurttaYe.Core.Models.ViewModels.MenuCardViewModel
 <div class="rounded-xl border border-card bg-card shadow-sm flex flex-col transition-colors w-full h-full min-h-[420px]">
     <div class="p-5 border-b border-card rounded-t-xl" style="background: linear-gradient(90deg, @Model.GradientStart 0%, @Model.GradientEnd 100%);">
-        <h2 class="text-xl font-bold text-white">
-            <span class="mr-2">@Model.Emoji</span> @Model.Title
+        <h2 class="text-xl font-bold text-white flex items-center gap-2">
+            <i class="@Model.IconClass"></i> @Model.Title
         </h2>
         <p class="text-sm text-white/90">@Model.DateText</p>
     </div>

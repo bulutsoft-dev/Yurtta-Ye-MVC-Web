@@ -1,13 +1,49 @@
 @model YurttaYe.Core.Models.ViewModels.NoMenuCardViewModel
-<div class="rounded-xl border border-card bg-card shadow-sm flex flex-col transition-colors w-full h-full min-h-[420px] p-8 text-center justify-between">
+
+@{
+    var isBreakfast = Model.MealLabel == "Sabah Kahvaltısı";
+}
+
+<style>
+    /* Scoped styles for NoMenuCard */
+    .no-menu-card.breakfast .icon-bg { background-color: #FFFBEB; }
+    .no-menu-card.breakfast .icon-fg { color: #F59E0B; }
+    .no-menu-card.breakfast .data-box { background-color: #FFFBEB; border-color: #FDE68A; }
+    .no-menu-card.breakfast .data-icon-bg { background-color: #F59E0B; }
+    .no-menu-card.breakfast .data-title { color: #B45309; }
+    .no-menu-card.breakfast .main-button { background-color: #F59E0B; }
+    .no-menu-card.breakfast .main-button:hover { background-color: #fbbf24; }
+
+    .dark .no-menu-card.breakfast .icon-bg { background-color: #422006; }
+    .dark .no-menu-card.breakfast .data-box { background-color: #422006; border-color: #78350F; }
+    .dark .no-menu-card.breakfast .data-title { color: #FDE68A; }
+
+
+    .no-menu-card.dinner .icon-bg { background-color: #EEF2FF; }
+    .no-menu-card.dinner .icon-fg { color: #1E3A8A; }
+    .no-menu-card.dinner .data-box { background-color: #EEF2FF; border-color: #C7D2FE; }
+    .no-menu-card.dinner .data-icon-bg { background-color: #1E3A8A; }
+    .no-menu-card.dinner .data-title { color: #312E81; }
+    .no-menu-card.dinner .main-button { background-color: #1E3A8A; }
+    .no-menu-card.dinner .main-button:hover { background-color: #3B82F6; }
+
+    .dark .no-menu-card.dinner .icon-bg { background-color: #1E293B; }
+    .dark .no-menu-card.dinner .icon-fg { color: #C7D2FE; } /* Lighter color for dark bg */
+    .dark .no-menu-card.dinner .data-box { background-color: #1E293B; border-color: #3730A3; }
+    .dark .no-menu-card.dinner .data-title { color: #C7D2FE; }
+    .dark .no-menu-card.dinner .main-button { background-color: #3B82F6; }
+    .dark .no-menu-card.dinner .main-button:hover { background-color: #60A5FA; }
+
+</style>
+
+<div class="no-menu-card @(isBreakfast ? "breakfast" : "dinner") rounded-xl border border-card bg-card shadow-sm flex flex-col transition-colors w-full h-full min-h-[420px] p-8 text-center justify-between">
     <div>
         <!-- İkon -->
-        <div class="w-16 h-16 mx-auto flex items-center justify-center rounded-full bg-accent/10 dark:bg-accent/20 my-6">
-            <i class="fas fa-clock text-3xl text-accent"></i>
+        <div class="w-16 h-16 mx-auto flex items-center justify-center rounded-full icon-bg">
+            <i class="@(isBreakfast ? "fas fa-mug-hot" : "fas fa-utensils") text-4xl icon-fg"></i>
         </div>
-
         <!-- Başlık ve Açıklama -->
-        <h2 class="text-xl font-bold text-primary">Menü Henüz Yayınlanmadı</h2>
+        <h2 class="text-xl font-bold text-primary mt-6">Menü Henüz Yayınlanmadı</h2>
         <p class="text-secondary mt-2">
             <strong>@Model.DateText</strong> için bu öğünün menüsü henüz sisteme girilmemiş.
         </p>
@@ -15,33 +51,23 @@
 
     <div class="w-full">
         <!-- Veri Katkısı Alanı -->
-        <div class="w-full text-left flex items-center gap-3 bg-secondary rounded-lg px-4 py-3 mb-5">
-            <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center rounded-md bg-accent text-white text-lg">
+        <div class="w-full text-left flex items-center gap-3 rounded-lg px-4 py-3 mb-5 border data-box">
+            <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center rounded-md text-white text-lg data-icon-bg">
                 <i class="fas fa-hand-holding-heart"></i>
             </div>
             <div>
-                <div class="font-semibold text-accent">Veri Katkısı</div>
-                <p class="text-xs text-secondary mb-1">
-                    Elinizde bilgi varsa, bize ulaşarak menünün eklenmesine yardımcı olabilirsiniz.
-                </p>
+                <div class="font-semibold data-title">Veri Katkısı</div>
                 <p class="text-xs text-secondary">
-                    Elinizde menüye ait herhangi bir belge (Excel, fotoğraf, PDF vb.) varsa veya kendi şehrinizin verilerinin sisteme eklenmesini istiyorsanız, lütfen bize mail yoluyla ulaşın. Sizin için verileri sisteme ekleyebiliriz.
+                    Bu menülerin doğruluğu ve güncelliği için sizin gibi kullanıcıların desteğine ihtiyacımız var. Elinizde bilgi varsa, bize ulaşarak menünün eklenmesine yardımcı olabilirsiniz.
                 </p>
             </div>
         </div>
 
-        <!-- Butonlar -->
-        <div class="flex flex-col sm:flex-row gap-3 w-full">
-            <a href="mailto:destek@yurttaye.com" class="w-full sm:w-1/2">
-                <button class="w-full bg-accent hover:bg-accent-hover text-white font-semibold py-2 rounded-lg flex items-center justify-center gap-2 transition">
-                    <i class="fas fa-envelope"></i> Bize Ulaşın
-                </button>
-            </a>
-            <form method="post" asp-action="Index" class="w-full sm:w-1/2">
-                <button type="submit" class="w-full bg-button-primary hover:bg-button-primary-hover text-white font-semibold py-2 rounded-lg flex items-center justify-center gap-2 transition">
-                    <i class="fas fa-rotate-right"></i> Yenile
-                </button>
-            </form>
-        </div>
+        <!-- Bize Ulaşın Butonu -->
+        <a href="mailto:destek@yurttaye.com" class="w-full">
+            <button class="w-full text-white font-semibold py-2 rounded-lg flex items-center justify-center gap-2 transition main-button">
+                <i class="fas fa-envelope"></i> Bize Ulaşın
+            </button>
+        </a>
     </div>
 </div> 
