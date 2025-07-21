@@ -253,7 +253,7 @@
 <partial name="_Navbar" />
 
 <!-- Mobil Uygulama Tanıtım Alanı (Navbar'a Yaslı) -->
-<section class="bg-card py-4 border-b border-card">
+<section x-data="{ show: true }" x-init="show = !localStorage.getItem('hideTopBanner')" x-show="show" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="bg-card py-4 border-b border-card" style="display: none;">
     <div class="container mx-auto px-4 flex justify-between items-center">
         <div class="flex items-center gap-4">
             <img src="~/logo-yurttaye.png" alt="YurttaYe Mobil Uygulama" class="w-12 h-12 rounded-lg">
@@ -262,10 +262,13 @@
                 <p class="text-xs text-secondary">Anlık bildirimler ve daha fazlası için uygulamayı indirin.</p>
             </div>
         </div>
-        <div class="flex gap-3">
+        <div class="flex items-center gap-3">
             <a href="https://play.google.com/store/apps/details?id=com.yurttaye.yurttaye" target="_blank" class="btn btn-primary text-sm">
                 <i class="fab fa-google-play mr-2"></i> İndir
             </a>
+            <button x-on:click="show = false; localStorage.setItem('hideTopBanner', 'true')" class="text-secondary hover:text-primary transition-colors p-2 rounded-full hover:bg-secondary/20">
+                <i class="fas fa-times"></i>
+            </button>
         </div>
     </div>
 </section>
@@ -278,7 +281,10 @@
 </div>
 
 <!-- Detaylı Mobil Uygulama Tanıtım Alanı -->
-<section class="bg-card py-8 border-t border-card">
+<section x-data="{ show: true }" x-init="show = !localStorage.getItem('hideBottomBanner')" x-show="show" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="bg-card py-8 border-t border-card relative" style="display: none;">
+    <button x-on:click="show = false; localStorage.setItem('hideBottomBanner', 'true')" class="absolute top-4 right-4 text-secondary hover:text-primary transition-colors p-2 rounded-full hover:bg-secondary/20 z-10">
+        <i class="fas fa-times"></i>
+    </button>
     <div class="container mx-auto px-4 grid md:grid-cols-2 gap-6 items-center">
         <div class="text-center">
             <img src="~/logo-yurttaye.png" alt="YurttaYe Mobil Uygulama" class="rounded-lg shadow-lg max-w-[180px] mx-auto">
@@ -303,7 +309,7 @@
 <partial name="_Footer" />
 
 <!-- Scripts -->
-<script src="~/lib/jquery/jquery.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
 @await RenderSectionAsync("Scripts", required: false)
 </body>
