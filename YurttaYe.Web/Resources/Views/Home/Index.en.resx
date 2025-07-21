@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="QueryMenu" xml:space="preserve"><value>Query Menu</value></data>
+  <data name="City" xml:space="preserve"><value>City</value></data>
+  <data name="SelectCity" xml:space="preserve"><value>Select City</value></data>
+  <data name="Meal" xml:space="preserve"><value>Meal</value></data>
+  <data name="MealType" xml:space="preserve"><value>Meal Type</value></data>
+  <data name="Date" xml:space="preserve"><value>Date</value></data>
+  <data name="Breakfast" xml:space="preserve"><value>Breakfast</value></data>
+  <data name="Dinner" xml:space="preserve"><value>Dinner</value></data>
+  <data name="BreakfastMenu" xml:space="preserve"><value>Breakfast Menu</value></data>
+  <data name="DinnerMenu" xml:space="preserve"><value>Dinner Menu</value></data>
+  <data name="BreakfastHours" xml:space="preserve"><value>07:00 - 09:00</value></data>
+  <data name="DinnerHours" xml:space="preserve"><value>18:00 - 20:00</value></data>
+  <data name="ImportantInfo" xml:space="preserve"><value>Important Info</value></data>
+  <data name="InfoNote" xml:space="preserve"><value>The menu information presented on this platform is based on data provided by dormitory administrations or contributed by users. Menus may vary depending on the dormitory, date, or meal time, and there may occasionally be inaccuracies in the data. Our application does not guarantee the accuracy of the displayed information and accepts no responsibility for any consequences arising from this data.</value></data>
+  <data name="Error" xml:space="preserve"><value>Error</value></data>
+  <data name="TotalEnergy" xml:space="preserve"><value>Total Energy</value></data>
+  <data name="MenuNotPublished" xml:space="preserve"><value>Menu Not Published</value></data>
+  <data name="MenuNotAvailable" xml:space="preserve"><value>no menu found for this date.</value></data>
+  <data name="DataContribution" xml:space="preserve"><value>Data Contribution</value></data>
+  <data name="ContributionNeeded" xml:space="preserve"><value>If the menu for this day is missing, you can contact us.</value></data>
+  <data name="ContactUs" xml:space="preserve"><value>Contact Us</value></data>
+</root> 

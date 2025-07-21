@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="FooterAboutText" xml:space="preserve"><value>YurttaYe is an open-source project that allows you to easily discover meal menus served in KYK dormitories.</value></data>
+  <data name="QuickLinks" xml:space="preserve"><value>Quick Links</value></data>
+  <data name="QueryMenu" xml:space="preserve"><value>Query Menu</value></data>
+  <data name="GooglePlay" xml:space="preserve"><value>Google Play</value></data>
+  <data name="TryTestVersion" xml:space="preserve"><value>Test Version</value></data>
+  <data name="About" xml:space="preserve"><value>About</value></data>
+  <data name="Contact" xml:space="preserve"><value>Contact</value></data>
+  <data name="Corporate" xml:space="preserve"><value>Corporate</value></data>
+  <data name="Feedback" xml:space="preserve"><value>Feedback</value></data>
+  <data name="OurAccounts" xml:space="preserve"><value>Our Accounts</value></data>
+  <data name="GitHub" xml:space="preserve"><value>GitHub</value></data>
+  <data name="LinkedIn" xml:space="preserve"><value>LinkedIn</value></data>
+  <data name="TwitterX" xml:space="preserve"><value>Twitter/X</value></data>
+  <data name="ToggleTheme" xml:space="preserve"><value>Light Theme</value></data>
+  <data name="ChangeLanguage" xml:space="preserve"><value>Change Language</value></data>
+  <data name="DevelopedBy" xml:space="preserve"><value>Developed by Bulutsoft.</value></data>
+</root> 

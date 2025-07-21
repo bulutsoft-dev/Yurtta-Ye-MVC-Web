@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="MenuNotPublished" xml:space="preserve"><value>Menü Henüz Yayınlanmadı</value></data>
+  <data name="MenuNotAvailable" xml:space="preserve"><value>için menü bulunamadı.</value></data>
+  <data name="DataContribution" xml:space="preserve"><value>Veri Katkısı</value></data>
+  <data name="ContributionNeeded" xml:space="preserve"><value>Bu menülerin doğruluğu ve güncelliği için sizin gibi kullanıcıların desteğine ihtiyacımız var. Elinizde bilgi varsa, bize ulaşarak menünün eklenmesine yardımcı olabilirsiniz.</value></data>
+  <data name="ContactUs" xml:space="preserve"><value>Bize Ulaşın</value></data>
+</root> 

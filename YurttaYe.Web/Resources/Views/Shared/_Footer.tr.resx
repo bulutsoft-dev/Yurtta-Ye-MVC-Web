@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="FooterAboutText" xml:space="preserve"><value>YurttaYe, KYK yurtlarında sunulan yemek menülerini kolayca keşfetmenizi sağlayan açık kaynak kodlu bir projedir.</value></data>
+  <data name="QuickLinks" xml:space="preserve"><value>Hızlı Bağlantılar</value></data>
+  <data name="QueryMenu" xml:space="preserve"><value>Menü Sorgula</value></data>
+  <data name="GooglePlay" xml:space="preserve"><value>Google Play</value></data>
+  <data name="TryTestVersion" xml:space="preserve"><value>Test Sürümü</value></data>
+  <data name="About" xml:space="preserve"><value>Hakkında</value></data>
+  <data name="Contact" xml:space="preserve"><value>İletişim</value></data>
+  <data name="Corporate" xml:space="preserve"><value>Kurumsal</value></data>
+  <data name="Feedback" xml:space="preserve"><value>Geri Bildirim</value></data>
+  <data name="OurAccounts" xml:space="preserve"><value>Hesaplarımız</value></data>
+  <data name="GitHub" xml:space="preserve"><value>GitHub</value></data>
+  <data name="LinkedIn" xml:space="preserve"><value>LinkedIn</value></data>
+  <data name="TwitterX" xml:space="preserve"><value>Twitter/X</value></data>
+  <data name="ToggleTheme" xml:space="preserve"><value>Açık Tema</value></data>
+  <data name="ChangeLanguage" xml:space="preserve"><value>Dil Değiştir</value></data>
+  <data name="DevelopedBy" xml:space="preserve"><value>Bulutsoft tarafından geliştirilmiştir.</value></data>
+</root> 

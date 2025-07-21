@@ -217,3 +217,11 @@
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/obj/Debug/net8.0/YurttaYe.Web.Resources.Views.Account.AccessDenied.tr.resources
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/obj/Debug/net8.0/YurttaYe.Web.Resources.Views.Account.Login.en.resources
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/obj/Debug/net8.0/YurttaYe.Web.Resources.Views.Account.Login.tr.resources
+/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/obj/Debug/net8.0/YurttaYe.Web.Resources.Views.Home.Index.en.resources
+/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/obj/Debug/net8.0/YurttaYe.Web.Resources.Views.Home.Index.tr.resources
+/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/obj/Debug/net8.0/YurttaYe.Web.Resources.Views.Shared._Footer.en.resources
+/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/obj/Debug/net8.0/YurttaYe.Web.Resources.Views.Shared._Footer.tr.resources
+/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/obj/Debug/net8.0/YurttaYe.Web.Resources.Views.Shared._MenuCard.en.resources
+/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/obj/Debug/net8.0/YurttaYe.Web.Resources.Views.Shared._MenuCard.tr.resources
+/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/obj/Debug/net8.0/YurttaYe.Web.Resources.Views.Shared._NoMenuCard.en.resources
+/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/obj/Debug/net8.0/YurttaYe.Web.Resources.Views.Shared._NoMenuCard.tr.resources

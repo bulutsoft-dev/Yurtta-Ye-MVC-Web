@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="MenuNotPublished" xml:space="preserve"><value>Menu Not Published Yet</value></data>
+  <data name="MenuNotAvailable" xml:space="preserve"><value>no menu found for this date.</value></data>
+  <data name="DataContribution" xml:space="preserve"><value>Data Contribution</value></data>
+  <data name="ContributionNeeded" xml:space="preserve"><value>We rely on the support of users like you for the accuracy and timeliness of these menus. If you have any information, please contact us to help add the menu.</value></data>
+  <data name="ContactUs" xml:space="preserve"><value>Contact Us</value></data>
+</root> 
