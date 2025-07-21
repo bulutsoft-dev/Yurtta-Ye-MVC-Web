@@ -15,48 +15,73 @@
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js" defer></script>
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 <meta name="google-site-verification" content="bku8zcxmPbYBtX3OnPrf-miY5w0Xy-wko_pfKpsQPmA" />
     <style>
-        /* Custom Theme Variables */
+        /* Custom Theme Variables based on Flutter Theme */
         :root {
-            --bg-primary: #fafaf9; /* stone-50 */
-            --bg-secondary: #f5f5f4; /* stone-100 */
-            --bg-card: #ffffff; /* white */
-            --text-primary: #1f2937; /* stone-800 */
-            --text-secondary: #6b7280; /* stone-500 */
-            --accent: #059669; /* emerald-600 */
-            --accent-hover: #047857; /* emerald-700 */
-            --border: #e5e7eb; /* stone-200 */
-            --border-card: #e5e7eb; /* stone-200 */
-            --button-primary: #2563eb; /* blue-600 */
-            --button-primary-hover: #1d4ed8; /* blue-700 */
-            --error-bg: #fef2f2; /* red-50 */
-            --error-text: #991b1b; /* red-800 */
-            --error-border: #dc2626; /* red-600 */
+            --kyk-primary: #1E3A8A;
+            --kyk-secondary: #3B82F6;
+            --kyk-accent: #F59E0B;
+            --kyk-error: #EF4444;
+            --kyk-gray-50: #F8FAFC;
+            --kyk-gray-200: #E2E8F0;
+            --kyk-gray-600: #475569;
+            --kyk-gray-800: #1E293B;
+            --white: #FFFFFF;
+
+            --bg-primary: var(--kyk-gray-50);
+            --bg-secondary: var(--white);
+            --bg-card: var(--white);
+            --text-primary: var(--kyk-gray-800);
+            --text-secondary: var(--kyk-gray-600);
+            --accent: var(--kyk-primary);
+            --accent-hover: var(--kyk-secondary);
+            --border: var(--kyk-gray-200);
+            --border-card: var(--kyk-gray-200);
+            --button-primary: var(--kyk-primary);
+            --button-primary-hover: var(--kyk-secondary);
+            --error-bg: #FEF2F2;
+            --error-text: #DC2626;
+            --error-border: #F87171;
         }
         .dark {
-            --bg-primary: #1f2937; /* gray-800 */
-            --bg-secondary: #374151; /* gray-700 */
-            --bg-card: #2d3748; /* gray-800 */
-            --text-primary: #e5e7eb; /* gray-200 */
-            --text-secondary: #9ca3af; /* gray-400 */
-            --accent: #10b981; /* emerald-500 */
-            --accent-hover: #059669; /* emerald-600 */
-            --border: #4b5563; /* gray-600 */
-            --border-card: #4b5563; /* gray-600 */
-            --button-primary: #3b82f6; /* blue-500 */
-            --button-primary-hover: #2563eb; /* blue-600 */
-            --error-bg: #7f1d1d; /* red-900/30 */
-            --error-text: #f87171; /* red-400 */
-            --error-border: #f87171; /* red-400 */
+            --dark-background: #0A0A0A;
+            --dark-surface: #1A1A1A;
+            --dark-card: #2A2A2A;
+            --dark-border: #3A3A3A;
+            --dark-text-primary: #F5F5F5;
+            --dark-text-secondary: #B0B0B0;
+
+            --bg-primary: var(--dark-background);
+            --bg-secondary: var(--dark-surface);
+            --bg-card: var(--dark-card);
+            --text-primary: var(--dark-text-primary);
+            --text-secondary: var(--dark-text-secondary);
+            --accent: var(--kyk-secondary);
+            --accent-hover: var(--kyk-accent);
+            --border: var(--dark-border);
+            --border-card: var(--dark-border);
+            --button-primary: var(--kyk-secondary);
+            --button-primary-hover: var(--kyk-accent);
+            --error-bg: rgba(239, 68, 68, 0.1);
+            --error-text: #F87171;
+            --error-border: #EF4444;
         }
 
         /* Base Styles */
         body {
             background-color: var(--bg-primary);
             color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
             transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
         }
         .bg-secondary { background-color: var(--bg-secondary); }
         .bg-card { background-color: var(--bg-card); }
@@ -78,100 +103,35 @@
         * {
             transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
+
+        /* Custom component styles */
+        .btn {
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: all 0.2s ease-in-out;
+            text-align: center;
+        }
+        .btn-primary {
+            background-color: var(--button-primary);
+            color: var(--white);
+        }
+        .btn-primary:hover {
+            background-color: var(--button-primary-hover);
+        }
+        .btn-outline {
+            background-color: transparent;
+            color: var(--accent);
+            border: 1.5px solid var(--accent);
+        }
+        .btn-outline:hover {
+            background-color: var(--accent);
+            color: var(--white);
+        }
     </style>
 </head>
-<body class="font-sans antialiased">
-<!-- Navbar -->
-<header>
-    <nav class="bg-secondary shadow-lg sticky top-0 z-50">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center py-4">
-                <!-- Logo -->
-                <a class="text-2xl font-bold text-primary hover:text-accent transition-colors" href="/">YurttaYe</a>
-                <!-- Mobile Menu Toggle -->
-                <div class="flex items-center space-x-4 lg:hidden">
-                    <button x-on:click="darkMode = !darkMode; localStorage.setItem('darkMode', darkMode)" class="text-secondary hover:text-accent focus:outline-none" aria-label="Tema değiştir">
-                        <i x-show="!darkMode" class="fas fa-sun w-6 h-6"></i>
-                        <i x-show="darkMode" class="fas fa-moon w-6 h-6"></i>
-                    </button>
-                    <button x-on:click="navOpen = !navOpen" class="text-secondary hover:text-accent focus:outline-none" aria-label="Menüyü aç/kapat">
-                        <i class="fas fa-bars w-6 h-6"></i>
-                    </button>
-                </div>
-                <!-- Desktop Menu -->
-                <div class="hidden lg:flex lg:items-center lg:space-x-6">
-                    <ul class="flex space-x-6">
-                        <li>
-                            <a class="text-secondary hover:text-accent transition-colors" asp-controller="Home" asp-action="Index">Menü Sorgula</a>
-                        </li>
-                        <li>
-                            <a href="https://play.google.com/store/apps/details?id=com.yurttaye.yurttaye" target="_blank" class="text-secondary hover:text-accent transition-colors">Google Play'den İndir</a>
-                        </li>
-                        @if (User.IsInRole("Admin"))
-                        {
-                        <li>
-                            <a class="text-secondary hover:text-accent transition-colors" asp-area="Admin" asp-controller="AdminMenu" asp-action="Index">Menü Yönetimi</a>
-                        </li>
-                        <li>
-                            <a class="text-secondary hover:text-accent transition-colors" asp-area="Admin" asp-controller="AdminCity" asp-action="Index">Şehir Yönetimi</a>
-                        </li>
-                        }
-                    </ul>
-                    <ul class="flex space-x-6 ml-6">
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                        <li>
-                            <a class="text-secondary hover:text-accent transition-colors" asp-controller="Account" asp-action="Logout">Çıkış</a>
-                        </li>
-                        }
-                        else
-                        {
-                        <li>
-                            <a class="text-secondary hover:text-accent transition-colors" asp-controller="Account" asp-action="Login">Giriş</a>
-                        </li>
-                        }
-                    </ul>
-                    <button x-on:click="darkMode = !darkMode; localStorage.setItem('darkMode', darkMode)" class="text-secondary hover:text-accent focus:outline-none" aria-label="Tema değiştir">
-                        <i x-show="!darkMode" class="fas fa-sun w-6 h-6"></i>
-                        <i x-show="darkMode" class="fas fa-moon w-6 h-6"></i>
-                    </button>
-                </div>
-            </div>
-            <!-- Mobile Menu -->
-            <div x-show="navOpen" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-4" class="lg:hidden">
-                <ul class="flex flex-col space-y-4 py-4">
-                    <li>
-                        <a class="text-secondary hover:text-accent transition-colors" asp-controller="Home" asp-action="Index">Menü Sorgula</a>
-                    </li>
-                    <li>
-                        <a href="https://play.google.com/store/apps/details?id=com.yurttaye.yurttaye" target="_blank" class="text-secondary hover:text-accent transition-colors">Google Play'den İndir</a>
-                    </li>
-                    @if (User.IsInRole("Admin"))
-                    {
-                    <li>
-                        <a class="text-secondary hover:text-accent transition-colors" asp-area="Admin" asp-controller="AdminMenu" asp-action="Index">Menü Yönetimi</a>
-                    </li>
-                    <li>
-                        <a class="text-secondary hover:text-accent transition-colors" asp-area="Admin" asp-controller="AdminCity" asp-action="Index">Şehir Yönetimi</a>
-                    </li>
-                    }
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                    <li>
-                        <a class="text-secondary hover:text-accent transition-colors" asp-controller="Account" asp-action="Logout">Çıkış</a>
-                    </li>
-                    }
-                    else
-                    {
-                    <li>
-                        <a class="text-secondary hover:text-accent transition-colors" asp-controller="Account" asp-action="Login">Giriş</a>
-                    </li>
-                    }
-                </ul>
-            </div>
-        </div>
-    </nav>
-</header>
+<body class="antialiased">
+<partial name="_Navbar" />
 
 <!-- Main Content -->
 <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -180,56 +140,7 @@
     </main>
 </div>
 
-<!-- Footer -->
-<footer class="bg-secondary shadow-lg text-primary">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- About -->
-            <div>
-                <h3 class="text-lg font-semibold text-primary mb-4">YurttaYe Hakkında</h3>
-                <p class="text-secondary text-sm">
-                    YurttaYe, KYK yurtlarında sunulan yemek menülerini kolayca keşfetmenizi sağlar. Mobil uygulamamızla her zaman, her yerde menülere erişebilirsiniz.
-                </p>
-            </div>
-            <!-- Links -->
-            <div>
-                <h3 class="text-lg font-semibold text-primary mb-4">Hızlı Bağlantılar</h3>
-                <ul class="space-y-2 text-sm">
-                    <li><a href="/" class="text-secondary hover:text-accent transition-colors">Menü Sorgula</a></li>
-                    <li><a href="https://play.google.com/store/apps/details?id=com.yurttaye.yurttaye" class="text-secondary hover:text-accent transition-colors">Google Play</a></li>
-                    <li><a href="https://play.google.com/apps/testing/com.yurttaye.yurttaye" class="text-secondary hover:text-accent transition-colors">Test Sürümü</a></li>
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                    <li><a asp-controller="Account" asp-action="Logout" class="text-secondary hover:text-accent transition-colors">Çıkış</a></li>
-                    }
-                    else
-                    {
-                    <li><a asp-controller="Account" asp-action="Login" class="text-secondary hover:text-accent transition-colors">Giriş</a></li>
-                    }
-                </ul>
-            </div>
-            <!-- Social Media -->
-            <div>
-                <h3 class="text-lg font-semibold text-primary mb-4">Bizi Takip Edin</h3>
-                <div class="flex space-x-4">
-                    <a href="https://www.furkanbulut.software/" target="_blank" class="text-secondary hover:text-accent transition-colors" aria-label="Furkan Bulut Web Sitesi">
-                        <i class="fas fa-globe w-6 h-6"></i>
-                    </a>
-                    <a href="#" class="text-secondary hover:text-accent transition-colors" aria-label="Twitter">
-                        <i class="fab fa-twitter w-6 h-6"></i>
-                    </a>
-                    <a href="#" class="text-secondary hover:text-accent transition-colors" aria-label="Instagram">
-                        <i class="fab fa-instagram w-6 h-6"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="border-t border-accent mt-8 pt-4 text-center">
-            <p class="text-secondary text-sm">© 2025 YurttaYe. Tüm hakları saklıdır.</p>
-            <p class="text-secondary text-sm mt-2">Geliştirici: <a href="https://www.furkanbulut.software/" target="_blank" class="text-accent hover:underline">Furkan Bulut</a></p>
-        </div>
-    </div>
-</footer>
+<partial name="_Footer" />
 
 <!-- Scripts -->
 <script src="~/lib/jquery/jquery.min.js"></script>

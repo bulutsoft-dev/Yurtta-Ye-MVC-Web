@@ -4,168 +4,124 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<style>
-    /* Override and enhance theme variables for menu display */
-    :root {
-        --text-primary: #111827; /* Darker gray for light theme */
-        --text-secondary: #374151; /* Darker gray for light theme */
-        --text-highlight: #92400e; /* Darker amber for light theme */
-        --bg-highlight: #fef3c7; /* Light amber background */
-        --bg-category: #f3f4f6; /* Light gray for category headers */
-        --icon-primary: #1f2937; /* Icon color for light theme */
-    }
-    .dark {
-        --text-primary: #e5e7eb; /* Light gray for dark theme */
-        --text-secondary: #9ca3af; /* Light gray for dark theme */
-        --text-highlight: #f59e0b; /* Bright amber for dark theme */
-        --bg-highlight: #451a03; /* Dark amber background */
-        --bg-category: #4b5563; /* Dark gray for category headers */
-        --icon-primary: #d1d5db; /* Icon color for dark theme */
-    }
-    .text-highlight { color: var(--text-highlight); }
-    .bg-highlight { background-color: var(--bg-highlight); }
-    .bg-category { background-color: var(--bg-category); }
-    .text-icon-primary { color: var(--icon-primary); }
-</style>
-
-<div class="min-h-screen bg-primary font-sans">
+<div class="min-h-screen bg-primary">
     <!-- Header -->
-    <header class="bg-secondary py-10 shadow-sm">
-        <h1 class="text-4xl md:text-5xl font-semibold text-center text-primary tracking-tight">KYK Yemek Menüsü</h1>
-        <p class="text-center text-secondary mt-3 text-base md:text-lg">Şehir ve tarih seçerek yurt yemek listesini keşfedin</p>
+    <header class="text-center py-10">
+        <h1 class="text-4xl md:text-5xl font-bold text-primary tracking-tight">KYK Yemek Menüsü</h1>
+        <p class="text-secondary mt-3 text-lg">Şehir ve tarih seçerek yurt yemek listesini keşfedin.</p>
     </header>
 
     <!-- Main content -->
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
         <!-- Mobile App Promotion Card -->
-        <div class="bg-card rounded-lg shadow-sm p-6 border border-card">
-            <div class="flex items-center space-x-2 mb-3">
-                <i class="fas fa-mobile-alt w-6 h-6 text-accent"></i>
-                <h2 class="text-xl font-semibold text-primary">YurttaYe Mobil Uygulaması</h2>
+        <div class="bg-card rounded-lg shadow-lg p-6 mb-8 border border-card">
+            <div class="flex items-center space-x-4 mb-4">
+                <i class="fas fa-mobile-alt text-3xl text-accent"></i>
+                <div>
+                    <h2 class="text-2xl font-bold text-primary">YurttaYe Mobil Uygulaması</h2>
+                    <p class="text-secondary">Yemek menüsünü her an, her yerden keşfedin!</p>
+                </div>
             </div>
-            <p class="text-primary text-lg mb-4">
-                Yurt yemek menüsünü her zaman, her yerde keşfedin! Mobil uygulamamızı indirerek menülere kolayca erişebilirsiniz.
-            </p>
-            <div class="flex flex-col sm:flex-row sm:space-x-4 space-y-3 sm:space-y-0">
-                <a href="https://play.google.com/store/apps/details?id=com.yurttaye.yurttaye" target="_blank" class="flex-1 py-3 px-6 rounded-lg text-lg font-medium text-white bg-accent hover:bg-accent-hover transition-colors text-center" aria-label="Google Play'den YurttaYe uygulamasını indir">
-                    <i class="fab fa-google-play mr-1"></i> Google Play'den İndir
+            <div class="flex flex-col sm:flex-row gap-4">
+                <a href="https://play.google.com/store/apps/details?id=com.yurttaye.yurttaye" target="_blank" class="btn btn-primary flex-1">
+                    <i class="fab fa-google-play mr-2"></i> Google Play'den İndir
                 </a>
-                <a href="https://play.google.com/apps/testing/com.yurttaye.yurttaye" target="_blank" class="flex-1 py-3 px-6 rounded-lg text-lg font-medium text-primary bg-secondary hover:bg-accent hover:text-white transition-colors text-center" aria-label="YurttaYe test sürümünü deneyin">
-                    <i class="fas fa-vial mr-1"></i> Test Sürümünü Deneyin
+                <a href="https://play.google.com/apps/testing/com.yurttaye.yurttaye" target="_blank" class="btn btn-outline flex-1">
+                    <i class="fas fa-vial mr-2"></i> Test Sürümünü Dene
                 </a>
             </div>
-            <p class="text-red-600 dark:text-red-400 text-sm mt-3">
-                Uyarı: Test sürümü deneysel özellikler içerebilir ve kararsız olabilir.
+            <p class="text-xs text-secondary mt-3">
+                Test sürümü deneysel özellikler içerebilir ve kararsız olabilir.
             </p>
         </div>
+        
         <!-- Form card -->
-        <div class="bg-gradient-to-b from-primary to-secondary rounded-xl shadow-md p-8 mb-12 border border-card">
-            <form asp-action="Index" method="post" class="grid gap-6 sm:grid-cols-1" id="menuForm">
-                <!-- City Selection -->
-                <div>
-                    <label for="CityId" class="block text-sm font-medium text-primary mb-2">Şehir</label>
-                    <select asp-for="CityId" id="CityId" class="block w-full rounded-lg border border-card focus:border-button-primary focus:ring focus:ring-button-primary py-3 px-4 text-sm placeholder-secondary bg-card text-primary" asp-items="@Model.Cities">
-                        <option value="">Şehir Seçin</option>
-                    </select>
-                    <span asp-validation-for="CityId" class="text-red-600 dark:text-red-400 text-xs mt-1 font-medium"></span>
+        <div class="bg-card rounded-xl shadow-lg p-6 mb-8 border border-card">
+            <form asp-action="Index" method="post" class="space-y-6" id="menuForm">
+                <!-- City and Date Selection -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="CityId" class="block text-sm font-medium text-primary mb-2">Şehir</label>
+                        <select asp-for="CityId" id="CityId" class="block w-full rounded-lg border border-border focus:border-accent focus:ring-accent py-3 px-4 bg-secondary text-primary" asp-items="@Model.Cities">
+                            <option value="">Şehir Seçin</option>
+                        </select>
+                        <span asp-validation-for="CityId" class="text-red-500 text-xs mt-1"></span>
+                    </div>
+                    <div>
+                        <label for="Date" class="block text-sm font-medium text-primary mb-2">Tarih</label>
+                        <div class="relative">
+                            <input type="text" asp-for="Date" id="Date" value="@Model.Date.ToString("yyyy-MM-dd")" class="flatpickr block w-full rounded-lg border border-border focus:border-accent focus:ring-accent py-3 px-4 bg-secondary text-primary" readonly/>
+                            <span class="absolute right-4 top-1/2 -translate-y-1/2 text-primary">
+                                <i class="fas fa-calendar-alt"></i>
+                            </span>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Hidden Meal Type -->
                 <input type="hidden" asp-for="MealType" id="MealType" value="@(Model.MealType ?? "Kahvaltı")"/>
 
-                <!-- Date Picker with Navigation -->
-                <div class="sm:col-span-2">
-                    <label for="Date" class="block text-sm font-medium text-primary mb-2">Tarih</label>
-                    <div class="flex items-center space-x-4">
-                        <button type="button" id="prevDate" class="p-3 rounded-full bg-secondary hover:bg-accent transition-colors" aria-label="Önceki tarih">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-icon-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-                            </svg>
-                        </button>
-                        <div class="relative flex-1">
-                            <input type="text" asp-for="Date" id="Date" value="@Model.Date.ToString("yyyy-MM-dd")" class="flatpickr block w-full rounded-lg border border-card focus:border-button-primary focus:ring focus:ring-button-primary py-3 px-4 text-sm bg-card text-primary" readonly/>
-                            <span class="absolute right-4 top-3 text-icon-primary">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                                </svg>
-                            </span>
-                        </div>
-                        <button type="button" id="nextDate" class="p-3 rounded-full bg-secondary hover:bg-accent transition-colors" aria-label="Sonraki tarih">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-icon-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                            </svg>
-                        </button>
-                    </div>
-                    <span asp-validation-for="Date" class="text-red-600 dark:text-red-400 text-xs mt-1 font-medium"></span>
+                <!-- Meal Type Toggle -->
+                <div class="flex rounded-lg bg-secondary p-1 border border-border">
+                    <button type="button" id="breakfastBtn" class="meal-type-btn flex-1 py-2 text-sm font-semibold rounded-md transition-colors" data-meal-type="Kahvaltı">Sabah</button>
+                    <button type="button" id="dinnerBtn" class="meal-type-btn flex-1 py-2 text-sm font-semibold rounded-md transition-colors" data-meal-type="Akşam Yemeği">Akşam</button>
                 </div>
             </form>
-
-            <!-- Meal Type Toggle -->
-            <div class="sm:col-span-2 mt-6">
-                <div class="flex space-x-4">
-                    <button type="button" id="breakfastBtn" class="flex-1 py-3 px-6 rounded-lg text-sm font-medium transition-colors @(Model.MealType == "Kahvaltı" ? "bg-button-primary text-white hover:bg-button-primary-hover" : "bg-secondary text-primary hover:bg-accent hover:text-white")">Sabah</button>
-                    <button type="button" id="dinnerBtn" class="flex-1 py-3 px-6 rounded-lg text-sm font-medium transition-colors @(Model.MealType == "Akşam Yemeği" ? "bg-button-primary text-white hover:bg-button-primary-hover" : "bg-secondary text-primary hover:bg-accent hover:text-white")">Akşam</button>
-                </div>
-            </div>
         </div>
 
-        <!-- Hata -->
+        <!-- Error Message -->
         @if (!string.IsNullOrEmpty(Model.ErrorMessage))
         {
-            <div class="error-bg border-l-4 border-error border-error-text p-4 rounded-lg mb-12" id="errorAlert">
-                <strong>Hata:</strong> @Model.ErrorMessage
-                <button onclick="document.getElementById('errorAlert').remove()" class="float-right error-text hover:text-accent">
-                    <i class="fas fa-times text-icon-primary"></i>
-                </button>
+            <div class="bg-error-bg border-l-4 border-error-border text-error-text p-4 rounded-lg mb-8" role="alert" id="errorAlert">
+                <div class="flex justify-between items-center">
+                    <span><strong>Hata:</strong> @Model.ErrorMessage</span>
+                    <button onclick="this.parentElement.parentElement.remove()" class="text-error-text hover:opacity-75">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
             </div>
         }
 
-        <!-- Menü Göster -->
+        <!-- Menu Display -->
         @if (Model.Menu != null)
         {
             string formattedDate = DateTime.TryParse(Model.Menu.Date, out var parsedDate)
-                ? parsedDate.ToString("dd MMMM yyyy dddd", new System.Globalization.CultureInfo("tr-TR"))
+                ? parsedDate.ToString("dd MMMM yyyy, dddd", new System.Globalization.CultureInfo("tr-TR"))
                 : string.Empty;
 
-            <div class="bg-card rounded-xl shadow-md mb-12 border border-card">
-       
-                <div class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-6 rounded-t-xl">
-                    <h2 class="text-xl font-semibold tracking-tight">
-                        @(Model.MealType == "Kahvaltı" ? "Sabah Kahvaltısı" : "Akşam Yemeği") - @formattedDate
-                    </h2>
-                    <p class="text-sm mt-1 text-blue-100">@Model.Cities.FirstOrDefault(c => c.Value == Model.CityId.ToString())?.Text</p>
+            var mealType = Model.MealType == "Kahvaltı" ? "Sabah Kahvaltısı" : "Akşam Yemeği";
+            
+            <div class="bg-card rounded-xl shadow-lg overflow-hidden border border-card">
+                <div class="p-6 bg-gradient-to-r from-accent to-button-primary-hover text-white">
+                    <h2 class="text-2xl font-bold">@mealType</h2>
+                    <p class="text-sm opacity-90">@formattedDate - @Model.Cities.FirstOrDefault(c => c.Value == Model.CityId.ToString())?.Text</p>
                 </div>
-                <div class="p-8">
-                    <div class="space-y-6">
-                        @foreach (var category in Model.Menu.Items.Select(i => i.Category).Distinct())
-                        {
-                            <div>
-                                <h3 class="text-base font-medium text-highlight bg-category px-3 py-2 rounded-lg mb-3 shadow-sm flex items-center">
-                                    <i class="fas fa-utensils mr-2 text-icon-primary"></i>
-                                    @category
-                                </h3>
-                                <ul class="space-y-3">
-                                    @foreach (var item in Model.Menu.Items.Where(i => i.Category == category))
-                                    {
-                                        <li class="text-primary text-sm flex items-center">
-                                            <span class="font-medium">@item.Name</span>
-                                            @if (!string.IsNullOrWhiteSpace(item.Gram))
-                                            {
-                                                <span class="ml-3 text-secondary bg-category px-2 py-1 rounded-lg font-semibold shadow-sm">(@item.Gram)</span>
-                                            }
-                                        </li>
-                                    }
-                                </ul>
-                            </div>
-                        }
-
-                        <div class="text-sm font-medium text-primary border-t border-card pt-4">
-                            Toplam Enerji: 
-                            <span class="text-highlight bg-highlight px-3 py-1 rounded-full ml-2 border border-card font-semibold">
-                                <i class="fas fa-fire mr-1 text-icon-primary"></i>
-                                @Model.Menu.Energy
-                            </span>
+                <div class="p-6 space-y-6">
+                    @foreach (var category in Model.Menu.Items.Select(i => i.Category).Distinct())
+                    {
+                        <div>
+                            <h3 class="text-lg font-semibold text-accent mb-3 flex items-center">
+                                <i class="fas fa-utensils mr-3"></i>
+                                @category
+                            </h3>
+                            <ul class="space-y-2 pl-8">
+                                @foreach (var item in Model.Menu.Items.Where(i => i.Category == category))
+                                {
+                                    <li class="flex items-center text-primary">
+                                        <span>@item.Name</span>
+                                        @if (!string.IsNullOrWhiteSpace(item.Gram))
+                                        {
+                                            <span class="ml-auto text-sm font-medium bg-secondary text-secondary py-1 px-2 rounded-md">@item.Gram</span>
+                                        }
+                                    </li>
+                                }
+                            </ul>
                         </div>
+                    }
+
+                    <div class="border-t border-border pt-4 text-right">
+                        <span class="text-lg font-bold text-primary">Toplam Enerji:</span>
+                        <span class="text-lg font-bold text-accent ml-2">@Model.Menu.Energy</span>
                     </div>
                 </div>
             </div>
@@ -175,46 +131,52 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-
-    <!-- Flatpickr -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/tr.js"></script>
 
     <script>
-        flatpickr("#Date", {
-            dateFormat: "Y-m-d",
-            maxDate: "today",
-            locale: "tr"
-        });
+        document.addEventListener('DOMContentLoaded', function () {
+            flatpickr("#Date", {
+                dateFormat: "Y-m-d",
+                maxDate: "today",
+                locale: "tr",
+                onChange: function(selectedDates, dateStr, instance) {
+                    document.getElementById("menuForm").submit();
+                }
+            });
 
-        // Tarih navigasyonu
-        document.getElementById("prevDate").addEventListener("click", function () {
-            changeDate(-1);
-        });
+            const mealTypeInput = document.getElementById("MealType");
+            const form = document.getElementById("menuForm");
+            const mealTypeButtons = document.querySelectorAll('.meal-type-btn');
 
-        document.getElementById("nextDate").addEventListener("click", function () {
-            changeDate(1);
-        });
-
-        function changeDate(offset) {
-            const dateInput = document.getElementById("Date");
-            const currentDate = new Date(dateInput.value);
-            if (!isNaN(currentDate)) {
-                currentDate.setDate(currentDate.getDate() + offset);
-                dateInput.value = currentDate.toISOString().split('T')[0];
-                document.getElementById("menuForm").submit();
+            function updateButtonStyles() {
+                const currentMealType = mealTypeInput.value;
+                mealTypeButtons.forEach(btn => {
+                    if (btn.dataset.mealType === currentMealType) {
+                        btn.classList.add('bg-button-primary', 'text-white');
+                        btn.classList.remove('text-primary');
+                    } else {
+                        btn.classList.remove('bg-button-primary', 'text-white');
+                        btn.classList.add('text-primary');
+                    }
+                });
             }
-        }
 
-        // Yemek türü seçimi
-        document.getElementById("breakfastBtn").addEventListener("click", function () {
-            document.getElementById("MealType").value = "Kahvaltı";
-            document.getElementById("menuForm").submit();
-        });
+            mealTypeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    mealTypeInput.value = this.dataset.mealType;
+                    updateButtonStyles();
+                    form.submit();
+                });
+            });
+            
+            document.getElementById('CityId').addEventListener('change', function() {
+                form.submit();
+            });
 
-        document.getElementById("dinnerBtn").addEventListener("click", function () {
-            document.getElementById("MealType").value = "Akşam Yemeği";
-            document.getElementById("menuForm").submit();
+            // Initial button styles
+            updateButtonStyles();
         });
     </script>
 }

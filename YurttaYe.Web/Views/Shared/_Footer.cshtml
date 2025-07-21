@@ -1,0 +1,50 @@
+<!-- Footer -->
+<footer class="bg-secondary shadow-lg text-primary">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- About -->
+            <div>
+                <h3 class="text-lg font-semibold text-primary mb-4">YurttaYe Hakkında</h3>
+                <p class="text-secondary text-sm">
+                    YurttaYe, KYK yurtlarında sunulan yemek menülerini kolayca keşfetmenizi sağlar. Mobil uygulamamızla her zaman, her yerde menülere erişebilirsiniz.
+                </p>
+            </div>
+            <!-- Links -->
+            <div>
+                <h3 class="text-lg font-semibold text-primary mb-4">Hızlı Bağlantılar</h3>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="/" class="text-secondary hover:text-accent transition-colors">Menü Sorgula</a></li>
+                    <li><a href="https://play.google.com/store/apps/details?id=com.yurttaye.yurttaye" class="text-secondary hover:text-accent transition-colors">Google Play</a></li>
+                    <li><a href="https://play.google.com/apps/testing/com.yurttaye.yurttaye" class="text-secondary hover:text-accent transition-colors">Test Sürümü</a></li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                    <li><a asp-controller="Account" asp-action="Logout" class="text-secondary hover:text-accent transition-colors">Çıkış</a></li>
+                    }
+                    else
+                    {
+                    <li><a asp-controller="Account" asp-action="Login" class="text-secondary hover:text-accent transition-colors">Giriş</a></li>
+                    }
+                </ul>
+            </div>
+            <!-- Social Media -->
+            <div>
+                <h3 class="text-lg font-semibold text-primary mb-4">Bizi Takip Edin</h3>
+                <div class="flex space-x-4">
+                    <a href="https://www.furkanbulut.software/" target="_blank" class="text-secondary hover:text-accent transition-colors" aria-label="Furkan Bulut Web Sitesi">
+                        <i class="fas fa-globe w-6 h-6"></i>
+                    </a>
+                    <a href="#" class="text-secondary hover:text-accent transition-colors" aria-label="Twitter">
+                        <i class="fab fa-twitter w-6 h-6"></i>
+                    </a>
+                    <a href="#" class="text-secondary hover:text-accent transition-colors" aria-label="Instagram">
+                        <i class="fab fa-instagram w-6 h-6"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-accent mt-8 pt-4 text-center">
+            <p class="text-secondary text-sm">© 2025 YurttaYe. Tüm hakları saklıdır.</p>
+            <p class="text-secondary text-sm mt-2">Geliştirici: <a href="https://www.furkanbulut.software/" target="_blank" class="text-accent hover:underline">Furkan Bulut</a></p>
+        </div>
+    </div>
+</footer> 
