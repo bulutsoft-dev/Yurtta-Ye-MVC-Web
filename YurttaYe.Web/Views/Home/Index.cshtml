@@ -1,4 +1,5 @@
 ﻿@model YurttaYe.Core.Models.ViewModels.MenuViewModel
+@using YurttaYe.Core.Models.ViewModels
 @{
     ViewData["Title"] = "Menü Sorgula";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -139,7 +140,7 @@
             <div class="flex flex-col h-full">
                 @if (Model.BreakfastMenu != null)
                 {
-                    var breakfastModel = new YurttaYe.Web.Views.Shared.MenuCardModel {
+                    var breakfastModel = new MenuCardViewModel {
                         Menu = Model.BreakfastMenu,
                         Title = "Sabah Kahvaltısı",
                         Emoji = "🥐",
@@ -152,7 +153,11 @@
                 }
                 else
                 {
-                    <partial name="_NoMenuCard" />
+                    var noMenuModel = new NoMenuCardViewModel {
+                        MealLabel = "Sabah Kahvaltısı",
+                        DateText = Model.Date.ToString("dd MMMM yyyy, dddd", new System.Globalization.CultureInfo("tr-TR"))
+                    };
+                    <partial name="_NoMenuCard" model="noMenuModel" />
                 }
             </div>
 
@@ -160,7 +165,7 @@
             <div class="flex flex-col h-full">
                 @if (Model.DinnerMenu != null)
                 {
-                    var dinnerModel = new YurttaYe.Web.Views.Shared.MenuCardModel {
+                    var dinnerModel = new MenuCardViewModel {
                         Menu = Model.DinnerMenu,
                         Title = "Akşam Yemeği",
                         Emoji = "🍽️",
@@ -173,7 +178,11 @@
                 }
                 else
                 {
-                    <partial name="_NoMenuCard" />
+                    var noMenuModel = new NoMenuCardViewModel {
+                        MealLabel = "Akşam Yemeği",
+                        DateText = Model.Date.ToString("dd MMMM yyyy, dddd", new System.Globalization.CultureInfo("tr-TR"))
+                    };
+                    <partial name="_NoMenuCard" model="noMenuModel" />
                 }
             </div>
         </div>

@@ -1,8 +1,8 @@
 using YurttaYe.Core.Models.Dtos;
 
-namespace YurttaYe.Web.Views.Shared
+namespace YurttaYe.Core.Models.ViewModels
 {
-    public class MenuCardModel
+    public class MenuCardViewModel
     {
         public MenuDto Menu { get; set; }
         public string Title { get; set; }
