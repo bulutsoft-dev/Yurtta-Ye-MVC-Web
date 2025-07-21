@@ -1,58 +1,53 @@
 <!-- Navbar -->
 <header x-data="{ navOpen: false }" class="navbar sticky top-0 z-50">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between py-3">
+        <div class="relative flex items-center justify-between py-3">
             
-            <!-- Mobile/Tablet view: Brand on left, icons on right -->
-            <div class="lg:hidden flex w-full items-center justify-between">
-                <a class="brand text-2xl" href="/">YurttaYe</a>
-                <div class="flex items-center space-x-2">
-                    <button x-on:click="darkMode = !darkMode; localStorage.setItem('darkMode', darkMode)" class="nav-action-icon" aria-label="Tema değiştir">
-                        <i x-show="!darkMode" class="fas fa-sun text-xl"></i>
-                        <i x-show="darkMode" class="fas fa-moon text-xl"></i>
-                    </button>
-                    <button x-on:click="navOpen = !navOpen" class="nav-action-icon" aria-label="Menüyü aç/kapat">
-                        <i class="fas fa-bars text-xl"></i>
-                    </button>
-                </div>
+            <!-- Left Icons -->
+            <div class="flex items-center space-x-2">
+                <a href="https://play.google.com/store/apps/details?id=com.yurttaye.yurttaye" target="_blank" class="nav-link p-2 lg:px-4 lg:py-2" title="Google Play'den İndir">
+                    <i class="fab fa-google-play text-xl"></i>
+                    <span class="hidden lg:inline ml-2 font-semibold">Google Play</span>
+                </a>
+                <a href="#" class="nav-link p-2 lg:px-4 lg:py-2" title="Dil Değiştir">
+                    <i class="fas fa-language text-xl"></i>
+                    <span class="hidden lg:inline ml-2 font-semibold">Dil</span>
+                </a>
             </div>
 
-            <!-- Desktop view -->
-            <div class="hidden lg:flex w-full items-center justify-between">
-                <!-- Left Icons -->
-                <div class="flex items-center space-x-2">
-                    <a href="https://play.google.com/store/apps/details?id=com.yurttaye.yurttaye" target="_blank" class="nav-link" title="Google Play'den İndir">
-                        <i class="fab fa-google-play text-xl"></i>
-                    </a>
-                    <a href="#" class="nav-link" title="Dil Değiştir">
-                        <i class="fas fa-language text-xl"></i>
-                    </a>
-                </div>
+            <!-- Centered Brand (All screens) -->
+            <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                <a class="brand" href="/">YurttaYe</a>
+            </div>
 
-                <!-- Centered Brand -->
-                <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-                    <a class="brand" href="/">YurttaYe</a>
-                </div>
-
-                <!-- Right Icons -->
-                <div class="flex items-center space-x-2">
-                    <button x-on:click="darkMode = !darkMode; localStorage.setItem('darkMode', darkMode)" class="nav-action-icon" aria-label="Tema değiştir">
-                        <i x-show="!darkMode" class="fas fa-sun text-xl"></i>
-                        <i x-show="darkMode" class="fas fa-moon text-xl"></i>
-                    </button>
+            <!-- Right Icons -->
+            <div class="flex items-center space-x-2">
+                <button x-on:click="darkMode = !darkMode; localStorage.setItem('darkMode', darkMode)" class="nav-action-icon p-2 lg:px-4 lg:py-2" aria-label="Tema değiştir">
+                    <i x-show="!darkMode" class="fas fa-sun text-xl"></i>
+                    <span class="hidden lg:inline ml-2 font-semibold" x-show="!darkMode">Açık</span>
+                    <i x-show="darkMode" class="fas fa-moon text-xl"></i>
+                    <span class="hidden lg:inline ml-2 font-semibold" x-show="darkMode">Koyu</span>
+                </button>
+                <div class="hidden lg:flex items-center">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <a class="nav-action-icon" asp-controller="Account" asp-action="Logout" title="Çıkış">
+                        <a class="nav-action-icon p-2 lg:px-4 lg:py-2" asp-controller="Account" asp-action="Logout" title="Çıkış">
                             <i class="fas fa-sign-out-alt text-xl"></i>
+                            <span class="hidden lg:inline ml-2 font-semibold">Çıkış</span>
                         </a>
                     }
                     else
                     {
-                        <a class="nav-action-icon" asp-controller="Account" asp-action="Login" title="Giriş">
+                        <a class="nav-action-icon p-2 lg:px-4 lg:py-2" asp-controller="Account" asp-action="Login" title="Giriş">
                             <i class="fas fa-sign-in-alt text-xl"></i>
+                            <span class="hidden lg:inline ml-2 font-semibold">Giriş</span>
                         </a>
                     }
                 </div>
+                <!-- Mobile Menu Toggle -->
+                <button x-on:click="navOpen = !navOpen" class="nav-action-icon lg:hidden p-2" aria-label="Menüyü aç/kapat">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
             </div>
         </div>
     </div>

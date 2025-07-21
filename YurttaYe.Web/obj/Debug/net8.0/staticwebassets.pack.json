@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets/YurttaYe.Web.bundle.scp.css"
     },
     {
+      "Id": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/wwwroot/ChatGPT Image May 21, 2025, 02_09_42 PM.png",
+      "PackagePath": "staticwebassets/ChatGPT Image May 21, 2025, 02_09_42 PM.png"
+    },
+    {
       "Id": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/wwwroot/app-ads.txt",
       "PackagePath": "staticwebassets/app-ads.txt"
     },
@@ -247,6 +251,14 @@
     {
       "Id": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/wwwroot/lib/jquery/dist/jquery.min.map",
       "PackagePath": "staticwebassets/lib/jquery/dist/jquery.min.map"
+    },
+    {
+      "Id": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/wwwroot/logo-min.png",
+      "PackagePath": "staticwebassets/logo-min.png"
+    },
+    {
+      "Id": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/wwwroot/logo.png",
+      "PackagePath": "staticwebassets/logo.png"
     },
     {
       "Id": "obj/Debug/net8.0/staticwebassets/msbuild.YurttaYe.Web.Microsoft.AspNetCore.StaticWebAssets.props",
