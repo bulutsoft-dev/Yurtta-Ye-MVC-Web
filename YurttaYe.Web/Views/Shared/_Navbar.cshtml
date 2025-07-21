@@ -11,7 +11,7 @@
                 </a>
                 <a href="#" class="nav-link p-2 lg:px-4 lg:py-2" title="Dil Değiştir">
                     <i class="fas fa-language text-xl"></i>
-                    <span class="hidden lg:inline ml-2 font-semibold">Dil</span>
+                    <span class="hidden lg:inline ml-2 font-semibold">Dil Değiştir</span>
                 </a>
             </div>
 
@@ -24,9 +24,9 @@
             <div class="flex items-center space-x-2">
                 <button x-on:click="darkMode = !darkMode; localStorage.setItem('darkMode', darkMode)" class="nav-action-icon p-2 lg:px-4 lg:py-2" aria-label="Tema değiştir">
                     <i x-show="!darkMode" class="fas fa-sun text-xl"></i>
-                    <span class="hidden lg:inline ml-2 font-semibold" x-show="!darkMode">Açık</span>
+                    <span class="hidden lg:inline ml-2 font-semibold" x-show="!darkMode">Açık Tema</span>
                     <i x-show="darkMode" class="fas fa-moon text-xl"></i>
-                    <span class="hidden lg:inline ml-2 font-semibold" x-show="darkMode">Koyu</span>
+                    <span class="hidden lg:inline ml-2 font-semibold" x-show="darkMode">Koyu Tema</span>
                 </button>
                 <div class="hidden lg:flex items-center">
                     @if (User.Identity.IsAuthenticated)
