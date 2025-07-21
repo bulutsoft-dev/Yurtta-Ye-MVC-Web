@@ -206,19 +206,7 @@
                 form.submit();
             }
 
-            // Initialize flatpickr on the date display
-            const dateDisplayTrigger = document.getElementById('date-display-trigger');
-            if (dateDisplayTrigger) {
-                flatpickr(dateDisplayTrigger, {
-                    defaultDate: dateInput.value,
-                    maxDate: "today",
-                    locale: "tr",
-                    dateFormat: "Y-m-d",
-                    onChange: function(selectedDates, dateStr, instance) {
-                        submitWithDate(dateStr);
-                    }
-                });
-            }
+            // FLATPICKR KALDIRILDI: Artık takvim açılmayacak
 
             document.getElementById('prevDateBtn').addEventListener('click', function() {
                 const currentDate = new Date(dateInput.value);
