@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "mg0Ap/lE+mlMn5auIr+sLtCzdXsNYn3WF+0Cb3ciwGY=",
+  "Hash": "Y4/QEc52oZBFd+f2mEZQP28xnSy7vRCXPimIU2D5X3U=",
   "Source": "YurttaYe.Web",
   "BasePath": "_content/YurttaYe.Web",
   "Mode": "Default",
@@ -1250,6 +1250,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/logo-min.png"
+    },
+    {
+      "Identity": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/wwwroot/logo-yurttaye.png",
+      "SourceId": "YurttaYe.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/wwwroot/",
+      "BasePath": "_content/YurttaYe.Web",
+      "RelativePath": "logo-yurttaye.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/logo-yurttaye.png"
     },
     {
       "Identity": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/wwwroot/logo.png",
