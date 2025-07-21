@@ -289,7 +289,7 @@
          x-init="const ts = localStorage.getItem('hideBottomBannerTimestamp'); show = !ts || (Date.now() - ts > 5 * 60 * 1000)"
          x-show="show"
          x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
-         class="bg-card py-8 border-t border-card relative" style="display: none;">
+         class="bg-card py-6 border-t border-card relative" style="display: none;">
     <button x-on:click="show = false; localStorage.setItem('hideBottomBannerTimestamp', Date.now())" class="absolute top-4 right-4 text-secondary hover:text-primary transition-colors p-2 rounded-full hover:bg-secondary/20 z-10">
         <i class="fas fa-times"></i>
     </button>
@@ -318,7 +318,7 @@
 <section x-data="{ show: true }"
          x-init="const ts = localStorage.getItem('hideContributionBannerTimestamp'); show = !ts || (Date.now() - ts > 5 * 60 * 1000)"
          x-show="show"
-         x-transition class="bg-card py-6 border-t border-card relative" style="display: none;">
+         x-transition class="bg-card py-5 border-t border-card relative" style="display: none;">
     <button x-on:click="show = false; localStorage.setItem('hideContributionBannerTimestamp', Date.now())" class="absolute top-4 right-4 text-secondary hover:text-primary transition-colors p-2 rounded-full hover:bg-secondary/20 z-10">
         <i class="fas fa-times"></i>
     </button>
