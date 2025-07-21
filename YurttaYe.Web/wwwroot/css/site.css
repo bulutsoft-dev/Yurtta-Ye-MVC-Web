@@ -163,3 +163,32 @@ body {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.5; }
 }
+
+/* Karanlık temada flatpickr günleri okunur olsun */
+.dark .flatpickr-day {
+  color: #e5e7eb !important; /* Tailwind gray-200 */
+}
+.dark .flatpickr-day.selected,
+.dark .flatpickr-day.today {
+  color: #fff !important;
+  background: #2563eb !important; /* Tailwind blue-600 */
+}
+
+/* Karanlık temada custom date strip için */
+.dark .date-strip-item:not(.selected) {
+  color: #e5e7eb !important;
+}
+
+/* Koyu temada gri yazılar beyaz olsun */
+.dark .text-gray-500,
+.dark .text-gray-600,
+.dark .text-secondary {
+  color: #fff !important;
+}
+
+/* Karanlık temada date picker ve custom date strip için unselected günler daha koyu arka plan ve beyaz yazı */
+.dark .flatpickr-day,
+.dark .date-strip-item:not(.selected) {
+  background: #23272f !important;
+  color: #fff !important;
+}
