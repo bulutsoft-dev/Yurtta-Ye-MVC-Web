@@ -1,50 +1,75 @@
 <!-- Footer -->
-<footer class="bg-secondary shadow-lg text-primary">
+<footer class="bg-secondary text-primary border-t border-border">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center md:text-left">
+            
             <!-- About -->
-            <div>
-                <h3 class="text-lg font-semibold text-primary mb-4">YurttaYe Hakkında</h3>
+            <div class="lg:col-span-1">
+                <div class="flex items-center justify-center md:justify-start mb-4">
+                    <img src="~/logo-yurttaye.png" alt="YurttaYe Logo" class="h-10 w-10 mr-3 bg-white rounded-full p-1">
+                    <h3 class="text-xl font-bold text-primary" style="font-family: 'Poppins', sans-serif;">YurttaYe</h3>
+                </div>
                 <p class="text-secondary text-sm">
-                    YurttaYe, KYK yurtlarında sunulan yemek menülerini kolayca keşfetmenizi sağlar. Mobil uygulamamızla her zaman, her yerde menülere erişebilirsiniz.
+                    YurttaYe, KYK yurtlarında sunulan yemek menülerini kolayca keşfetmenizi sağlayan açık kaynak kodlu bir projedir.
                 </p>
             </div>
-            <!-- Links -->
+
+            <!-- Quick Links -->
             <div>
                 <h3 class="text-lg font-semibold text-primary mb-4">Hızlı Bağlantılar</h3>
-                <ul class="space-y-2 text-sm">
-                    <li><a href="/" class="text-secondary hover:text-accent transition-colors">Menü Sorgula</a></li>
-                    <li><a href="https://play.google.com/store/apps/details?id=com.yurttaye.yurttaye" class="text-secondary hover:text-accent transition-colors">Google Play</a></li>
-                    <li><a href="https://play.google.com/apps/testing/com.yurttaye.yurttaye" class="text-secondary hover:text-accent transition-colors">Test Sürümü</a></li>
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                    <li><a asp-controller="Account" asp-action="Logout" class="text-secondary hover:text-accent transition-colors">Çıkış</a></li>
-                    }
-                    else
-                    {
-                    <li><a asp-controller="Account" asp-action="Login" class="text-secondary hover:text-accent transition-colors">Giriş</a></li>
-                    }
+                <ul class="space-y-3 text-sm">
+                    <li><a href="/" class="inline-flex items-center text-secondary hover:text-accent transition-colors"><i class="fas fa-utensils w-5 mr-2"></i>Menü Sorgula</a></li>
+                    <li><a href="https://play.google.com/store/apps/details?id=com.yurttaye.yurttaye" target="_blank" class="inline-flex items-center text-secondary hover:text-accent transition-colors"><i class="fab fa-google-play w-5 mr-2"></i>Google Play</a></li>
+                    <li><a href="https://github.com/bulutsoft-dev/Yurtta-Ye-Mobile/releases" target="_blank" class="inline-flex items-center text-secondary hover:text-accent transition-colors"><i class="fas fa-vial w-5 mr-2"></i>Test Sürümü</a></li>
                 </ul>
             </div>
-            <!-- Social Media -->
+
+            <!-- About Section -->
             <div>
-                <h3 class="text-lg font-semibold text-primary mb-4">Bizi Takip Edin</h3>
-                <div class="flex space-x-4">
-                    <a href="https://www.furkanbulut.software/" target="_blank" class="text-secondary hover:text-accent transition-colors" aria-label="Furkan Bulut Web Sitesi">
-                        <i class="fas fa-globe w-6 h-6"></i>
-                    </a>
-                    <a href="#" class="text-secondary hover:text-accent transition-colors" aria-label="Twitter">
-                        <i class="fab fa-twitter w-6 h-6"></i>
-                    </a>
-                    <a href="#" class="text-secondary hover:text-accent transition-colors" aria-label="Instagram">
-                        <i class="fab fa-instagram w-6 h-6"></i>
+                <h3 class="text-lg font-semibold text-primary mb-4">Hakkında</h3>
+                <ul class="space-y-3 text-sm">
+                    <li><a href="#" class="inline-flex items-center text-secondary hover:text-accent transition-colors"><i class="fas fa-envelope w-5 mr-2"></i>İletişim</a></li>
+                    <li><a href="#" class="inline-flex items-center text-secondary hover:text-accent transition-colors"><i class="fas fa-building w-5 mr-2"></i>Kurumsal</a></li>
+                    <li><a href="#" class="inline-flex items-center text-secondary hover:text-accent transition-colors"><i class="fas fa-comments w-5 mr-2"></i>Geri Bildirim</a></li>
+                </ul>
+            </div>
+
+            <!-- Our Accounts -->
+            <div>
+                <h3 class="text-lg font-semibold text-primary mb-4">Hesaplarımız</h3>
+                <ul class="space-y-3 text-sm">
+                    <li><a href="https://github.com/bulutsoft-dev" target="_blank" class="inline-flex items-center text-secondary hover:text-accent transition-colors"><i class="fab fa-github w-5 mr-2"></i>GitHub</a></li>
+                    <li><a href="https://www.linkedin.com/company/bulutsoft-dev/" target="_blank" class="inline-flex items-center text-secondary hover:text-accent transition-colors"><i class="fab fa-linkedin w-5 mr-2"></i>LinkedIn</a></li>
+                    <li><a href="https://x.com/bulutsoftdev" target="_blank" class="inline-flex items-center text-secondary hover:text-accent transition-colors"><i class="fab fa-twitter w-5 mr-2"></i>Twitter/X</a></li>
+                </ul>
+            </div>
+            
+        </div>
+
+        <div class="border-t border-border mt-4 pt-6 text-sm text-secondary">
+            <div class="flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-4">
+                <!-- Left: Theme & Lang buttons -->
+                <div class="flex items-center space-x-2">
+                    <button x-on:click="darkMode = !darkMode; localStorage.setItem('darkMode', darkMode)" class="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors" aria-label="Tema değiştir">
+                        <i x-show="!darkMode" class="fas fa-sun text-base"></i>
+                        <i x-show="darkMode" class="fas fa-moon text-base"></i>
+                    </button>
+                    <a href="#" class="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors" title="Dil Değiştir">
+                        <i class="fas fa-language text-base"></i>
                     </a>
                 </div>
+                <div class="text-center">
+                    <p>© @DateTime.Now.Year YurttaYe. <a href="https://github.com/bulutsoft-dev" class="text-accent hover:underline">Bulutsoft</a> tarafından geliştirilmiştir.</p>
+                </div>
+                
+                <!-- Right: Social Media -->
+                <div class="flex items-center space-x-4">
+                    <a href="https://github.com/bulutsoft-dev" target="_blank" class="text-secondary hover:text-accent transition-colors" aria-label="GitHub"><i class="fab fa-github text-xl"></i></a>
+                    <a href="https://x.com/bulutsoftdev" target="_blank" class="text-secondary hover:text-accent transition-colors" aria-label="X/Twitter"><i class="fab fa-twitter text-xl"></i></a>
+                    <a href="https://www.linkedin.com/company/bulutsoft-dev/" target="_blank" class="text-secondary hover:text-accent transition-colors" aria-label="LinkedIn"><i class="fab fa-linkedin text-xl"></i></a>
+                </div>
             </div>
-        </div>
-        <div class="border-t border-accent mt-8 pt-4 text-center">
-            <p class="text-secondary text-sm">© 2025 YurttaYe. Tüm hakları saklıdır.</p>
-            <p class="text-secondary text-sm mt-2">Geliştirici: <a href="https://www.furkanbulut.software/" target="_blank" class="text-accent hover:underline">Furkan Bulut</a></p>
+           
         </div>
     </div>
 </footer> 

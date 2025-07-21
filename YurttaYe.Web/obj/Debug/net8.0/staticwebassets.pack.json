@@ -257,6 +257,10 @@
       "PackagePath": "staticwebassets/logo-min.png"
     },
     {
+      "Id": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/wwwroot/logo-yurttaye-gb-512.png",
+      "PackagePath": "staticwebassets/logo-yurttaye-gb-512.png"
+    },
+    {
       "Id": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/wwwroot/logo-yurttaye.png",
       "PackagePath": "staticwebassets/logo-yurttaye.png"
     },
