@@ -25,20 +25,24 @@ namespace YurttaYe.Web.Controllers.Web
         public async Task<IActionResult> Index()
         {
             var cities = await _cityService.GetAllCitiesAsync();
+            var cityList = cities.Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Name }).ToList();
+            cityList.Insert(0, new SelectListItem { Value = "0", Text = "Şehir Seçin" });
 
-            // Read defaults from configuration
-            var defaultCity = _configuration["Defaults:City"] ?? "Manisa";
-            var defaultCityId = cities.FirstOrDefault(c => c.Name.Equals(defaultCity, StringComparison.OrdinalIgnoreCase))?.Id ?? 0;
+            // Read default city from configuration
+            var defaultCityName = _configuration["Defaults:City"] ?? "Manisa";
+            var defaultCityId = cities.FirstOrDefault(c => c.Name.Equals(defaultCityName, StringComparison.OrdinalIgnoreCase))?.Id ?? 0;
+            
             var today = DateTime.Today;
 
             var model = new MenuViewModel
             {
-                Cities = cities.Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Name }),
-                CityId = defaultCityId,
-                MealType = "Kahvaltı", // Geri uyumluluk için
+                Cities = cityList,
+                CityId = defaultCityId, // Manisa default olsun
+                MealType = "Kahvaltı",
                 Date = today
             };
 
+            // Eğer geçerli bir şehir seçilirse menüyü getir
             if (model.CityId > 0)
             {
                 try
@@ -51,8 +55,6 @@ namespace YurttaYe.Web.Controllers.Web
                     model.DinnerMenu = await _menuService.GetMenuAsync(model.CityId, "Akşam Yemeği", model.Date);
                 }
                 catch { model.DinnerMenu = null; }
-                // Geri uyumluluk için mevcut MealType'a göre Menu property’sini doldur
-                model.Menu = model.MealType == "Kahvaltı" ? model.BreakfastMenu : model.DinnerMenu;
             }
 
             ViewData["TimeOfDayTheme"] = GetTimeOfDayTheme();
@@ -63,9 +65,11 @@ namespace YurttaYe.Web.Controllers.Web
         public async Task<IActionResult> Index(MenuViewModel model)
         {
             var cities = await _cityService.GetAllCitiesAsync();
-            model.Cities = new SelectList(cities, "Id", "Name");
+            var cityList = cities.Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Name }).ToList();
+            cityList.Insert(0, new SelectListItem { Value = "0", Text = "Şehir Seçin" });
+            model.Cities = cityList;
 
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && model.CityId > 0)
             {
                 try
                 {
