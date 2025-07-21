@@ -11,6 +11,8 @@ namespace YurttaYe.Core.Models.ViewModels
         public string MealType { get; set; } = string.Empty;
         public DateTime Date { get; set; } = DateTime.Today;
         public MenuDto? Menu { get; set; }
+        public MenuDto? BreakfastMenu { get; set; }
+        public MenuDto? DinnerMenu { get; set; }
         public IEnumerable<SelectListItem> Cities { get; set; } = new List<SelectListItem>();
         public string? ErrorMessage { get; set; }
     }
