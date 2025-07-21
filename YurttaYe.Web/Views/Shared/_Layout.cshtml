@@ -173,29 +173,8 @@
         :root {
             --breakfast-primary: #FF8A65;
             --dinner-primary: #1E3A8A;
-            --unselected-bg: #E2E8F0;
-            --unselected-text: #475569;
-            --unselected-hover-bg: #CBD5E1;
         }
-        .dark {
-            --unselected-bg-dark: #334155;
-            --unselected-text-dark: #E2E8F0;
-            --unselected-hover-bg-dark: #475569;
-        }
-        .date-strip-item {
-            background-color: var(--unselected-bg);
-            color: var(--unselected-text);
-        }
-        .dark .date-strip-item {
-            background-color: var(--unselected-bg-dark);
-            color: var(--unselected-text-dark);
-        }
-        .date-strip-item:hover {
-            background-color: var(--unselected-hover-bg);
-        }
-        .dark .date-strip-item:hover {
-            background-color: var(--unselected-hover-bg-dark);
-        }
+
         [data-meal-theme="morning"] .date-strip-item.selected,
         [data-meal-theme="morning"] .meal-type-btn.btn-primary {
             background-color: var(--breakfast-primary);

@@ -43,25 +43,45 @@
             <form asp-action="Index" method="post" class="space-y-4" id="menuForm" data-meal-theme="@(Model.MealType == "Kahvaltı" ? "morning" : "evening")">
                 <!-- City Selection -->
                 <div>
-                    <label for="CityId" class="block text-sm font-medium text-primary mb-2">Şehir</label>
-                    <select asp-for="CityId" id="CityId" class="block w-full rounded-lg border border-border focus:border-accent focus:ring-accent py-3 px-4 bg-secondary text-primary" asp-items="@Model.Cities">
-                        <option value="">Şehir Seçin</option>
-                    </select>
-                    <span asp-validation-for="CityId" class="text-red-500 text-xs mt-1"></span>
+                    <div x-data="{ open: false }" class="relative">
+                        <label for="city-button" class="block text-sm font-medium text-primary mb-2">Şehir</label>
+                        <button type="button" @@click="open = !open" class="relative block w-full text-left rounded-lg border border-border focus:border-accent focus:ring-accent py-3 px-4 bg-secondary text-primary">
+                            <span>
+                                @(Model.Cities.FirstOrDefault(c => c.Value == Model.CityId.ToString())?.Text ?? "Şehir Seçin")
+                            </span>
+                            <i class="fas fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-primary opacity-75"></i>
+                        </button>
+
+                        <div x-show="open" @@click.outside="open = false" x-transition class="absolute z-10 mt-1 w-full bg-card rounded-lg shadow-lg border border-border max-h-60 overflow-y-auto" style="display: none;">
+                            <ul class="py-1">
+                                @foreach (var city in Model.Cities)
+                                {
+                                    <li>
+                                        <a href="#" @@click.prevent="document.getElementById('CityId').value = '@city.Value'; document.getElementById('menuForm').submit();" class="block px-4 py-2 text-primary hover:bg-gray-200 dark:hover:bg-gray-700 @(city.Value == Model.CityId.ToString() ? "bg-accent text-white" : "")">
+                                            @city.Text
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                        
+                        <select asp-for="CityId" class="hidden" asp-items="@Model.Cities"></select>
+                        <span asp-validation-for="CityId" class="text-red-500 text-xs mt-1"></span>
+                    </div>
                 </div>
 
                 <!-- New Date Picker -->
                 <div>
                     <div class="date-selector">
-                        <div class="flex items-center justify-between mb-4">
-                            <button type="button" id="prevDateBtn" class="p-2 w-10 h-10 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                        <div class="flex items-center justify-between mb-6">
+                            <button type="button" id="prevDateBtn" class="p-2 w-10 h-10 rounded-md bg-card border border-border text-primary hover:bg-secondary transition-colors">
                                 <i class="fas fa-chevron-left text-sm"></i>
                             </button>
                             <div class="text-center cursor-pointer" id="date-display-trigger">
                                 <p class="text-sm text-secondary">@culture.TextInfo.ToTitleCase(culture.DateTimeFormat.GetDayName(selectedDate.DayOfWeek))</p>
                                 <p class="text-xl font-bold text-primary">@selectedDate.ToString("d MMMM yyyy", culture)</p>
                             </div>
-                            <button type="button" id="nextDateBtn" class="p-2 w-10 h-10 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                            <button type="button" id="nextDateBtn" class="p-2 w-10 h-10 rounded-md bg-card border border-border text-primary hover:bg-secondary transition-colors">
                                 <i class="fas fa-chevron-right text-sm"></i>
                             </button>
                         </div>
