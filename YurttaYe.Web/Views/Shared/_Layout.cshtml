@@ -252,12 +252,53 @@
 <body class="antialiased" x-data="{ timeOfDay: '@(ViewData["TimeOfDayTheme"] ?? "evening")' }" x-bind:class="'theme-' + timeOfDay">
 <partial name="_Navbar" />
 
+<!-- Mobil Uygulama Tanıtım Alanı (Navbar'a Yaslı) -->
+<section class="bg-card py-4 border-b border-card">
+    <div class="container mx-auto px-4 flex justify-between items-center">
+        <div class="flex items-center gap-4">
+            <img src="~/logo-yurttaye.png" alt="YurttaYe Mobil Uygulama" class="w-12 h-12 rounded-lg">
+            <div>
+                <h3 class="font-bold text-primary">Yemek Menüsü Artık Cebinde!</h3>
+                <p class="text-xs text-secondary">Anlık bildirimler ve daha fazlası için uygulamayı indirin.</p>
+            </div>
+        </div>
+        <div class="flex gap-3">
+            <a href="https://play.google.com/store/apps/details?id=com.yurttaye.yurttaye" target="_blank" class="btn btn-primary text-sm">
+                <i class="fab fa-google-play mr-2"></i> İndir
+            </a>
+        </div>
+    </div>
+</section>
+
 <!-- Main Content -->
 <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <main role="main">
         @RenderBody()
     </main>
 </div>
+
+<!-- Detaylı Mobil Uygulama Tanıtım Alanı -->
+<section class="bg-card py-8 border-t border-card">
+    <div class="container mx-auto px-4 grid md:grid-cols-2 gap-6 items-center">
+        <div class="text-center">
+            <img src="~/logo-yurttaye.png" alt="YurttaYe Mobil Uygulama" class="rounded-lg shadow-lg max-w-[180px] mx-auto">
+        </div>
+        <div>
+            <h2 class="text-xl font-bold text-primary mb-2">Yemek Menüsü Artık Cebinde!</h2>
+            <p class="text-secondary mb-4 text-sm">
+                YurttaYe mobil uygulamasını indir, anlık bildirimlerle yeni menülerden ilk sen haberdar ol. Favori yemeklerini takip et, pratik arayüzün keyfini çıkar!
+            </p>
+            <div class="flex flex-col sm:flex-row gap-3">
+                <a href="https://play.google.com/store/apps/details?id=com.yurttaye.yurttaye" target="_blank" class="btn btn-primary text-sm flex-1">
+                    <i class="fab fa-google-play mr-2"></i> Google Play
+                </a>
+                <a href="https://play.google.com/apps/testing/com.yurttaye.yurttaye" target="_blank" class="btn btn-outline text-sm flex-1">
+                    <i class="fas fa-vial mr-2"></i> Test Sürümünü Dene
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
 
 <partial name="_Footer" />
 
