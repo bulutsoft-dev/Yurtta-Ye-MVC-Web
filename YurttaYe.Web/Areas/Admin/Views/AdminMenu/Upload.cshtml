@@ -1,14 +1,16 @@
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 <!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Excel ile Menü Yükle</title>
+    <title>@Localizer["UploadMenuExcel"]</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 font-sans">
 <div class="container mx-auto p-6">
-    <h2 class="text-2xl font-bold mb-6">Excel ile Menü Yükle</h2>
+    <h2 class="text-2xl font-bold mb-6">@Localizer["UploadMenuExcel"]</h2>
 
     @if (TempData["Error"] != null)
     {
@@ -20,13 +22,13 @@
     <form asp-area="Admin" asp-controller="AdminMenu" asp-action="Upload" method="post" enctype="multipart/form-data" class="bg-white p-6 rounded-lg shadow">
         @Html.AntiForgeryToken()
         <div class="mb-4">
-            <label for="file" class="block text-sm font-medium text-gray-700">Excel Dosyası</label>
+            <label for="file" class="block text-sm font-medium text-gray-700">@Localizer["ExcelFile"]</label>
             <input type="file" name="file" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" accept=".xlsx,.xls" />
             <span class="text-red-500 text-sm"></span>
         </div>
         <div class="flex gap-4">
-            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 pointer-events-auto">Yükle</button>
-            <a asp-area="Admin" asp-controller="AdminMenu" asp-action="Index" class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 pointer-events-auto">Geri</a>
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 pointer-events-auto">@Localizer["Upload"]</button>
+            <a asp-area="Admin" asp-controller="AdminMenu" asp-action="Index" class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 pointer-events-auto">@Localizer["Back"]</a>
         </div>
     </form>
 </div>

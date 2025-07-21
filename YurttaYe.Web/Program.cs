@@ -17,7 +17,11 @@ DotNetEnv.Env.Load();
 // 1. MVC + Razor View desteği
 builder.Services.AddControllersWithViews()
     .AddViewLocalization(Microsoft.AspNetCore.Mvc.Razor.LanguageViewLocationExpanderFormat.Suffix)
-    .AddDataAnnotationsLocalization();
+    .AddDataAnnotationsLocalization(options =>
+    {
+        options.DataAnnotationLocalizerProvider = (type, factory) =>
+            factory.Create(typeof(YurttaYe.Web.Resources.SharedControllerResources));
+    });
 
 
 // 2. EF Core (SQLite)

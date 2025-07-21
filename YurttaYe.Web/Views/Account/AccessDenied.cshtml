@@ -1,6 +1,9 @@
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
 @{
-    ViewData["Title"] = "Erişim Engellendi";
+    ViewData["Title"] = Localizer["AccessDenied"];
 }
-<h2>Erişim Engellendi</h2>
-<p>Bu sayfaya erişim yetkiniz yok.</p>
-<a asp-controller="Home" asp-action="Index" class="btn btn-primary">Anasayfaya Dön</a>
+<h2>@Localizer["AccessDenied"]</h2>
+<p>@Localizer["AccessDeniedMessage"]</p>
+<a asp-controller="Home" asp-action="Index" class="btn btn-primary">@Localizer["ReturnHome"]</a>

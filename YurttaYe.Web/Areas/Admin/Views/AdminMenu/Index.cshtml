@@ -1,14 +1,16 @@
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 <!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menüler</title>
+    <title>@Localizer["Menus"]</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 font-sans">
     <div class="container mx-auto p-6">
-        <h2 class="text-2xl font-bold mb-6">Menüler</h2>
+        <h2 class="text-2xl font-bold mb-6">@Localizer["Menus"]</h2>
 
         @if (TempData["Success"] != null)
         {
@@ -25,9 +27,9 @@
 
         <form method="get" asp-area="Admin" asp-controller="AdminMenu" asp-action="Index" class="mb-6 grid grid-cols-1 md:grid-cols-4 gap-4">
             <div>
-                <label class="block text-sm font-medium text-gray-700">Şehir</label>
+                <label class="block text-sm font-medium text-gray-700">@Localizer["City"]</label>
                 <select name="cityFilter" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <option value="">Tümü</option>
+                    <option value="">@Localizer["All"]</option>
                     @foreach (var city in ViewBag.Cities)
                     {
                         <option value="@city.Value" selected="@(city.Value == ViewBag.CityFilter ? "selected" : null)">@city.Text</option>
@@ -35,9 +37,9 @@
                 </select>
             </div>
             <div>
-                <label class="block text-sm font-medium text-gray-700">Yemek Türü</label>
+                <label class="block text-sm font-medium text-gray-700">@Localizer["MealType"]</label>
                 <select name="mealTypeFilter" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <option value="">Tümü</option>
+                    <option value="">@Localizer["All"]</option>
                     @foreach (var mealType in ViewBag.MealTypes)
                     {
                         <option value="@mealType.Value" selected="@(mealType.Value == ViewBag.MealTypeFilter ? "selected" : null)">@mealType.Text</option>
@@ -45,11 +47,11 @@
                 </select>
             </div>
             <div>
-                <label class="block text-sm font-medium text-gray-700">Tarih</label>
+                <label class="block text-sm font-medium text-gray-700">@Localizer["Date"]</label>
                 <input type="date" name="dateFilter" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" value="@ViewBag.DateFilter" />
             </div>
             <div class="flex items-end">
-                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 w-full pointer-events-auto">Filtrele</button>
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 w-full pointer-events-auto">@Localizer["Filter"]</button>
             </div>
         </form>
 
@@ -57,12 +59,12 @@
             <table class="w-full">
                 <thead class="bg-gray-200">
                     <tr>
-                        <th class="p-3 text-left">Şehir</th>
-                        <th class="p-3 text-left">Yemek Türü</th>
-                        <th class="p-3 text-left">Tarih</th>
-                        <th class="p-3 text-left">Enerji</th>
-                        <th class="p-3 text-left">Öğeler</th>
-                        <th class="p-3 text-left">İşlemler</th>
+                        <th class="p-3 text-left">@Localizer["City"]</th>
+                        <th class="p-3 text-left">@Localizer["MealType"]</th>
+                        <th class="p-3 text-left">@Localizer["Date"]</th>
+                        <th class="p-3 text-left">@Localizer["Energy"]</th>
+                        <th class="p-3 text-left">@Localizer["Items"]</th>
+                        <th class="p-3 text-left">@Localizer["Actions"]</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -82,10 +84,10 @@
                                 </ul>
                             </td>
                             <td class="p-3 flex gap-2">
-                                <a asp-area="Admin" asp-controller="AdminMenu" asp-action="Edit" asp-route-id="@menu.Id" class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 pointer-events-auto">Düzenle</a>
-                                <form asp-area="Admin" asp-controller="AdminMenu" asp-action="Delete" asp-route-id="@menu.Id" method="post" class="inline" onsubmit="return confirm('Bu menüyü silmek istediğinize emin misiniz?');">
+                                <a asp-area="Admin" asp-controller="AdminMenu" asp-action="Edit" asp-route-id="@menu.Id" class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 pointer-events-auto">@Localizer["Edit"]</a>
+                                <form asp-area="Admin" asp-controller="AdminMenu" asp-action="Delete" asp-route-id="@menu.Id" method="post" class="inline" onsubmit="return confirm('@Localizer["ConfirmDeleteMenu"]');">
                                     @Html.AntiForgeryToken()
-                                    <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 pointer-events-auto">Sil</button>
+                                    <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 pointer-events-auto">@Localizer["Delete"]</button>
                                 </form>
                             </td>
                         </tr>
@@ -95,8 +97,8 @@
         </div>
 
         <div class="mt-6 flex gap-4">
-            <a asp-area="Admin" asp-controller="AdminMenu" asp-action="Create" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 pointer-events-auto">Yeni Menü Ekle</a>
-            <a asp-area="Admin" asp-controller="AdminMenu" asp-action="Upload" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 pointer-events-auto">Excel Yükle</a>
+            <a asp-area="Admin" asp-controller="AdminMenu" asp-action="Create" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 pointer-events-auto">@Localizer["AddNewMenu"]</a>
+            <a asp-area="Admin" asp-controller="AdminMenu" asp-action="Upload" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 pointer-events-auto">@Localizer["UploadExcel"]</a>
         </div>
     </div>
 </body>

@@ -3,11 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Localization;
 using YurttaYe.Core.Models.Entities;
 using YurttaYe.Core.Models.ViewModels;
 using YurttaYe.Core.Services;
 using System.IO;
 using OfficeOpenXml;
+using YurttaYe.Web.Resources;
 
 namespace YurttaYe.Web.Areas.Admin.Controllers
 {
@@ -17,11 +19,13 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
     {
         private readonly IMenuService _menuService;
         private readonly ICityService _cityService;
+        private readonly IStringLocalizer<SharedControllerResources> _localizer;
 
-        public AdminMenuController(IMenuService menuService, ICityService cityService)
+        public AdminMenuController(IMenuService menuService, ICityService cityService, IStringLocalizer<SharedControllerResources> localizer)
         {
             _menuService = menuService;
             _cityService = cityService;
+            _localizer = localizer;
         }
 
         public async Task<IActionResult> Index(string cityFilter, string mealTypeFilter, string dateFilter)
@@ -53,8 +57,8 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
                 .Select(c => new SelectListItem { Value = c.Name, Text = c.Name });
             ViewBag.MealTypes = new List<SelectListItem>
             {
-                new SelectListItem { Value = "Breakfast", Text = "Sabah" },
-                new SelectListItem { Value = "Dinner", Text = "Akşam" }
+                new SelectListItem { Value = "Breakfast", Text = _localizer["Morning"] },
+                new SelectListItem { Value = "Dinner", Text = _localizer["Evening"] }
             };
 
             return View(model);
@@ -90,13 +94,13 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
                     }).ToList()
                 };
                 await _menuService.AddMenuAsync(menu);
-                TempData["Success"] = "Menü başarıyla eklendi.";
+                TempData["Success"] = string.Format(_localizer["EntityAddedSuccessfully"], _localizer["Menu"]);
                 return RedirectToAction(nameof(Index));
             }
 
             model.Cities = (await _cityService.GetAllCitiesAsync())
                 .Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Name });
-            TempData["Error"] = "Lütfen tüm alanları doğru doldurun.";
+            TempData["Error"] = _localizer["ValidationError"];
             return View(model);
         }
 
@@ -144,13 +148,13 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
                     }).ToList()
                 };
                 await _menuService.UpdateMenuAsync(menu);
-                TempData["Success"] = "Menü başarıyla güncellendi.";
+                TempData["Success"] = string.Format(_localizer["EntityUpdatedSuccessfully"], _localizer["Menu"]);
                 return RedirectToAction(nameof(Index));
             }
 
             model.Cities = (await _cityService.GetAllCitiesAsync())
                 .Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Name });
-            TempData["Error"] = "Lütfen tüm alanları doğru doldurun.";
+            TempData["Error"] = _localizer["ValidationError"];
             return View(model);
         }
 
@@ -160,11 +164,11 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
             try
             {
                 await _menuService.DeleteMenuAsync(id);
-                TempData["Success"] = "Menü başarıyla silindi.";
+                TempData["Success"] = string.Format(_localizer["EntityDeletedSuccessfully"], _localizer["Menu"]);
             }
             catch
             {
-                TempData["Error"] = "Menü silinirken hata oluştu.";
+                TempData["Error"] = string.Format(_localizer["DeletionError"], _localizer["Menu"]);
             }
             return RedirectToAction(nameof(Index));
         }
@@ -179,7 +183,7 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
         {
             if (file == null || file.Length == 0)
             {
-                TempData["Error"] = "Lütfen bir dosya seçin.";
+                TempData["Error"] = _localizer["PleaseSelectFile"];
                 return View();
             }
 
@@ -226,7 +230,7 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
                     await _menuService.AddMenuAsync(menu);
                 }
 
-                TempData["Success"] = "Menüler başarıyla yüklendi.";
+                TempData["Success"] = string.Format(_localizer["UploadSuccess"], _localizer["Menus"]);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)

@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Localization;
 using YurttaYe.Core.Models.Entities;
 using YurttaYe.Core.Models.ViewModels;
 using YurttaYe.Core.Services;
+using YurttaYe.Web.Resources;
 
 namespace YurttaYe.Web.Areas.Admin.Controllers
 {
@@ -12,10 +14,12 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
     public class AdminCityController : Controller
     {
         private readonly ICityService _cityService;
+        private readonly IStringLocalizer<SharedControllerResources> _localizer;
 
-        public AdminCityController(ICityService cityService)
+        public AdminCityController(ICityService cityService, IStringLocalizer<SharedControllerResources> localizer)
         {
             _cityService = cityService;
+            _localizer = localizer;
         }
 
         public async Task<IActionResult> Index(string search)
@@ -43,10 +47,10 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
             {
                 var city = new City { Name = model.Name };
                 await _cityService.AddCityAsync(city);
-                TempData["Success"] = "Şehir başarıyla eklendi.";
+                TempData["Success"] = string.Format(_localizer["EntityAddedSuccessfully"], _localizer["City"]);
                 return RedirectToAction(nameof(Index));
             }
-            TempData["Error"] = "Lütfen tüm alanları doğru doldurun.";
+            TempData["Error"] = _localizer["ValidationError"];
             return View(model);
         }
 
@@ -66,10 +70,10 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
             {
                 var city = new City { Id = model.Id, Name = model.Name };
                 await _cityService.UpdateCityAsync(city);
-                TempData["Success"] = "Şehir başarıyla güncellendi.";
+                TempData["Success"] = string.Format(_localizer["EntityUpdatedSuccessfully"], _localizer["City"]);
                 return RedirectToAction(nameof(Index));
             }
-            TempData["Error"] = "Lütfen tüm alanları doğru doldurun.";
+            TempData["Error"] = _localizer["ValidationError"];
             return View(model);
         }
 
@@ -79,11 +83,11 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
             try
             {
                 await _cityService.DeleteCityAsync(id);
-                TempData["Success"] = "Şehir başarıyla silindi.";
+                TempData["Success"] = string.Format(_localizer["EntityDeletedSuccessfully"], _localizer["City"]);
             }
             catch
             {
-                TempData["Error"] = "Şehir silinirken hata oluştu.";
+                TempData["Error"] = string.Format(_localizer["DeletionError"], _localizer["City"]);
             }
             return RedirectToAction(nameof(Index));
         }

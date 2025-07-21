@@ -1,6 +1,16 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=YurttaYe_002EWeb_002FResources_002FAreas_002FAdmin_002FViews_002FAdminCity_002FCreate/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=YurttaYe_002EWeb_002FResources_002FAreas_002FAdmin_002FViews_002FAdminCity_002FEdit/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=YurttaYe_002EWeb_002FResources_002FAreas_002FAdmin_002FViews_002FAdminCity_002FIndex/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=YurttaYe_002EWeb_002FResources_002FAreas_002FAdmin_002FViews_002FAdminMenu_002FCreate/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=YurttaYe_002EWeb_002FResources_002FAreas_002FAdmin_002FViews_002FAdminMenu_002FEdit/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=YurttaYe_002EWeb_002FResources_002FAreas_002FAdmin_002FViews_002FAdminMenu_002FIndex/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=YurttaYe_002EWeb_002FResources_002FAreas_002FAdmin_002FViews_002FAdminMenu_002FUpload/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=YurttaYe_002EWeb_002FResources_002FSharedControllerResources/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=YurttaYe_002EWeb_002FResources_002FSharedResource/@EntryIndexedValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=YurttaYe_002EWeb_002FResources_002FSharedResource/@EntryIndexRemoved">True</s:Boolean>
+	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=YurttaYe_002EWeb_002FResources_002FViews_002FAccount_002FAccessDenied/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=YurttaYe_002EWeb_002FResources_002FViews_002FAccount_002FLogin/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=YurttaYe_002EWeb_002FResources_002FViews_002FShared_002F_005FLayout/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=YurttaYe_002EWeb_002FResources_002FViews_002FShared_002F_005FNavbar/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/Initialized/@EntryValue">True</s:Boolean>

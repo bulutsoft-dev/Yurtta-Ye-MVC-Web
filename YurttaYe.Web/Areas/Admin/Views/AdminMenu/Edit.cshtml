@@ -1,10 +1,12 @@
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 @model YurttaYe.Core.Models.ViewModels.AdminMenuViewModel
 <!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menü Düzenle</title>
+    <title>@Localizer["EditMenu"]</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
@@ -12,7 +14,7 @@
 </head>
 <body class="bg-gray-100 font-sans">
     <div class="container mx-auto p-6">
-        <h2 class="text-2xl font-bold mb-6">Menü Düzenle</h2>
+        <h2 class="text-2xl font-bold mb-6">@Localizer["EditMenu"]</h2>
 
         @if (TempData["Error"] != null)
         {
@@ -25,63 +27,63 @@
             @Html.AntiForgeryToken()
             <input type="hidden" asp-for="Id" />
             <div class="mb-4">
-                <label asp-for="CityId" class="block text-sm font-medium text-gray-700">Şehir</label>
+                <label asp-for="CityId" class="block text-sm font-medium text-gray-700">@Localizer["City"]</label>
                 <select asp-for="CityId" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" asp-items="@Model.Cities">
-                    <option value="">Seçiniz</option>
+                    <option value="">@Localizer["Select"]</option>
                 </select>
                 <span asp-validation-for="CityId" class="text-red-500 text-sm"></span>
             </div>
             <div class="mb-4">
-                <label asp-for="MealType" class="block text-sm font-medium text-gray-700">Yemek Türü</label>
+                <label asp-for="MealType" class="block text-sm font-medium text-gray-700">@Localizer["MealType"]</label>
                 <select asp-for="MealType" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <option value="">Seçiniz</option>
-                    <option value="Breakfast">Sabah</option>
-                    <option value="Dinner">Akşam</option>
+                    <option value="">@Localizer["Select"]</option>
+                    <option value="Breakfast">@Localizer["Morning"]</option>
+                    <option value="Dinner">@Localizer["Evening"]</option>
                 </select>
                 <span asp-validation-for="MealType" class="text-red-500 text-sm"></span>
             </div>
             <div class="mb-4">
-                <label asp-for="Date" class="block text-sm font-medium text-gray-700">Tarih</label>
+                <label asp-for="Date" class="block text-sm font-medium text-gray-700">@Localizer["Date"]</label>
                 <input asp-for="Date" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" type="date" />
                 <span asp-validation-for="Date" class="text-red-500 text-sm"></span>
             </div>
             <div class="mb-4">
-                <label asp-for="Energy" class="block text-sm font-medium text-gray-700">Enerji (Kalori)</label>
+                <label asp-for="Energy" class="block text-sm font-medium text-gray-700">@Localizer["EnergyCalories"]</label>
                 <input asp-for="Energy" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
                 <span asp-validation-for="Energy" class="text-red-500 text-sm"></span>
             </div>
 
-            <h4 class="text-lg font-semibold mb-4">Menü Öğeleri</h4>
+            <h4 class="text-lg font-semibold mb-4">@Localizer["MenuItems"]</h4>
             <div id="menuItems">
                 @for (int i = 0; i < Model.Items.Count; i++)
                 {
                     <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4 menu-item">
                         <div>
-                            <label asp-for="Items[i].Category" class="block text-sm font-medium text-gray-700">Kategori</label>
+                            <label asp-for="Items[i].Category" class="block text-sm font-medium text-gray-700">@Localizer["Category"]</label>
                             <input asp-for="Items[i].Category" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
                             <span asp-validation-for="Items[i].Category" class="text-red-500 text-sm"></span>
                         </div>
                         <div>
-                            <label asp-for="Items[i].Name" class="block text-sm font-medium text-gray-700">Ad</label>
+                            <label asp-for="Items[i].Name" class="block text-sm font-medium text-gray-700">@Localizer["Name"]</label>
                             <input asp-for="Items[i].Name" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
                             <span asp-validation-for="Items[i].Name" class="text-red-500 text-sm"></span>
                         </div>
                         <div>
-                            <label asp-for="Items[i].Gram" class="block text-sm font-medium text-gray-700">Gramaj</label>
+                            <label asp-for="Items[i].Gram" class="block text-sm font-medium text-gray-700">@Localizer["Grams"]</label>
                             <input asp-for="Items[i].Gram" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
                             <span asp-validation-for="Items[i].Gram" class="text-red-500 text-sm"></span>
                         </div>
                         <div class="flex items-end">
-                            <button type="button" class="bg-red-500 text-white px-3 py-2 rounded-lg hover:bg-red-600 remove-item pointer-events-auto">Sil</button>
+                            <button type="button" class="bg-red-500 text-white px-3 py-2 rounded-lg hover:bg-red-600 remove-item pointer-events-auto">@Localizer["Delete"]</button>
                         </div>
                     </div>
                 }
             </div>
-            <button type="button" id="addItem" class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 mb-4 pointer-events-auto">Öğe Ekle</button>
+            <button type="button" id="addItem" class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 mb-4 pointer-events-auto">@Localizer["AddItem"]</button>
 
             <div class="flex gap-4">
-                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 pointer-events-auto">Güncelle</button>
-                <a asp-area="Admin" asp-controller="AdminMenu" asp-action="Index" class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 pointer-events-auto">Geri</a>
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 pointer-events-auto">@Localizer["Update"]</button>
+                <a asp-area="Admin" asp-controller="AdminMenu" asp-action="Index" class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 pointer-events-auto">@Localizer["Back"]</a>
             </div>
         </form>
     </div>
@@ -93,22 +95,22 @@
                 const itemHtml = `
                     <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4 menu-item">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700">Kategori</label>
+                            <label class="block text-sm font-medium text-gray-700">@Localizer["Category"]</label>
                             <input name="Items[${itemIndex}].Category" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
                             <span class="text-red-500 text-sm"></span>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700">Ad</label>
+                            <label class="block text-sm font-medium text-gray-700">@Localizer["Name"]</label>
                             <input name="Items[${itemIndex}].Name" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
                             <span class="text-red-500 text-sm"></span>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700">Gramaj</label>
+                            <label class="block text-sm font-medium text-gray-700">@Localizer["Grams"]</label>
                             <input name="Items[${itemIndex}].Gram" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
                             <span class="text-red-500 text-sm"></span>
                         </div>
                         <div class="flex items-end">
-                            <button type="button" class="bg-red-500 text-white px-3 py-2 rounded-lg hover:bg-red-600 remove-item pointer-events-auto">Sil</button>
+                            <button type="button" class="bg-red-500 text-white px-3 py-2 rounded-lg hover:bg-red-600 remove-item pointer-events-auto">@Localizer["Delete"]</button>
                         </div>
                     </div>`;
                 $("#menuItems").append(itemHtml);
