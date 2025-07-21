@@ -250,6 +250,53 @@
     </style>
 </head>
 <body class="antialiased" x-data="{ timeOfDay: '@(ViewData["TimeOfDayTheme"] ?? "evening")' }" x-bind:class="'theme-' + timeOfDay">
+
+<!-- Startup Modal -->
+<div x-data="{ showModal: false }"
+     x-init="if (!localStorage.getItem('startupModalDismissed')) { setTimeout(() => showModal = true, 500) }"
+     x-show="showModal"
+     x-on:keydown.escape.window="showModal = false; localStorage.setItem('startupModalDismissed', 'true')"
+     class="fixed inset-0 bg-black bg-opacity-60 z-50 flex items-center justify-center p-4"
+     style="display: none;">
+
+    <!-- Modal Panel -->
+    <div x-show="showModal"
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0 transform scale-95"
+         x-transition:enter-end="opacity-100 transform scale-100"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100 transform scale-100"
+         x-transition:leave-end="opacity-0 transform scale-95"
+         x-on:click.outside="showModal = false; localStorage.setItem('startupModalDismissed', 'true')"
+         class="bg-card rounded-xl shadow-lg w-full max-w-md p-6 relative">
+
+        <!-- Close button -->
+        <button x-on:click="showModal = false; localStorage.setItem('startupModalDismissed', 'true')" class="absolute top-3 right-3 text-secondary hover:text-primary transition-colors p-2 rounded-full hover:bg-secondary/20">
+            <i class="fas fa-times"></i>
+        </button>
+        
+        <!-- Modal Content -->
+        <div class="text-center">
+            <img src="~/logo-yurttaye.png" alt="YurttaYe Logo" class="w-20 h-20 mx-auto mb-4 rounded-full shadow-md">
+            <h2 class="text-2xl font-bold text-primary mb-2">YurttaYe'ye Hoş Geldiniz!</h2>
+            <p class="text-secondary mb-6 text-sm">
+                Yurt yemek menülerini kolayca görüntüleyin. Bu platform, topluluk katkılarıyla gelişmektedir. Siz de eksik veya yanlış menüleri bize göndererek projemize destek olabilirsiniz!
+            </p>
+            <div class="space-y-3">
+                <button x-on:click="showModal = false; localStorage.setItem('startupModalDismissed', 'true')" class="btn btn-primary w-full">
+                    Anladım, Başlayalım!
+                </button>
+                <a href="https://play.google.com/store/apps/details?id=com.yurttaye.yurttaye" target="_blank"
+                   x-on:click="showModal = false; localStorage.setItem('startupModalDismissed', 'true')"
+                   class="btn btn-outline w-full flex items-center justify-center gap-2">
+                    <i class="fab fa-google-play"></i>
+                    Google Play'den İndir
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <partial name="_Navbar" />
 
 <!-- Mobil Uygulama Tanıtım Alanı (Navbar'a Yaslı) -->
