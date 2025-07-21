@@ -85,28 +85,47 @@ namespace YurttaYe.Web.Controllers.Web
                 }
             }
 
+            ViewData["TimeOfDayTheme"] = GetTimeOfDayTheme();
+
             return View(model);
         }
 
         [HttpPost]
         public async Task<IActionResult> Index(MenuViewModel model)
         {
-            model.Cities = (await _cityService.GetAllCitiesAsync())
-                .Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Name });
+            var cities = await _cityService.GetAllCitiesAsync();
+            model.Cities = new SelectList(cities, "Id", "Name");
 
             if (ModelState.IsValid)
             {
                 try
                 {
                     var menu = await _menuService.GetMenuAsync(model.CityId, model.MealType, model.Date);
-                    model.Menu = menu;
+                    if (menu != null)
+                    {
+                        model.Menu = menu;
+                    }
+                    else
+                    {
+                        model.ErrorMessage = "Bu tarih ve şehir için menü bulunamadı.";
+                    }
                 }
-                catch
+                catch (Exception ex)
                 {
-                    model.ErrorMessage = "Menü bulunamadı.";
+                    model.ErrorMessage = $"Hata: {ex.Message}";
                 }
             }
+            
+            ViewData["TimeOfDayTheme"] = GetTimeOfDayTheme();
+
             return View(model);
+        }
+
+        private string GetTimeOfDayTheme()
+        {
+            var now = DateTime.Now.Hour;
+            if (now >= 5 && now < 12) return "morning";
+            return "evening";
         }
     }
 }

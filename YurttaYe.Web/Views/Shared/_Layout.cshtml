@@ -154,6 +154,23 @@
         .navbar .nav-link:hover, .navbar .nav-action-icon:hover {
             background-color: var(--kyk-secondary);
         }
+
+        /* Time-based Themes */
+        .theme-morning {
+             --bg-primary: linear-gradient(120deg, #FFFDE7, #FFF3E0); /* Light yellow to light orange */
+        }
+        .theme-evening {
+            --bg-primary: linear-gradient(120deg, #E3F2FD, #EDE7F6); /* Light blue to light purple */
+        }
+        .dark .theme-morning {
+            --bg-primary: linear-gradient(120deg, #424242, #37474F); /* Dark gray to blue-gray */
+        }
+        .dark .theme-evening {
+            --bg-primary: linear-gradient(120deg, #0F172A, #1E293B); /* Slate-900 to Slate-800 */
+        }
+        body {
+            background: var(--bg-primary);
+        }
         .navbar .brand {
             font-family: 'Poppins', sans-serif;
             color: var(--white);
@@ -166,7 +183,7 @@
         }
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased" x-data="{ timeOfDay: '@(ViewData["TimeOfDayTheme"] ?? "evening")' }" x-bind:class="'theme-' + timeOfDay">
 <partial name="_Navbar" />
 
 <!-- Main Content -->
