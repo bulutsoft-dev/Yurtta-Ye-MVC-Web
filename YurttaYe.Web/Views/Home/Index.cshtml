@@ -132,76 +132,84 @@
         {
             string cityName = Model.Cities.FirstOrDefault(c => c.Value == Model.CityId.ToString())?.Text;
             string formattedDate = Model.Date.ToString("dd MMMM yyyy, dddd", culture);
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
                 @if (Model.BreakfastMenu != null)
                 {
-                    <div class="bg-card rounded-xl shadow-lg overflow-hidden border border-card flex flex-col">
-                        <div class="p-6 bg-gradient-to-r from-accent to-button-primary-hover text-white">
-                            <h2 class="text-2xl font-bold">Sabah Kahvaltısı</h2>
-                            <p class="text-sm opacity-90">@formattedDate - @cityName</p>
+                    <div class="rounded-xl border border-card bg-card shadow-sm flex flex-col transition-colors">
+                        <div class="p-5 border-b border-card rounded-t-xl"
+                             style="background: linear-gradient(90deg, #FF8A65 0%, #FFCC02 100%);">
+                            <h2 class="text-xl font-bold text-white">
+                                <span class="mr-2">🥐</span> Sabah Kahvaltısı
+                            </h2>
+                            <p class="text-sm text-white/90">@formattedDate - @cityName</p>
                         </div>
-                        <div class="p-6 space-y-6 flex-1">
+                        <div class="p-5 space-y-5 flex-1">
                             @foreach (var category in Model.BreakfastMenu.Items.Select(i => i.Category).Distinct())
                             {
                                 <div>
-                                    <h3 class="text-lg font-semibold text-accent mb-3 flex items-center">
-                                        <i class="fas fa-utensils mr-3"></i>
+                                    <h3 class="text-base font-semibold flex items-center mb-2"
+                                        style="color: var(--breakfast-primary);">
+                                        <i class="fas fa-utensils mr-2 opacity-70"></i>
                                         @category
                                     </h3>
-                                    <ul class="space-y-2 pl-8">
+                                    <ul class="space-y-1 pl-6">
                                         @foreach (var item in Model.BreakfastMenu.Items.Where(i => i.Category == category))
                                         {
                                             <li class="flex items-center text-primary">
                                                 <span>@item.Name</span>
                                                 @if (!string.IsNullOrWhiteSpace(item.Gram))
                                                 {
-                                                    <span class="ml-auto text-sm font-medium bg-secondary text-secondary py-1 px-2 rounded-md">@item.Gram</span>
+                                                    <span class="ml-auto text-xs font-medium bg-secondary text-secondary py-1 px-2 rounded">@item.Gram</span>
                                                 }
                                             </li>
                                         }
                                     </ul>
                                 </div>
                             }
-                            <div class="border-t border-border pt-4 text-right">
-                                <span class="text-lg font-bold text-primary">Toplam Enerji:</span>
-                                <span class="text-lg font-bold text-accent ml-2">@Model.BreakfastMenu.Energy</span>
-                            </div>
+                        </div>
+                        <div class="border-t border-card pt-4 text-center flex items-center justify-center min-h-[56px]">
+                            <span class="text-base font-bold text-primary">Toplam Enerji:</span>
+                            <span class="text-base font-bold ml-2" style="color: var(--breakfast-primary);">@Model.BreakfastMenu.Energy</span>
                         </div>
                     </div>
                 }
                 @if (Model.DinnerMenu != null)
                 {
-                    <div class="bg-card rounded-xl shadow-lg overflow-hidden border border-card flex flex-col">
-                        <div class="p-6 bg-gradient-to-r from-accent to-button-primary-hover text-white">
-                            <h2 class="text-2xl font-bold">Akşam Yemeği</h2>
-                            <p class="text-sm opacity-90">@formattedDate - @cityName</p>
+                    <div class="rounded-xl border border-card bg-card shadow-sm flex flex-col transition-colors">
+                        <div class="p-5 border-b border-card rounded-t-xl"
+                             style="background: linear-gradient(90deg, #1E3A8A 0%, #3B82F6 100%);">
+                            <h2 class="text-xl font-bold text-white">
+                                <span class="mr-2">🍽️</span> Akşam Yemeği
+                            </h2>
+                            <p class="text-sm text-white/90">@formattedDate - @cityName</p>
                         </div>
-                        <div class="p-6 space-y-6 flex-1">
+                        <div class="p-5 space-y-5 flex-1">
                             @foreach (var category in Model.DinnerMenu.Items.Select(i => i.Category).Distinct())
                             {
                                 <div>
-                                    <h3 class="text-lg font-semibold text-accent mb-3 flex items-center">
-                                        <i class="fas fa-utensils mr-3"></i>
+                                    <h3 class="text-base font-semibold flex items-center mb-2"
+                                        style="color: var(--dinner-primary);">
+                                        <i class="fas fa-utensils mr-2 opacity-70"></i>
                                         @category
                                     </h3>
-                                    <ul class="space-y-2 pl-8">
+                                    <ul class="space-y-1 pl-6">
                                         @foreach (var item in Model.DinnerMenu.Items.Where(i => i.Category == category))
                                         {
                                             <li class="flex items-center text-primary">
                                                 <span>@item.Name</span>
                                                 @if (!string.IsNullOrWhiteSpace(item.Gram))
                                                 {
-                                                    <span class="ml-auto text-sm font-medium bg-secondary text-secondary py-1 px-2 rounded-md">@item.Gram</span>
+                                                    <span class="ml-auto text-xs font-medium bg-secondary text-secondary py-1 px-2 rounded">@item.Gram</span>
                                                 }
                                             </li>
                                         }
                                     </ul>
                                 </div>
                             }
-                            <div class="border-t border-border pt-4 text-right">
-                                <span class="text-lg font-bold text-primary">Toplam Enerji:</span>
-                                <span class="text-lg font-bold text-accent ml-2">@Model.DinnerMenu.Energy</span>
-                            </div>
+                        </div>
+                        <div class="border-t border-card pt-4 text-center flex items-center justify-center min-h-[56px]">
+                            <span class="text-base font-bold text-primary">Toplam Enerji:</span>
+                            <span class="text-base font-bold ml-2" style="color: var(--dinner-primary);">@Model.DinnerMenu.Energy</span>
                         </div>
                     </div>
                 }
