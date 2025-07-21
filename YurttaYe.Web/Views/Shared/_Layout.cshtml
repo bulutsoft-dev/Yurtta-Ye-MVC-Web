@@ -253,7 +253,11 @@
 <partial name="_Navbar" />
 
 <!-- Mobil Uygulama Tanıtım Alanı (Navbar'a Yaslı) -->
-<section x-data="{ show: true }" x-init="show = !localStorage.getItem('hideTopBanner')" x-show="show" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="bg-card py-4 border-b border-card" style="display: none;">
+<section x-data="{ show: true }" 
+         x-init="const ts = localStorage.getItem('hideTopBannerTimestamp'); show = !ts || (Date.now() - ts > 5 * 60 * 1000)" 
+         x-show="show" 
+         x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" 
+         class="bg-card py-4 border-b border-card" style="display: none;">
     <div class="container mx-auto px-4 flex justify-between items-center">
         <div class="flex items-center gap-4">
             <img src="~/logo-yurttaye.png" alt="YurttaYe Mobil Uygulama" class="w-12 h-12 rounded-lg">
@@ -266,7 +270,7 @@
             <a href="https://play.google.com/store/apps/details?id=com.yurttaye.yurttaye" target="_blank" class="btn btn-primary text-sm">
                 <i class="fab fa-google-play mr-2"></i> İndir
             </a>
-            <button x-on:click="show = false; localStorage.setItem('hideTopBanner', 'true')" class="text-secondary hover:text-primary transition-colors p-2 rounded-full hover:bg-secondary/20">
+            <button x-on:click="show = false; localStorage.setItem('hideTopBannerTimestamp', Date.now())" class="text-secondary hover:text-primary transition-colors p-2 rounded-full hover:bg-secondary/20">
                 <i class="fas fa-times"></i>
             </button>
         </div>
@@ -281,8 +285,12 @@
 </div>
 
 <!-- Detaylı Mobil Uygulama Tanıtım Alanı -->
-<section x-data="{ show: true }" x-init="show = !localStorage.getItem('hideBottomBanner')" x-show="show" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="bg-card py-8 border-t border-card relative" style="display: none;">
-    <button x-on:click="show = false; localStorage.setItem('hideBottomBanner', 'true')" class="absolute top-4 right-4 text-secondary hover:text-primary transition-colors p-2 rounded-full hover:bg-secondary/20 z-10">
+<section x-data="{ show: true }"
+         x-init="const ts = localStorage.getItem('hideBottomBannerTimestamp'); show = !ts || (Date.now() - ts > 5 * 60 * 1000)"
+         x-show="show"
+         x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+         class="bg-card py-8 border-t border-card relative" style="display: none;">
+    <button x-on:click="show = false; localStorage.setItem('hideBottomBannerTimestamp', Date.now())" class="absolute top-4 right-4 text-secondary hover:text-primary transition-colors p-2 rounded-full hover:bg-secondary/20 z-10">
         <i class="fas fa-times"></i>
     </button>
     <div class="container mx-auto px-4 grid md:grid-cols-2 gap-6 items-center">
@@ -302,6 +310,29 @@
                     <i class="fas fa-vial mr-2"></i> Test Sürümünü Dene
                 </a>
             </div>
+        </div>
+    </div>
+</section>
+
+<!-- Geri Bildirim ve Katkı Alanı -->
+<section x-data="{ show: true }"
+         x-init="const ts = localStorage.getItem('hideContributionBannerTimestamp'); show = !ts || (Date.now() - ts > 5 * 60 * 1000)"
+         x-show="show"
+         x-transition class="bg-card py-6 border-t border-card relative" style="display: none;">
+    <button x-on:click="show = false; localStorage.setItem('hideContributionBannerTimestamp', Date.now())" class="absolute top-4 right-4 text-secondary hover:text-primary transition-colors p-2 rounded-full hover:bg-secondary/20 z-10">
+        <i class="fas fa-times"></i>
+    </button>
+    <div class="container mx-auto px-4 text-center">
+        <div class="max-w-xl mx-auto">
+            <i class="fas fa-hands-helping text-2xl text-accent mb-3"></i>
+            <h2 class="text-lg font-semibold text-primary mb-2">Veri Katkısıyla Büyüyoruz</h2>
+            <p class="text-secondary text-sm mb-4">
+                Elinizdeki yurt menüsü bilgilerini bizimle paylaşarak binlerce öğrencinin doğru bilgiye ulaşmasına yardımcı olabilirsiniz. Bir fotoğraf veya metin göndermeniz yeterli.
+            </p>
+            <a href="mailto:bulutsofdev@gmail.com?subject=YurttaYe%20-%20Veri%20Katkısı" class="btn btn-outline text-sm inline-flex items-center gap-2">
+                <i class="fas fa-paper-plane"></i>
+                Katkıda Bulun
+            </a>
         </div>
     </div>
 </section>
