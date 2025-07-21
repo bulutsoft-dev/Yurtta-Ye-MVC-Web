@@ -162,8 +162,6 @@
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/YurttaYe.Data.pdb
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/YurttaYe.Services.pdb
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/obj/Debug/net8.0/YurttaYe.Web.csproj.AssemblyReference.cache
-/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/obj/Debug/net8.0/YurttaYe.Web.Resources.SharedResource.resources
-/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/obj/Debug/net8.0/YurttaYe.Web.Resources.SharedResource.en.resources
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/obj/Debug/net8.0/YurttaYe.Web.csproj.GenerateResource.cache
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/obj/Debug/net8.0/YurttaYe.Web.GeneratedMSBuildEditorConfig.editorconfig
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/obj/Debug/net8.0/YurttaYe.Web.AssemblyInfoInputs.cache
@@ -192,3 +190,10 @@
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/obj/Debug/net8.0/YurttaYe.Web.pdb
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/obj/Debug/net8.0/YurttaYe.Web.genruntimeconfig.cache
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/obj/Debug/net8.0/ref/YurttaYe.Web.dll
+/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/obj/Debug/net8.0/YurttaYe.Web.Resources.Views.Shared._Layout.en.resources
+/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/obj/Debug/net8.0/YurttaYe.Web.Resources.Views.Shared._Layout.tr.resources
+/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/obj/Debug/net8.0/YurttaYe.Web.Resources.Views.Shared._Navbar.en.resources
+/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/obj/Debug/net8.0/YurttaYe.Web.Resources.Views.Shared._Navbar.tr.resources
+/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/bin/Debug/net8.0/tr/YurttaYe.Web.resources.dll
+/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/obj/Debug/net8.0/tr/YurttaYe.Web.resources.cs
+/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/obj/Debug/net8.0/tr/YurttaYe.Web.resources.dll

@@ -1,8 +1,10 @@
-﻿@model YurttaYe.Core.Models.ViewModels.MenuViewModel
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model YurttaYe.Core.Models.ViewModels.MenuViewModel
 @using YurttaYe.Core.Models.ViewModels
 @using System.Globalization
 @{
-    ViewData["Title"] = SharedLocalizer["QueryMenu"];
+    ViewData["Title"] = Localizer["QueryMenu"];
     Layout = "~/Views/Shared/_Layout.cshtml";
     var currentCulture = Thread.CurrentThread.CurrentUICulture;
 }
@@ -21,14 +23,14 @@
                     .Select(i => firstDayOfMonth.AddDays(i))
                     .ToList();
             }
-            <form asp-action="Index" method="post" class="space-y-4" id="menuForm" data-meal-theme="@(Model.MealType == SharedLocalizer["Breakfast"] ? "morning" : "evening")">
+            <form asp-action="Index" method="post" class="space-y-4" id="menuForm" data-meal-theme="@(Model.MealType == Localizer["Breakfast"].ToString() ? "morning" : "evening")">
                 <!-- City Selection -->
                 <div>
                     <div x-data="{ open: false }" class="relative">
-                        <label for="city-button" class="block text-sm font-medium text-primary mb-2">@SharedLocalizer["City"]</label>
+                        <label for="city-button" class="block text-sm font-medium text-primary mb-2">@Localizer["City"]</label>
                         <button type="button" @@click="open = !open" class="relative block w-full text-left rounded-lg border border-border focus:border-accent focus:ring-accent py-3 px-4 bg-secondary text-primary">
                             <span>
-                                @(Model.Cities.FirstOrDefault(c => c.Value == Model.CityId.ToString())?.Text ?? SharedLocalizer["SelectCity"])
+                                @(Model.Cities.FirstOrDefault(c => c.Value == Model.CityId.ToString())?.Text ?? Localizer["SelectCity"].ToString())
                             </span>
                             <i class="fas fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-primary opacity-75"></i>
                         </button>
@@ -82,19 +84,19 @@
 
                 <!-- Hidden Inputs -->
                 <input type="hidden" asp-for="Date" id="Date" value="@Model.Date.ToString("yyyy-MM-dd")"/>
-                <input type="hidden" asp-for="MealType" id="MealType" value="@(Model.MealType ?? SharedLocalizer["Breakfast"])" />
+                <input type="hidden" asp-for="MealType" id="MealType" value="@(Model.MealType ?? Localizer["Breakfast"].ToString())" />
 
                 <!-- Meal Type Toggle -->
                 <div>
-                    <label class="block text-sm font-medium text-primary mb-2">@SharedLocalizer["Meal"]</label>
+                    <label class="block text-sm font-medium text-primary mb-2">@Localizer["Meal"]</label>
                     <div class="grid grid-cols-2 gap-4">
-                        <button type="button" id="breakfastBtn" class="btn meal-type-btn w-full flex flex-col items-center justify-center" data-meal-type="@SharedLocalizer["Breakfast"]">
-                            <span class="block font-semibold">@SharedLocalizer["Breakfast"]</span>
-                            <span class="block text-xs meal-subtitle mt-1">@SharedLocalizer["BreakfastHours"]</span>
+                        <button type="button" id="breakfastBtn" class="btn meal-type-btn w-full flex flex-col items-center justify-center" data-meal-type="@Localizer["Breakfast"].ToString()">
+                            <span class="block font-semibold">@Localizer["Breakfast"]</span>
+                            <span class="block text-xs meal-subtitle mt-1">@Localizer["BreakfastHours"]</span>
                         </button>
-                        <button type="button" id="dinnerBtn" class="btn meal-type-btn w-full flex flex-col items-center justify-center" data-meal-type="@SharedLocalizer["DinnerMenu"]">
-                            <span class="block font-semibold">@SharedLocalizer["Dinner"]</span>
-                            <span class="block text-xs meal-subtitle mt-1">@SharedLocalizer["DinnerHours"]</span>
+                        <button type="button" id="dinnerBtn" class="btn meal-type-btn w-full flex flex-col items-center justify-center" data-meal-type="@Localizer["DinnerMenu"].ToString()">
+                            <span class="block font-semibold">@Localizer["Dinner"]</span>
+                            <span class="block text-xs meal-subtitle mt-1">@Localizer["DinnerHours"]</span>
                         </button>
                     </div>
                 </div>
@@ -106,7 +108,7 @@
         {
             <div class="bg-error-bg border-l-4 border-error-border text-error-text p-4 rounded-lg mb-8" role="alert" id="errorAlert">
                 <div class="flex justify-between items-center">
-                    <span><strong>@SharedLocalizer["Error"]:</strong> @Model.ErrorMessage</span>
+                    <span><strong>@Localizer["Error"]:</strong> @Model.ErrorMessage</span>
                     <button onclick="this.parentElement.parentElement.remove()" class="text-error-text hover:opacity-75">
                         <i class="fas fa-times"></i>
                     </button>
@@ -122,7 +124,7 @@
                 {
                     var breakfastModel = new MenuCardViewModel {
                         Menu = Model.BreakfastMenu,
-                        Title = SharedLocalizer["BreakfastMenu"],
+                        Title = Localizer["BreakfastMenu"].ToString(),
                         IconClass = "fas fa-mug-hot",
                         GradientStart = "#FF8A65",
                         GradientEnd = "#FFCC02",
@@ -134,7 +136,7 @@
                 else
                 {
                     var noMenuModel = new NoMenuCardViewModel {
-                        MealLabel = SharedLocalizer["BreakfastMenu"],
+                        MealLabel = Localizer["BreakfastMenu"].ToString(),
                         DateText = Model.Date.ToString("dd MMMM yyyy, dddd", currentCulture)
                     };
                     <partial name="_NoMenuCard" model="noMenuModel" />
@@ -147,7 +149,7 @@
                 {
                     var dinnerModel = new MenuCardViewModel {
                         Menu = Model.DinnerMenu,
-                        Title = SharedLocalizer["DinnerMenu"],
+                        Title = Localizer["DinnerMenu"].ToString(),
                         IconClass = "fas fa-utensils",
                         GradientStart = "#1E3A8A",
                         GradientEnd = "#3B82F6",
@@ -159,7 +161,7 @@
                 else
                 {
                     var noMenuModel = new NoMenuCardViewModel {
-                        MealLabel = SharedLocalizer["DinnerMenu"],
+                        MealLabel = Localizer["DinnerMenu"].ToString(),
                         DateText = Model.Date.ToString("dd MMMM yyyy, dddd", currentCulture)
                     };
                     <partial name="_NoMenuCard" model="noMenuModel" />
@@ -173,9 +175,9 @@
                 <i class="fas fa-info-circle text-accent"></i>
             </div>
             <div>
-                <h4 class="font-semibold text-primary">@SharedLocalizer["ImportantInfo"]</h4>
+                <h4 class="font-semibold text-primary">@Localizer["ImportantInfo"]</h4>
                 <p class="text-secondary text-sm mt-1">
-                    @SharedLocalizer["InfoNote"]
+                    @Localizer["InfoNote"]
                 </p>
             </div>
         </div>
@@ -198,8 +200,8 @@
             const formContainer = document.getElementById('menuForm');
 
             // Constants for meal types from Razor
-            const breakfastType = "@SharedLocalizer["Breakfast"]";
-            const dinnerType = "@SharedLocalizer["DinnerMenu"]"; // Corresponds to Akşam Yemeği
+            const breakfastType = "@Localizer["Breakfast"].ToString()";
+            const dinnerType = "@Localizer["DinnerMenu"].ToString()"; // Corresponds to Akşam Yemeği
 
             // Scroll selected date into view
             const selectedDateElement = document.querySelector('.date-strip-item.selected');

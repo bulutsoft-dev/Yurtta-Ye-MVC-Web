@@ -25,6 +25,9 @@
         "resources": {
           "en/YurttaYe.Web.resources.dll": {
             "locale": "en"
+          },
+          "tr/YurttaYe.Web.resources.dll": {
+            "locale": "tr"
           }
         }
       },

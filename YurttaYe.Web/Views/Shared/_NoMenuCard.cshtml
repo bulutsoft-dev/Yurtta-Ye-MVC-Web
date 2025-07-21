@@ -1,7 +1,9 @@
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 @model YurttaYe.Core.Models.ViewModels.NoMenuCardViewModel
 
 @{
-    var isBreakfast = Model.MealLabel == SharedLocalizer["BreakfastMenu"];
+    var isBreakfast = Model.MealLabel == Localizer["BreakfastMenu"].ToString();
 }
 
 <style>
@@ -43,9 +45,9 @@
             <i class="@(isBreakfast ? "fas fa-mug-hot" : "fas fa-utensils") text-4xl icon-fg"></i>
         </div>
         <!-- Başlık ve Açıklama -->
-        <h2 class="text-xl font-bold text-primary mt-6">@SharedLocalizer["MenuNotPublished"]</h2>
+        <h2 class="text-xl font-bold text-primary mt-6">@Localizer["MenuNotPublished"]</h2>
         <p class="text-secondary mt-2">
-            <strong>@Model.DateText</strong> @SharedLocalizer["MenuNotAvailable"]
+            <strong>@Model.DateText</strong> @Localizer["MenuNotAvailable"]
         </p>
     </div>
 
@@ -56,9 +58,9 @@
                 <i class="fas fa-hand-holding-heart"></i>
             </div>
             <div>
-                <div class="font-semibold data-title">@SharedLocalizer["DataContribution"]</div>
+                <div class="font-semibold data-title">@Localizer["DataContribution"]</div>
                 <p class="text-xs text-secondary">
-                    @SharedLocalizer["ContributionNeeded"]
+                    @Localizer["ContributionNeeded"]
                 </p>
             </div>
         </div>
@@ -66,7 +68,7 @@
         <!-- Bize Ulaşın Butonu -->
         <a href="mailto:destek@yurttaye.com" class="w-full">
             <button class="w-full text-white font-semibold py-2 rounded-lg flex items-center justify-center gap-2 transition main-button">
-                <i class="fas fa-envelope"></i> @SharedLocalizer["ContactUs"]
+                <i class="fas fa-envelope"></i> @Localizer["ContactUs"]
             </button>
         </a>
     </div>

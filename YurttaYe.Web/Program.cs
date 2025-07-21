@@ -15,7 +15,10 @@ var builder = WebApplication.CreateBuilder(args);
 DotNetEnv.Env.Load();
 
 // 1. MVC + Razor View desteği
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews()
+    .AddViewLocalization(Microsoft.AspNetCore.Mvc.Razor.LanguageViewLocationExpanderFormat.Suffix)
+    .AddDataAnnotationsLocalization();
+
 
 // 2. EF Core (SQLite)
 //builder.Services.AddDbContext<AppDbContext>(options =>
@@ -94,7 +97,7 @@ app.UseRouting();
 
 // Enable localization middleware
 var locOptions = app.Services.GetService<IOptions<RequestLocalizationOptions>>();
-app.UseRequestLocalization(locOptions.Value);
+if (locOptions != null) app.UseRequestLocalization(locOptions.Value);
 
 app.UseCors("AllowFlutter");
 app.UseAuthentication();

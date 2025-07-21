@@ -1,3 +1,5 @@
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 <!-- Footer -->
 <footer class="bg-secondary text-primary border-t border-border">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -10,37 +12,37 @@
                     <h3 class="text-xl font-bold text-primary" style="font-family: 'Poppins', sans-serif;">YurttaYe</h3>
                 </div>
                 <p class="text-secondary text-sm">
-                    @SharedLocalizer["FooterAboutText"]
+                    @Localizer["FooterAboutText"]
                 </p>
             </div>
 
             <!-- Quick Links -->
             <div>
-                <h3 class="text-lg font-semibold text-primary mb-4">@SharedLocalizer["QuickLinks"]</h3>
+                <h3 class="text-lg font-semibold text-primary mb-4">@Localizer["QuickLinks"]</h3>
                 <ul class="space-y-3 text-sm">
-                    <li><a href="/" class="inline-flex items-center text-secondary hover:text-accent transition-colors"><i class="fas fa-utensils w-5 mr-2"></i>@SharedLocalizer["QueryMenu"]</a></li>
-                    <li><a href="https://play.google.com/store/apps/details?id=com.yurttaye.yurttaye" target="_blank" class="inline-flex items-center text-secondary hover:text-accent transition-colors"><i class="fab fa-google-play w-5 mr-2"></i>@SharedLocalizer["GooglePlay"]</a></li>
-                    <li><a href="https://github.com/bulutsoft-dev/Yurtta-Ye-Mobile/releases" target="_blank" class="inline-flex items-center text-secondary hover:text-accent transition-colors"><i class="fas fa-vial w-5 mr-2"></i>@SharedLocalizer["TryTestVersion"]</a></li>
+                    <li><a href="/" class="inline-flex items-center text-secondary hover:text-accent transition-colors"><i class="fas fa-utensils w-5 mr-2"></i>@Localizer["QueryMenu"]</a></li>
+                    <li><a href="https://play.google.com/store/apps/details?id=com.yurttaye.yurttaye" target="_blank" class="inline-flex items-center text-secondary hover:text-accent transition-colors"><i class="fab fa-google-play w-5 mr-2"></i>@Localizer["GooglePlay"]</a></li>
+                    <li><a href="https://github.com/bulutsoft-dev/Yurtta-Ye-Mobile/releases" target="_blank" class="inline-flex items-center text-secondary hover:text-accent transition-colors"><i class="fas fa-vial w-5 mr-2"></i>@Localizer["TryTestVersion"]</a></li>
                 </ul>
             </div>
 
             <!-- About Section -->
             <div>
-                <h3 class="text-lg font-semibold text-primary mb-4">@SharedLocalizer["About"]</h3>
+                <h3 class="text-lg font-semibold text-primary mb-4">@Localizer["About"]</h3>
                 <ul class="space-y-3 text-sm">
-                    <li><a href="#" class="inline-flex items-center text-secondary hover:text-accent transition-colors"><i class="fas fa-envelope w-5 mr-2"></i>@SharedLocalizer["Contact"]</a></li>
-                    <li><a href="#" class="inline-flex items-center text-secondary hover:text-accent transition-colors"><i class="fas fa-building w-5 mr-2"></i>@SharedLocalizer["Corporate"]</a></li>
-                    <li><a href="#" class="inline-flex items-center text-secondary hover:text-accent transition-colors"><i class="fas fa-comments w-5 mr-2"></i>@SharedLocalizer["Feedback"]</a></li>
+                    <li><a href="#" class="inline-flex items-center text-secondary hover:text-accent transition-colors"><i class="fas fa-envelope w-5 mr-2"></i>@Localizer["Contact"]</a></li>
+                    <li><a href="#" class="inline-flex items-center text-secondary hover:text-accent transition-colors"><i class="fas fa-building w-5 mr-2"></i>@Localizer["Corporate"]</a></li>
+                    <li><a href="#" class="inline-flex items-center text-secondary hover:text-accent transition-colors"><i class="fas fa-comments w-5 mr-2"></i>@Localizer["Feedback"]</a></li>
                 </ul>
             </div>
 
             <!-- Our Accounts -->
             <div>
-                <h3 class="text-lg font-semibold text-primary mb-4">@SharedLocalizer["OurAccounts"]</h3>
+                <h3 class="text-lg font-semibold text-primary mb-4">@Localizer["OurAccounts"]</h3>
                 <ul class="space-y-3 text-sm">
-                    <li><a href="https://github.com/bulutsoft-dev" target="_blank" class="inline-flex items-center text-secondary hover:text-accent transition-colors"><i class="fab fa-github w-5 mr-2"></i>@SharedLocalizer["GitHub"]</a></li>
-                    <li><a href="https://www.linkedin.com/company/bulutsoft-dev/" target="_blank" class="inline-flex items-center text-secondary hover:text-accent transition-colors"><i class="fab fa-linkedin w-5 mr-2"></i>@SharedLocalizer["LinkedIn"]</a></li>
-                    <li><a href="https://x.com/bulutsoftdev" target="_blank" class="inline-flex items-center text-secondary hover:text-accent transition-colors"><i class="fab fa-twitter w-5 mr-2"></i>@SharedLocalizer["TwitterX"]</a></li>
+                    <li><a href="https://github.com/bulutsoft-dev" target="_blank" class="inline-flex items-center text-secondary hover:text-accent transition-colors"><i class="fab fa-github w-5 mr-2"></i>@Localizer["GitHub"]</a></li>
+                    <li><a href="https://www.linkedin.com/company/bulutsoft-dev/" target="_blank" class="inline-flex items-center text-secondary hover:text-accent transition-colors"><i class="fab fa-linkedin w-5 mr-2"></i>@Localizer["LinkedIn"]</a></li>
+                    <li><a href="https://x.com/bulutsoftdev" target="_blank" class="inline-flex items-center text-secondary hover:text-accent transition-colors"><i class="fab fa-twitter w-5 mr-2"></i>@Localizer["TwitterX"]</a></li>
                 </ul>
             </div>
             
@@ -50,7 +52,7 @@
             <div class="flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-4">
                 <!-- Left: Theme & Lang buttons -->
                 <div class="flex items-center space-x-2">
-                    <button x-on:click="darkMode = !darkMode; localStorage.setItem('darkMode', darkMode)" class="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors" aria-label="@SharedLocalizer["ToggleTheme"]">
+                    <button x-on:click="darkMode = !darkMode; localStorage.setItem('darkMode', darkMode)" class="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors" aria-label="@Localizer["ToggleTheme"]">
                         <i x-show="!darkMode" class="fas fa-sun text-base"></i>
                         <i x-show="darkMode" class="fas fa-moon text-base"></i>
                     </button>
@@ -61,13 +63,13 @@
                         }
                         <input type="hidden" name="culture" value="@(isTr ? "en" : "tr")" />
                         <input type="hidden" name="returnUrl" value="@Context.Request.Path@Context.Request.QueryString" />
-                        <button type="submit" class="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors" title="@SharedLocalizer["ChangeLanguage"]">
+                        <button type="submit" class="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors" title="@Localizer["ChangeLanguage"]">
                             <i class="fas fa-language text-base"></i>
                         </button>
                     </form>
                 </div>
                 <div class="text-center">
-                    <p>© @DateTime.Now.Year YurttaYe. <a href="https://github.com/bulutsoft-dev" class="text-accent hover:underline">Bulutsoft</a> @SharedLocalizer["DevelopedBy"]</p>
+                    <p>© @DateTime.Now.Year YurttaYe. <a href="https://github.com/bulutsoft-dev" class="text-accent hover:underline">Bulutsoft</a> @Localizer["DevelopedBy"]</p>
                 </div>
                 
                 <!-- Right: Social Media -->

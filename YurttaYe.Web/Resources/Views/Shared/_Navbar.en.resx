@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, ...</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, ...</value>
+  </resheader>
+  <data name="Welcome" xml:space="preserve">
+    <value>Welcome to YurttaYe!</value>
+  </data>
+  <data name="MenuInfo" xml:space="preserve">
+    <value>Easily view dormitory meal menus. This platform grows with community contributions. You can support our project by sending us missing or incorrect menus!</value>
+  </data>
+  <data name="LetsStart" xml:space="preserve">
+    <value>Got it, Let's Start!</value>
+  </data>
+  <data name="DownloadOnGooglePlay" xml:space="preserve">
+    <value>Download on Google Play</value>
+  </data>
+  <data name="LanguageTurkish" xml:space="preserve">
+    <value>Turkish</value>
+  </data>
+  <data name="LanguageEnglish" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="DataContributionTitle" xml:space="preserve">
+    <value>We Grow with Data Contribution</value>
+  </data>
+  <data name="DataContributionDesc" xml:space="preserve">
+    <value>By sharing your dorm menu information with us, you help thousands of students access accurate information. Sending a photo or text is enough.</value>
+  </data>
+  <data name="Contribute" xml:space="preserve">
+    <value>Contribute</value>
+  </data>
+  <data name="ChangeLanguage" xml:space="preserve">
+    <value>Change Language</value>
+  </data>
+  <data name="LightMode" xml:space="preserve">
+    <value>Light Mode</value>
+  </data>
+  <data name="DarkMode" xml:space="preserve">
+    <value>Dark Mode</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="HomePage" xml:space="preserve">
+    <value>Home Page</value>
+  </data>
+  <data name="MobileApp" xml:space="preserve">
+    <value>Mobile App</value>
+  </data>
+  <data name="Management" xml:space="preserve">
+    <value>Management</value>
+  </data>
+  <data name="ToggleTheme" xml:space="preserve">
+    <value>Toggle theme</value>
+  </data>
+  <data name="QueryMenu" xml:space="preserve">
+    <value>Query Menu</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="SelectCity" xml:space="preserve">
+    <value>Select City</value>
+  </data>
+  <data name="Meal" xml:space="preserve">
+    <value>Meal</value>
+  </data>
+  <data name="Breakfast" xml:space="preserve">
+    <value>Breakfast</value>
+  </data>
+  <data name="BreakfastHours" xml:space="preserve">
+    <value>Start: 06:30 • End: 12:00</value>
+  </data>
+  <data name="Dinner" xml:space="preserve">
+    <value>Dinner</value>
+  </data>
+  <data name="DinnerHours" xml:space="preserve">
+    <value>Start: 16:00 • End: 23:00</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="BreakfastMenu" xml:space="preserve">
+    <value>Breakfast Menu</value>
+  </data>
+  <data name="DinnerMenu" xml:space="preserve">
+    <value>Dinner Menu</value>
+  </data>
+  <data name="ImportantInfo" xml:space="preserve">
+    <value>Important Information</value>
+  </data>
+  <data name="InfoNote" xml:space="preserve">
+    <value>The menu information presented on this platform is based on data provided by dormitory administrations or contributions from users. Menus may vary depending on the dormitory, date, or mealtime, and there may occasionally be inaccuracies in the data. Our application does not guarantee the accuracy of the information displayed and accepts no liability for any issues arising from this data.</value>
+  </data>
+  <data name="MetaDescription" xml:space="preserve">
+    <value>KYK Dormitory Food Menu inquiry and management system.</value>
+  </data>
+  <data name="MetaOgDescription" xml:space="preserve">
+    <value>Query and manage KYK food menus.</value>
+  </data>
+  <data name="AppInYourPocket" xml:space="preserve">
+    <value>The Food Menu is Now in Your Pocket!</value>
+  </data>
+  <data name="AppBannerSubtitle" xml:space="preserve">
+    <value>Download the app for instant notifications and more.</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="AppDetailDescription" xml:space="preserve">
+    <value>Download the YurttaYe mobile app and be the first to know about new menus with instant notifications. Follow your favorite meals and enjoy the practical interface!</value>
+  </data>
+  <data name="GooglePlay" xml:space="preserve">
+    <value>Google Play</value>
+  </data>
+  <data name="TryTestVersion" xml:space="preserve">
+    <value>Try the Test Version</value>
+  </data>
+  <data name="FooterAboutText" xml:space="preserve">
+    <value>YurttaYe is an open-source project that allows you to easily discover the food menus offered in KYK dormitories.</value>
+  </data>
+  <data name="QuickLinks" xml:space="preserve">
+    <value>Quick Links</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="Contact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="Corporate" xml:space="preserve">
+    <value>Corporate</value>
+  </data>
+  <data name="Feedback" xml:space="preserve">
+    <value>Feedback</value>
+  </data>
+  <data name="OurAccounts" xml:space="preserve">
+    <value>Our Accounts</value>
+  </data>
+  <data name="GitHub" xml:space="preserve">
+    <value>GitHub</value>
+  </data>
+  <data name="LinkedIn" xml:space="preserve">
+    <value>LinkedIn</value>
+  </data>
+  <data name="TwitterX" xml:space="preserve">
+    <value>Twitter/X</value>
+  </data>
+  <data name="DevelopedBy" xml:space="preserve">
+    <value>developed by</value>
+  </data>
+  <data name="TotalEnergy" xml:space="preserve">
+    <value>Total Energy</value>
+  </data>
+  <data name="MenuNotPublished" xml:space="preserve">
+    <value>Menu Not Published Yet</value>
+  </data>
+  <data name="MenuNotAvailable" xml:space="preserve">
+    <value>The menu for this meal has not been entered into the system yet for</value>
+  </data>
+  <data name="DataContribution" xml:space="preserve">
+    <value>Data Contribution</value>
+  </data>
+  <data name="ContributionNeeded" xml:space="preserve">
+    <value>For the accuracy and timeliness of these menus, we need the support of users like you. If you have the information, you can help add the menu by contacting us.</value>
+  </data>
+  <data name="ContactUs" xml:space="preserve">
+    <value>Contact Us</value>
+  </data>
+</root> 
