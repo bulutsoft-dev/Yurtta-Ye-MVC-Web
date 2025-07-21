@@ -7,6 +7,9 @@ using YurttaYe.Data.Repositories;
 using YurttaYe.Services;
 using YurttaYe.Web.Middleware;
 using YurttaYe.Web.Services;
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 DotNetEnv.Env.Load();
@@ -47,6 +50,22 @@ builder.Services.AddCors(options =>
             .AllowAnyHeader());
 });
 
+// Add localization services
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    var supportedCultures = new[]
+    {
+        new CultureInfo("tr"),
+        new CultureInfo("en")
+    };
+    options.DefaultRequestCulture = new RequestCulture("tr");
+    options.SupportedCultures = supportedCultures;
+    options.SupportedUICultures = supportedCultures;
+    options.RequestCultureProviders.Insert(0, new CookieRequestCultureProvider());
+});
+
 
 // 5. Dependency Injection
 builder.Services.AddScoped<IMenuService, MenuService>();
@@ -75,6 +94,10 @@ app.UseRouting();
 app.UseCors("AllowFlutter");
 app.UseAuthentication();
 app.UseAuthorization();
+
+// Enable localization middleware
+var locOptions = app.Services.GetService<IOptions<RequestLocalizationOptions>>();
+app.UseRequestLocalization(locOptions.Value);
 
 // 9. Route tanımları
 app.MapControllerRoute(

@@ -252,6 +252,7 @@
 <body class="antialiased" x-data="{ timeOfDay: '@(ViewData["TimeOfDayTheme"] ?? "evening")' }" x-bind:class="'theme-' + timeOfDay">
 
 <!-- Startup Modal -->
+@inject IStringLocalizer<SharedResource> SharedLocalizer
 <div x-data="{ showModal: false }"
      x-init="if (!localStorage.getItem('startupModalDismissed')) { setTimeout(() => showModal = true, 500) }"
      x-show="showModal"
@@ -278,19 +279,19 @@
         <!-- Modal Content -->
         <div class="text-center">
             <img src="~/logo-yurttaye.png" alt="YurttaYe Logo" class="w-20 h-20 mx-auto mb-4 rounded-full shadow-md">
-            <h2 class="text-2xl font-bold text-primary mb-2">YurttaYe'ye Hoş Geldiniz!</h2>
+            <h2 class="text-2xl font-bold text-primary mb-2">@SharedLocalizer["Welcome"]</h2>
             <p class="text-secondary mb-6 text-sm">
-                Yurt yemek menülerini kolayca görüntüleyin. Bu platform, topluluk katkılarıyla gelişmektedir. Siz de eksik veya yanlış menüleri bize göndererek projemize destek olabilirsiniz!
+                @SharedLocalizer["MenuInfo"]
             </p>
             <div class="space-y-3">
                 <button x-on:click="showModal = false; localStorage.setItem('startupModalDismissed', 'true')" class="btn btn-primary w-full">
-                    Anladım, Başlayalım!
+                    @SharedLocalizer["LetsStart"]
                 </button>
                 <a href="https://play.google.com/store/apps/details?id=com.yurttaye.yurttaye" target="_blank"
                    x-on:click="showModal = false; localStorage.setItem('startupModalDismissed', 'true')"
                    class="btn btn-outline w-full flex items-center justify-center gap-2">
                     <i class="fab fa-google-play"></i>
-                    Google Play'den İndir
+                    @SharedLocalizer["DownloadOnGooglePlay"]
                 </a>
             </div>
         </div>
@@ -372,13 +373,13 @@
     <div class="container mx-auto px-4 text-center">
         <div class="max-w-xl mx-auto">
             <i class="fas fa-hands-helping text-2xl text-accent mb-3"></i>
-            <h2 class="text-lg font-semibold text-primary mb-2">Veri Katkısıyla Büyüyoruz</h2>
+            <h2 class="text-lg font-semibold text-primary mb-2">@SharedLocalizer["DataContributionTitle"]</h2>
             <p class="text-secondary text-sm mb-4">
-                Elinizdeki yurt menüsü bilgilerini bizimle paylaşarak binlerce öğrencinin doğru bilgiye ulaşmasına yardımcı olabilirsiniz. Bir fotoğraf veya metin göndermeniz yeterli.
+                @SharedLocalizer["DataContributionDesc"]
             </p>
             <a href="mailto:bulutsofdev@gmail.com?subject=YurttaYe%20-%20Veri%20Katkısı" class="btn btn-outline text-sm inline-flex items-center gap-2">
                 <i class="fas fa-paper-plane"></i>
-                Katkıda Bulun
+                @SharedLocalizer["Contribute"]
             </a>
         </div>
     </div>

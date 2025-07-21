@@ -6,6 +6,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using YurttaYe.Core.Models.ViewModels;
 using YurttaYe.Core.Services;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Http;
 
 namespace YurttaYe.Web.Controllers.Web
 {
@@ -64,23 +66,58 @@ namespace YurttaYe.Web.Controllers.Web
         [HttpPost]
         public async Task<IActionResult> Index(MenuViewModel model)
         {
+            if (model == null)
+            {
+                model = new MenuViewModel();
+            }
+
             var cities = await _cityService.GetAllCitiesAsync();
             var cityList = cities.Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Name }).ToList();
             cityList.Insert(0, new SelectListItem { Value = "0", Text = "Şehir Seçin" });
+            
+            // Default city from config
+            var defaultCityName = _configuration["Defaults:City"] ?? "Manisa";
+            if (model.CityId == 0)
+            {
+                model.CityId = cities.FirstOrDefault(c => c.Name.Equals(defaultCityName, StringComparison.OrdinalIgnoreCase))?.Id ?? 0;
+            }
+
             model.Cities = cityList;
 
-            if (ModelState.IsValid && model.CityId > 0)
+            if (model.Date == DateTime.MinValue)
+            {
+                model.Date = DateTime.Today;
+            }
+
+            if (string.IsNullOrEmpty(model.MealType))
+            {
+                model.MealType = GetTimeOfDayTheme(); 
+            }
+            
+            // Fetch menus if a valid city is selected
+            if (model.CityId > 0)
             {
                 try
                 {
                     model.BreakfastMenu = await _menuService.GetMenuAsync(model.CityId, "Kahvaltı", model.Date);
                 }
-                catch { model.BreakfastMenu = null; }
+                catch (Exception ex)
+                {
+                    // Assuming _logger is available, otherwise remove this block
+                    // _logger.LogError(ex, "Error getting breakfast menu for CityId: {CityId}, Date: {Date}", model.CityId, model.Date);
+                    model.BreakfastMenu = null;
+                }
+
                 try
                 {
                     model.DinnerMenu = await _menuService.GetMenuAsync(model.CityId, "Akşam Yemeği", model.Date);
                 }
-                catch { model.DinnerMenu = null; }
+                catch (Exception ex)
+                {
+                    // Assuming _logger is available, otherwise remove this block
+                    // _logger.LogError(ex, "Error getting dinner menu for CityId: {CityId}, Date: {Date}", model.CityId, model.Date);
+                    model.DinnerMenu = null;
+                }
                 // Geri uyumluluk için mevcut MealType'a göre Menu property’sini doldur
                 model.Menu = model.MealType == "Kahvaltı" ? model.BreakfastMenu : model.DinnerMenu;
 
@@ -94,7 +131,20 @@ namespace YurttaYe.Web.Controllers.Web
             return View(model);
         }
 
-        private string GetTimeOfDayTheme(string mealType = null)
+        [HttpPost]
+        public IActionResult SetLanguage(string culture, string? returnUrl = null)
+        {
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
+            );
+            if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                return LocalRedirect(returnUrl);
+            return Redirect(Request.Headers["Referer"].ToString() ?? "/");
+        }
+
+        private string GetTimeOfDayTheme(string? mealType = null)
         {
             if (!string.IsNullOrEmpty(mealType))
             {

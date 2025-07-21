@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, ...</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, ...</value>
+  </resheader>
+  <data name="Welcome" xml:space="preserve">
+    <value>YurttaYe'ye Hoş Geldiniz!</value>
+  </data>
+  <data name="MenuInfo" xml:space="preserve">
+    <value>Yurt yemek menülerini kolayca görüntüleyin. Bu platform, topluluk katkılarıyla gelişmektedir. Siz de eksik veya yanlış menüleri bize göndererek projemize destek olabilirsiniz!</value>
+  </data>
+  <data name="LetsStart" xml:space="preserve">
+    <value>Anladım, Başlayalım!</value>
+  </data>
+  <data name="DownloadOnGooglePlay" xml:space="preserve">
+    <value>Google Play'den İndir</value>
+  </data>
+  <data name="LanguageTurkish" xml:space="preserve">
+    <value>Türkçe</value>
+  </data>
+  <data name="LanguageEnglish" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="DataContributionTitle" xml:space="preserve">
+    <value>Veri Katkısıyla Büyüyoruz</value>
+  </data>
+  <data name="DataContributionDesc" xml:space="preserve">
+    <value>Elinizdeki yurt menüsü bilgilerini bizimle paylaşarak binlerce öğrencinin doğru bilgiye ulaşmasına yardımcı olabilirsiniz. Bir fotoğraf veya metin göndermeniz yeterli.</value>
+  </data>
+  <data name="Contribute" xml:space="preserve">
+    <value>Katkıda Bulun</value>
+  </data>
+</root> 

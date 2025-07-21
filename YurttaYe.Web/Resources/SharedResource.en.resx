@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, ...</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, ...</value>
+  </resheader>
+  <data name="Welcome" xml:space="preserve">
+    <value>Welcome to YurttaYe!</value>
+  </data>
+  <data name="MenuInfo" xml:space="preserve">
+    <value>Easily view dormitory meal menus. This platform grows with community contributions. You can support our project by sending us missing or incorrect menus!</value>
+  </data>
+  <data name="LetsStart" xml:space="preserve">
+    <value>Got it, Let's Start!</value>
+  </data>
+  <data name="DownloadOnGooglePlay" xml:space="preserve">
+    <value>Download on Google Play</value>
+  </data>
+  <data name="LanguageTurkish" xml:space="preserve">
+    <value>Turkish</value>
+  </data>
+  <data name="LanguageEnglish" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="DataContributionTitle" xml:space="preserve">
+    <value>We Grow with Data Contribution</value>
+  </data>
+  <data name="DataContributionDesc" xml:space="preserve">
+    <value>By sharing your dorm menu information with us, you help thousands of students access accurate information. Sending a photo or text is enough.</value>
+  </data>
+  <data name="Contribute" xml:space="preserve">
+    <value>Contribute</value>
+  </data>
+</root> 
