@@ -1,27 +1,34 @@
 @using Microsoft.AspNetCore.Identity
+@using Microsoft.Extensions.Localization
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 @inject IStringLocalizer<SharedResource> SharedLocalizer
 
 @{
     var currentCulture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name;
+    var isTr = currentCulture.StartsWith("tr");
+    var isEn = currentCulture.StartsWith("en");
 }
 
 <!-- Navbar -->
 <header x-data="{ navOpen: false }" class="navbar sticky top-0 z-50">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="relative flex items-center justify-between py-3">
-            
+
             <!-- Left Icons -->
             <div class="flex items-center space-x-2">
-                <a href="https://play.google.com/store/apps/details?id=com.yurttaye.yurttaye" target="_blank" class="nav-link p-2 lg:px-4 lg:py-2" title="Google Play'den İndir">
+                <a href="https://play.google.com/store/apps/details?id=com.yurttaye.yurttaye" target="_blank" class="nav-link p-2 lg:px-4 lg:py-2" title="@SharedLocalizer["DownloadOnGooglePlay"]">
                     <i class="fab fa-google-play text-xl"></i>
-                    <span class="hidden lg:inline ml-2 font-semibold">Google Play</span>
+                    <span class="hidden lg:inline ml-2 font-semibold">@SharedLocalizer["DownloadOnGooglePlay"]</span>
                 </a>
-                <a href="#" class="nav-link p-2 lg:px-4 lg:py-2" title="Dil Değiştir">
-                    <i class="fas fa-language text-xl"></i>
-                    <span class="hidden lg:inline ml-2 font-semibold">Dil Değiştir</span>
-                </a>
+                <form asp-controller="Home" asp-action="SetLanguage" method="post" class="inline">
+                    <input type="hidden" name="culture" value="@(isTr ? "en" : "tr")" />
+                    <input type="hidden" name="returnUrl" value="@Context.Request.Path@Context.Request.QueryString" />
+                    <button type="submit" class="nav-link p-2 lg:px-4 lg:py-2" title="@SharedLocalizer["ChangeLanguage"]">
+                        <i class="fas fa-language text-xl"></i>
+                        <span class="hidden lg:inline ml-2 font-semibold">@SharedLocalizer["ChangeLanguage"]</span>
+                    </button>
+                </form>
             </div>
 
             <!-- Centered Brand (All screens) -->
@@ -31,25 +38,25 @@
 
             <!-- Right Icons -->
             <div class="flex items-center space-x-2">
-                <button x-on:click="darkMode = !darkMode; localStorage.setItem('darkMode', darkMode)" class="nav-action-icon p-2 lg:px-4 lg:py-2" aria-label="Tema değiştir">
+                <button x-on:click="darkMode = !darkMode; localStorage.setItem('darkMode', darkMode)" class="nav-action-icon p-2 lg:px-4 lg:py-2" aria-label="@SharedLocalizer["ToggleTheme"]">
                     <i x-show="!darkMode" class="fas fa-sun text-xl"></i>
-                    <span class="hidden lg:inline ml-2 font-semibold" x-show="!darkMode">Açık Tema</span>
+                    <span class="hidden lg:inline ml-2 font-semibold" x-show="!darkMode">@SharedLocalizer["LightMode"]</span>
                     <i x-show="darkMode" class="fas fa-moon text-xl"></i>
-                    <span class="hidden lg:inline ml-2 font-semibold" x-show="darkMode">Koyu Tema</span>
+                    <span class="hidden lg:inline ml-2 font-semibold" x-show="darkMode">@SharedLocalizer["DarkMode"]</span>
                 </button>
                 <div class="hidden lg:flex items-center">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <a class="nav-action-icon p-2 lg:px-4 lg:py-2" asp-controller="Account" asp-action="Logout" title="Çıkış">
+                        <a class="nav-action-icon p-2 lg:px-4 lg:py-2" asp-controller="Account" asp-action="Logout" title="@SharedLocalizer["Logout"]">
                             <i class="fas fa-sign-out-alt text-xl"></i>
-                            <span class="hidden lg:inline ml-2 font-semibold">Çıkış</span>
+                            <span class="hidden lg:inline ml-2 font-semibold">@SharedLocalizer["Logout"]</span>
                         </a>
                     }
                     else
                     {
-                        <a class="nav-action-icon p-2 lg:px-4 lg:py-2" asp-controller="Account" asp-action="Login" title="Giriş">
+                        <a class="nav-action-icon p-2 lg:px-4 lg:py-2" asp-controller="Account" asp-action="Login" title="@SharedLocalizer["Login"]">
                             <i class="fas fa-sign-in-alt text-xl"></i>
-                            <span class="hidden lg:inline ml-2 font-semibold">Giriş</span>
+                            <span class="hidden lg:inline ml-2 font-semibold">@SharedLocalizer["Login"]</span>
                         </a>
                     }
                 </div>
@@ -65,20 +72,28 @@
     <div x-show="navOpen" x-on:click.away="navOpen = false" class="lg:hidden border-t border-white/10" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-4">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
             <ul class="flex flex-col space-y-2">
-                <li><a class="nav-link !w-full !justify-start" asp-controller="Home" asp-action="Index"><i class="fas fa-home text-xl w-8 text-center mr-3"></i>Ana Sayfa</a></li>
-                <li><a class="nav-link !w-full !justify-start" href="https://play.google.com/store/apps/details?id=com.yurttaye.yurttaye" target="_blank"><i class="fab fa-google-play text-xl w-8 text-center mr-3"></i>Mobil Uygulama</a></li>
-                <li><a class="nav-link !w-full !justify-start" href="#"><i class="fas fa-language text-xl w-8 text-center mr-3"></i>Dil Değiştir</a></li>
+                <li><a class="nav-link !w-full !justify-start" asp-controller="Home" asp-action="Index"><i class="fas fa-home text-xl w-8 text-center mr-3"></i>@SharedLocalizer["HomePage"]</a></li>
+                <li><a class="nav-link !w-full !justify-start" href="https://play.google.com/store/apps/details?id=com.yurttaye.yurttaye" target="_blank"><i class="fab fa-google-play text-xl w-8 text-center mr-3"></i>@SharedLocalizer["DownloadOnGooglePlay"]</a></li>
+                <li>
+                    <form asp-controller="Home" asp-action="SetLanguage" method="post" class="w-full">
+                        <input type="hidden" name="culture" value="@(isTr ? "en" : "tr")" />
+                        <input type="hidden" name="returnUrl" value="@Context.Request.Path@Context.Request.QueryString" />
+                        <button type="submit" class="nav-link !w-full !justify-start">
+                            <i class="fas fa-language text-xl w-8 text-center mr-3"></i>@SharedLocalizer["ChangeLanguage"]
+                        </button>
+                    </form>
+                </li>
                 @if (User.IsInRole("Admin"))
                 {
-                    <li><a class="nav-link !w-full !justify-start" asp-area="Admin" asp-controller="AdminMenu" asp-action="Index"><i class="fas fa-user-shield text-xl w-8 text-center mr-3"></i>Yönetim</a></li>
+                    <li><a class="nav-link !w-full !justify-start" asp-area="Admin" asp-controller="AdminMenu" asp-action="Index"><i class="fas fa-user-shield text-xl w-8 text-center mr-3"></i>@SharedLocalizer["Management"]</a></li>
                 }
                 @if (User.Identity.IsAuthenticated)
                 {
-                    <li><a class="nav-link !w-full !justify-start" asp-controller="Account" asp-action="Logout"><i class="fas fa-sign-out-alt text-xl w-8 text-center mr-3"></i>Çıkış</a></li>
+                    <li><a class="nav-link !w-full !justify-start" asp-controller="Account" asp-action="Logout"><i class="fas fa-sign-out-alt text-xl w-8 text-center mr-3"></i>@SharedLocalizer["Logout"]</a></li>
                 }
                 else
                 {
-                    <li><a class="nav-link !w-full !justify-start" asp-controller="Account" asp-action="Login"><i class="fas fa-sign-in-alt text-xl w-8 text-center mr-3"></i>Giriş</a></li>
+                    <li><a class="nav-link !w-full !justify-start" asp-controller="Account" asp-action="Login"><i class="fas fa-sign-in-alt text-xl w-8 text-center mr-3"></i>@SharedLocalizer["Login"]</a></li>
                 }
             </ul>
         </div>

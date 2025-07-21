@@ -39,4 +39,145 @@
   <data name="Contribute" xml:space="preserve">
     <value>Katkıda Bulun</value>
   </data>
+  <data name="ChangeLanguage" xml:space="preserve">
+    <value>Dil Değiştir</value>
+  </data>
+  <data name="LightMode" xml:space="preserve">
+    <value>Açık Tema</value>
+  </data>
+  <data name="DarkMode" xml:space="preserve">
+    <value>Koyu Tema</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Giriş</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Çıkış</value>
+  </data>
+  <data name="HomePage" xml:space="preserve">
+    <value>Ana Sayfa</value>
+  </data>
+  <data name="MobileApp" xml:space="preserve">
+    <value>Mobil Uygulama</value>
+  </data>
+  <data name="Management" xml:space="preserve">
+    <value>Yönetim</value>
+  </data>
+  <data name="ToggleTheme" xml:space="preserve">
+    <value>Tema değiştir</value>
+  </data>
+  <data name="QueryMenu" xml:space="preserve">
+    <value>Menü Sorgula</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>Şehir</value>
+  </data>
+  <data name="SelectCity" xml:space="preserve">
+    <value>Şehir Seçin</value>
+  </data>
+  <data name="Meal" xml:space="preserve">
+    <value>Öğün</value>
+  </data>
+  <data name="Breakfast" xml:space="preserve">
+    <value>Sabah</value>
+  </data>
+  <data name="BreakfastHours" xml:space="preserve">
+    <value>Başlangıç: 06:30 • Bitiş: 12:00</value>
+  </data>
+  <data name="Dinner" xml:space="preserve">
+    <value>Akşam</value>
+  </data>
+  <data name="DinnerHours" xml:space="preserve">
+    <value>Başlangıç: 16:00 • Bitiş: 23:00</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Hata</value>
+  </data>
+  <data name="BreakfastMenu" xml:space="preserve">
+    <value>Sabah Kahvaltısı</value>
+  </data>
+  <data name="DinnerMenu" xml:space="preserve">
+    <value>Akşam Yemeği</value>
+  </data>
+  <data name="ImportantInfo" xml:space="preserve">
+    <value>Önemli Bilgilendirme</value>
+  </data>
+  <data name="InfoNote" xml:space="preserve">
+    <value>Bu platformda sunulan menü bilgileri, yurt yönetimleri tarafından sağlanan veya kullanıcılar tarafından yapılan katkılara dayanmaktadır. Menüler; yurda, tarihe veya öğün saatine göre farklılık gösterebilir ve verilerde zaman zaman yanlışlıklar olabilir. Uygulamamız, gösterilen bilgilerin doğruluğunu garanti etmez ve bu verilerden kaynaklanabilecek herhangi bir sorumluluk kabul etmez.</value>
+  </data>
+  <data name="MetaDescription" xml:space="preserve">
+    <value>KYK Yurt Yemek Menüsü sorgulama ve yönetim sistemi.</value>
+  </data>
+  <data name="MetaOgDescription" xml:space="preserve">
+    <value>KYK yemek menülerini sorgulayın, yönetin.</value>
+  </data>
+  <data name="AppInYourPocket" xml:space="preserve">
+    <value>Yemek Menüsü Artık Cebinde!</value>
+  </data>
+  <data name="AppBannerSubtitle" xml:space="preserve">
+    <value>Anlık bildirimler ve daha fazlası için uygulamayı indirin.</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>İndir</value>
+  </data>
+  <data name="AppDetailDescription" xml:space="preserve">
+    <value>YurttaYe mobil uygulamasını indir, anlık bildirimlerle yeni menülerden ilk sen haberdar ol. Favori yemeklerini takip et, pratik arayüzün keyfini çıkar!</value>
+  </data>
+  <data name="GooglePlay" xml:space="preserve">
+    <value>Google Play</value>
+  </data>
+  <data name="TryTestVersion" xml:space="preserve">
+    <value>Test Sürümünü Dene</value>
+  </data>
+  <data name="FooterAboutText" xml:space="preserve">
+    <value>YurttaYe, KYK yurtlarında sunulan yemek menülerini kolayca keşfetmenizi sağlayan açık kaynak kodlu bir projedir.</value>
+  </data>
+  <data name="QuickLinks" xml:space="preserve">
+    <value>Hızlı Bağlantılar</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>Hakkında</value>
+  </data>
+  <data name="Contact" xml:space="preserve">
+    <value>İletişim</value>
+  </data>
+  <data name="Corporate" xml:space="preserve">
+    <value>Kurumsal</value>
+  </data>
+  <data name="Feedback" xml:space="preserve">
+    <value>Geri Bildirim</value>
+  </data>
+  <data name="OurAccounts" xml:space="preserve">
+    <value>Hesaplarımız</value>
+  </data>
+  <data name="GitHub" xml:space="preserve">
+    <value>GitHub</value>
+  </data>
+  <data name="LinkedIn" xml:space="preserve">
+    <value>LinkedIn</value>
+  </data>
+  <data name="TwitterX" xml:space="preserve">
+    <value>Twitter/X</value>
+  </data>
+  <data name="DevelopedBy" xml:space="preserve">
+    <value>tarafından geliştirilmiştir.</value>
+  </data>
+  <data name="TotalEnergy" xml:space="preserve">
+    <value>Toplam Enerji</value>
+  </data>
+  <data name="MenuNotPublished" xml:space="preserve">
+    <value>Menü Henüz Yayınlanmadı</value>
+  </data>
+  <data name="MenuNotAvailable" xml:space="preserve">
+    <value>için bu öğünün menüsü henüz sisteme girilmemiş.</value>
+  </data>
+  <data name="DataContribution" xml:space="preserve">
+    <value>Veri Katkısı</value>
+  </data>
+  <data name="ContributionNeeded" xml:space="preserve">
+    <value>Bu menülerin doğruluğu ve güncelliği için sizin gibi kullanıcıların desteğine ihtiyacımız var. Elinizde bilgi varsa, bize ulaşarak menünün eklenmesine yardımcı olabilirsiniz.</value>
+  </data>
+  <data name="ContactUs" xml:space="preserve">
+    <value>Bize Ulaşın</value>
+  </data>
 </root> 

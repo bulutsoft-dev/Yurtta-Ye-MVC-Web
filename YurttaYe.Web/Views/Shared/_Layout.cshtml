@@ -1,12 +1,14 @@
+@using Microsoft.Extensions.Localization
+@using System.Globalization
 <!DOCTYPE html>
-<html lang="tr" x-data="{ darkMode: localStorage.getItem('darkMode') === 'true', navOpen: false }" x-bind:class="{ 'dark': darkMode }">
+<html lang="@CultureInfo.CurrentUICulture.Name" x-data="{ darkMode: localStorage.getItem('darkMode') === 'true', navOpen: false }" x-bind:class="{ 'dark': darkMode }">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="KYK Yurt Yemek Menüsü sorgulama ve yönetim sistemi." />
+    <meta name="description" content="@SharedLocalizer["MetaDescription"]" />
     <meta name="author" content="YurttaYe Ekibi" />
     <meta property="og:title" content="YurttaYe" />
-    <meta property="og:description" content="KYK yemek menülerini sorgulayın, yönetin." />
+    <meta property="og:description" content="@SharedLocalizer["MetaOgDescription"]" />
 
     <title>@ViewData["Title"] - YurttaYe</title>
     
@@ -310,13 +312,13 @@
         <div class="flex items-center gap-4">
             <img src="~/logo-yurttaye.png" alt="YurttaYe Mobil Uygulama" class="w-12 h-12 rounded-lg">
             <div>
-                <h3 class="font-bold text-primary">Yemek Menüsü Artık Cebinde!</h3>
-                <p class="text-xs text-secondary">Anlık bildirimler ve daha fazlası için uygulamayı indirin.</p>
+                <h3 class="font-bold text-primary">@SharedLocalizer["AppInYourPocket"]</h3>
+                <p class="text-xs text-secondary">@SharedLocalizer["AppBannerSubtitle"]</p>
             </div>
         </div>
         <div class="flex items-center gap-3">
             <a href="https://play.google.com/store/apps/details?id=com.yurttaye.yurttaye" target="_blank" class="btn btn-primary text-sm">
-                <i class="fab fa-google-play mr-2"></i> İndir
+                <i class="fab fa-google-play mr-2"></i> @SharedLocalizer["Download"]
             </a>
             <button x-on:click="show = false; localStorage.setItem('hideTopBannerTimestamp', Date.now())" class="text-secondary hover:text-primary transition-colors p-2 rounded-full hover:bg-secondary/20">
                 <i class="fas fa-times"></i>
@@ -346,16 +348,16 @@
             <img src="~/logo-yurttaye.png" alt="YurttaYe Mobil Uygulama" class="rounded-lg shadow-lg max-w-[180px] mx-auto">
         </div>
         <div>
-            <h2 class="text-xl font-bold text-primary mb-2">Yemek Menüsü Artık Cebinde!</h2>
+            <h2 class="text-xl font-bold text-primary mb-2">@SharedLocalizer["AppInYourPocket"]</h2>
             <p class="text-secondary mb-4 text-sm">
-                YurttaYe mobil uygulamasını indir, anlık bildirimlerle yeni menülerden ilk sen haberdar ol. Favori yemeklerini takip et, pratik arayüzün keyfini çıkar!
+                @SharedLocalizer["AppDetailDescription"]
             </p>
             <div class="flex flex-col sm:flex-row gap-3">
                 <a href="https://play.google.com/store/apps/details?id=com.yurttaye.yurttaye" target="_blank" class="btn btn-primary text-sm flex-1">
-                    <i class="fab fa-google-play mr-2"></i> Google Play
+                    <i class="fab fa-google-play mr-2"></i> @SharedLocalizer["GooglePlay"]
                 </a>
                 <a href="https://play.google.com/apps/testing/com.yurttaye.yurttaye" target="_blank" class="btn btn-outline text-sm flex-1">
-                    <i class="fas fa-vial mr-2"></i> Test Sürümünü Dene
+                    <i class="fas fa-vial mr-2"></i> @SharedLocalizer["TryTestVersion"]
                 </a>
             </div>
         </div>

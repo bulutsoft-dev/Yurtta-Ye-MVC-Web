@@ -1,8 +1,10 @@
 ﻿@model YurttaYe.Core.Models.ViewModels.MenuViewModel
 @using YurttaYe.Core.Models.ViewModels
+@using System.Globalization
 @{
-    ViewData["Title"] = "Menü Sorgula";
+    ViewData["Title"] = SharedLocalizer["QueryMenu"];
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var currentCulture = Thread.CurrentThread.CurrentUICulture;
 }
 
 <div class="min-h-screen">
@@ -13,21 +15,20 @@
         <div class="space-y-4">
             @{
                 var selectedDate = Model.Date;
-                var culture = new System.Globalization.CultureInfo("tr-TR");
                 var firstDayOfMonth = new DateTime(selectedDate.Year, selectedDate.Month, 1);
                 var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
                 var datesToShow = Enumerable.Range(0, lastDayOfMonth.Day)
                     .Select(i => firstDayOfMonth.AddDays(i))
                     .ToList();
             }
-            <form asp-action="Index" method="post" class="space-y-4" id="menuForm" data-meal-theme="@(Model.MealType == "Kahvaltı" ? "morning" : "evening")">
+            <form asp-action="Index" method="post" class="space-y-4" id="menuForm" data-meal-theme="@(Model.MealType == SharedLocalizer["Breakfast"] ? "morning" : "evening")">
                 <!-- City Selection -->
                 <div>
                     <div x-data="{ open: false }" class="relative">
-                        <label for="city-button" class="block text-sm font-medium text-primary mb-2">Şehir</label>
+                        <label for="city-button" class="block text-sm font-medium text-primary mb-2">@SharedLocalizer["City"]</label>
                         <button type="button" @@click="open = !open" class="relative block w-full text-left rounded-lg border border-border focus:border-accent focus:ring-accent py-3 px-4 bg-secondary text-primary">
                             <span>
-                                @(Model.Cities.FirstOrDefault(c => c.Value == Model.CityId.ToString())?.Text ?? "Şehir Seçin")
+                                @(Model.Cities.FirstOrDefault(c => c.Value == Model.CityId.ToString())?.Text ?? SharedLocalizer["SelectCity"])
                             </span>
                             <i class="fas fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-primary opacity-75"></i>
                         </button>
@@ -58,8 +59,8 @@
                                 <i class="fas fa-chevron-left text-sm"></i>
                             </button>
                             <div class="text-center cursor-pointer" id="date-display-trigger">
-                                <p class="text-sm text-secondary">@culture.TextInfo.ToTitleCase(culture.DateTimeFormat.GetDayName(selectedDate.DayOfWeek))</p>
-                                <p class="text-xl font-bold text-primary">@selectedDate.ToString("d MMMM yyyy", culture)</p>
+                                <p class="text-sm text-secondary">@currentCulture.TextInfo.ToTitleCase(currentCulture.DateTimeFormat.GetDayName(selectedDate.DayOfWeek))</p>
+                                <p class="text-xl font-bold text-primary">@selectedDate.ToString("d MMMM yyyy", currentCulture)</p>
                             </div>
                             <button type="button" id="nextDateBtn" class="p-2 w-10 h-10 rounded-md bg-card border border-border text-primary hover:bg-secondary transition-colors">
                                 <i class="fas fa-chevron-right text-sm"></i>
@@ -69,7 +70,7 @@
                             @foreach (var date in datesToShow)
                             {
                                 bool isSelected = date.Date == selectedDate.Date;
-                                var dayAbbr = culture.DateTimeFormat.GetAbbreviatedDayName(date.DayOfWeek).ToUpper();
+                                var dayAbbr = currentCulture.DateTimeFormat.GetAbbreviatedDayName(date.DayOfWeek).ToUpper();
                                 <button type="button" class="date-strip-item flex-shrink-0 w-14 h-16 rounded-lg flex flex-col items-center justify-center transition-colors @(isSelected ? "selected shadow" : "")" data-date="@date.ToString("yyyy-MM-dd")">
                                     <span class="text-xs font-semibold opacity-75">@dayAbbr</span>
                                     <span class="text-lg font-bold">@date.Day</span>
@@ -81,19 +82,19 @@
 
                 <!-- Hidden Inputs -->
                 <input type="hidden" asp-for="Date" id="Date" value="@Model.Date.ToString("yyyy-MM-dd")"/>
-                <input type="hidden" asp-for="MealType" id="MealType" value="@(Model.MealType ?? "Kahvaltı")"/>
+                <input type="hidden" asp-for="MealType" id="MealType" value="@(Model.MealType ?? SharedLocalizer["Breakfast"])" />
 
                 <!-- Meal Type Toggle -->
                 <div>
-                    <label class="block text-sm font-medium text-primary mb-2">Öğün</label>
+                    <label class="block text-sm font-medium text-primary mb-2">@SharedLocalizer["Meal"]</label>
                     <div class="grid grid-cols-2 gap-4">
-                        <button type="button" id="breakfastBtn" class="btn meal-type-btn w-full flex flex-col items-center justify-center" data-meal-type="Kahvaltı">
-                            <span class="block font-semibold">Sabah</span>
-                            <span class="block text-xs meal-subtitle mt-1">Başlangıç: 06:30 • Bitiş: 12:00</span>
+                        <button type="button" id="breakfastBtn" class="btn meal-type-btn w-full flex flex-col items-center justify-center" data-meal-type="@SharedLocalizer["Breakfast"]">
+                            <span class="block font-semibold">@SharedLocalizer["Breakfast"]</span>
+                            <span class="block text-xs meal-subtitle mt-1">@SharedLocalizer["BreakfastHours"]</span>
                         </button>
-                        <button type="button" id="dinnerBtn" class="btn meal-type-btn w-full flex flex-col items-center justify-center" data-meal-type="Akşam Yemeği">
-                            <span class="block font-semibold">Akşam</span>
-                            <span class="block text-xs meal-subtitle mt-1">Başlangıç: 16:00 • Bitiş: 23:00</span>
+                        <button type="button" id="dinnerBtn" class="btn meal-type-btn w-full flex flex-col items-center justify-center" data-meal-type="@SharedLocalizer["DinnerMenu"]">
+                            <span class="block font-semibold">@SharedLocalizer["Dinner"]</span>
+                            <span class="block text-xs meal-subtitle mt-1">@SharedLocalizer["DinnerHours"]</span>
                         </button>
                     </div>
                 </div>
@@ -105,7 +106,7 @@
         {
             <div class="bg-error-bg border-l-4 border-error-border text-error-text p-4 rounded-lg mb-8" role="alert" id="errorAlert">
                 <div class="flex justify-between items-center">
-                    <span><strong>Hata:</strong> @Model.ErrorMessage</span>
+                    <span><strong>@SharedLocalizer["Error"]:</strong> @Model.ErrorMessage</span>
                     <button onclick="this.parentElement.parentElement.remove()" class="text-error-text hover:opacity-75">
                         <i class="fas fa-times"></i>
                     </button>
@@ -121,20 +122,20 @@
                 {
                     var breakfastModel = new MenuCardViewModel {
                         Menu = Model.BreakfastMenu,
-                        Title = "Sabah Kahvaltısı",
+                        Title = SharedLocalizer["BreakfastMenu"],
                         IconClass = "fas fa-mug-hot",
                         GradientStart = "#FF8A65",
                         GradientEnd = "#FFCC02",
                         CategoryColor = "#FF8A65",
-                        DateText = Model.Date.ToString("dd MMMM yyyy, dddd", new System.Globalization.CultureInfo("tr-TR")) + " - " + Model.Cities.FirstOrDefault(c => c.Value == Model.CityId.ToString())?.Text
+                        DateText = Model.Date.ToString("dd MMMM yyyy, dddd", currentCulture) + " - " + Model.Cities.FirstOrDefault(c => c.Value == Model.CityId.ToString())?.Text
                     };
                     <partial name="_MenuCard" model="breakfastModel" />
                 }
                 else
                 {
                     var noMenuModel = new NoMenuCardViewModel {
-                        MealLabel = "Sabah Kahvaltısı",
-                        DateText = Model.Date.ToString("dd MMMM yyyy, dddd", new System.Globalization.CultureInfo("tr-TR"))
+                        MealLabel = SharedLocalizer["BreakfastMenu"],
+                        DateText = Model.Date.ToString("dd MMMM yyyy, dddd", currentCulture)
                     };
                     <partial name="_NoMenuCard" model="noMenuModel" />
                 }
@@ -146,20 +147,20 @@
                 {
                     var dinnerModel = new MenuCardViewModel {
                         Menu = Model.DinnerMenu,
-                        Title = "Akşam Yemeği",
+                        Title = SharedLocalizer["DinnerMenu"],
                         IconClass = "fas fa-utensils",
                         GradientStart = "#1E3A8A",
                         GradientEnd = "#3B82F6",
                         CategoryColor = "#1E3A8A",
-                        DateText = Model.Date.ToString("dd MMMM yyyy, dddd", new System.Globalization.CultureInfo("tr-TR")) + " - " + Model.Cities.FirstOrDefault(c => c.Value == Model.CityId.ToString())?.Text
+                        DateText = Model.Date.ToString("dd MMMM yyyy, dddd", currentCulture) + " - " + Model.Cities.FirstOrDefault(c => c.Value == Model.CityId.ToString())?.Text
                     };
                     <partial name="_MenuCard" model="dinnerModel" />
                 }
                 else
                 {
                     var noMenuModel = new NoMenuCardViewModel {
-                        MealLabel = "Akşam Yemeği",
-                        DateText = Model.Date.ToString("dd MMMM yyyy, dddd", new System.Globalization.CultureInfo("tr-TR"))
+                        MealLabel = SharedLocalizer["DinnerMenu"],
+                        DateText = Model.Date.ToString("dd MMMM yyyy, dddd", currentCulture)
                     };
                     <partial name="_NoMenuCard" model="noMenuModel" />
                 }
@@ -172,9 +173,9 @@
                 <i class="fas fa-info-circle text-accent"></i>
             </div>
             <div>
-                <h4 class="font-semibold text-primary">Önemli Bilgilendirme</h4>
+                <h4 class="font-semibold text-primary">@SharedLocalizer["ImportantInfo"]</h4>
                 <p class="text-secondary text-sm mt-1">
-                    Bu platformda sunulan menü bilgileri, yurt yönetimleri tarafından sağlanan veya kullanıcılar tarafından yapılan katkılara dayanmaktadır. Menüler; yurda, tarihe veya öğün saatine göre farklılık gösterebilir ve verilerde zaman zaman yanlışlıklar olabilir. Uygulamamız, gösterilen bilgilerin doğruluğunu garanti etmez ve bu verilerden kaynaklanabilecek herhangi bir sorumluluk kabul etmez.
+                    @SharedLocalizer["InfoNote"]
                 </p>
             </div>
         </div>
@@ -191,6 +192,14 @@
         document.addEventListener('DOMContentLoaded', function () {
             const form = document.getElementById("menuForm");
             const dateInput = document.getElementById("Date");
+            const mealTypeInput = document.getElementById("MealType");
+            const breakfastBtn = document.getElementById("breakfastBtn");
+            const dinnerBtn = document.getElementById("dinnerBtn");
+            const formContainer = document.getElementById('menuForm');
+
+            // Constants for meal types from Razor
+            const breakfastType = "@SharedLocalizer["Breakfast"]";
+            const dinnerType = "@SharedLocalizer["DinnerMenu"]"; // Corresponds to Akşam Yemeği
 
             // Scroll selected date into view
             const selectedDateElement = document.querySelector('.date-strip-item.selected');
@@ -213,8 +222,6 @@
                 form.submit();
             }
 
-            // FLATPICKR KALDIRILDI: Artık takvim açılmayacak
-
             document.getElementById('prevDateBtn').addEventListener('click', function() {
                 const currentDate = new Date(dateInput.value);
                 currentDate.setDate(currentDate.getDate() - 1);
@@ -227,7 +234,6 @@
                 submitWithDate(currentDate.toISOString().split('T')[0]);
             });
 
-            // Drag to scroll for date strip
             const dateStrip = document.querySelector('.hide-scrollbar');
             let isDragging = false; 
 
@@ -269,15 +275,11 @@
                 });
             }
 
-            const mealTypeInput = document.getElementById("MealType");
-            const mealTypeButtons = document.querySelectorAll('.meal-type-btn');
-            const formContainer = document.getElementById('menuForm');
-
             function updateButtonStyles() {
                 const currentMealType = mealTypeInput.value;
-                formContainer.dataset.mealTheme = currentMealType === 'Kahvaltı' ? 'morning' : 'evening';
+                formContainer.dataset.mealTheme = currentMealType === breakfastType ? 'morning' : 'evening';
                 
-                mealTypeButtons.forEach(btn => {
+                [breakfastBtn, dinnerBtn].forEach(btn => {
                     btn.classList.remove('btn-primary', 'btn-outline');
                     if (btn.dataset.mealType === currentMealType) {
                         btn.classList.add('btn-primary');
@@ -287,7 +289,7 @@
                 });
             }
 
-            mealTypeButtons.forEach(button => {
+            [breakfastBtn, dinnerBtn].forEach(button => {
                 button.addEventListener('click', function() {
                     mealTypeInput.value = this.dataset.mealType;
                     updateButtonStyles();
@@ -299,7 +301,6 @@
                 form.submit();
             });
 
-            // Initial button styles
             updateButtonStyles();
         });
     </script>

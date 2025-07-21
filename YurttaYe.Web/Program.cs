@@ -91,13 +91,15 @@ app.UseMiddleware<ExceptionMiddleware>();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
-app.UseCors("AllowFlutter");
-app.UseAuthentication();
-app.UseAuthorization();
 
 // Enable localization middleware
 var locOptions = app.Services.GetService<IOptions<RequestLocalizationOptions>>();
 app.UseRequestLocalization(locOptions.Value);
+
+app.UseCors("AllowFlutter");
+app.UseAuthentication();
+app.UseAuthorization();
+
 
 // 9. Route tanımları
 app.MapControllerRoute(

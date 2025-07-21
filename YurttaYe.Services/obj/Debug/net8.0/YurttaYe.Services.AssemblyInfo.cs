@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("YurttaYe.Services")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c8c567f081b0bc182dcf610d5b35629b026a0556")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b75cce3fd7fb84834319bfc4c1ea2d62f5200b59")]
 [assembly: System.Reflection.AssemblyProductAttribute("YurttaYe.Services")]
 [assembly: System.Reflection.AssemblyTitleAttribute("YurttaYe.Services")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
