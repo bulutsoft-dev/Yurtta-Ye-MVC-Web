@@ -70,7 +70,7 @@ namespace YurttaYe.Web.Controllers.Web
                 MealType = mealType,
                 Date = DateTime.Today
             };
-
+            
             // Fetch menu data if CityId is valid
             if (model.CityId > 0)
             {
@@ -116,13 +116,18 @@ namespace YurttaYe.Web.Controllers.Web
                 }
             }
             
-            ViewData["TimeOfDayTheme"] = GetTimeOfDayTheme();
+            ViewData["TimeOfDayTheme"] = GetTimeOfDayTheme(model.MealType);
 
             return View(model);
         }
 
-        private string GetTimeOfDayTheme()
+        private string GetTimeOfDayTheme(string mealType = null)
         {
+            if (!string.IsNullOrEmpty(mealType))
+            {
+                return mealType == "Kahvaltı" ? "morning" : "evening";
+            }
+
             var now = DateTime.Now.Hour;
             if (now >= 5 && now < 12) return "morning";
             return "evening";
