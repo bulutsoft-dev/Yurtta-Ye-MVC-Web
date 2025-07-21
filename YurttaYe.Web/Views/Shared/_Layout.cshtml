@@ -128,6 +128,39 @@
             background-color: var(--accent);
             color: var(--white);
         }
+
+        /* Navbar Styles */
+        .navbar {
+            background-color: var(--kyk-primary);
+            color: var(--white);
+        }
+        .dark .navbar {
+            background-color: var(--kyk-primary);
+        }
+        .navbar .nav-link, .navbar .nav-action-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            color: var(--white);
+            background-color: rgba(255, 255, 255, 0.1);
+            transition: background-color 0.2s ease;
+        }
+        .navbar .nav-link:hover, .navbar .nav-action-icon:hover {
+            background-color: var(--kyk-secondary);
+        }
+        .navbar .brand {
+            font-family: 'Poppins', sans-serif;
+            color: var(--white);
+            font-weight: 700;
+            font-size: 1.75rem;
+            transition: color 0.2s ease;
+        }
+        .navbar .brand:hover {
+            color: var(--kyk-accent);
+        }
     </style>
 </head>
 <body class="antialiased">
