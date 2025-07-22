@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Localization;
 using YurttaYe.Core.Models.Entities;
 using YurttaYe.Core.Models.ViewModels;
 
@@ -12,11 +13,13 @@ namespace YurttaYe.Web.Controllers.Web
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly IStringLocalizer<AccountController> _localizer;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IStringLocalizer<AccountController> localizer)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _localizer = localizer;
         }
 
         [HttpGet]
@@ -44,7 +47,7 @@ namespace YurttaYe.Web.Controllers.Web
                 }
             }
 
-            ViewBag.Error = "Geçersiz kullanıcı adı veya şifre.";
+            ViewBag.Error = _localizer["InvalidLoginAttempt"];
             return View(model);
         }
 

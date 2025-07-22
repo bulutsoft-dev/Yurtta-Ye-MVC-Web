@@ -1,6 +1,8 @@
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer localizer
 @model YurttaYe.Core.Models.ViewModels.LoginViewModel
 @{
-    ViewData["Title"] = "Giriş Yap";
+    ViewData["Title"] = localizer["Title"];
     Layout = "~/Views/Shared/_LoginLayout.cshtml";
 }
 
@@ -12,10 +14,10 @@
                 <img src="~/logo-yurttaye.png" alt="YurttaYe Logo" class="h-16 w-16 object-contain" />
             </div>
             <h2 class="mt-6 text-center text-3xl font-extrabold text-white">
-                YurttaYe Admin Paneli
+                @localizer["Header"]
             </h2>
             <p class="mt-2 text-center text-sm text-gray-200">
-                Güvenli giriş yapın
+                @localizer["SubHeader"]
             </p>
         </div>
 
@@ -55,13 +57,13 @@
                 <div class="relative">
                     <label for="Username" class="block text-sm font-medium text-login-primary mb-2">
                         <i class="fas fa-user mr-2"></i>
-                        Kullanıcı Adı
+                        @localizer["UsernameLabel"]
                     </label>
                     <input asp-for="Username" 
                            type="text" 
                            required 
                            class="login-input w-full px-4 py-3 pl-12 rounded-lg text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                           placeholder="kullanici.adi"
+                           placeholder="@localizer["UsernamePlaceholder"]"
                            x-model="username"
                            x-on:input="validateUsername()">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none mt-8">
@@ -74,13 +76,13 @@
                 <div class="relative" x-data="{ showPassword: false }">
                     <label for="Password" class="block text-sm font-medium text-login-primary mb-2">
                         <i class="fas fa-lock mr-2"></i>
-                        Şifre
+                        @localizer["PasswordLabel"]
                     </label>
                     <input asp-for="Password" 
                            x-bind:type="showPassword ? 'text' : 'password'"
                            required 
                            class="login-input w-full px-4 py-3 pl-12 pr-12 rounded-lg text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                           placeholder="••••••••"
+                           placeholder="@localizer["PasswordPlaceholder"]"
                            x-model="password"
                            x-on:input="validatePassword()">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none mt-8">
@@ -102,12 +104,12 @@
                                type="checkbox" 
                                class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
                         <label for="remember_me" class="ml-2 block text-sm text-login-secondary">
-                            Beni hatırla
+                            @localizer["RememberMe"]
                         </label>
                     </div>
                     <div class="text-sm">
                         <a href="#" class="font-medium text-blue-600 hover:text-blue-500 transition-colors duration-200">
-                            Şifremi unuttum?
+                            @localizer["ForgotPassword"]
                         </a>
                     </div>
                 </div>
@@ -120,11 +122,11 @@
                             x-on:click="submitForm()">
                         <span x-show="!isLoading" class="flex items-center">
                             <i class="fas fa-sign-in-alt mr-2"></i>
-                            Giriş Yap
+                            @localizer["LoginButton"]
                         </span>
                         <span x-show="isLoading" class="flex items-center" style="display: none;">
                             <i class="fas fa-spinner loading-spinner mr-2"></i>
-                            Giriş yapılıyor...
+                            @localizer["LoggingInButton"]
                         </span>
                     </button>
                 </div>
@@ -135,7 +137,7 @@
                         <div class="w-full border-t border-gray-300"></div>
                     </div>
                     <div class="relative flex justify-center text-sm">
-                        <span class="px-2 bg-white text-gray-500">veya</span>
+                        <span class="px-2 bg-white text-gray-500">@localizer["Or"]</span>
                     </div>
                 </div>
 
@@ -145,7 +147,7 @@
                             class="w-full flex justify-center py-3 px-4 border-2 border-dashed border-gray-300 text-sm font-medium rounded-lg text-gray-700 bg-gray-50 hover:bg-gray-100 transition-colors duration-200"
                             x-on:click="fillDemoCredentials()">
                         <i class="fas fa-user-cog mr-2"></i>
-                        Demo Hesabı ile Giriş
+                        @localizer["DemoLoginButton"]
                     </button>
                 </div>
             </form>
@@ -154,14 +156,14 @@
         <!-- Footer -->
         <div class="text-center">
             <p class="text-xs text-gray-300">
-                © 2025 YurttaYe. Tüm hakları saklıdır.
+                @localizer["Copyright"]
             </p>
             <div class="mt-2 flex justify-center space-x-4 text-xs text-gray-400">
-                <a href="#" class="hover:text-white transition-colors duration-200">Gizlilik Politikası</a>
+                <a href="#" class="hover:text-white transition-colors duration-200">@localizer["PrivacyPolicy"]</a>
                 <span>•</span>
-                <a href="#" class="hover:text-white transition-colors duration-200">Kullanım Şartları</a>
+                <a href="#" class="hover:text-white transition-colors duration-200">@localizer["TermsOfUse"]</a>
                 <span>•</span>
-                <a href="#" class="hover:text-white transition-colors duration-200">Destek</a>
+                <a href="#" class="hover:text-white transition-colors duration-200">@localizer["Support"]</a>
             </div>
         </div>
     </div>
