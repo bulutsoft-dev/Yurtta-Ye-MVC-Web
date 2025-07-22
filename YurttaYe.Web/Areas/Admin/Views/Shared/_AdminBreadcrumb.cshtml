@@ -1,0 +1,140 @@
+<!-- Admin Breadcrumb Navigation -->
+<nav class="flex mb-6 px-6" aria-label="Breadcrumb">
+    <ol class="inline-flex items-center space-x-1 md:space-x-3">
+        <!-- Home/Dashboard Link -->
+        <li class="inline-flex items-center">
+            <a asp-area="Admin" asp-controller="Home" asp-action="Index" 
+               class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-admin-primary transition-colors">
+                <i class="fas fa-home mr-2 text-gray-400"></i>
+                Dashboard
+            </a>
+        </li>
+        
+        <!-- Dynamic Breadcrumb Items -->
+        @if (ViewData["BreadcrumbItems"] != null)
+        {
+            @foreach (var item in (List<dynamic>)ViewData["BreadcrumbItems"])
+            {
+                <li>
+                    <div class="flex items-center">
+                        <i class="fas fa-chevron-right text-gray-400 mx-2 text-xs"></i>
+                        @if (item.Url != null)
+                        {
+                            <a href="@item.Url" class="text-sm font-medium text-gray-700 hover:text-admin-primary transition-colors">
+                                @if (item.Icon != null)
+                                {
+                                    <i class="@item.Icon mr-1"></i>
+                                }
+                                @item.Text
+                            </a>
+                        }
+                        else
+                        {
+                            <span class="text-sm font-medium text-gray-500">
+                                @if (item.Icon != null)
+                                {
+                                    <i class="@item.Icon mr-1"></i>
+                                }
+                                @item.Text
+                            </span>
+                        }
+                    </div>
+                </li>
+            }
+        }
+        else if (ViewData["Breadcrumb"] != null)
+        {
+            <!-- Simple Breadcrumb -->
+            <li>
+                <div class="flex items-center">
+                    <i class="fas fa-chevron-right text-gray-400 mx-2 text-xs"></i>
+                    <span class="text-sm font-medium text-gray-500">@ViewData["Breadcrumb"]</span>
+                </div>
+            </li>
+        }
+    </ol>
+    
+    <!-- Page Actions (Right Side) -->
+    @if (ViewData["PageActions"] != null)
+    {
+        <div class="ml-auto flex items-center space-x-2">
+            @foreach (var action in (List<dynamic>)ViewData["PageActions"])
+            {
+                @if (action.Type == "button")
+                {
+                    <button type="button" 
+                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-@(action.Color ?? "admin-primary") hover:bg-@(action.HoverColor ?? "admin-secondary") focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-@(action.Color ?? "admin-primary") transition-colors"
+                            onclick="@action.OnClick">
+                        @if (action.Icon != null)
+                        {
+                            <i class="@action.Icon mr-1"></i>
+                        }
+                        @action.Text
+                    </button>
+                }
+                else if (action.Type == "link")
+                {
+                    <a href="@action.Url" 
+                       class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-@(action.Color ?? "admin-primary") hover:bg-@(action.HoverColor ?? "admin-secondary") focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-@(action.Color ?? "admin-primary") transition-colors">
+                        @if (action.Icon != null)
+                        {
+                            <i class="@action.Icon mr-1"></i>
+                        }
+                        @action.Text
+                    </a>
+                }
+                else if (action.Type == "dropdown")
+                {
+                    <div class="relative inline-block text-left">
+                        <button type="button" 
+                                class="inline-flex items-center px-3 py-2 border border-gray-300 text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-admin-primary transition-colors"
+                                onclick="toggleDropdown('@action.Id')">
+                            @if (action.Icon != null)
+                            {
+                                <i class="@action.Icon mr-1"></i>
+                            }
+                            @action.Text
+                            <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                        </button>
+                        <div id="@action.Id" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200 z-10">
+                            @foreach (var dropdownItem in action.Items)
+                            {
+                                <a href="@dropdownItem.Url" 
+                                   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors">
+                                    @if (dropdownItem.Icon != null)
+                                    {
+                                        <i class="@dropdownItem.Icon mr-2"></i>
+                                    }
+                                    @dropdownItem.Text
+                                </a>
+                            }
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    }
+</nav>
+
+<script>
+    function toggleDropdown(id) {
+        const dropdown = document.getElementById(id);
+        dropdown.classList.toggle('hidden');
+        
+        // Close other dropdowns
+        document.querySelectorAll('[id$="dropdown"]').forEach(el => {
+            if (el.id !== id) {
+                el.classList.add('hidden');
+            }
+        });
+    }
+    
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function(event) {
+        if (!event.target.closest('[onclick*="toggleDropdown"]')) {
+            document.querySelectorAll('[id$="dropdown"]').forEach(el => {
+                el.classList.add('hidden');
+            });
+        }
+    });
+</script>

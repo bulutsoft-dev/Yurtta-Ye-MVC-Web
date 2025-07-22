@@ -1,49 +1,148 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Admin Panel</title>
+    <title>@ViewData["Title"] - YurttaYe Admin Panel</title>
+    
+    <!-- Styles -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'admin-primary': '#1e40af',
+                        'admin-secondary': '#3b82f6',
+                        'admin-dark': '#1e293b',
+                        'admin-light': '#f8fafc'
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom Styles -->
+    <style>
+        .nav-link.active {
+            background-color: #1e40af !important;
+            color: white !important;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        @@keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .slide-in-right {
+            animation: slideInRight 0.3s ease-in-out;
+        }
+        
+        @@keyframes slideInRight {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+        
+        /* Admin Panel Custom Styles */
+        .admin-sidebar {
+            transition: all 0.3s ease-in-out;
+        }
+        
+        .admin-dropdown {
+            transition: all 0.2s ease-in-out;
+        }
+        
+        .admin-card {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        
+        .admin-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .nav-link {
+            transition: all 0.2s ease-in-out;
+        }
+        
+        .nav-link:hover {
+            background-color: #1e40af;
+            color: white;
+        }
+        
+        /* Loading animation */
+        .loading-spinner {
+            animation: spin 1s linear infinite;
+        }
+        
+        @@keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    </style>
 </head>
-<body class="bg-gray-100 font-sans leading-normal tracking-normal">
-    <div class="flex md:flex-row flex-col">
-        <!-- Sidebar -->
-        <div class="bg-gray-800 text-white w-full md:w-64 min-h-screen md:min-h-screen">
-            <div class="flex items-center justify-center h-20 border-b border-gray-700">
-                <h1 class="text-2xl font-bold">Admin Panel</h1>
-            </div>
-            <nav class="mt-10">
-                <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="flex items-center px-6 py-3 text-gray-300 hover:bg-gray-700 hover:text-white">
-                    <i class="fas fa-tachometer-alt w-6"></i>
-                    <span class="ml-4">Dashboard</span>
-                </a>
-                <a asp-area="Admin" asp-controller="AdminMenu" asp-action="Index" class="flex items-center px-6 py-3 mt-4 text-gray-300 hover:bg-gray-700 hover:text-white">
-                    <i class="fas fa-utensils w-6"></i>
-                    <span class="ml-4">Menus</span>
-                </a>
-                <a asp-area="Admin" asp-controller="AdminCity" asp-action="Index" class="flex items-center px-6 py-3 mt-4 text-gray-300 hover:bg-gray-700 hover:text-white">
-                    <i class="fas fa-city w-6"></i>
-                    <span class="ml-4">Cities</span>
-                </a>
-            </nav>
-        </div>
+<body class="bg-admin-light font-inter antialiased">
+    
+    <!-- Sidebar -->
+    @await Html.PartialAsync("_AdminSidebar")
 
-        <!-- Main Content -->
-        <div class="flex-1 flex flex-col overflow-hidden">
-            <header class="flex justify-between items-center p-6 bg-white border-b-2 border-gray-200">
-                <div class="flex items-center">
-                    <h2 class="text-2xl text-gray-800 font-semibold">@ViewData["Title"]</h2>
-                </div>
-            </header>
-            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200 p-6">
+    <!-- Mobile menu overlay -->
+    <div id="sidebar-overlay" class="fixed inset-0 z-30 bg-black bg-opacity-50 lg:hidden hidden"></div>
+
+    <!-- Main Content Wrapper -->
+    <div class="lg:ml-64 min-h-screen flex flex-col">
+        
+        <!-- Top Navigation -->
+        @await Html.PartialAsync("_AdminNavbar")
+        
+        <!-- Breadcrumb Navigation -->
+        @await Html.PartialAsync("_AdminBreadcrumb")
+
+        <!-- Main Content Area -->
+        <main class="flex-1 px-6 pb-6">
+            <!-- Page Content Container -->
+            <div class="fade-in">
                 @RenderBody()
-            </main>
-        </div>
+            </div>
+        </main>
+        
+        <!-- Footer -->
+        <footer class="border-t border-gray-200 bg-white px-6 py-4">
+            <div class="flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+                <div class="flex items-center space-x-4">
+                    <p>&copy; @DateTime.Now.Year YurttaYe. Tüm hakları saklıdır.</p>
+                    <span class="hidden md:block">•</span>
+                    <p class="hidden md:block">Versiyon 1.0.0</p>
+                </div>
+                <div class="flex items-center space-x-4 mt-2 md:mt-0">
+                    <a href="#" class="hover:text-admin-primary transition-colors">Gizlilik</a>
+                    <span>•</span>
+                    <a href="#" class="hover:text-admin-primary transition-colors">Kullanım Şartları</a>
+                    <span>•</span>
+                    <a href="#" class="hover:text-admin-primary transition-colors">Destek</a>
+                </div>
+            </div>
+        </footer>
     </div>
 
+    <!-- Core Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Admin Panel Scripts -->
+    @await Html.PartialAsync("_AdminScripts")
+    
+    <!-- Page Specific Scripts -->
     @await RenderSectionAsync("Scripts", required: false)
+    
 </body>
-</html> 
+</html>

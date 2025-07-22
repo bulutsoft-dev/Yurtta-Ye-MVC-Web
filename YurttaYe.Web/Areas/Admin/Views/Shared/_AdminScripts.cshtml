@@ -1,0 +1,311 @@
+<!-- Admin JavaScript Functions -->
+<script>
+    // Global Admin Panel JavaScript Functions
+    class AdminPanel {
+        constructor() {
+            this.init();
+        }
+
+        init() {
+            this.setupMobileMenu();
+            this.setupDropdowns();
+            this.setupSearch();
+            this.setupNotifications();
+            this.setupActiveNavigation();
+            this.setupTooltips();
+        }
+
+        // Mobile Menu Toggle
+        setupMobileMenu() {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+
+            if (mobileMenuButton && sidebar) {
+                mobileMenuButton.addEventListener('click', () => {
+                    sidebar.classList.toggle('-translate-x-full');
+                    if (overlay) {
+                        overlay.classList.toggle('hidden');
+                    }
+                });
+            }
+
+            if (overlay) {
+                overlay.addEventListener('click', () => {
+                    sidebar.classList.add('-translate-x-full');
+                    overlay.classList.add('hidden');
+                });
+            }
+        }
+
+        // Dropdown Menus
+        setupDropdowns() {
+            // User Menu Dropdown
+            const userMenuButton = document.getElementById('user-menu-button');
+            const userDropdown = document.getElementById('user-dropdown');
+
+            if (userMenuButton && userDropdown) {
+                userMenuButton.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    userDropdown.classList.toggle('hidden');
+                    // Close other dropdowns
+                    this.closeOtherDropdowns(['user-dropdown']);
+                });
+            }
+
+            // Notifications Dropdown
+            const notificationsButton = document.getElementById('notifications-button');
+            const notificationsDropdown = document.getElementById('notifications-dropdown');
+
+            if (notificationsButton && notificationsDropdown) {
+                notificationsButton.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    notificationsDropdown.classList.toggle('hidden');
+                    // Close other dropdowns
+                    this.closeOtherDropdowns(['notifications-dropdown']);
+                });
+            }
+
+            // Close dropdowns when clicking outside
+            document.addEventListener('click', () => {
+                this.closeAllDropdowns();
+            });
+        }
+
+        closeOtherDropdowns(except = []) {
+            const dropdowns = ['user-dropdown', 'notifications-dropdown'];
+            dropdowns.forEach(id => {
+                if (!except.includes(id)) {
+                    const dropdown = document.getElementById(id);
+                    if (dropdown) {
+                        dropdown.classList.add('hidden');
+                    }
+                }
+            });
+        }
+
+        closeAllDropdowns() {
+            this.closeOtherDropdowns([]);
+        }
+
+        // Global Search Functionality
+        setupSearch() {
+            const searchInput = document.getElementById('global-search');
+            const searchResults = document.getElementById('search-results');
+
+            if (searchInput && searchResults) {
+                let searchTimeout;
+
+                searchInput.addEventListener('input', (e) => {
+                    clearTimeout(searchTimeout);
+                    const query = e.target.value.trim();
+
+                    if (query.length > 2) {
+                        searchTimeout = setTimeout(() => {
+                            this.performSearch(query, searchResults);
+                        }, 300);
+                    } else {
+                        searchResults.classList.add('hidden');
+                    }
+                });
+
+                // Close search results when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+                        searchResults.classList.add('hidden');
+                    }
+                });
+            }
+        }
+
+        async performSearch(query, resultsContainer) {
+            try {
+                // Show loading state
+                resultsContainer.innerHTML = `
+                    <div class="p-4 text-center">
+                        <i class="fas fa-spinner fa-spin text-gray-400"></i>
+                        <p class="text-sm text-gray-500 mt-2">Aranıyor...</p>
+                    </div>
+                `;
+                resultsContainer.classList.remove('hidden');
+
+                // Simulate API call (replace with actual search endpoint)
+                const response = await fetch(`/Admin/Search?q=${encodeURIComponent(query)}`);
+                const results = await response.json();
+
+                this.displaySearchResults(results, resultsContainer);
+            } catch (error) {
+                console.error('Search error:', error);
+                resultsContainer.innerHTML = `
+                    <div class="p-4 text-center">
+                        <i class="fas fa-exclamation-triangle text-red-400"></i>
+                        <p class="text-sm text-red-500 mt-2">Arama sırasında hata oluştu</p>
+                    </div>
+                `;
+            }
+        }
+
+        displaySearchResults(results, container) {
+            if (!results || results.length === 0) {
+                container.innerHTML = `
+                    <div class="p-4 text-center">
+                        <i class="fas fa-search text-gray-400"></i>
+                        <p class="text-sm text-gray-500 mt-2">Sonuç bulunamadı</p>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '';
+            results.forEach(result => {
+                html += `
+                    <a href="${result.url}" class="block px-4 py-3 hover:bg-gray-50 border-b border-gray-100 last:border-b-0">
+                        <div class="flex items-center space-x-3">
+                            <i class="${result.icon} text-gray-400"></i>
+                            <div class="flex-1">
+                                <p class="text-sm font-medium text-gray-900">${result.title}</p>
+                                <p class="text-xs text-gray-500">${result.description}</p>
+                            </div>
+                            <span class="text-xs text-gray-400 bg-gray-100 px-2 py-1 rounded">${result.type}</span>
+                        </div>
+                    </a>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        // Notifications
+        setupNotifications() {
+            // Mark notification as read when clicked
+            document.addEventListener('click', (e) => {
+                const notification = e.target.closest('[data-notification-id]');
+                if (notification) {
+                    this.markNotificationAsRead(notification.dataset.notificationId);
+                    notification.classList.add('opacity-50');
+                }
+            });
+        }
+
+        markNotificationAsRead(notificationId) {
+            // Send AJAX request to mark notification as read
+            fetch('/Admin/Notifications/MarkAsRead', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ id: notificationId })
+            }).catch(error => console.error('Error marking notification as read:', error));
+        }
+
+        // Active Navigation Highlighting
+        setupActiveNavigation() {
+            const currentPath = window.location.pathname.toLowerCase();
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            navLinks.forEach(link => {
+                const href = link.getAttribute('href');
+                if (href && currentPath.includes(href.toLowerCase())) {
+                    link.classList.add('bg-admin-primary', 'text-white');
+                    link.classList.remove('text-gray-300');
+                }
+            });
+        }
+
+        // Tooltips
+        setupTooltips() {
+            // Simple tooltip implementation
+            const tooltipElements = document.querySelectorAll('[data-tooltip]');
+            
+            tooltipElements.forEach(element => {
+                element.addEventListener('mouseenter', (e) => {
+                    this.showTooltip(e.target, e.target.dataset.tooltip);
+                });
+
+                element.addEventListener('mouseleave', () => {
+                    this.hideTooltip();
+                });
+            });
+        }
+
+        showTooltip(element, text) {
+            const tooltip = document.createElement('div');
+            tooltip.className = 'absolute z-50 px-2 py-1 text-xs text-white bg-gray-900 rounded shadow-lg pointer-events-none';
+            tooltip.textContent = text;
+            tooltip.id = 'admin-tooltip';
+
+            document.body.appendChild(tooltip);
+
+            const rect = element.getBoundingClientRect();
+            tooltip.style.top = `${rect.top - tooltip.offsetHeight - 5}px`;
+            tooltip.style.left = `${rect.left + (rect.width - tooltip.offsetWidth) / 2}px`;
+        }
+
+        hideTooltip() {
+            const tooltip = document.getElementById('admin-tooltip');
+            if (tooltip) {
+                tooltip.remove();
+            }
+        }
+
+        // Utility Functions
+        showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `fixed top-4 right-4 z-50 max-w-sm p-4 rounded-lg shadow-lg transition-all duration-300 transform translate-x-full`;
+            
+            const bgColor = {
+                'success': 'bg-green-500',
+                'error': 'bg-red-500',
+                'warning': 'bg-yellow-500',
+                'info': 'bg-blue-500'
+            };
+
+            notification.classList.add(bgColor[type] || bgColor.info);
+            notification.innerHTML = `
+                <div class="flex items-center space-x-3 text-white">
+                    <i class="fas fa-${type === 'success' ? 'check' : type === 'error' ? 'exclamation' : type === 'warning' ? 'exclamation-triangle' : 'info'}-circle"></i>
+                    <p class="text-sm font-medium">${message}</p>
+                    <button onclick="this.parentElement.parentElement.remove()" class="ml-auto">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `;
+
+            document.body.appendChild(notification);
+
+            // Animate in
+            setTimeout(() => {
+                notification.classList.remove('translate-x-full');
+            }, 100);
+
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                notification.classList.add('translate-x-full');
+                setTimeout(() => notification.remove(), 300);
+            }, 5000);
+        }
+
+        confirmDelete(message = 'Bu işlemi geri alamazsınız!') {
+            return confirm(`Bu öğeyi silmek istediğinizden emin misiniz?\n\n${message}`);
+        }
+    }
+
+    // Initialize Admin Panel when DOM is ready
+    document.addEventListener('DOMContentLoaded', () => {
+        window.adminPanel = new AdminPanel();
+    });
+
+    // Global utility functions
+    window.showAdminNotification = (message, type = 'info') => {
+        if (window.adminPanel) {
+            window.adminPanel.showNotification(message, type);
+        }
+    };
+
+    window.confirmAdminDelete = (message) => {
+        if (window.adminPanel) {
+            return window.adminPanel.confirmDelete(message);
+        }
+        return confirm('Silmek istediğinizden emin misiniz?');
+    };
+</script>
