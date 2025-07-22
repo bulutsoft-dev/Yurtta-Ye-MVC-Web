@@ -38,17 +38,6 @@ class MenuInterface {
     }
 
     submitWithDate(newDateStr) {
-        const newDate = new Date(newDateStr);
-        const today = new Date();
-        
-        newDate.setHours(0, 0, 0, 0);
-        today.setHours(0, 0, 0, 0);
-
-        if (newDate > today) {
-            alert('Gelecekteki tarihler seçilemez');
-            return;
-        }
-
         this.dateInput.value = newDateStr;
         this.form.submit();
     }
