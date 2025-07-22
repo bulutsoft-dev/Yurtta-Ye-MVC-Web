@@ -49,10 +49,10 @@
     <value>Koyu Tema</value>
   </data>
   <data name="Login" xml:space="preserve">
-    <value>Giriş</value>
+    <value>Giriş Yap</value>
   </data>
   <data name="Logout" xml:space="preserve">
-    <value>Çıkış</value>
+    <value>Çıkış Yap</value>
   </data>
   <data name="HomePage" xml:space="preserve">
     <value>Ana Sayfa</value>
@@ -63,8 +63,11 @@
   <data name="Management" xml:space="preserve">
     <value>Yönetim</value>
   </data>
+  <data name="ToggleMenu" xml:space="preserve">
+    <value>Menüyü aç/kapat</value>
+  </data>
   <data name="ToggleTheme" xml:space="preserve">
-    <value>Tema değiştir</value>
+    <value>Temayı değiştir</value>
   </data>
   <data name="QueryMenu" xml:space="preserve">
     <value>Menü Sorgula</value>

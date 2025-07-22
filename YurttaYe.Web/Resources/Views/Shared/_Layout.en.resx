@@ -63,6 +63,9 @@
   <data name="Management" xml:space="preserve">
     <value>Management</value>
   </data>
+  <data name="ToggleMenu" xml:space="preserve">
+    <value>Toggle menu</value>
+  </data>
   <data name="ToggleTheme" xml:space="preserve">
     <value>Toggle theme</value>
   </data>

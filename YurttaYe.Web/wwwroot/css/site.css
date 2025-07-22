@@ -230,3 +230,12 @@ body {
   background: #23272f !important;
   color: #fff !important;
 }
+
+/* Navbar link and action icon transitions to prevent layout shift */
+.nav-link, .nav-action-icon {
+    transition: all 0.3s ease-in-out;
+}
+
+.nav-link span, .nav-action-icon span {
+    transition: all 0.3s ease-in-out;
+}
