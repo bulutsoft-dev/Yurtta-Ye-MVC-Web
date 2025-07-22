@@ -123,27 +123,23 @@
                 
                 <!-- Right Section - Action Links -->
                 <div class="flex items-center space-x-6">
-                    <a href="#" class="text-sm text-gray-600 hover:text-blue-600 transition-colors flex items-center group">
-                        <i class="fas fa-shield-alt mr-2 group-hover:scale-110 transition-transform"></i>
-                        Gizlilik
+                    <a asp-controller="Home" asp-action="Index" asp-area="" 
+                       class="text-sm text-gray-600 hover:text-blue-600 transition-colors flex items-center group" 
+                       target="_blank">
+                        <i class="fas fa-home mr-2 group-hover:scale-110 transition-transform"></i>
+                        Ana Siteye Git
+                        <i class="fas fa-external-link-alt ml-1 text-xs"></i>
                     </a>
-                    <a href="#" class="text-sm text-gray-600 hover:text-blue-600 transition-colors flex items-center group">
-                        <i class="fas fa-file-contract mr-2 group-hover:scale-110 transition-transform"></i>
-                        Şartlar
-                    </a>
-                    <a href="#" class="text-sm text-gray-600 hover:text-blue-600 transition-colors flex items-center group">
-                        <i class="fas fa-life-ring mr-2 group-hover:scale-110 transition-transform"></i>
-                        Destek
-                    </a>
-                    <a href="#" class="text-sm text-gray-600 hover:text-blue-600 transition-colors flex items-center group">
-                        <i class="fas fa-question-circle mr-2 group-hover:scale-110 transition-transform"></i>
-                        Yardım
+                    <a href="/Account/Logout" 
+                       class="text-sm text-red-600 hover:text-red-700 transition-colors flex items-center group">
+                        <i class="fas fa-sign-out-alt mr-2 group-hover:scale-110 transition-transform"></i>
+                        Çıkış
                     </a>
                 </div>
             </div>
         </div>
     </div>
-    
     <!-- Performance Bar -->
     <div class="bg-gradient-to-r from-green-500 to-emerald-500 h-1"></div>
+
 </footer>
