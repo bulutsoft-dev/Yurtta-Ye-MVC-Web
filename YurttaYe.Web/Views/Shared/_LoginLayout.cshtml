@@ -1,6 +1,21 @@
 @using System.Globalization
 <!DOCTYPE html>
-<html lang="@CultureInfo.CurrentUICulture.Name" x-data="{ darkMode: localStorage.getItem('darkMode') === 'true' }" x-bind:class="{ 'dark': darkMode }">
+<html lang="@CultureInfo.CurrentUICulture.Name" x-data="{ 
+    darkMode: localStorage.getItem('darkMode') === 'true' || (!localStorage.getItem('darkMode') && window.matchMedia('(prefers-color-scheme: dark)').matches),
+    init() {
+        this.$watch('darkMode', value => {
+            if (value) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+        // Apply initial theme
+        if (this.darkMode) {
+            document.documentElement.classList.add('dark');
+        }
+    }
+}" x-bind:class="{ 'dark': darkMode }">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,6 +31,19 @@
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'poppins': ['Poppins', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
     <!-- Alpine.js for interactivity -->
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js" defer></script>
     <!-- Font Awesome for icons -->
@@ -35,7 +63,7 @@
         <!-- Language Switcher -->
         <div x-data="{ open: false }" class="relative">
             <button x-on:click="open = !open" 
-                    class="theme-toggle p-3 rounded-full transition-all duration-300 hover:scale-110" 
+                    class="bg-white/20 dark:bg-gray-800/30 backdrop-blur-md border border-white/30 dark:border-gray-700/50 text-white dark:text-gray-200 p-3 rounded-full transition-all duration-300 hover:scale-110 hover:bg-white/30 dark:hover:bg-gray-700/40" 
                     title="Dil Değiştir">
                 <i class="fas fa-globe text-lg"></i>
             </button>
@@ -47,13 +75,13 @@
                  x-transition:leave="transition ease-in duration-150"
                  x-transition:leave-start="opacity-100 transform scale-100"
                  x-transition:leave-end="opacity-0 transform scale-95"
-                 class="absolute right-0 mt-2 w-32 bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden"
+                 class="absolute right-0 mt-2 w-32 bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden border border-gray-200 dark:border-gray-700"
                  style="display: none;">
-                <a href="@Url.Action("SetLanguage", "Home", new { culture = "tr", returnUrl = Context.Request.Path + Context.Request.QueryString })" class="flex items-center px-4 py-3 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
+                <a href="@Url.Action("SetLanguage", "Home", new { culture = "tr", returnUrl = Context.Request.Path + Context.Request.QueryString })" class="flex items-center px-4 py-3 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200">
                     <img src="https://flagcdn.com/w20/tr.png" alt="Türkçe" class="w-5 h-5 mr-3 rounded-sm">
                     Türkçe
                 </a>
-                <a href="@Url.Action("SetLanguage", "Home", new { culture = "en", returnUrl = Context.Request.Path + Context.Request.QueryString })" class="flex items-center px-4 py-3 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
+                <a href="@Url.Action("SetLanguage", "Home", new { culture = "en", returnUrl = Context.Request.Path + Context.Request.QueryString })" class="flex items-center px-4 py-3 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200">
                     <img src="https://flagcdn.com/w20/gb.png" alt="English" class="w-5 h-5 mr-3 rounded-sm">
                     English
                 </a>
@@ -61,11 +89,12 @@
         </div>
         
         <!-- Dark Mode Toggle -->
-        <button x-on:click="darkMode = !darkMode; localStorage.setItem('darkMode', darkMode)"
-                class="theme-toggle p-3 rounded-full transition-all duration-300 hover:scale-110"
-                title="Tema Değiştir">
-            <i x-show="!darkMode" class="fas fa-moon text-lg"></i>
-            <i x-show="darkMode" class="fas fa-sun text-lg" style="display: none;"></i>
+        <button x-on:click="darkMode = !darkMode; localStorage.setItem('darkMode', darkMode.toString())"
+                class="bg-white/20 dark:bg-gray-800/30 backdrop-blur-md border border-white/30 dark:border-gray-700/50 text-white dark:text-gray-200 p-3 rounded-full transition-all duration-300 hover:scale-110 hover:bg-white/30 dark:hover:bg-gray-700/40 shadow-lg"
+                title="Tema Değiştir"
+                type="button">
+            <i x-show="!darkMode" class="fas fa-moon text-lg transition-all duration-300"></i>
+            <i x-show="darkMode" class="fas fa-sun text-lg transition-all duration-300" x-cloak></i>
         </button>
     </div>
 
@@ -93,8 +122,20 @@
     @await RenderSectionAsync("Scripts", required: false)
 
     <script>
-        // Enhanced animations and interactions
+        // Simple fallback theme management
         document.addEventListener('DOMContentLoaded', function() {
+            // Initialize theme immediately
+            const savedTheme = localStorage.getItem('darkMode');
+            const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const shouldBeDark = savedTheme === 'true' || (!savedTheme && systemDark);
+            
+            if (shouldBeDark) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+
+            // Enhanced animations and interactions
             // Smooth scroll behavior
             document.documentElement.style.scrollBehavior = 'smooth';
             
@@ -124,32 +165,38 @@
                     }
                 });
             });
-        });
 
-        // Prevent right-click on login page for security
-        document.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-        });
-
-        // Disable F12 and other dev tools shortcuts for security
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'F12' || 
-                (e.ctrlKey && e.shiftKey && e.key === 'I') ||
-                (e.ctrlKey && e.shiftKey && e.key === 'C') ||
-                (e.ctrlKey && e.key === 'u')) {
+            // Prevent right-click on login page for security
+            document.addEventListener('contextmenu', function(e) {
                 e.preventDefault();
-            }
+            });
+
+            // Disable F12 and other dev tools shortcuts for security
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'F12' || 
+                    (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+                    (e.ctrlKey && e.shiftKey && e.key === 'C') ||
+                    (e.ctrlKey && e.key === 'u')) {
+                    e.preventDefault();
+                }
+            });
+
+            // Auto-hide alerts after 5 seconds
+            setTimeout(() => {
+                const alerts = document.querySelectorAll('.login-error, .login-success');
+                alerts.forEach(alert => {
+                    alert.style.transition = 'opacity 0.5s ease-out';
+                    alert.style.opacity = '0';
+                    setTimeout(() => alert.remove(), 500);
+                });
+            }, 5000);
         });
 
-        // Auto-hide alerts after 5 seconds
-        setTimeout(() => {
-            const alerts = document.querySelectorAll('.login-error, .login-success');
-            alerts.forEach(alert => {
-                alert.style.transition = 'opacity 0.5s ease-out';
-                alert.style.opacity = '0';
-                setTimeout(() => alert.remove(), 500);
-            });
-        }, 5000);
+        // ...existing code...
     </script>
+    
+    <style>
+        [x-cloak] { display: none !important; }
+    </style>
 </body>
 </html>
