@@ -1,0 +1,28 @@
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+@{
+    var breadcrumbs = ViewData["Breadcrumbs"] as List<(string Text, string Url)> ?? new List<(string, string)>();
+}
+
+<!-- Breadcrumb Navigation -->
+@if (breadcrumbs.Any())
+{
+    <nav class="flex items-center space-x-2 text-sm text-secondary mb-6 px-4 py-3 bg-card rounded-lg border border-border" aria-label="Breadcrumb">
+        <i class="fas fa-home text-accent"></i>
+        <a href="/" class="hover:text-accent transition-colors">@Localizer["Home"]</a>
+        
+        @foreach (var (text, url) in breadcrumbs)
+        {
+            <i class="fas fa-chevron-right text-xs opacity-50"></i>
+            @if (!string.IsNullOrEmpty(url))
+            {
+                <a href="@url" class="hover:text-accent transition-colors">@text</a>
+            }
+            else
+            {
+                <span class="text-primary font-medium">@text</span>
+            }
+        }
+    </nav>
+}

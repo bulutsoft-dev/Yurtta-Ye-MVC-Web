@@ -1,0 +1,63 @@
+/* Enhanced Performance CSS */
+
+/* Critical CSS - Inline this in <head> */
+:root {
+    --primary: #1E3A8A;
+    --secondary: #3B82F6;
+    --accent: #F59E0B;
+    --bg: #F8FAFC;
+    --text: #1E293B;
+}
+
+/* Font Loading Optimization */
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400 700;
+    font-display: swap;
+    src: url('/fonts/inter-var.woff2') format('woff2');
+}
+
+/* Minimize Layout Shift */
+.nav-placeholder {
+    height: 72px;
+}
+
+/* Optimize scrolling */
+.smooth-scroll {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Preload critical resources */
+.preload-image {
+    content-visibility: auto;
+    contain: layout style paint;
+}
+
+/* Dark mode optimizations */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #0F172A;
+        --text: #F1F5F9;
+        --primary: #3B82F6;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    :root {
+        --primary: #000000;
+        --text: #000000;
+        --bg: #FFFFFF;
+    }
+}

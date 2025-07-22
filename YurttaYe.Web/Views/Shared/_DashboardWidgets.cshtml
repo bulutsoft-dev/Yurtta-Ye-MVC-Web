@@ -1,0 +1,155 @@
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+<!-- Dashboard Stats Widget -->
+<div class="dashboard-widgets grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    <!-- Total Queries Widget -->
+    <div class="stat-widget bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-xl p-6 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-12 -mt-12"></div>
+        <div class="relative z-10">
+            <div class="flex items-center justify-between mb-4">
+                <div class="bg-white/20 p-3 rounded-lg">
+                    <i class="fas fa-search text-2xl"></i>
+                </div>
+                <span class="text-sm bg-white/20 px-2 py-1 rounded-full">+12%</span>
+            </div>
+            <h3 class="text-3xl font-bold mb-2" x-data="{ count: 0 }" x-init="() => {
+                const target = 15420;
+                const increment = target / 100;
+                const timer = setInterval(() => {
+                    count += increment;
+                    if (count >= target) {
+                        count = target;
+                        clearInterval(timer);
+                    }
+                }, 20);
+            }" x-text="Math.floor(count).toLocaleString()">0</h3>
+            <p class="text-blue-100">@Localizer["TotalQueries"]</p>
+        </div>
+    </div>
+
+    <!-- Active Cities Widget -->
+    <div class="stat-widget bg-gradient-to-br from-green-500 to-green-600 text-white rounded-xl p-6 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-12 -mt-12"></div>
+        <div class="relative z-10">
+            <div class="flex items-center justify-between mb-4">
+                <div class="bg-white/20 p-3 rounded-lg">
+                    <i class="fas fa-city text-2xl"></i>
+                </div>
+                <span class="text-sm bg-white/20 px-2 py-1 rounded-full">+3</span>
+            </div>
+            <h3 class="text-3xl font-bold mb-2">127</h3>
+            <p class="text-green-100">@Localizer["ActiveCities"]</p>
+        </div>
+    </div>
+
+    <!-- Popular Menu Widget -->
+    <div class="stat-widget bg-gradient-to-br from-purple-500 to-purple-600 text-white rounded-xl p-6 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-12 -mt-12"></div>
+        <div class="relative z-10">
+            <div class="flex items-center justify-between mb-4">
+                <div class="bg-white/20 p-3 rounded-lg">
+                    <i class="fas fa-utensils text-2xl"></i>
+                </div>
+                <span class="text-sm bg-white/20 px-2 py-1 rounded-full">🔥</span>
+            </div>
+            <h3 class="text-lg font-bold mb-2">Köfte & Pilav</h3>
+            <p class="text-purple-100">@Localizer["PopularMenu"]</p>
+        </div>
+    </div>
+
+    <!-- User Satisfaction Widget -->
+    <div class="stat-widget bg-gradient-to-br from-orange-500 to-orange-600 text-white rounded-xl p-6 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-12 -mt-12"></div>
+        <div class="relative z-10">
+            <div class="flex items-center justify-between mb-4">
+                <div class="bg-white/20 p-3 rounded-lg">
+                    <i class="fas fa-star text-2xl"></i>
+                </div>
+                <span class="text-sm bg-white/20 px-2 py-1 rounded-full">+0.3</span>
+            </div>
+            <h3 class="text-3xl font-bold mb-2">4.8</h3>
+            <p class="text-orange-100">@Localizer["UserRating"]</p>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Actions Widget -->
+<div class="quick-actions-widget bg-card rounded-xl p-6 border border-border mb-8">
+    <div class="flex items-center justify-between mb-6">
+        <h3 class="text-lg font-bold text-primary">@Localizer["QuickActions"]</h3>
+        <button class="text-secondary hover:text-primary">
+            <i class="fas fa-ellipsis-h"></i>
+        </button>
+    </div>
+    
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <button class="quick-action-btn group flex flex-col items-center p-4 rounded-lg bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-colors">
+            <div class="bg-blue-500 text-white p-3 rounded-full mb-3 group-hover:scale-110 transition-transform">
+                <i class="fas fa-plus"></i>
+            </div>
+            <span class="text-sm font-medium text-blue-600 dark:text-blue-400">@Localizer["AddFavorite"]</span>
+        </button>
+
+        <button class="quick-action-btn group flex flex-col items-center p-4 rounded-lg bg-green-50 dark:bg-green-900/20 hover:bg-green-100 dark:hover:bg-green-900/40 transition-colors">
+            <div class="bg-green-500 text-white p-3 rounded-full mb-3 group-hover:scale-110 transition-transform">
+                <i class="fas fa-download"></i>
+            </div>
+            <span class="text-sm font-medium text-green-600 dark:text-green-400">@Localizer["DownloadMenu"]</span>
+        </button>
+
+        <button class="quick-action-btn group flex flex-col items-center p-4 rounded-lg bg-purple-50 dark:bg-purple-900/20 hover:bg-purple-100 dark:hover:bg-purple-900/40 transition-colors">
+            <div class="bg-purple-500 text-white p-3 rounded-full mb-3 group-hover:scale-110 transition-transform">
+                <i class="fas fa-share"></i>
+            </div>
+            <span class="text-sm font-medium text-purple-600 dark:text-purple-400">@Localizer["ShareMenu"]</span>
+        </button>
+
+        <button class="quick-action-btn group flex flex-col items-center p-4 rounded-lg bg-orange-50 dark:bg-orange-900/20 hover:bg-orange-100 dark:hover:bg-orange-900/40 transition-colors">
+            <div class="bg-orange-500 text-white p-3 rounded-full mb-3 group-hover:scale-110 transition-transform">
+                <i class="fas fa-bell"></i>
+            </div>
+            <span class="text-sm font-medium text-orange-600 dark:text-orange-400">@Localizer["SetReminder"]</span>
+        </button>
+    </div>
+</div>
+
+<!-- Recent Activity Widget -->
+<div class="recent-activity-widget bg-card rounded-xl p-6 border border-border">
+    <div class="flex items-center justify-between mb-6">
+        <h3 class="text-lg font-bold text-primary">@Localizer["RecentActivity"]</h3>
+        <a href="/history" class="text-accent hover:text-accent-hover text-sm font-medium">@Localizer["ViewAll"]</a>
+    </div>
+    
+    <div class="space-y-4">
+        <div class="activity-item flex items-center space-x-4 p-3 rounded-lg hover:bg-secondary transition-colors">
+            <div class="bg-blue-100 dark:bg-blue-900 p-2 rounded-full">
+                <i class="fas fa-utensils text-blue-600"></i>
+            </div>
+            <div class="flex-1">
+                <p class="text-sm font-medium text-primary">Ankara - Kahvaltı menüsü sorgulandı</p>
+                <p class="text-xs text-secondary">2 dakika önce</p>
+            </div>
+        </div>
+
+        <div class="activity-item flex items-center space-x-4 p-3 rounded-lg hover:bg-secondary transition-colors">
+            <div class="bg-green-100 dark:bg-green-900 p-2 rounded-full">
+                <i class="fas fa-heart text-green-600"></i>
+            </div>
+            <div class="flex-1">
+                <p class="text-sm font-medium text-primary">İstanbul menüsü favorilere eklendi</p>
+                <p class="text-xs text-secondary">5 dakika önce</p>
+            </div>
+        </div>
+
+        <div class="activity-item flex items-center space-x-4 p-3 rounded-lg hover:bg-secondary transition-colors">
+            <div class="bg-purple-100 dark:bg-purple-900 p-2 rounded-full">
+                <i class="fas fa-share text-purple-600"></i>
+            </div>
+            <div class="flex-1">
+                <p class="text-sm font-medium text-primary">Menü WhatsApp'ta paylaşıldı</p>
+                <p class="text-xs text-secondary">10 dakika önce</p>
+            </div>
+        </div>
+    </div>
+</div>

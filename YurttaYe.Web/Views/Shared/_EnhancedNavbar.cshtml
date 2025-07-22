@@ -1,0 +1,200 @@
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.Extensions.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@inject IViewLocalizer Localizer
+
+@{
+    var currentCulture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name;
+    var isTr = currentCulture.StartsWith("tr");
+    var isEn = currentCulture.StartsWith("en");
+}
+
+<!-- Enhanced Navbar -->
+<header x-data="{ 
+    navOpen: false, 
+    scrolled: false,
+    showSearch: false 
+}" 
+x-init="
+    window.addEventListener('scroll', () => {
+        scrolled = window.scrollY > 20;
+    });
+" 
+class="navbar sticky top-0 z-50 transition-all duration-300"
+:class="{ 'shadow-lg backdrop-blur-md': scrolled }">
+    
+    <!-- Progress Bar for Loading -->
+    <div id="progress-bar" class="h-1 bg-gradient-to-r from-blue-500 to-purple-500 transform scale-x-0 origin-left transition-transform duration-300"></div>
+    
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="relative flex items-center justify-between py-3">
+
+            <!-- Mobile Menu Button -->
+            <button 
+                x-on:click="navOpen = !navOpen" 
+                class="lg:hidden nav-action-icon p-2"
+                aria-label="Toggle Menu">
+                <i x-show="!navOpen" class="fas fa-bars"></i>
+                <i x-show="navOpen" class="fas fa-times" style="display: none;"></i>
+            </button>
+
+            <!-- Left Navigation -->
+            <div class="hidden lg:flex items-center space-x-4">
+                <!-- Quick Search -->
+                <div class="relative" x-show="showSearch" x-transition>
+                    <input type="text" 
+                           placeholder="@Localizer["SearchCity"]" 
+                           class="bg-white/20 text-white placeholder-white/70 border border-white/30 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-white/50 w-64">
+                    <i class="fas fa-search absolute right-3 top-1/2 transform -translate-y-1/2 text-white/70"></i>
+                </div>
+                
+                <button x-on:click="showSearch = !showSearch" 
+                        class="nav-action-icon p-2" 
+                        title="@Localizer["Search"]">
+                    <i class="fas fa-search"></i>
+                </button>
+
+                <!-- Notifications -->
+                <div x-data="{ showNotifications: false }" class="relative">
+                    <button x-on:click="showNotifications = !showNotifications" 
+                            class="nav-action-icon p-2 relative" 
+                            title="@Localizer["Notifications"]">
+                        <i class="fas fa-bell"></i>
+                        <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
+                    </button>
+                    
+                    <!-- Notifications Dropdown -->
+                    <div x-show="showNotifications" 
+                         x-transition
+                         x-on:click.outside="showNotifications = false"
+                         class="absolute top-full right-0 mt-2 w-80 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700"
+                         style="display: none;">
+                        <div class="p-4">
+                            <h3 class="font-semibold text-gray-900 dark:text-white mb-3">@Localizer["Notifications"]</h3>
+                            <div class="space-y-3">
+                                <div class="flex items-start space-x-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700">
+                                    <div class="bg-blue-100 p-2 rounded-full">
+                                        <i class="fas fa-utensils text-blue-600"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <p class="text-sm font-medium text-gray-900 dark:text-white">Yeni menü yayınlandı</p>
+                                        <p class="text-xs text-gray-500">2 dakika önce</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Centered Brand -->
+            <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                <a class="brand flex items-center space-x-2" href="/">
+                    <img src="~/logo-yurttaye.png" alt="YurttaYe" class="h-8 w-8 rounded-full">
+                    <span class="hidden sm:inline font-bold text-xl">YurttaYe</span>
+                </a>
+            </div>
+
+            <!-- Right Navigation -->
+            <div class="flex items-center space-x-2">
+                <!-- Quick Actions -->
+                <div class="hidden lg:flex items-center space-x-2">
+                    <a href="https://play.google.com/store/apps/details?id=com.yurttaye.yurttaye" 
+                       target="_blank" 
+                       class="nav-link px-4 py-2 text-sm flex items-center space-x-2" 
+                       title="@Localizer["DownloadApp"]">
+                        <i class="fab fa-google-play"></i>
+                        <span>@Localizer["App"]</span>
+                    </a>
+                </div>
+
+                <!-- Theme Toggle -->
+                <button x-on:click="darkMode = !darkMode; localStorage.setItem('darkMode', darkMode)" 
+                        class="nav-action-icon p-2" 
+                        aria-label="@Localizer["ToggleTheme"]">
+                    <i x-show="!darkMode" class="fas fa-sun"></i>
+                    <i x-show="darkMode" class="fas fa-moon" style="display: none;"></i>
+                </button>
+
+                <!-- Language Toggle -->
+                <a href="@Url.Action("SetLanguage", "Home", new { culture = (isTr ? "en" : "tr"), returnUrl = Context.Request.Path + Context.Request.QueryString })" 
+                   class="nav-action-icon p-2" 
+                   title="@Localizer["ChangeLanguage"]">
+                    <span class="font-semibold text-sm">@(isTr ? "EN" : "TR")</span>
+                </a>
+
+                <!-- User Menu -->
+                <div x-data="{ userMenu: false }" class="relative">
+                    <button x-on:click="userMenu = !userMenu" 
+                            class="nav-action-icon p-2" 
+                            title="@Localizer["UserMenu"]">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                    
+                    <!-- User Dropdown -->
+                    <div x-show="userMenu" 
+                         x-transition
+                         x-on:click.outside="userMenu = false"
+                         class="absolute top-full right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700"
+                         style="display: none;">
+                        <div class="py-2">
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <i class="fas fa-user mr-2"></i>@Localizer["Profile"]
+                            </a>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <i class="fas fa-cog mr-2"></i>@Localizer["Settings"]
+                            </a>
+                            <hr class="my-1 border-gray-200 dark:border-gray-700">
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <i class="fas fa-sign-out-alt mr-2"></i>@Localizer["Logout"]
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div x-show="navOpen" 
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0 -translate-y-2"
+             x-transition:enter-end="opacity-100 translate-y-0"
+             class="lg:hidden absolute top-full left-0 right-0 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-t border-white/20 shadow-lg"
+             style="display: none;">
+            <div class="px-4 py-6 space-y-4">
+                <!-- Mobile Search -->
+                <div class="relative">
+                    <input type="text" 
+                           placeholder="@Localizer["SearchCity"]" 
+                           class="w-full bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <i class="fas fa-search absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                </div>
+
+                <!-- Mobile Links -->
+                <div class="space-y-3">
+                    <a href="/" class="flex items-center space-x-3 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">
+                        <i class="fas fa-utensils w-5"></i>
+                        <span>@Localizer["QueryMenu"]</span>
+                    </a>
+                    <a href="https://play.google.com/store/apps/details?id=com.yurttaye.yurttaye" target="_blank" class="flex items-center space-x-3 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">
+                        <i class="fab fa-google-play w-5"></i>
+                        <span>@Localizer["DownloadApp"]</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<script>
+// Progress bar for page loading
+window.addEventListener('beforeunload', () => {
+    document.getElementById('progress-bar').style.transform = 'scaleX(1)';
+});
+
+window.addEventListener('load', () => {
+    document.getElementById('progress-bar').style.transform = 'scaleX(0)';
+});
+</script>

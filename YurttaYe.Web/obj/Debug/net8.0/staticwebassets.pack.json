@@ -21,16 +21,16 @@
       "PackagePath": "staticwebassets/css/menu-enhancements.css"
     },
     {
+      "Id": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/wwwroot/css/performance.css",
+      "PackagePath": "staticwebassets/css/performance.css"
+    },
+    {
       "Id": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/wwwroot/css/site.css",
       "PackagePath": "staticwebassets/css/site.css"
     },
     {
       "Id": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/wwwroot/favicon.ico",
       "PackagePath": "staticwebassets/favicon.ico"
-    },
-    {
-      "Id": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/wwwroot/js/menu-favorites.js",
-      "PackagePath": "staticwebassets/js/menu-favorites.js"
     },
     {
       "Id": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/wwwroot/js/menu-interface.js",

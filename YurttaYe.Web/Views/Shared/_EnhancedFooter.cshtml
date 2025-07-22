@@ -1,0 +1,224 @@
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+<!-- Enhanced Footer -->
+<footer class="bg-gradient-to-br from-gray-900 to-gray-800 text-white relative overflow-hidden">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 opacity-5">
+        <div class="absolute inset-0" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48Y2lyY2xlIGN4PSIzMCIgY3k9IjMwIiByPSI0Ii8+PC9nPjwvZz48L3N2Zz4=');"></div>
+    </div>
+
+    <div class="relative z-10">
+        <!-- Main Footer Content -->
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <!-- Newsletter Section -->
+            <div class="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 mb-12 text-center">
+                <h3 class="text-2xl font-bold mb-4">@Localizer["StayUpdated"]</h3>
+                <p class="mb-6 opacity-90">@Localizer["NewsletterDescription"]</p>
+                <div x-data="{ email: '', subscribed: false }" class="max-w-md mx-auto">
+                    <div x-show="!subscribed" class="flex flex-col sm:flex-row gap-3">
+                        <input type="email" 
+                               x-model="email"
+                               placeholder="@Localizer["EmailAddress"]" 
+                               class="flex-1 px-4 py-3 rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/50">
+                        <button x-on:click="subscribed = true" 
+                                class="px-6 py-3 bg-white text-blue-600 font-semibold rounded-lg hover:bg-gray-100 transition-colors">
+                            @Localizer["Subscribe"]
+                        </button>
+                    </div>
+                    <div x-show="subscribed" x-transition class="text-center py-4" style="display: none;">
+                        <i class="fas fa-check-circle text-green-400 text-2xl mb-2"></i>
+                        <p class="font-semibold">@Localizer["SubscriptionSuccess"]</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- Brand Section -->
+                <div class="lg:col-span-1">
+                    <div class="flex items-center mb-6">
+                        <img src="~/logo-yurttaye.png" alt="YurttaYe Logo" class="h-12 w-12 mr-4 rounded-full bg-white p-2">
+                        <div>
+                            <h3 class="text-2xl font-bold" style="font-family: 'Poppins', sans-serif;">YurttaYe</h3>
+                            <p class="text-blue-300 text-sm">@Localizer["BrandTagline"]</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        @Localizer["FooterAboutText"]
+                    </p>
+                    
+                    <!-- App Download Buttons -->
+                    <div class="space-y-3">
+                        <a href="https://play.google.com/store/apps/details?id=com.yurttaye.yurttaye" 
+                           target="_blank" 
+                           class="inline-flex items-center bg-black hover:bg-gray-800 text-white px-4 py-3 rounded-lg transition-colors w-full sm:w-auto">
+                            <i class="fab fa-google-play text-xl mr-3"></i>
+                            <div class="text-left">
+                                <div class="text-xs">@Localizer["GetItOn"]</div>
+                                <div class="font-semibold">Google Play</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-xl font-semibold mb-6 text-blue-300">@Localizer["QuickLinks"]</h4>
+                    <ul class="space-y-4">
+                        <li>
+                            <a href="/" class="flex items-center text-gray-300 hover:text-white transition-colors group">
+                                <i class="fas fa-utensils w-5 mr-3 text-blue-400 group-hover:text-blue-300"></i>
+                                @Localizer["QueryMenu"]
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/favorites" class="flex items-center text-gray-300 hover:text-white transition-colors group">
+                                <i class="fas fa-heart w-5 mr-3 text-red-400 group-hover:text-red-300"></i>
+                                @Localizer["Favorites"]
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/history" class="flex items-center text-gray-300 hover:text-white transition-colors group">
+                                <i class="fas fa-history w-5 mr-3 text-green-400 group-hover:text-green-300"></i>
+                                @Localizer["History"]
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/api" class="flex items-center text-gray-300 hover:text-white transition-colors group">
+                                <i class="fas fa-code w-5 mr-3 text-purple-400 group-hover:text-purple-300"></i>
+                                @Localizer["API"]
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Support -->
+                <div>
+                    <h4 class="text-xl font-semibold mb-6 text-blue-300">@Localizer["Support"]</h4>
+                    <ul class="space-y-4">
+                        <li>
+                            <a href="/help" class="flex items-center text-gray-300 hover:text-white transition-colors group">
+                                <i class="fas fa-question-circle w-5 mr-3 text-yellow-400 group-hover:text-yellow-300"></i>
+                                @Localizer["Help"]
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mailto:support@yurttaye.com" class="flex items-center text-gray-300 hover:text-white transition-colors group">
+                                <i class="fas fa-envelope w-5 mr-3 text-blue-400 group-hover:text-blue-300"></i>
+                                @Localizer["Contact"]
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/feedback" class="flex items-center text-gray-300 hover:text-white transition-colors group">
+                                <i class="fas fa-comments w-5 mr-3 text-green-400 group-hover:text-green-300"></i>
+                                @Localizer["Feedback"]
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/report-bug" class="flex items-center text-gray-300 hover:text-white transition-colors group">
+                                <i class="fas fa-bug w-5 mr-3 text-red-400 group-hover:text-red-300"></i>
+                                @Localizer["ReportBug"]
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Social & Stats -->
+                <div>
+                    <h4 class="text-xl font-semibold mb-6 text-blue-300">@Localizer["Community"]</h4>
+                    
+                    <!-- Social Links -->
+                    <div class="flex space-x-4 mb-6">
+                        <a href="https://github.com/bulutsoft-dev" target="_blank" 
+                           class="bg-gray-700 hover:bg-gray-600 p-3 rounded-lg transition-colors group">
+                            <i class="fab fa-github text-xl group-hover:scale-110 transform transition-transform"></i>
+                        </a>
+                        <a href="https://x.com/bulutsoftdev" target="_blank" 
+                           class="bg-blue-500 hover:bg-blue-400 p-3 rounded-lg transition-colors group">
+                            <i class="fab fa-twitter text-xl group-hover:scale-110 transform transition-transform"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/company/bulutsoft-dev/" target="_blank" 
+                           class="bg-blue-600 hover:bg-blue-500 p-3 rounded-lg transition-colors group">
+                            <i class="fab fa-linkedin text-xl group-hover:scale-110 transform transition-transform"></i>
+                        </a>
+                    </div>
+
+                    <!-- Stats -->
+                    <div class="space-y-4">
+                        <div class="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
+                            <div class="text-2xl font-bold text-blue-300">50K+</div>
+                            <div class="text-sm text-gray-300">@Localizer["ActiveUsers"]</div>
+                        </div>
+                        <div class="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
+                            <div class="text-2xl font-bold text-green-300">100+</div>
+                            <div class="text-sm text-gray-300">@Localizer["SupportedCities"]</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Footer -->
+        <div class="border-t border-gray-700">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
+                <div class="flex flex-col lg:flex-row items-center justify-between gap-4">
+                    <!-- Copyright -->
+                    <div class="text-center lg:text-left">
+                        <p class="text-gray-300">
+                            © @DateTime.Now.Year YurttaYe. @Localizer["AllRightsReserved"]
+                        </p>
+                        <p class="text-sm text-gray-400">
+                            <a href="https://github.com/bulutsoft-dev" class="text-blue-400 hover:text-blue-300">Bulutsoft</a> @Localizer["DevelopedBy"]
+                        </p>
+                    </div>
+
+                    <!-- Quick Settings -->
+                    <div class="flex items-center space-x-4">
+                        <!-- Theme Toggle -->
+                        <button x-on:click="darkMode = !darkMode; localStorage.setItem('darkMode', darkMode)" 
+                                class="bg-gray-700 hover:bg-gray-600 p-3 rounded-lg transition-colors" 
+                                aria-label="@Localizer["ToggleTheme"]">
+                            <i x-show="!darkMode" class="fas fa-sun"></i>
+                            <i x-show="darkMode" class="fas fa-moon" style="display: none;"></i>
+                        </button>
+
+                        <!-- Language Toggle -->
+                        <form asp-controller="Home" asp-action="SetLanguage" method="post" class="inline">
+                            @{
+                                var currentCulture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name;
+                                var isTr = currentCulture.StartsWith("tr");
+                            }
+                            <input type="hidden" name="culture" value="@(isTr ? "en" : "tr")" />
+                            <input type="hidden" name="returnUrl" value="@Context.Request.Path@Context.Request.QueryString" />
+                            <button type="submit" 
+                                    class="bg-gray-700 hover:bg-gray-600 px-4 py-3 rounded-lg transition-colors font-semibold" 
+                                    title="@Localizer["ChangeLanguage"]">
+                                @(isTr ? "EN" : "TR")
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Legal Links -->
+                    <div class="flex flex-wrap justify-center lg:justify-end gap-4 text-sm">
+                        <a href="/privacy" class="text-gray-400 hover:text-white transition-colors">@Localizer["Privacy"]</a>
+                        <a href="/terms" class="text-gray-400 hover:text-white transition-colors">@Localizer["Terms"]</a>
+                        <a href="/cookies" class="text-gray-400 hover:text-white transition-colors">@Localizer["Cookies"]</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Back to Top Button -->
+    <button x-data="{ show: false }" 
+            x-init="window.addEventListener('scroll', () => { show = window.scrollY > 300 })"
+            x-show="show"
+            x-transition
+            x-on:click="window.scrollTo({ top: 0, behavior: 'smooth' })"
+            class="fixed bottom-8 right-8 bg-blue-600 hover:bg-blue-500 text-white p-4 rounded-full shadow-lg z-50 transition-all transform hover:scale-110"
+            style="display: none;">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+</footer>

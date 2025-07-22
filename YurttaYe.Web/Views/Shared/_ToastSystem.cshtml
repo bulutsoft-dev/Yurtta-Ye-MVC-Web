@@ -1,0 +1,99 @@
+<!-- Toast Notification System -->
+<div id="toastContainer" class="fixed top-4 right-4 z-50 space-y-3"></div>
+
+<script>
+class ToastManager {
+    constructor() {
+        this.container = document.getElementById('toastContainer');
+        this.toasts = [];
+    }
+
+    show(message, type = 'info', duration = 4000) {
+        const toast = this.createToast(message, type, duration);
+        this.container.appendChild(toast);
+        
+        // Animate in
+        setTimeout(() => {
+            toast.classList.remove('translate-x-full', 'opacity-0');
+        }, 100);
+
+        // Auto remove
+        setTimeout(() => {
+            this.remove(toast);
+        }, duration);
+
+        return toast;
+    }
+
+    createToast(message, type, duration) {
+        const toastId = 'toast-' + Date.now();
+        const toast = document.createElement('div');
+        
+        const typeConfig = {
+            success: { icon: 'fas fa-check-circle', bgColor: 'bg-green-500', borderColor: 'border-green-600' },
+            error: { icon: 'fas fa-exclamation-circle', bgColor: 'bg-red-500', borderColor: 'border-red-600' },
+            warning: { icon: 'fas fa-exclamation-triangle', bgColor: 'bg-yellow-500', borderColor: 'border-yellow-600' },
+            info: { icon: 'fas fa-info-circle', bgColor: 'bg-blue-500', borderColor: 'border-blue-600' }
+        };
+
+        const config = typeConfig[type] || typeConfig.info;
+        
+        toast.id = toastId;
+        toast.className = `transform translate-x-full opacity-0 transition-all duration-300 max-w-md w-full ${config.bgColor} text-white rounded-lg shadow-lg border-l-4 ${config.borderColor} overflow-hidden`;
+        
+        toast.innerHTML = `
+            <div class="p-4">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0">
+                        <i class="${config.icon} text-xl"></i>
+                    </div>
+                    <div class="ml-3 flex-1">
+                        <p class="text-sm font-medium">${message}</p>
+                    </div>
+                    <div class="ml-4 flex-shrink-0">
+                        <button onclick="toastManager.remove(document.getElementById('${toastId}'))" 
+                                class="text-white hover:text-gray-200 focus:outline-none">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                ${duration > 0 ? `<div class="progress-bar bg-white/20 h-1 mt-3 rounded-full overflow-hidden">
+                    <div class="progress-fill bg-white h-full rounded-full transition-all ease-linear" style="width: 100%; animation: toast-progress ${duration}ms linear;"></div>
+                </div>` : ''}
+            </div>
+        `;
+
+        return toast;
+    }
+
+    remove(toast) {
+        if (!toast || !toast.parentNode) return;
+        
+        toast.classList.add('translate-x-full', 'opacity-0');
+        setTimeout(() => {
+            if (toast.parentNode) {
+                toast.parentNode.removeChild(toast);
+            }
+        }, 300);
+    }
+
+    success(message, duration = 4000) {
+        return this.show(message, 'success', duration);
+    }
+
+    error(message, duration = 5000) {
+        return this.show(message, 'error', duration);
+    }
+
+    warning(message, duration = 4000) {
+        return this.show(message, 'warning', duration);
+    }
+
+    info(message, duration = 4000) {
+        return this.show(message, 'info', duration);
+    }
+}
+
+// Global toast manager instance
+const toastManager = new ToastManager();
+</script>

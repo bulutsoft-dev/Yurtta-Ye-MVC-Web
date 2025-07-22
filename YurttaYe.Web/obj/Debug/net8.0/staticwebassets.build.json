@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "NpHmvO2QCa13GbmxYCXU5gfEhnxvRYgxKldRIkVflwY=",
+  "Hash": "YDlKqUHwl4ZwLjYoynyc+M1Owui2ZpcXbT2JAIZssTw=",
   "Source": "YurttaYe.Web",
   "BasePath": "_content/YurttaYe.Web",
   "Mode": "Default",
@@ -131,6 +131,25 @@
       "OriginalItemSpec": "wwwroot/css/menu-enhancements.css"
     },
     {
+      "Identity": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/wwwroot/css/performance.css",
+      "SourceId": "YurttaYe.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/wwwroot/",
+      "BasePath": "_content/YurttaYe.Web",
+      "RelativePath": "css/performance.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/css/performance.css"
+    },
+    {
       "Identity": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/wwwroot/css/site.css",
       "SourceId": "YurttaYe.Web",
       "SourceType": "Discovered",
@@ -167,25 +186,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/favicon.ico"
-    },
-    {
-      "Identity": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/wwwroot/js/menu-favorites.js",
-      "SourceId": "YurttaYe.Web",
-      "SourceType": "Discovered",
-      "ContentRoot": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/wwwroot/",
-      "BasePath": "_content/YurttaYe.Web",
-      "RelativePath": "js/menu-favorites.js",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/js/menu-favorites.js"
     },
     {
       "Identity": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/wwwroot/js/menu-interface.js",

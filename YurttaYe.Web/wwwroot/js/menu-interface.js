@@ -24,7 +24,6 @@ class MenuInterface {
         this.scrollToSelectedDate();
         this.setupKeyboardNavigation();
         this.setupSwipeGestures();
-        this.setupLoadingStates();
     }
 
     scrollToSelectedDate() {
@@ -46,11 +45,10 @@ class MenuInterface {
         today.setHours(0, 0, 0, 0);
 
         if (newDate > today) {
-            this.showToast('Gelecekteki tarihler seçilemez', 'warning');
+            alert('Gelecekteki tarihler seçilemez');
             return;
         }
 
-        this.showLoadingState();
         this.dateInput.value = newDateStr;
         this.form.submit();
     }
@@ -119,7 +117,6 @@ class MenuInterface {
             button.addEventListener('click', () => {
                 this.mealTypeInput.value = button.dataset.mealType;
                 this.updateButtonStyles();
-                this.showLoadingState();
                 this.form.submit();
             });
         });
@@ -129,7 +126,6 @@ class MenuInterface {
         const citySelect = document.getElementById('CityId');
         if (citySelect) {
             citySelect.addEventListener('change', () => {
-                this.showLoadingState();
                 this.form.submit();
             });
         }
@@ -205,90 +201,6 @@ class MenuInterface {
             startX = null;
             startY = null;
         });
-    }
-
-    setupLoadingStates() {
-        const form = document.getElementById('menuForm');
-        const submitBtns = form.querySelectorAll('button[type="button"]');
-        
-        submitBtns.forEach(btn => {
-            btn.disabled = true;
-            const icon = btn.querySelector('i');
-            if (icon && !icon.classList.contains('fa-spin')) {
-                icon.dataset.originalClass = icon.className;
-                icon.className = 'fas fa-spinner fa-spin';
-            }
-        });
-
-        // Show loading overlay
-        this.showLoadingOverlay();
-    }
-
-    showLoadingOverlay() {
-        const existing = document.getElementById('loadingOverlay');
-        if (existing) return;
-
-        const overlay = document.createElement('div');
-        overlay.id = 'loadingOverlay';
-        overlay.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 loading-overlay';
-        overlay.innerHTML = `
-            <div class="bg-white dark:bg-gray-800 rounded-lg p-6 flex items-center space-x-3">
-                <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600"></div>
-                <span class="text-gray-700 dark:text-gray-300">Menü yükleniyor...</span>
-            </div>
-        `;
-        document.body.appendChild(overlay);
-    }
-
-    showToast(message, type = 'info') {
-        const toast = document.createElement('div');
-        const toastId = 'toast-' + Date.now();
-        toast.id = toastId;
-        toast.className = `toast fixed top-4 right-4 p-4 rounded-lg text-white z-50 transform transition-all duration-300 translate-x-full`;
-        
-        const bgColor = {
-            'success': 'bg-green-500',
-            'error': 'bg-red-500',
-            'warning': 'bg-yellow-500',
-            'info': 'bg-blue-500'
-        }[type] || 'bg-blue-500';
-        
-        const icon = {
-            'success': 'fas fa-check-circle',
-            'error': 'fas fa-exclamation-circle',
-            'warning': 'fas fa-exclamation-triangle',
-            'info': 'fas fa-info-circle'
-        }[type] || 'fas fa-info-circle';
-        
-        toast.classList.add(bgColor);
-        toast.innerHTML = `
-            <div class="flex items-center space-x-2">
-                <i class="${icon}"></i>
-                <span>${message}</span>
-                <button onclick="document.getElementById('${toastId}').remove()" class="ml-2 text-white hover:opacity-75">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-        `;
-        
-        document.body.appendChild(toast);
-        
-        // Animate in
-        setTimeout(() => {
-            toast.classList.remove('translate-x-full');
-        }, 100);
-        
-        // Remove after 4 seconds
-        setTimeout(() => {
-            if (toast.parentNode) {
-                toast.classList.add('translate-x-full');
-                setTimeout(() => {
-                    if (toast.parentNode) {
-                        toast.remove();
-                    }
-                }, 300);
-            }
-        }, 4000);
     }
 }
 

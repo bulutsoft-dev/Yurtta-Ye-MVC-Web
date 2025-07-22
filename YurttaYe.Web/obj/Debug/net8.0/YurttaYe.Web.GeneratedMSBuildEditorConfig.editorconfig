@@ -106,8 +106,28 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/Views/Shared/_Breadcrumb.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19CcmVhZGNydW1iLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/Views/Shared/_DashboardWidgets.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19EYXNoYm9hcmRXaWRnZXRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/Views/Shared/_EnhancedFooter.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19FbmhhbmNlZEZvb3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/Views/Shared/_EnhancedNavbar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19FbmhhbmNlZE5hdmJhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/Views/Shared/_Footer.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19Gb290ZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/Views/Shared/_LoadingComponents.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19Mb2FkaW5nQ29tcG9uZW50cy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/Views/Shared/_LoginLayout.cshtml]
@@ -124,6 +144,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/Views/Shared/_NoMenuCard.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19Ob01lbnVDYXJkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/Views/Shared/_ToastSystem.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19Ub2FzdFN5c3RlbS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/Views/Shared/_ValidationScriptsPartial.cshtml]
