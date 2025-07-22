@@ -58,7 +58,7 @@
     @if (ViewData["PageActions"] != null)
     {
         <div class="ml-auto flex items-center space-x-2">
-            @foreach (var action in (List<dynamic>)ViewData["PageActions"])
+            @foreach (var action in (List<dynamic>)ViewData["PageActions"]!)
             {
                 @if (action.Type == "button")
                 {

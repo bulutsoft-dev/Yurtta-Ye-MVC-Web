@@ -13,8 +13,10 @@ namespace YurttaYe.Core.Models.ViewModels
     public class RecentMenuViewModel
     {
         public int Id { get; set; }
-        public string CityName { get; set; }
-        public string MealType { get; set; }
+        public string CityName { get; set; } = string.Empty;
+        public string Location { get; set; } = string.Empty;
+        public string MealType { get; set; } = string.Empty;
         public DateTime Date { get; set; }
+        public string MenuContent { get; set; } = string.Empty;
     }
-} 
+}
