@@ -2,10 +2,6 @@
 @inject IViewLocalizer Localizer
 @model YurttaYe.Core.Models.ViewModels.NoMenuCardViewModel
 
-@{
-    var isBreakfast = Model.MealLabel == Localizer["BreakfastMenu"].ToString();
-}
-
 <style>
     /* Scoped styles for NoMenuCard */
     .no-menu-card.breakfast .icon-bg { background-color: #FFFBEB; }
@@ -38,16 +34,16 @@
 
 </style>
 
-<div class="no-menu-card @(isBreakfast ? "breakfast" : "dinner") rounded-xl border border-card bg-card shadow-sm flex flex-col transition-colors w-full h-full min-h-[420px] p-8 text-center justify-between">
+<div class="no-menu-card @(Model.IsBreakfast ? "breakfast" : "dinner") rounded-xl border border-card bg-card shadow-sm flex flex-col transition-colors w-full h-full min-h-[420px] p-8 text-center justify-between">
     <div>
         <!-- İkon -->
         <div class="w-16 h-16 mx-auto flex items-center justify-center rounded-full icon-bg">
-            <i class="@(isBreakfast ? "fas fa-mug-hot" : "fas fa-utensils") text-4xl icon-fg"></i>
+            <i class="@(Model.IsBreakfast ? "fas fa-mug-hot" : "fas fa-utensils") text-4xl icon-fg"></i>
         </div>
         <!-- Başlık ve Açıklama -->
-        <h2 class="text-xl font-bold text-primary mt-6">@Localizer["MenuNotPublished"]</h2>
+        <h2 class="text-xl font-bold text-primary mt-6">@Model.MealLabel</h2>
         <p class="text-secondary mt-2">
-            <strong>@Model.DateText</strong> @Localizer["MenuNotAvailable"]
+            @Model.Description
         </p>
     </div>
 

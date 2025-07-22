@@ -202,12 +202,17 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
                     var city = cities.FirstOrDefault(c => c.Name == cityName);
                     if (city == null) continue;
 
+                    if (!DateTime.TryParse(worksheet.Cells[row, 3].Value?.ToString(), out var date))
+                    {
+                        continue; // Tarih dönüştürülemezse bu satırı atla
+                    }
+                    
                     var menu = new Menu
                     {
                         CityId = city.Id,
-                        MealType = worksheet.Cells[row, 2].Value?.ToString(),
-                        Date = DateTime.Parse(worksheet.Cells[row, 3].Value?.ToString()),
-                        Energy = worksheet.Cells[row, 4].Value?.ToString(),
+                        MealType = worksheet.Cells[row, 2].Value?.ToString() ?? "",
+                        Date = date,
+                        Energy = worksheet.Cells[row, 4].Value?.ToString() ?? "",
                         Items = new List<MenuItem>()
                     };
 

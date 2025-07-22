@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Localization;
 using System.Diagnostics;
+using YurttaYe.Core.Models.Dtos;
 
 
 namespace YurttaYe.Web.Controllers.Web
@@ -38,99 +39,105 @@ namespace YurttaYe.Web.Controllers.Web
             var defaultCityId = cities.FirstOrDefault(c => c.Name.Equals(defaultCityName, StringComparison.OrdinalIgnoreCase))?.Id ?? 0;
             
             var today = DateTime.Today;
+            var mealType = GetDefaultMealType();
 
             var model = new MenuViewModel
             {
                 Cities = cityList,
-                CityId = defaultCityId, // Manisa default olsun
-                MealType = "Kahvaltı",
+                CityId = defaultCityId,
+                MealType = mealType,
                 Date = today
             };
 
-            // Eğer geçerli bir şehir seçilirse menüyü getir
             if (model.CityId > 0)
             {
                 try
                 {
-                    model.BreakfastMenu = await _menuService.GetMenuAsync(model.CityId, "Kahvaltı", model.Date);
+                    var breakfastMenuEntity = await _menuService.GetMenuAsync(model.CityId, "Kahvaltı", model.Date);
+                    if (breakfastMenuEntity != null)
+                    {
+                        model.BreakfastMenu = new MenuDto
+                        {
+                            Items = breakfastMenuEntity.Items.Select(i => new MenuItemDto { Category = i.Category, Name = i.Name, Gram = i.Gram }).ToList(),
+                            Energy = breakfastMenuEntity.Energy
+                        };
+                    }
                 }
                 catch { model.BreakfastMenu = null; }
+
                 try
                 {
-                    model.DinnerMenu = await _menuService.GetMenuAsync(model.CityId, "Akşam Yemeği", model.Date);
+                    var dinnerMenuEntity = await _menuService.GetMenuAsync(model.CityId, "Akşam Yemeği", model.Date);
+                    if (dinnerMenuEntity != null)
+                    {
+                        model.DinnerMenu = new MenuDto
+                        {
+                            Items = dinnerMenuEntity.Items.Select(i => new MenuItemDto { Category = i.Category, Name = i.Name, Gram = i.Gram }).ToList(),
+                            Energy = dinnerMenuEntity.Energy
+                        };
+                    }
                 }
                 catch { model.DinnerMenu = null; }
             }
 
-            ViewData["TimeOfDayTheme"] = GetTimeOfDayTheme();
+            ViewData["TimeOfDayTheme"] = GetThemeForMealType(mealType);
             return View(model);
         }
 
         [HttpPost]
         public async Task<IActionResult> Index(MenuViewModel model)
         {
-            if (model == null)
-            {
-                model = new MenuViewModel();
-            }
-
             var cities = await _cityService.GetAllCitiesAsync();
             var cityList = cities.Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Name }).ToList();
             cityList.Insert(0, new SelectListItem { Value = "0", Text = "Şehir Seçin" });
-            
-            // Default city from config
-            var defaultCityName = _configuration["Defaults:City"] ?? "Manisa";
+            model.Cities = cityList;
+
             if (model.CityId == 0)
             {
+                var defaultCityName = _configuration["Defaults:City"] ?? "Manisa";
                 model.CityId = cities.FirstOrDefault(c => c.Name.Equals(defaultCityName, StringComparison.OrdinalIgnoreCase))?.Id ?? 0;
             }
 
-            model.Cities = cityList;
-
-            if (model.Date == DateTime.MinValue)
-            {
-                model.Date = DateTime.Today;
-            }
-
-            if (string.IsNullOrEmpty(model.MealType))
-            {
-                model.MealType = GetTimeOfDayTheme(); 
-            }
+            if (model.Date == DateTime.MinValue) model.Date = DateTime.Today;
+            if (string.IsNullOrEmpty(model.MealType)) model.MealType = GetDefaultMealType();
             
-            // Fetch menus if a valid city is selected
             if (model.CityId > 0)
             {
                 try
                 {
-                    model.BreakfastMenu = await _menuService.GetMenuAsync(model.CityId, "Kahvaltı", model.Date);
+                    var breakfastMenu = await _menuService.GetMenuAsync(model.CityId, "Kahvaltı", model.Date);
+                    if(breakfastMenu != null)
+                    {
+                        model.BreakfastMenu = new MenuDto
+                        {
+                            Items = breakfastMenu.Items.Select(i => new MenuItemDto { Category = i.Category, Name = i.Name, Gram = i.Gram }).ToList(),
+                            Energy = breakfastMenu.Energy
+                        };
+                    }
+                    var dinnerMenu = await _menuService.GetMenuAsync(model.CityId, "Akşam Yemeği", model.Date);
+                    if(dinnerMenu != null)
+                    {
+                        model.DinnerMenu = new MenuDto
+                        {
+                            Items = dinnerMenu.Items.Select(i => new MenuItemDto { Category = i.Category, Name = i.Name, Gram = i.Gram }).ToList(),
+                            Energy = dinnerMenu.Energy
+                        };
+                    }
+
+                    if (model.BreakfastMenu == null && model.DinnerMenu == null)
+                    {
+                        model.ErrorMessage = "Bu tarih ve şehir için menü bulunamadı.";
+                    }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    // Assuming _logger is available, otherwise remove this block
-                    // _logger.LogError(ex, "Error getting breakfast menu for CityId: {CityId}, Date: {Date}", model.CityId, model.Date);
+                    model.ErrorMessage = "Menü getirilirken bir hata oluştu.";
                     model.BreakfastMenu = null;
-                }
-
-                try
-                {
-                    model.DinnerMenu = await _menuService.GetMenuAsync(model.CityId, "Akşam Yemeği", model.Date);
-                }
-                catch (Exception ex)
-                {
-                    // Assuming _logger is available, otherwise remove this block
-                    // _logger.LogError(ex, "Error getting dinner menu for CityId: {CityId}, Date: {Date}", model.CityId, model.Date);
                     model.DinnerMenu = null;
-                }
-                // Geri uyumluluk için mevcut MealType'a göre Menu property’sini doldur
-                model.Menu = model.MealType == "Kahvaltı" ? model.BreakfastMenu : model.DinnerMenu;
-
-                if (model.BreakfastMenu == null && model.DinnerMenu == null)
-                {
-                    model.ErrorMessage = "Bu tarih ve şehir için menü bulunamadı.";
                 }
             }
 
-            ViewData["TimeOfDayTheme"] = GetTimeOfDayTheme(model.MealType);
+            ViewData["TimeOfDayTheme"] = GetThemeForMealType(model.MealType);
             return View(model);
         }
 
@@ -152,16 +159,23 @@ namespace YurttaYe.Web.Controllers.Web
             return LocalRedirect(returnUrl);
         }
 
-        private string GetTimeOfDayTheme(string? mealType = null)
+        private string GetThemeForMealType(string? mealType)
         {
-            if (!string.IsNullOrEmpty(mealType))
+            if (!string.IsNullOrEmpty(mealType) && mealType == "Breakfast")
             {
-                return mealType == "Kahvaltı" ? "morning" : "evening";
+                return "morning";
             }
-
-            var now = DateTime.Now.Hour;
-            if (now >= 5 && now < 12) return "morning";
             return "evening";
+        }
+
+        private string GetDefaultMealType()
+        {
+            var now = DateTime.Now.Hour;
+            if (now >= 5 && now < 14) // 05:00 - 13:59 arasını kahvaltı olarak kabul edelim
+            {
+                return "Breakfast";
+            }
+            return "Dinner";
         }
     }
 }

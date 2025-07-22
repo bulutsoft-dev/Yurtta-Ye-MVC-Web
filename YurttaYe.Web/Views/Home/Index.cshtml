@@ -84,17 +84,17 @@
 
                 <!-- Hidden Inputs -->
                 <input type="hidden" asp-for="Date" id="Date" value="@Model.Date.ToString("yyyy-MM-dd")"/>
-                <input type="hidden" asp-for="MealType" id="MealType" value="@(Model.MealType ?? Localizer["Breakfast"].ToString())" />
+                <input type="hidden" asp-for="MealType" id="MealType" value="@(Model.MealType ?? "Breakfast")" />
 
                 <!-- Meal Type Toggle -->
                 <div>
                     <label class="block text-sm font-medium text-primary mb-2">@Localizer["Meal"]</label>
                     <div class="grid grid-cols-2 gap-4">
-                        <button type="button" id="breakfastBtn" class="btn meal-type-btn w-full flex flex-col items-center justify-center" data-meal-type="@Localizer["Breakfast"].ToString()">
+                        <button type="button" id="breakfastBtn" class="btn meal-type-btn w-full flex flex-col items-center justify-center" data-meal-type="Breakfast">
                             <span class="block font-semibold">@Localizer["Breakfast"]</span>
                             <span class="block text-xs meal-subtitle mt-1">@Localizer["BreakfastHours"]</span>
                         </button>
-                        <button type="button" id="dinnerBtn" class="btn meal-type-btn w-full flex flex-col items-center justify-center" data-meal-type="@Localizer["DinnerMenu"].ToString()">
+                        <button type="button" id="dinnerBtn" class="btn meal-type-btn w-full flex flex-col items-center justify-center" data-meal-type="Dinner">
                             <span class="block font-semibold">@Localizer["Dinner"]</span>
                             <span class="block text-xs meal-subtitle mt-1">@Localizer["DinnerHours"]</span>
                         </button>
@@ -124,20 +124,23 @@
                 {
                     var breakfastModel = new MenuCardViewModel {
                         Menu = Model.BreakfastMenu,
-                        Title = Localizer["BreakfastMenu"].ToString(),
+                        Title = Localizer["BreakfastMenu"].Value,
                         IconClass = "fas fa-mug-hot",
                         GradientStart = "#FF8A65",
                         GradientEnd = "#FFCC02",
                         CategoryColor = "#FF8A65",
-                        DateText = Model.Date.ToString("dd MMMM yyyy, dddd", currentCulture) + " - " + Model.Cities.FirstOrDefault(c => c.Value == Model.CityId.ToString())?.Text
+                        DateText = $"{Model.Date.ToString("dd MMMM yyyy, dddd", currentCulture)} - {Model.Cities.FirstOrDefault(c => c.Value == Model.CityId.ToString())?.Text ?? ""}"
                     };
                     <partial name="_MenuCard" model="breakfastModel" />
                 }
                 else
                 {
+                    var dateText = Model.Date.ToString("dd MMMM yyyy, dddd", currentCulture);
+                    var description = string.Format(Localizer["MenuNotAvailableForDate"].Value, dateText);
                     var noMenuModel = new NoMenuCardViewModel {
-                        MealLabel = Localizer["BreakfastMenu"].ToString(),
-                        DateText = Model.Date.ToString("dd MMMM yyyy, dddd", currentCulture)
+                        MealLabel = Localizer["BreakfastMenu"].Value,
+                        Description = description,
+                        IsBreakfast = true
                     };
                     <partial name="_NoMenuCard" model="noMenuModel" />
                 }
@@ -149,20 +152,23 @@
                 {
                     var dinnerModel = new MenuCardViewModel {
                         Menu = Model.DinnerMenu,
-                        Title = Localizer["DinnerMenu"].ToString(),
+                        Title = Localizer["DinnerMenu"].Value,
                         IconClass = "fas fa-utensils",
                         GradientStart = "#1E3A8A",
                         GradientEnd = "#3B82F6",
                         CategoryColor = "#1E3A8A",
-                        DateText = Model.Date.ToString("dd MMMM yyyy, dddd", currentCulture) + " - " + Model.Cities.FirstOrDefault(c => c.Value == Model.CityId.ToString())?.Text
+                        DateText = $"{Model.Date.ToString("dd MMMM yyyy, dddd", currentCulture)} - {Model.Cities.FirstOrDefault(c => c.Value == Model.CityId.ToString())?.Text ?? ""}"
                     };
                     <partial name="_MenuCard" model="dinnerModel" />
                 }
                 else
                 {
+                    var dateText = Model.Date.ToString("dd MMMM yyyy, dddd", currentCulture);
+                    var description = string.Format(Localizer["MenuNotAvailableForDate"].Value, dateText);
                     var noMenuModel = new NoMenuCardViewModel {
-                        MealLabel = Localizer["DinnerMenu"].ToString(),
-                        DateText = Model.Date.ToString("dd MMMM yyyy, dddd", currentCulture)
+                        MealLabel = Localizer["DinnerMenu"].Value,
+                        Description = description,
+                        IsBreakfast = false
                     };
                     <partial name="_NoMenuCard" model="noMenuModel" />
                 }
@@ -200,8 +206,8 @@
             const formContainer = document.getElementById('menuForm');
 
             // Constants for meal types from Razor
-            const breakfastType = "@Localizer["Breakfast"].ToString()";
-            const dinnerType = "@Localizer["DinnerMenu"].ToString()"; // Corresponds to Akşam Yemeği
+            const breakfastType = "Breakfast";
+            const dinnerType = "Dinner";
 
             // Scroll selected date into view
             const selectedDateElement = document.querySelector('.date-strip-item.selected');

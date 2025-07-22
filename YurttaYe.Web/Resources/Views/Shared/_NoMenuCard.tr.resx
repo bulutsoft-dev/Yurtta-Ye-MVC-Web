@@ -1,8 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-  <data name="MenuNotPublished" xml:space="preserve"><value>Menü Henüz Yayınlanmadı</value></data>
-  <data name="MenuNotAvailable" xml:space="preserve"><value>için menü bulunamadı.</value></data>
-  <data name="DataContribution" xml:space="preserve"><value>Veri Katkısı</value></data>
-  <data name="ContributionNeeded" xml:space="preserve"><value>Bu menülerin doğruluğu ve güncelliği için sizin gibi kullanıcıların desteğine ihtiyacımız var. Elinizde bilgi varsa, bize ulaşarak menünün eklenmesine yardımcı olabilirsiniz.</value></data>
-  <data name="ContactUs" xml:space="preserve"><value>Bize Ulaşın</value></data>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DataContribution" xml:space="preserve">
+    <value>Veri Katkısı</value>
+  </data>
+  <data name="ContributionNeeded" xml:space="preserve">
+    <value>Bu menülerin doğruluğu ve güncelliği için sizin gibi kullanıcıların desteğine ihtiyacımız var.</value>
+  </data>
+  <data name="ContactUs" xml:space="preserve">
+    <value>Bize Ulaşın</value>
+  </data>
 </root> 

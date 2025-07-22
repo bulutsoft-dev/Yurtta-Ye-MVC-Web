@@ -1,38 +1,42 @@
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
 @model YurttaYe.Core.Models.ViewModels.MenuCardViewModel
-<div class="rounded-xl border border-card bg-card shadow-sm flex flex-col transition-colors w-full h-full min-h-[420px]">
+<div class="rounded-xl border border-card bg-card shadow-sm flex flex-col transition-colors w-full h-full min-h-[420px]" 
+     style="--card-theme-primary: @Model.CategoryColor; --card-theme-accent: @Model.GradientEnd;">
     <div class="p-5 border-b border-card rounded-t-xl" style="background: linear-gradient(90deg, @Model.GradientStart 0%, @Model.GradientEnd 100%);">
         <h2 class="text-xl font-bold text-white flex items-center gap-2">
             <i class="@Model.IconClass"></i> @Model.Title
         </h2>
         <p class="text-sm text-white/90">@Model.DateText</p>
     </div>
-    <div class="p-5 space-y-5 flex-1">
-        @foreach (var category in Model.Menu.Items.Select(i => i.Category).Distinct())
-        {
-            <div>
-                <h3 class="text-base font-semibold flex items-center mb-2" style="color: @Model.CategoryColor;">
-                    <i class="fas fa-utensils mr-2 opacity-70"></i>
-                    @category
-                </h3>
-                <ul class="space-y-1 pl-6">
-                    @foreach (var item in Model.Menu.Items.Where(i => i.Category == category))
-                    {
-                        <li class="flex items-center text-primary">
-                            <span>@item.Name</span>
-                            @if (!string.IsNullOrWhiteSpace(item.Gram))
-                            {
-                                <span class="ml-auto text-xs font-medium bg-secondary text-secondary py-1 px-2 rounded">@item.Gram</span>
-                            }
-                        </li>
-                    }
-                </ul>
-            </div>
-        }
-    </div>
-    <div class="border-t border-card pt-4 text-center flex items-center justify-center min-h-[56px]">
-        <span class="text-base font-bold text-primary">@Localizer["TotalEnergy"]:</span>
-        <span class="text-base font-bold ml-2" style="color: @Model.CategoryColor;">@Model.Menu.Energy</span>
-    </div>
+    @if (Model.Menu != null)
+    {
+        <div class="p-5 space-y-5 flex-1">
+            @foreach (var category in Model.Menu.Items.Select(i => i.Category).Distinct())
+            {
+                <div>
+                    <h3 class="text-base font-semibold flex items-center mb-2" style="color: var(--card-theme-primary);">
+                        <i class="fas fa-utensils mr-2 opacity-70"></i>
+                        @category
+                    </h3>
+                    <ul class="space-y-1 pl-6">
+                        @foreach (var item in Model.Menu.Items.Where(i => i.Category == category))
+                        {
+                            <li class="flex items-center text-primary">
+                                <span>@item.Name</span>
+                                @if (!string.IsNullOrWhiteSpace(item.Gram))
+                                {
+                                    <span class="ml-auto text-xs font-medium text-white py-1 px-2 rounded" style="background-color: var(--card-theme-accent);">@item.Gram</span>
+                                }
+                            </li>
+                        }
+                    </ul>
+                </div>
+            }
+        </div>
+        <div class="border-t border-card pt-4 text-center flex items-center justify-center min-h-[56px]">
+            <span class="text-base font-bold text-primary">@Localizer["TotalEnergy"]:</span>
+            <span class="text-base font-bold ml-2" style="color: var(--card-theme-primary);">@Model.Menu.Energy</span>
+        </div>
+    }
 </div> 

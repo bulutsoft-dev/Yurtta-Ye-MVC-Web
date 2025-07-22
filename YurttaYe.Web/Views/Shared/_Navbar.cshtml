@@ -42,7 +42,7 @@
                     <span class="hidden lg:inline ml-2 font-semibold" x-show="darkMode">@Localizer["DarkMode"]</span>
                 </button>
                 <div class="hidden lg:flex items-center">
-                    @if (User.Identity.IsAuthenticated)
+                    @if (User.Identity?.IsAuthenticated ?? false)
                     {
                         <a class="nav-action-icon p-2 lg:px-4 lg:py-2" asp-controller="Account" asp-action="Logout" title="@Localizer["Logout"]">
                             <i class="fas fa-sign-out-alt text-xl"></i>
@@ -80,7 +80,7 @@
                 {
                     <li><a class="nav-link !w-full !justify-start" asp-area="Admin" asp-controller="AdminMenu" asp-action="Index"><i class="fas fa-user-shield text-xl w-8 text-center mr-3"></i>@Localizer["Management"]</a></li>
                 }
-                @if (User.Identity.IsAuthenticated)
+                @if (User.Identity?.IsAuthenticated ?? false)
                 {
                     <li><a class="nav-link !w-full !justify-start" asp-controller="Account" asp-action="Logout"><i class="fas fa-sign-out-alt text-xl w-8 text-center mr-3"></i>@Localizer["Logout"]</a></li>
                 }

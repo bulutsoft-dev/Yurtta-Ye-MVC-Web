@@ -1,24 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-  <data name="QueryMenu" xml:space="preserve"><value>Menü Sorgula</value></data>
-  <data name="City" xml:space="preserve"><value>Şehir</value></data>
-  <data name="SelectCity" xml:space="preserve"><value>Şehir Seç</value></data>
-  <data name="Meal" xml:space="preserve"><value>Öğün</value></data>
-  <data name="MealType" xml:space="preserve"><value>Öğün Türü</value></data>
-  <data name="Date" xml:space="preserve"><value>Tarih</value></data>
-  <data name="Breakfast" xml:space="preserve"><value>Kahvaltı</value></data>
-  <data name="Dinner" xml:space="preserve"><value>Akşam Yemeği</value></data>
-  <data name="BreakfastMenu" xml:space="preserve"><value>Kahvaltı Menüsü</value></data>
-  <data name="DinnerMenu" xml:space="preserve"><value>Akşam Yemeği Menüsü</value></data>
-  <data name="BreakfastHours" xml:space="preserve"><value>07:00 - 09:00</value></data>
-  <data name="DinnerHours" xml:space="preserve"><value>18:00 - 20:00</value></data>
-  <data name="ImportantInfo" xml:space="preserve"><value>Önemli Bilgi</value></data>
-  <data name="InfoNote" xml:space="preserve"><value>Bu platformda sunulan menü bilgileri, yurt yönetimleri tarafından sağlanan veya kullanıcılar tarafından yapılan katkılara dayanmaktadır. Menüler; yurda, tarihe veya öğün saatine göre farklılık gösterebilir ve verilerde zaman zaman yanlışlıklar olabilir. Uygulamamız, gösterilen bilgilerin doğruluğunu garanti etmez ve bu verilerden kaynaklanabilecek herhangi bir sorumluluk kabul etmez.</value></data>
-  <data name="Error" xml:space="preserve"><value>Hata</value></data>
-  <data name="TotalEnergy" xml:space="preserve"><value>Toplam Enerji</value></data>
-  <data name="MenuNotPublished" xml:space="preserve"><value>Menü Yayınlanmadı</value></data>
-  <data name="MenuNotAvailable" xml:space="preserve"><value>için menü bulunamadı.</value></data>
-  <data name="DataContribution" xml:space="preserve"><value>Veri Katkısı</value></data>
-  <data name="ContributionNeeded" xml:space="preserve"><value>Bu günün menüsü eksikse bize ulaşabilirsiniz.</value></data>
-  <data name="ContactUs" xml:space="preserve"><value>Bize Ulaşın</value></data>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="QueryMenu" xml:space="preserve">
+    <value>Menü Sorgula</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>Şehir</value>
+  </data>
+  <data name="SelectCity" xml:space="preserve">
+    <value>Şehir Seçin</value>
+  </data>
+  <data name="Meal" xml:space="preserve">
+    <value>Öğün</value>
+  </data>
+  <data name="Breakfast" xml:space="preserve">
+    <value>Kahvaltı</value>
+  </data>
+  <data name="BreakfastHours" xml:space="preserve">
+    <value>07:00 - 09:00</value>
+  </data>
+  <data name="Dinner" xml:space="preserve">
+    <value>Akşam Yemeği</value>
+  </data>
+  <data name="DinnerHours" xml:space="preserve">
+    <value>18:00 - 20:00</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Hata</value>
+  </data>
+  <data name="BreakfastMenu" xml:space="preserve">
+    <value>Kahvaltı Menüsü</value>
+  </data>
+  <data name="DinnerMenu" xml:space="preserve">
+    <value>Akşam Yemeği Menüsü</value>
+  </data>
+  <data name="MenuNotAvailableForDate" xml:space="preserve">
+    <value>{0} tarihi için menü henüz yayınlanmadı.</value>
+  </data>
+  <data name="ImportantInfo" xml:space="preserve">
+    <value>Önemli Bilgilendirme</value>
+  </data>
+  <data name="InfoNote" xml:space="preserve">
+    <value>Menüler, Kredi ve Yurtlar Kurumu (KYK) tarafından sağlanan verilere dayanmaktadır. Menülerde değişiklik olabilir, en güncel bilgi için lütfen yurt duyurularını takip edin.</value>
+  </data>
+  <data name="TotalEnergy" xml:space="preserve">
+    <value>Toplam Enerji</value>
+  </data>
 </root> 

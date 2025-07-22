@@ -51,14 +51,41 @@ body {
     border-radius: 0.5rem;
     font-weight: 600;
     transition: all 0.2s ease;
-    border: 1px solid transparent;
+    border: 2px solid var(--border);
 }
 
 .meal-type-btn {
     background-color: var(--card);
-    border-color: var(--border);
-    color: var(--text-secondary);
 }
+
+/* --- Meal Type Button Theming (Final Fix) --- */
+
+/* Default State - Use !important to override theme-wide styles */
+.meal-type-btn[data-meal-type="Breakfast"] { border-color: var(--morning-primary) !important; }
+.meal-type-btn[data-meal-type="Breakfast"] .font-semibold { color: var(--morning-primary) !important; }
+.meal-type-btn[data-meal-type="Breakfast"] .meal-subtitle { color: var(--text-secondary) !important; }
+
+.meal-type-btn[data-meal-type="Dinner"] { border-color: var(--evening-primary) !important; }
+.meal-type-btn[data-meal-type="Dinner"] .font-semibold { color: var(--evening-primary) !important; }
+.meal-type-btn[data-meal-type="Dinner"] .meal-subtitle { color: var(--text-secondary) !important; }
+
+/* Active State - This will override the default state for the active button */
+[data-meal-theme='morning'] .meal-type-btn[data-meal-type="Breakfast"] {
+    background-color: var(--morning-primary) !important;
+    border-color: var(--morning-primary) !important;
+}
+
+[data-meal-theme='evening'] .meal-type-btn[data-meal-type="Dinner"] {
+    background-color: var(--evening-primary) !important;
+    border-color: var(--evening-primary) !important;
+}
+
+/* Ensure text is white on active buttons */
+[data-meal-theme='morning'] .meal-type-btn[data-meal-type="Breakfast"] span,
+[data-meal-theme='evening'] .meal-type-btn[data-meal-type="Dinner"] span {
+    color: white !important;
+}
+
 
 .hide-scrollbar {
     -ms-overflow-style: none; /* IE and Edge */
@@ -79,42 +106,53 @@ body {
     background-color: #2A2A2A; /* Explicitly dark gray for dark mode */
 }
 
-.theme-morning .date-strip-item.selected {
+[data-meal-theme='morning'] .date-strip-item.selected {
     background-color: var(--morning-primary);
     border-color: var(--morning-primary);
     color: white;
 }
-.theme-evening .date-strip-item.selected {
+[data-meal-theme='evening'] .date-strip-item.selected {
     background-color: var(--evening-primary);
     border-color: var(--evening-primary);
     color: white;
 }
 
 /* Meal Type Button Active States */
-.theme-morning .meal-type-btn[data-meal-type="Kahvaltı"],
-.theme-evening .meal-type-btn[data-meal-type="Akşam Yemeği"] {
+[data-meal-theme='morning'] .meal-type-btn[data-meal-type="Breakfast"] {
     background-color: var(--kyk-accent);
     color: white;
     border-color: var(--kyk-accent);
 }
 
+[data-meal-theme='evening'] .meal-type-btn[data-meal-type="Dinner"] {
+    background-color: var(--evening-primary);
+    color: white;
+    border-color: var(--evening-primary);
+}
+
+/* Make sure the text inside the active dinner button is readable */
+[data-meal-theme='evening'] .meal-type-btn[data-meal-type="Dinner"] span {
+    color: white;
+}
+
+
 /* Icon Color Theming for Date Navigation */
-.theme-morning #prevDateBtn i,
-.theme-morning #nextDateBtn i {
+[data-meal-theme='morning'] #prevDateBtn i,
+[data-meal-theme='morning'] #nextDateBtn i {
     color: var(--morning-primary);
 }
 
-.theme-evening #prevDateBtn i,
-.theme-evening #nextDateBtn i {
+[data-meal-theme='evening'] #prevDateBtn i,
+[data-meal-theme='evening'] #nextDateBtn i {
     color: var(--evening-primary);
 }
 
 /* Date Display Text Color Theming */
-.theme-morning #date-display-trigger .text-primary {
+[data-meal-theme='morning'] #date-display-trigger .text-primary {
     color: var(--morning-primary);
 }
 
-.theme-evening #date-display-trigger .text-primary {
+[data-meal-theme='evening'] #date-display-trigger .text-primary {
     color: var(--evening-primary);
 }
 
