@@ -63,6 +63,9 @@
   <data name="Management" xml:space="preserve">
     <value>Yönetim</value>
   </data>
+  <data name="Menu" xml:space="preserve">
+    <value>Menü</value>
+  </data>
   <data name="ToggleMenu" xml:space="preserve">
     <value>Menüyü aç/kapat</value>
   </data>
