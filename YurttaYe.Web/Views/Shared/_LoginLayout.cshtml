@@ -1,0 +1,126 @@
+@using System.Globalization
+<!DOCTYPE html>
+<html lang="@CultureInfo.CurrentUICulture.Name" x-data="{ darkMode: localStorage.getItem('darkMode') === 'true' }" x-bind:class="{ 'dark': darkMode }">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="YurttaYe Yönetim Paneli - Güvenli Giriş" />
+    <meta name="author" content="YurttaYe Ekibi" />
+    <meta name="robots" content="noindex, nofollow" />
+
+    <title>@ViewData["Title"] - YurttaYe Admin</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="~/logo-yurttaye.png" type="image/png" />
+    <link rel="apple-touch-icon" href="~/logo-yurttaye.png" />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Alpine.js for interactivity -->
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js" defer></script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Custom Login Styles -->
+    <link rel="stylesheet" href="~/css/login.css" />
+</head>
+
+<body>
+    <!-- Dark Mode Toggle -->
+    <div class="absolute top-6 right-6 z-50">
+        <button x-on:click="darkMode = !darkMode; localStorage.setItem('darkMode', darkMode)" 
+                class="theme-toggle p-3 rounded-full transition-all duration-300 hover:scale-110"
+                title="Tema Değiştir">
+            <i x-show="!darkMode" class="fas fa-moon text-lg"></i>
+            <i x-show="darkMode" class="fas fa-sun text-lg" style="display: none;"></i>
+        </button>
+    </div>
+
+    <!-- Animated Background -->
+    <div class="login-bg">
+        <!-- Floating Shapes -->
+        <div class="shape">
+            <i class="fas fa-utensils text-6xl text-white"></i>
+        </div>
+        <div class="shape">
+            <i class="fas fa-cookie-bite text-5xl text-white"></i>
+        </div>
+        <div class="shape">
+            <i class="fas fa-pizza-slice text-4xl text-white"></i>
+        </div>
+
+        <!-- Main Content -->
+        <main class="relative z-10">
+            @RenderBody()
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+    <script>
+        // Enhanced animations and interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scroll behavior
+            document.documentElement.style.scrollBehavior = 'smooth';
+            
+            // Add entrance animation to main content
+            const mainContent = document.querySelector('main');
+            if (mainContent) {
+                mainContent.style.opacity = '0';
+                mainContent.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    mainContent.style.transition = 'all 0.8s ease-out';
+                    mainContent.style.opacity = '1';
+                    mainContent.style.transform = 'translateY(0)';
+                }, 100);
+            }
+
+            // Form validation enhancements
+            const inputs = document.querySelectorAll('.login-input');
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentElement.querySelector('label')?.classList.add('text-blue-500');
+                });
+                
+                input.addEventListener('blur', function() {
+                    if (!this.value) {
+                        this.parentElement.querySelector('label')?.classList.remove('text-blue-500');
+                    }
+                });
+            });
+        });
+
+        // Prevent right-click on login page for security
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // Disable F12 and other dev tools shortcuts for security
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F12' || 
+                (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+                (e.ctrlKey && e.shiftKey && e.key === 'C') ||
+                (e.ctrlKey && e.key === 'u')) {
+                e.preventDefault();
+            }
+        });
+
+        // Auto-hide alerts after 5 seconds
+        setTimeout(() => {
+            const alerts = document.querySelectorAll('.login-error, .login-success');
+            alerts.forEach(alert => {
+                alert.style.transition = 'opacity 0.5s ease-out';
+                alert.style.opacity = '0';
+                setTimeout(() => alert.remove(), 500);
+            });
+        }, 5000);
+    </script>
+</body>
+</html>

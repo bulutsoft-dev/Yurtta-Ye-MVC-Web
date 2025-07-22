@@ -1,0 +1,274 @@
+/* Login-specific Theme Variables */
+:root {
+    --login-primary: #1E3A8A;
+    --login-secondary: #3B82F6;
+    --login-accent: #F59E0B;
+    --login-success: #10B981;
+    --login-error: #EF4444;
+    --login-warning: #F59E0B;
+    
+    --login-bg-primary: #F8FAFC;
+    --login-bg-secondary: #FFFFFF;
+    --login-bg-card: #FFFFFF;
+    --login-text-primary: #1E293B;
+    --login-text-secondary: #64748B;
+    --login-border: #E2E8F0;
+    --login-shadow: rgba(0, 0, 0, 0.1);
+    
+    --login-gradient-start: #667EEA;
+    --login-gradient-end: #764BA2;
+}
+
+.dark {
+    --login-bg-primary: #0F172A;
+    --login-bg-secondary: #1E293B;
+    --login-bg-card: #334155;
+    --login-text-primary: #F1F5F9;
+    --login-text-secondary: #94A3B8;
+    --login-border: #475569;
+    --login-shadow: rgba(0, 0, 0, 0.3);
+    
+    --login-gradient-start: #4C1D95;
+    --login-gradient-end: #1E3A8A;
+}
+
+/* Base Styles */
+body {
+    background: linear-gradient(135deg, var(--login-gradient-start) 0%, var(--login-gradient-end) 100%);
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Animated Background */
+.login-bg {
+    position: relative;
+    background: linear-gradient(135deg, var(--login-gradient-start) 0%, var(--login-gradient-end) 100%);
+    min-height: 100vh;
+}
+
+.login-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    animation: float 20s infinite linear;
+}
+
+/* Keyframe Animations */
+@keyframes float {
+    0% { transform: translateY(0px) translateX(0px); }
+    33% { transform: translateY(-10px) translateX(5px); }
+    66% { transform: translateY(5px) translateX(-5px); }
+    100% { transform: translateY(0px) translateX(0px); }
+}
+
+@keyframes floatShapes {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    25% { transform: translateY(-20px) rotate(90deg); }
+    50% { transform: translateY(-10px) rotate(180deg); }
+    75% { transform: translateY(-30px) rotate(270deg); }
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Floating Shapes */
+.shape {
+    position: absolute;
+    opacity: 0.1;
+    animation: floatShapes 15s infinite ease-in-out;
+}
+
+.shape:nth-child(1) {
+    top: 20%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.shape:nth-child(2) {
+    top: 60%;
+    right: 15%;
+    animation-delay: 5s;
+}
+
+.shape:nth-child(3) {
+    bottom: 20%;
+    left: 20%;
+    animation-delay: 10s;
+}
+
+/* Login Card Styles */
+.login-card {
+    background: var(--login-bg-card);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--login-border);
+    box-shadow: 0 25px 50px -12px var(--login-shadow);
+    animation: slideInUp 0.8s ease-out;
+}
+
+/* Input Styles */
+.login-input {
+    background: var(--login-bg-secondary);
+    border: 2px solid var(--login-border);
+    color: var(--login-text-primary);
+    transition: all 0.3s ease;
+}
+
+.login-input:focus {
+    border-color: var(--login-secondary);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    background: var(--login-bg-card);
+}
+
+.login-input::placeholder {
+    color: var(--login-text-secondary);
+}
+
+/* Button Styles */
+.login-btn {
+    background: linear-gradient(135deg, var(--login-primary) 0%, var(--login-secondary) 100%);
+    border: none;
+    color: white;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.login-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(30, 58, 138, 0.3);
+}
+
+.login-btn:active {
+    transform: translateY(0);
+}
+
+.login-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.login-btn:hover::before {
+    left: 100%;
+}
+
+/* Error Styles */
+.login-error {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: var(--login-error);
+}
+
+/* Success Styles */
+.login-success {
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: var(--login-success);
+}
+
+/* Dark mode toggle */
+.theme-toggle {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+/* Text Colors */
+.text-login-primary { color: var(--login-text-primary); }
+.text-login-secondary { color: var(--login-text-secondary); }
+.text-login-accent { color: var(--login-accent); }
+
+/* Loading Animation */
+.loading-spinner {
+    animation: spin 1s linear infinite;
+}
+
+/* Pulse Animation */
+.pulse-slow {
+    animation: pulse 3s infinite;
+}
+
+/* Logo Animation */
+.logo-bounce {
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(-25%);
+        animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+    }
+    50% {
+        transform: translateY(0);
+        animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .login-card {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+    
+    .shape {
+        display: none;
+    }
+}
+
+/* From Login.cshtml */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+/* Custom input focus effects */
+.login-input:focus + .absolute i {
+    color: #3B82F6 !important;
+}
+
+/* Improved button hover effects */
+.login-btn:hover {
+    box-shadow: 0 15px 35px rgba(30, 58, 138, 0.4);
+}
+
