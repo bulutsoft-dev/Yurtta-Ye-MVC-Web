@@ -17,12 +17,24 @@
       "PackagePath": "staticwebassets/css/login.css"
     },
     {
+      "Id": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/wwwroot/css/menu-enhancements.css",
+      "PackagePath": "staticwebassets/css/menu-enhancements.css"
+    },
+    {
       "Id": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/wwwroot/css/site.css",
       "PackagePath": "staticwebassets/css/site.css"
     },
     {
       "Id": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/wwwroot/favicon.ico",
       "PackagePath": "staticwebassets/favicon.ico"
+    },
+    {
+      "Id": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/wwwroot/js/menu-favorites.js",
+      "PackagePath": "staticwebassets/js/menu-favorites.js"
+    },
+    {
+      "Id": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/wwwroot/js/menu-interface.js",
+      "PackagePath": "staticwebassets/js/menu-interface.js"
     },
     {
       "Id": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/wwwroot/js/site.js",
@@ -271,6 +283,14 @@
     {
       "Id": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/wwwroot/logo.png",
       "PackagePath": "staticwebassets/logo.png"
+    },
+    {
+      "Id": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/wwwroot/manifest.json",
+      "PackagePath": "staticwebassets/manifest.json"
+    },
+    {
+      "Id": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/wwwroot/sw.js",
+      "PackagePath": "staticwebassets/sw.js"
     },
     {
       "Id": "obj/Debug/net8.0/staticwebassets/msbuild.YurttaYe.Web.Microsoft.AspNetCore.StaticWebAssets.props",

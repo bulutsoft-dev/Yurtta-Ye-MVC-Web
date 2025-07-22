@@ -53,7 +53,7 @@
                     </div>
                 </div>
 
-                <!-- New Date Picker -->
+                <!-- Enhanced Date Picker -->
                 <div>
                     <div class="date-selector">
                         <div class="flex items-center justify-between mb-6">
@@ -195,121 +195,46 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://npmcdn.com/flatpickr/dist/l10n/tr.js"></script>
+    <script src="~/js/menu-interface.js" defer></script>
+    
+    <!-- Keyboard shortcuts help modal -->
+    <div id="helpModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-6 max-w-md mx-4">
+            <h3 class="text-lg font-bold mb-4">Klavye Kısayolları</h3>
+            <div class="space-y-2 text-sm">
+                <div class="flex justify-between">
+                    <span>← →</span>
+                    <span>Tarih değiştir</span>
+                </div>
+                <div class="flex justify-between">
+                    <span>1</span>
+                    <span>Kahvaltı</span>
+                </div>
+                <div class="flex justify-between">
+                    <span>2</span>
+                    <span>Akşam yemeği</span>
+                </div>
+                <div class="flex justify-between">
+                    <span>?</span>
+                    <span>Bu yardımı göster</span>
+                </div>
+            </div>
+            <button onclick="document.getElementById('helpModal').classList.add('hidden')" 
+                    class="mt-4 w-full bg-blue-500 text-white py-2 rounded">
+                Kapat
+            </button>
+        </div>
+    </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const form = document.getElementById("menuForm");
-            const dateInput = document.getElementById("Date");
-            const mealTypeInput = document.getElementById("MealType");
-            const breakfastBtn = document.getElementById("breakfastBtn");
-            const dinnerBtn = document.getElementById("dinnerBtn");
-            const formContainer = document.getElementById('menuForm');
-
-            // Constants for meal types from Razor
-            const breakfastType = "Breakfast";
-            const dinnerType = "Dinner";
-
-            // Scroll selected date into view
-            const selectedDateElement = document.querySelector('.date-strip-item.selected');
-            if (selectedDateElement) {
-                selectedDateElement.scrollIntoView({ behavior: 'auto', inline: 'center', block: 'nearest' });
+        // Help modal toggle
+        document.addEventListener('keydown', (e) => {
+            if (e.key === '?' && !e.ctrlKey && !e.metaKey) {
+                e.preventDefault();
+                const modal = document.getElementById('helpModal');
+                modal.classList.toggle('hidden');
+                modal.classList.toggle('flex');
             }
-
-            function submitWithDate(newDateStr) {
-                const newDate = new Date(newDateStr);
-                const today = new Date();
-                
-                newDate.setHours(0, 0, 0, 0);
-                today.setHours(0, 0, 0, 0);
-
-                if (newDate > today) {
-                    return; // Prevent selecting future dates
-                }
-
-                dateInput.value = newDateStr;
-                form.submit();
-            }
-
-            document.getElementById('prevDateBtn').addEventListener('click', function() {
-                const currentDate = new Date(dateInput.value);
-                currentDate.setDate(currentDate.getDate() - 1);
-                submitWithDate(currentDate.toISOString().split('T')[0]);
-            });
-
-            document.getElementById('nextDateBtn').addEventListener('click', function() {
-                const currentDate = new Date(dateInput.value);
-                currentDate.setDate(currentDate.getDate() + 1);
-                submitWithDate(currentDate.toISOString().split('T')[0]);
-            });
-
-            const dateStrip = document.querySelector('.hide-scrollbar');
-            let isDragging = false; 
-
-            if (dateStrip) {
-                let isDown = false;
-                let startX;
-                let scrollLeft;
-                
-                dateStrip.addEventListener('mousedown', (e) => {
-                    isDown = true;
-                    isDragging = false; 
-                    startX = e.pageX - dateStrip.offsetLeft;
-                    scrollLeft = dateStrip.scrollLeft;
-                });
-                
-                dateStrip.addEventListener('mousemove', (e) => {
-                    if(!isDown) return;
-                    e.preventDefault();
-                    isDragging = true;
-                    dateStrip.classList.add('grabbing');
-                    const x = e.pageX - dateStrip.offsetLeft;
-                    const walk = (x - startX) * 2; 
-                    dateStrip.scrollLeft = scrollLeft - walk;
-                });
-                
-                window.addEventListener('mouseup', () => {
-                    isDown = false;
-                    dateStrip.classList.remove('grabbing');
-                });
-                
-                document.querySelectorAll('.date-strip-item').forEach(button => {
-                    button.addEventListener('click', function(e) {
-                        if (isDragging) {
-                            e.preventDefault();
-                            return;
-                        }
-                        submitWithDate(this.dataset.date);
-                    });
-                });
-            }
-
-            function updateButtonStyles() {
-                const currentMealType = mealTypeInput.value;
-                formContainer.dataset.mealTheme = currentMealType === breakfastType ? 'morning' : 'evening';
-                
-                [breakfastBtn, dinnerBtn].forEach(btn => {
-                    btn.classList.remove('btn-primary', 'btn-outline');
-                    if (btn.dataset.mealType === currentMealType) {
-                        btn.classList.add('btn-primary');
-                    } else {
-                        btn.classList.add('btn-outline');
-                    }
-                });
-            }
-
-            [breakfastBtn, dinnerBtn].forEach(button => {
-                button.addEventListener('click', function() {
-                    mealTypeInput.value = this.dataset.mealType;
-                    updateButtonStyles();
-                    form.submit();
-                });
-            });
-            
-            document.getElementById('CityId').addEventListener('change', function() {
-                form.submit();
-            });
-
-            updateButtonStyles();
         });
     </script>
 }
