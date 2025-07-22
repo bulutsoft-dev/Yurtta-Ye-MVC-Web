@@ -1,46 +1,142 @@
-<!-- Admin Sidebar Component -->
-<aside id="sidebar" class="fixed left-0 top-0 z-40 w-64 h-screen transition-transform -translate-x-full lg:translate-x-0 bg-admin-dark border-r border-gray-700">
-    <!-- Logo Section -->
-    <div class="flex items-center justify-center h-16 border-b border-gray-700 bg-admin-primary">
-        <div class="flex items-center space-x-2">
-            <div class="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
-                <i class="fas fa-utensils text-admin-primary text-lg"></i>
+<!-- Enhanced Admin Sidebar Component -->
+<aside id="sidebar" class="fixed left-0 top-0 z-40 w-64 h-screen transition-all duration-300 -translate-x-full lg:translate-x-0 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 border-r border-slate-700/50 shadow-2xl">
+    <!-- Enhanced Logo Section -->
+    <div class="flex items-center justify-center h-20 border-b border-slate-700/50 bg-gradient-to-r from-blue-600 to-purple-700 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 animate-pulse"></div>
+        <div class="flex items-center space-x-3 relative z-10">
+            <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-lg transform hover:scale-110 transition-transform duration-300">
+                <i class="fas fa-utensils text-blue-600 text-xl"></i>
             </div>
             <div>
-                <h1 class="text-lg font-bold text-white">YurttaYe</h1>
-                <p class="text-xs text-blue-200">Admin Panel</p>
+                <h1 class="text-xl font-bold text-white tracking-wide">YurttaYe</h1>
+                <p class="text-xs text-blue-200 font-medium">Admin Panel</p>
             </div>
         </div>
     </div>
 
-    <!-- Navigation Menu -->
-    <nav class="p-4 space-y-1">
+    <!-- Enhanced Navigation Menu -->
+    <nav class="p-4 space-y-2 h-full overflow-y-auto">
         <!-- Dashboard -->
         <a asp-area="Admin" asp-controller="Home" asp-action="Index" 
-           class="nav-link flex items-center px-4 py-3 rounded-lg text-gray-300 hover:bg-admin-primary hover:text-white transition-all duration-200 group @(ViewContext.RouteData.Values["controller"]?.ToString() == "Home" ? "bg-admin-primary text-white" : "")">
-            <i class="fas fa-tachometer-alt w-5 text-center group-hover:scale-110 transition-transform"></i>
-            <span class="ml-3 font-medium">Dashboard</span>
+           class="nav-link flex items-center px-4 py-3 rounded-xl text-gray-300 hover:bg-gradient-to-r hover:from-blue-600 hover:to-blue-700 hover:text-white transition-all duration-300 group transform hover:scale-[1.02] @(ViewContext.RouteData.Values["controller"]?.ToString() == "Home" ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg" : "")">
+            <div class="w-10 h-10 rounded-lg bg-slate-700/50 group-hover:bg-white/20 flex items-center justify-center mr-3 transition-all duration-300">
+                <i class="fas fa-tachometer-alt group-hover:scale-110 transition-transform"></i>
+            </div>
+            <div class="flex-1">
+                <span class="font-semibold">Dashboard</span>
+                <div class="text-xs text-gray-400 group-hover:text-blue-100">Genel Bakış</div>
+            </div>
         </a>
         
-        <!-- Menu Management -->
-        <div class="menu-section">
+        <!-- Menu Management Section -->
+        <div class="space-y-2">
+            <div class="px-4 py-2">
+                <div class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Menü Yönetimi</div>
+            </div>
+            
             <a asp-area="Admin" asp-controller="AdminMenu" asp-action="Index" 
-               class="nav-link flex items-center px-4 py-3 rounded-lg text-gray-300 hover:bg-admin-primary hover:text-white transition-all duration-200 group @(ViewContext.RouteData.Values["controller"]?.ToString() == "AdminMenu" ? "bg-admin-primary text-white" : "")">
-                <i class="fas fa-utensils w-5 text-center group-hover:scale-110 transition-transform"></i>
-                <span class="ml-3 font-medium">Menü Yönetimi</span>
-                <span class="ml-auto bg-blue-500 text-white text-xs px-2 py-1 rounded-full opacity-75">@ViewBag.MenuCount</span>
+               class="nav-link flex items-center px-4 py-3 rounded-xl text-gray-300 hover:bg-gradient-to-r hover:from-emerald-600 hover:to-emerald-700 hover:text-white transition-all duration-300 group transform hover:scale-[1.02] @(ViewContext.RouteData.Values["controller"]?.ToString() == "AdminMenu" ? "bg-gradient-to-r from-emerald-600 to-emerald-700 text-white shadow-lg" : "")">
+                <div class="w-10 h-10 rounded-lg bg-slate-700/50 group-hover:bg-white/20 flex items-center justify-center mr-3 transition-all duration-300">
+                    <i class="fas fa-utensils group-hover:scale-110 transition-transform"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="flex items-center justify-between">
+                        <span class="font-semibold">Menüler</span>
+                        <span class="bg-emerald-500/20 text-emerald-300 text-xs px-2 py-1 rounded-full font-medium">@(ViewBag.MenuCount ?? 0)</span>
+                    </div>
+                    <div class="text-xs text-gray-400 group-hover:text-emerald-100">Menü Listesi</div>
+                </div>
+            </a>
+            
+            <a asp-area="Admin" asp-controller="AdminMenu" asp-action="Create" 
+               class="nav-link flex items-center px-4 py-3 rounded-xl text-gray-300 hover:bg-gradient-to-r hover:from-blue-500 hover:to-blue-600 hover:text-white transition-all duration-300 group transform hover:scale-[1.02]">
+                <div class="w-10 h-10 rounded-lg bg-slate-700/50 group-hover:bg-white/20 flex items-center justify-center mr-3 transition-all duration-300">
+                    <i class="fas fa-plus group-hover:scale-110 transition-transform"></i>
+                </div>
+                <div class="flex-1">
+                    <span class="font-semibold">Yeni Menü</span>
+                    <div class="text-xs text-gray-400 group-hover:text-blue-100">Menü Ekle</div>
+                </div>
             </a>
         </div>
-        
-        <!-- City Management -->
-        <a asp-area="Admin" asp-controller="AdminCity" asp-action="Index" 
-           class="nav-link flex items-center px-4 py-3 rounded-lg text-gray-300 hover:bg-admin-primary hover:text-white transition-all duration-200 group @(ViewContext.RouteData.Values["controller"]?.ToString() == "AdminCity" ? "bg-admin-primary text-white" : "")">
-            <i class="fas fa-city w-5 text-center group-hover:scale-110 transition-transform"></i>
-            <span class="ml-3 font-medium">Şehir Yönetimi</span>
-            <span class="ml-auto text-xs text-gray-400">@ViewBag.CityCount</span>
-        </a>
 
-        <!-- Divider -->
-        <div class="border-t border-gray-700 my-4"></div>
+        <!-- City Management Section -->
+        <div class="space-y-2">
+            <div class="px-4 py-2">
+                <div class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Lokasyon Yönetimi</div>
+            </div>
+            
+            <a asp-area="Admin" asp-controller="AdminCity" asp-action="Index" 
+               class="nav-link flex items-center px-4 py-3 rounded-xl text-gray-300 hover:bg-gradient-to-r hover:from-purple-600 hover:to-purple-700 hover:text-white transition-all duration-300 group transform hover:scale-[1.02] @(ViewContext.RouteData.Values["controller"]?.ToString() == "AdminCity" ? "bg-gradient-to-r from-purple-600 to-purple-700 text-white shadow-lg" : "")">
+                <div class="w-10 h-10 rounded-lg bg-slate-700/50 group-hover:bg-white/20 flex items-center justify-center mr-3 transition-all duration-300">
+                    <i class="fas fa-city group-hover:scale-110 transition-transform"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="flex items-center justify-between">
+                        <span class="font-semibold">Şehirler</span>
+                        <span class="text-xs text-gray-400 group-hover:text-purple-100">@(ViewBag.CityCount ?? 0)</span>
+                    </div>
+                    <div class="text-xs text-gray-400 group-hover:text-purple-100">Şehir Listesi</div>
+                </div>
+            </a>
+            
+            <a asp-area="Admin" asp-controller="AdminCity" asp-action="Create" 
+               class="nav-link flex items-center px-4 py-3 rounded-xl text-gray-300 hover:bg-gradient-to-r hover:from-indigo-500 hover:to-indigo-600 hover:text-white transition-all duration-300 group transform hover:scale-[1.02]">
+                <div class="w-10 h-10 rounded-lg bg-slate-700/50 group-hover:bg-white/20 flex items-center justify-center mr-3 transition-all duration-300">
+                    <i class="fas fa-map-marker-alt group-hover:scale-110 transition-transform"></i>
+                </div>
+                <div class="flex-1">
+                    <span class="font-semibold">Yeni Şehir</span>
+                    <div class="text-xs text-gray-400 group-hover:text-indigo-100">Şehir Ekle</div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Tools Section -->
+        <div class="space-y-2">
+            <div class="px-4 py-2">
+                <div class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Araçlar</div>
+            </div>
+            
+            <button onclick="showBulkImportModal()" 
+                    class="w-full nav-link flex items-center px-4 py-3 rounded-xl text-gray-300 hover:bg-gradient-to-r hover:from-orange-600 hover:to-orange-700 hover:text-white transition-all duration-300 group transform hover:scale-[1.02]">
+                <div class="w-10 h-10 rounded-lg bg-slate-700/50 group-hover:bg-white/20 flex items-center justify-center mr-3 transition-all duration-300">
+                    <i class="fas fa-file-import group-hover:scale-110 transition-transform"></i>
+                </div>
+                <div class="flex-1">
+                    <span class="font-semibold">Toplu İçe Aktarım</span>
+                    <div class="text-xs text-gray-400 group-hover:text-orange-100">Excel Yükle</div>
+                </div>
+            </button>
+            
+            <button onclick="exportAllData()" 
+                    class="w-full nav-link flex items-center px-4 py-3 rounded-xl text-gray-300 hover:bg-gradient-to-r hover:from-teal-600 hover:to-teal-700 hover:text-white transition-all duration-300 group transform hover:scale-[1.02]">
+                <div class="w-10 h-10 rounded-lg bg-slate-700/50 group-hover:bg-white/20 flex items-center justify-center mr-3 transition-all duration-300">
+                    <i class="fas fa-download group-hover:scale-110 transition-transform"></i>
+                </div>
+                <div class="flex-1">
+                    <span class="font-semibold">Veri Dışa Aktar</span>
+                    <div class="text-xs text-gray-400 group-hover:text-teal-100">Excel İndir</div>
+                </div>
+            </button>
+        </div>
+
+        <!-- Footer Section -->
+        <div class="mt-auto pt-6 border-t border-slate-700/50">
+            <div class="px-4 py-3 bg-slate-800/50 rounded-xl">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 bg-gradient-to-r from-green-400 to-green-500 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-check text-white text-sm"></i>
+                    </div>
+                    <div>
+                        <div class="text-sm font-medium text-white">Sistem Durumu</div>
+                        <div class="text-xs text-green-400">Tüm sistemler çalışıyor</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </nav>
 </aside>
+
+<!-- Mobile Sidebar Overlay -->
+<div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden hidden transition-opacity duration-300"></div>
