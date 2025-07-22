@@ -48,13 +48,13 @@ namespace YurttaYe.Data
                         if (!context.Cities.Any())
             {
                 var city = new City { Name = "İstanbul" };
-                context.Cities.Add(city);
-                context.SaveChanges();
+                await context.Cities.AddAsync(city);
+                await context.SaveChangesAsync();
             }
 
-            var istanbul = context.Cities.FirstOrDefault(c => c.Name == "İstanbul");
+            var istanbul = await context.Cities.FirstOrDefaultAsync(c => c.Name == "İstanbul");
 
-            if (!context.Menus.Any(m => m.Date >= new DateTime(2025, 5, 15) && m.Date <= new DateTime(2025, 5, 25)))
+            if (istanbul != null && !await context.Menus.AnyAsync(m => m.Date >= new DateTime(2025, 5, 15) && m.Date <= new DateTime(2025, 5, 25)))
             {
                 var menuList = new[]
                 {
@@ -175,8 +175,8 @@ namespace YurttaYe.Data
                     // Diğer günleri aynı mantıkla doldurabilirsin (22, 23, 24, 25 Mayıs)
                 };
 
-                context.Menus.AddRange(menuList);
-                context.SaveChanges();
+                await context.Menus.AddRangeAsync(menuList);
+                await context.SaveChangesAsync();
             }
         }
     }

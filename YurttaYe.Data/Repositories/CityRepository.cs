@@ -21,7 +21,7 @@ namespace YurttaYe.Data.Repositories
 
         public async Task<City> GetCityByIdAsync(int id)
         {
-            return await _context.Cities.FindAsync(id);
+            return await _context.Cities.FindAsync(id) ?? new City();
         }
 
         public async Task AddCityAsync(City city)

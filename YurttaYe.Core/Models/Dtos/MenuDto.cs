@@ -8,7 +8,7 @@ namespace YurttaYe.Core.Models.Dtos
         public int Id { get; set; }
         public int CityId { get; set; }
         public string MealType { get; set; } = string.Empty;
-        public string Date { get; set; }
+        public string Date { get; set; } = string.Empty;
         public string Energy { get; set; } = string.Empty;
         public List<MenuItemDto> Items { get; set; } = new();
     }

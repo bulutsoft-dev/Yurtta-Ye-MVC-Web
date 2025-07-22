@@ -30,7 +30,7 @@ namespace YurttaYe.Data.Repositories
             return await _context.Menus
                 .Include(m => m.City)
                 .Include(m => m.Items)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.Id == id) ?? new Menu();
         }
 
         public async Task<List<Menu>> GetAllMenusAsync()

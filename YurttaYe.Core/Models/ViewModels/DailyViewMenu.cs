@@ -6,6 +6,6 @@ namespace YurttaYe.Core.Models.ViewModels;
 public class DailyMenu
 {
     public DateTime Date { get; set; }
-    public MenuDto Breakfast { get; set; }
-    public MenuDto Dinner { get; set; }
+    public MenuDto? Breakfast { get; set; }
+    public MenuDto? Dinner { get; set; }
 }

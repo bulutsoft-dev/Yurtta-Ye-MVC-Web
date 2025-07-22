@@ -6,18 +6,18 @@ namespace YurttaYe.Core.Models.ViewModels
     {
         public int Id { get; set; }
         public int CityId { get; set; }
-        public string CityName { get; set; }
-        public string MealType { get; set; }
+        public string CityName { get; set; } = string.Empty;
+        public string MealType { get; set; } = string.Empty;
         public DateTime Date { get; set; }
-        public string Energy { get; set; }
-        public IEnumerable<SelectListItem> Cities { get; set; }
-        public List<AdminMenuItemViewModel> Items { get; set; }
+        public string Energy { get; set; } = string.Empty;
+        public IEnumerable<SelectListItem> Cities { get; set; } = new List<SelectListItem>();
+        public List<AdminMenuItemViewModel> Items { get; set; } = new List<AdminMenuItemViewModel>();
     }
 
     public class AdminMenuItemViewModel
     {
-        public string Category { get; set; }
-        public string Name { get; set; }
-        public string Gram { get; set; }
+        public string Category { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
+        public string Gram { get; set; } = string.Empty;
     }
 }
