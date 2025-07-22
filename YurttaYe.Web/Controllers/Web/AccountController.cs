@@ -41,9 +41,7 @@ namespace YurttaYe.Web.Controllers.Web
                 if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
-                        return Redirect(returnUrl);
-                    return RedirectToAction("Index", "AdminMenu", new { area = "Admin" });
+                    return RedirectToAction("Index", "Home", new { area = "Admin" });
                 }
             }
 
