@@ -30,6 +30,8 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
         public async Task<IActionResult> Index(string cityFilter, string mealTypeFilter, string dateFilter)
         {
             var menus = await _serviceManager.MenuService.GetAllMenusAsync();
+            var allCities = await _serviceManager.CityService.GetAllCitiesAsync();
+            
             var model = menus.Select(m => new AdminMenuViewModel
             {
                 Id = m.Id,
@@ -52,15 +54,49 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
             if (dateFilter != null && DateTime.TryParse(dateFilter, out var date))
                 model = model.Where(m => m.Date.Date == date.Date);
 
-            ViewBag.Cities = (await _serviceManager.CityService.GetAllCitiesAsync())
-                .Select(c => new SelectListItem { Value = c.Name, Text = c.Name });
+            // ViewData for sidebar and breadcrumb
+            ViewBag.MenuCount = menus.Count();
+            ViewBag.CityCount = allCities.Count();
+            
+            // Breadcrumb configuration
+            ViewData["BreadcrumbItems"] = new List<dynamic>
+            {
+                new { Text = "Menü Yönetimi", Icon = "fas fa-utensils", Url = (string)null }
+            };
+            
+            // Page actions
+            ViewData["PageActions"] = new List<dynamic>
+            {
+                new { 
+                    Type = "link", 
+                    Url = Url.Action("Create"), 
+                    Text = "Yeni Menü Ekle", 
+                    Icon = "fas fa-plus",
+                    Color = "blue-600",
+                    HoverColor = "blue-700"
+                },
+                new { 
+                    Type = "dropdown", 
+                    Text = "İşlemler", 
+                    Icon = "fas fa-cog",
+                    Id = "menu-actions-dropdown",
+                    Items = new List<dynamic>
+                    {
+                        new { Text = "Excel'e Aktar", Icon = "fas fa-file-excel", Url = Url.Action("ExportToExcel") },
+                        new { Text = "Toplu Silme", Icon = "fas fa-trash", Url = "#" },
+                        new { Text = "Filtreleri Temizle", Icon = "fas fa-filter", Url = Url.Action("Index") }
+                    }
+                }
+            };
+
+            ViewBag.Cities = allCities.Select(c => new SelectListItem { Value = c.Name, Text = c.Name });
             ViewBag.MealTypes = new List<SelectListItem>
             {
                 new SelectListItem { Value = "Breakfast", Text = _localizer["Morning"] },
                 new SelectListItem { Value = "Dinner", Text = _localizer["Evening"] }
             };
 
-            return View(model);
+            return View(model.ToList());
         }
 
         public async Task<IActionResult> Create()
@@ -243,5 +279,60 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
                 return View();
             }
         }
+
+        // Search endpoint for global search functionality
+        [HttpGet]
+        public async Task<IActionResult> Search(string q)
+        {
+            if (string.IsNullOrWhiteSpace(q) || q.Length < 2)
+            {
+                return Json(new List<object>());
+            }
+
+            var results = new List<object>();
+
+            try
+            {
+                // Search in menus
+                var menus = await _serviceManager.MenuService.GetAllMenusAsync();
+                var menuResults = menus
+                    .Where(m => m.City.Name.Contains(q, StringComparison.OrdinalIgnoreCase) || 
+                               m.MealType.Contains(q, StringComparison.OrdinalIgnoreCase))
+                    .Take(5)
+                    .Select(m => new
+                    {
+                        title = $"{m.City.Name} - {m.MealType}",
+                        description = $"{m.Date:dd.MM.yyyy} - {m.Energy} kcal",
+                        url = Url.Action("Details", "AdminMenu", new { id = m.Id }),
+                        icon = "fas fa-utensils",
+                        type = "Menü"
+                    });
+
+                results.AddRange(menuResults);
+
+                // Search in cities
+                var cities = await _serviceManager.CityService.GetAllCitiesAsync();
+                var cityResults = cities
+                    .Where(c => c.Name.Contains(q, StringComparison.OrdinalIgnoreCase))
+                    .Take(3)
+                    .Select(c => new
+                    {
+                        title = c.Name,
+                        description = "Şehir",
+                        url = Url.Action("Details", "AdminCity", new { id = c.Id }),
+                        icon = "fas fa-city",
+                        type = "Şehir"
+                    });
+
+                results.AddRange(cityResults);
+
+                return Json(results);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { error = "Arama sırasında hata oluştu" });
+            }
+        }
     }
 }
+

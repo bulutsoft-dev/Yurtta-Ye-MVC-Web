@@ -5,7 +5,8 @@ using YurttaYe.Core.Models.ViewModels;
 using YurttaYe.Core.Services.Interfaces;
 using System;
 
-
+namespace YurttaYe.Web.Areas.Admin.Controllers
+{
     [Area("Admin")]
     public class HomeController : Controller
     {
@@ -35,6 +36,38 @@ using System;
                 }).ToList()
             };
 
+            // ViewData'ları sidebar ve breadcrumb için ayarla
+            ViewBag.MenuCount = allMenus.Count();
+            ViewBag.CityCount = allCities.Count();
+            
+            // Breadcrumb için
+            ViewData["BreadcrumbItems"] = new List<dynamic>
+            {
+                new { Text = "Ana Sayfa", Icon = "fas fa-home", Url = (string)null }
+            };
+            
+            // Page actions
+            ViewData["PageActions"] = new List<dynamic>
+            {
+                new { 
+                    Type = "link", 
+                    Url = Url.Action("Create", "AdminMenu"), 
+                    Text = "Yeni Menü", 
+                    Icon = "fas fa-plus",
+                    Color = "blue-600",
+                    HoverColor = "blue-700"
+                },
+                new { 
+                    Type = "link", 
+                    Url = Url.Action("Create", "AdminCity"), 
+                    Text = "Yeni Şehir", 
+                    Icon = "fas fa-map-marker-alt",
+                    Color = "green-600",
+                    HoverColor = "green-700"
+                }
+            };
+
             return View(model);
         }
     }
+}

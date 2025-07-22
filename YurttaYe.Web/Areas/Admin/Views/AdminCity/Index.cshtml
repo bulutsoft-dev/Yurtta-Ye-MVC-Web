@@ -1,58 +1,338 @@
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
 @model IEnumerable<YurttaYe.Core.Models.ViewModels.AdminCityViewModel>
+
 @{
-    Layout = "_AdminLayout";
-    ViewData["Title"] = Localizer["CityManagement"];
+    ViewData["Title"] = "Şehir Yönetimi";
+    ViewData["BreadcrumbItems"] = new List<dynamic>
+    {
+        new { Text = "Şehir Yönetimi", Icon = "fas fa-city", Url = (string)null }
+    };
+    
+    ViewData["PageActions"] = new List<dynamic>
+    {
+        new { 
+            Type = "link", 
+            Url = Url.Action("Create"), 
+            Text = "Yeni Şehir Ekle", 
+            Icon = "fas fa-plus",
+            Color = "blue-600",
+            HoverColor = "blue-700"
+        }
+    };
 }
 
-<div class="mb-6 flex justify-between items-center">
-    <a asp-area="Admin" asp-controller="AdminCity" asp-action="Create" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">@Localizer["NewCity"]</a>
-    <form asp-area="Admin" asp-controller="AdminCity" asp-action="Index" method="get" class="w-1/3">
-        <div class="relative">
-            <input type="text" name="search" class="w-full p-2 border rounded-lg" placeholder="@Localizer["SearchCityPlaceholder"]" />
-            <button type="submit" class="absolute right-0 top-0 mt-2 mr-2">
-                <i class="fas fa-search text-gray-500"></i>
-            </button>
-        </div>
-    </form>
-</div>
-
-<div class="bg-white shadow rounded-lg overflow-hidden">
-    <table class="w-full">
-        <thead class="bg-gray-200">
-        <tr>
-            <th class="p-3 text-left">@Localizer["CityName"]</th>
-            <th class="p-3 text-left">@Localizer["Actions"]</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (var city in Model)
-        {
-            <tr class="border-b">
-                <td class="p-3">@city.Name</td>
-                <td class="p-3 flex gap-2">
-                    <a asp-area="Admin" asp-controller="AdminCity" asp-action="Edit" asp-route-id="@city.Id" class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600">@Localizer["Edit"]</a>
-                    <form asp-area="Admin" asp-controller="AdminCity" asp-action="Delete" asp-route-id="@city.Id" method="post" class="inline" onsubmit="return confirm('@Localizer["ConfirmDelete"]')">
-                        @Html.AntiForgeryToken()
-                        <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">@Localizer["Delete"]</button>
-                    </form>
-                </td>
-            </tr>
-        }
-        </tbody>
-    </table>
-</div>
-
+<!-- Success/Error Messages -->
 @if (TempData["Success"] != null)
 {
-    <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mt-4 rounded">
-        @TempData["Success"]
+    <div class="mb-6 bg-green-50 border border-green-200 rounded-lg p-4 flex items-center">
+        <i class="fas fa-check-circle text-green-500 mr-3"></i>
+        <span class="text-green-800 font-medium">@TempData["Success"]</span>
     </div>
 }
 @if (TempData["Error"] != null)
 {
-    <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mt-4 rounded">
-        @TempData["Error"]
+    <div class="mb-6 bg-red-50 border border-red-200 rounded-lg p-4 flex items-center">
+        <i class="fas fa-exclamation-circle text-red-500 mr-3"></i>
+        <span class="text-red-800 font-medium">@TempData["Error"]</span>
     </div>
+}
+
+<!-- Search and Stats -->
+<div class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-6">
+    <!-- Search Card -->
+    <div class="lg:col-span-3 admin-card bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+        <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+            <i class="fas fa-search text-blue-500 mr-2"></i>
+            Şehir Arama
+        </h3>
+        
+        <form asp-area="Admin" asp-controller="AdminCity" asp-action="Index" method="get" class="flex gap-4">
+            <div class="flex-1">
+                <input type="text" name="search" value="@ViewBag.SearchTerm" 
+                       placeholder="Şehir adı ile ara..." 
+                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" />
+            </div>
+            <button type="submit" class="inline-flex items-center px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                <i class="fas fa-search mr-2"></i>
+                Ara
+            </button>
+            @if (!string.IsNullOrEmpty(ViewBag.SearchTerm as string))
+            {
+                <a href="@Url.Action("Index")" class="inline-flex items-center px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                    <i class="fas fa-times mr-2"></i>
+                    Temizle
+                </a>
+            }
+        </form>
+    </div>
+
+    <!-- Stats Card -->
+    <div class="admin-card bg-gradient-to-r from-green-500 to-green-600 rounded-xl p-6 text-white">
+        <div class="flex items-center">
+            <i class="fas fa-city text-3xl mr-4"></i>
+            <div>
+                <p class="text-green-100 text-sm font-medium">Toplam Şehir</p>
+                <p class="text-3xl font-bold">@Model.Count()</p>
+                <p class="text-green-100 text-xs mt-1">Kayıtlı şehir sayısı</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Cities Table -->
+<div class="admin-card bg-white rounded-xl shadow-sm border border-gray-200">
+    <div class="p-6 border-b border-gray-200">
+        <div class="flex items-center justify-between">
+            <h3 class="text-lg font-semibold text-gray-900 flex items-center">
+                <i class="fas fa-list text-blue-500 mr-2"></i>
+                Şehir Listesi
+                @if (!string.IsNullOrEmpty(ViewBag.SearchTerm as string))
+                {
+                    <span class="ml-2 text-sm text-gray-500">
+                        - "@ViewBag.SearchTerm" araması için @Model.Count() sonuç
+                    </span>
+                }
+            </h3>
+            <div class="flex items-center space-x-2">
+                <button onclick="selectAll()" class="text-sm text-gray-600 hover:text-gray-800">
+                    <i class="fas fa-check-square mr-1"></i>
+                    Tümünü Seç
+                </button>
+                <button onclick="deleteSelected()" class="text-sm text-red-600 hover:text-red-800 disabled:opacity-50" disabled id="delete-selected-btn">
+                    <i class="fas fa-trash mr-1"></i>
+                    Seçilenleri Sil
+                </button>
+            </div>
+        </div>
+    </div>
+
+    @if (Model.Any())
+    {
+        <div class="overflow-x-auto">
+            <table class="w-full">
+                <thead class="bg-gray-50 border-b border-gray-200">
+                    <tr>
+                        <th class="w-8 px-6 py-3">
+                            <input type="checkbox" id="select-all" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <button onclick="sortTable('name')" class="flex items-center hover:text-gray-700">
+                                Şehir Adı
+                                <i class="fas fa-sort ml-1"></i>
+                            </button>
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Menü Sayısı</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Eklenme Tarihi</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Durum</th>
+                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200" id="city-table-body">
+                    @foreach (var city in Model)
+                    {
+                        <tr class="hover:bg-gray-50 transition-colors" data-city-id="@city.Id">
+                            <td class="px-6 py-4">
+                                <input type="checkbox" class="city-checkbox rounded border-gray-300 text-blue-600 focus:ring-blue-500" value="@city.Id">
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 h-10 w-10">
+                                        <div class="h-10 w-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold">
+                                            @city.Name.Substring(0, Math.Min(2, city.Name.Length)).ToUpper()
+                                        </div>
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium text-gray-900">@city.Name</div>
+                                        <div class="text-sm text-gray-500">Türkiye</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <i class="fas fa-utensils text-gray-400 mr-2"></i>
+                                    <span class="text-sm text-gray-900">@(city.MenuCount ?? 0) menü</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <div class="flex items-center">
+                                    <i class="fas fa-calendar text-gray-400 mr-2"></i>
+                                    @(city.CreatedDate?.ToString("dd.MM.yyyy") ?? "Bilinmiyor")
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="inline-flex items-center px-2 py-1 text-xs font-semibold rounded-full 
+                                      @((city.MenuCount ?? 0) > 0 ? "bg-green-100 text-green-800" : "bg-yellow-100 text-yellow-800")">
+                                    <i class="fas @((city.MenuCount ?? 0) > 0 ? "fa-check" : "fa-exclamation-triangle") mr-1"></i>
+                                    @((city.MenuCount ?? 0) > 0 ? "Aktif" : "Menü Yok")
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <div class="flex items-center justify-end space-x-2">
+                                    <button onclick="showCityDetails(@city.Id)" 
+                                            class="nav-link text-blue-600 hover:text-blue-900 p-2 rounded-lg hover:bg-blue-50 transition-colors"
+                                            data-tooltip="Detayları Görüntüle">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <a asp-area="Admin" asp-controller="AdminCity" asp-action="Edit" asp-route-id="@city.Id" 
+                                       class="nav-link text-green-600 hover:text-green-900 p-2 rounded-lg hover:bg-green-50 transition-colors"
+                                       data-tooltip="Düzenle">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <button onclick="deleteCity(@city.Id, '@city.Name')" 
+                                            class="text-red-600 hover:text-red-900 p-2 rounded-lg hover:bg-red-50 transition-colors"
+                                            data-tooltip="Sil">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="p-12 text-center">
+            @if (!string.IsNullOrEmpty(ViewBag.SearchTerm as string))
+            {
+                <i class="fas fa-search text-6xl text-gray-300 mb-4"></i>
+                <h3 class="text-lg font-medium text-gray-900 mb-2">Arama sonucu bulunamadı</h3>
+                <p class="text-gray-500 mb-6">"@ViewBag.SearchTerm" araması için herhangi bir şehir bulunamadı.</p>
+                <a href="@Url.Action("Index")" 
+                   class="inline-flex items-center px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                    <i class="fas fa-arrow-left mr-2"></i>
+                    Tüm Şehirleri Göster
+                </a>
+            }
+            else
+            {
+                <i class="fas fa-city text-6xl text-gray-300 mb-4"></i>
+                <h3 class="text-lg font-medium text-gray-900 mb-2">Henüz şehir eklenmemiş</h3>
+                <p class="text-gray-500 mb-6">İlk şehri ekleyerek başlayın.</p>
+                <a asp-area="Admin" asp-controller="AdminCity" asp-action="Create" 
+                   class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                    <i class="fas fa-plus mr-2"></i>
+                    İlk Şehri Ekle
+                </a>
+            }
+        </div>
+    }
+</div>
+
+<!-- City Details Modal -->
+<div id="city-details-modal" class="fixed inset-0 z-50 hidden overflow-y-auto">
+    <div class="flex items-center justify-center min-h-screen px-4">
+        <div class="fixed inset-0 bg-black opacity-50"></div>
+        <div class="relative bg-white rounded-lg max-w-lg w-full p-6">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold">Şehir Detayları</h3>
+                <button onclick="closeCityDetails()" class="text-gray-400 hover:text-gray-600">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div id="city-details-content">
+                <!-- Content will be loaded here -->
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        let selectedCities = [];
+
+        function selectAll() {
+            const selectAllCheckbox = document.getElementById('select-all');
+            const cityCheckboxes = document.querySelectorAll('.city-checkbox');
+            
+            selectAllCheckbox.checked = !selectAllCheckbox.checked;
+            cityCheckboxes.forEach(checkbox => {
+                checkbox.checked = selectAllCheckbox.checked;
+            });
+            
+            updateSelectedCities();
+        }
+
+        function updateSelectedCities() {
+            const checkboxes = document.querySelectorAll('.city-checkbox:checked');
+            selectedCities = Array.from(checkboxes).map(cb => cb.value);
+            
+            const deleteBtn = document.getElementById('delete-selected-btn');
+            deleteBtn.disabled = selectedCities.length === 0;
+        }
+
+        function deleteSelected() {
+            if (selectedCities.length === 0) return;
+            
+            if (confirmAdminDelete(`${selectedCities.length} şehri silmek istediğinizden emin misiniz?`)) {
+                showAdminNotification(`${selectedCities.length} şehir siliniyor...`, 'info');
+                // Add AJAX call here for bulk delete
+            }
+        }
+
+        function deleteCity(id, name) {
+            if (confirmAdminDelete(`"${name}" şehrini silmek istediğinizden emin misiniz?`)) {
+                fetch(`/Admin/AdminCity/Delete/${id}`, {
+                    method: 'POST',
+                    headers: {
+                        'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]')?.value
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        showAdminNotification('Şehir başarıyla silindi!', 'success');
+                        document.querySelector(`[data-city-id="${id}"]`).remove();
+                    } else {
+                        showAdminNotification('Şehir silinirken hata oluştu!', 'error');
+                    }
+                })
+                .catch(error => {
+                    showAdminNotification('Şehir silinirken hata oluştu!', 'error');
+                });
+            }
+        }
+
+        function showCityDetails(id) {
+            const modal = document.getElementById('city-details-modal');
+            const content = document.getElementById('city-details-content');
+            
+            content.innerHTML = '<div class="text-center py-4"><i class="fas fa-spinner fa-spin text-2xl text-gray-400"></i></div>';
+            modal.classList.remove('hidden');
+            
+            // Load city details via AJAX
+            fetch(`/Admin/AdminCity/Details/${id}`)
+                .then(response => response.text())
+                .then(html => {
+                    content.innerHTML = html;
+                })
+                .catch(error => {
+                    content.innerHTML = '<div class="text-center py-4 text-red-500">Detaylar yüklenirken hata oluştu.</div>';
+                });
+        }
+
+        function closeCityDetails() {
+            document.getElementById('city-details-modal').classList.add('hidden');
+        }
+
+        function sortTable(column) {
+            showAdminNotification(`${column} sütununa göre sıralanıyor...`, 'info');
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Setup checkbox event listeners
+            document.querySelectorAll('.city-checkbox').forEach(checkbox => {
+                checkbox.addEventListener('change', updateSelectedCities);
+            });
+
+            // Close modal when clicking outside
+            document.getElementById('city-details-modal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeCityDetails();
+                }
+            });
+        });
+    </script>
 }

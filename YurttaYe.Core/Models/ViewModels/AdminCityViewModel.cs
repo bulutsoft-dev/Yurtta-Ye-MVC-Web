@@ -9,5 +9,9 @@ namespace YurttaYe.Core.Models.ViewModels
         [Display(Name = "CityName")]
         [Required(ErrorMessage = "RequiredField")]
         public string Name { get; set; } = string.Empty;
+        
+        // Additional properties for admin display
+        public int? MenuCount { get; set; }
+        public DateTime? CreatedDate { get; set; }
     }
 }

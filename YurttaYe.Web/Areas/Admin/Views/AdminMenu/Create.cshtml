@@ -1,136 +1,424 @@
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
 @model YurttaYe.Core.Models.ViewModels.AdminMenuViewModel
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@Localizer["AddNewMenu"]</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
-</head>
-<body class="bg-gray-100 font-sans">
-    <div class="container mx-auto p-6">
-        <h2 class="text-2xl font-bold mb-6">@Localizer["AddNewMenu"]</h2>
 
-        @if (TempData["Error"] != null)
-        {
-            <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4 rounded">
-                @TempData["Error"]
-            </div>
-        }
+@{
+    ViewData["Title"] = "Yeni Menü Ekle";
+    ViewData["BreadcrumbItems"] = new List<dynamic>
+    {
+        new { Text = "Menü Yönetimi", Icon = "fas fa-utensils", Url = Url.Action("Index") },
+        new { Text = "Yeni Menü Ekle", Icon = "fas fa-plus", Url = (string)null }
+    };
+}
 
-        <form asp-area="Admin" asp-controller="AdminMenu" asp-action="Create" method="post" class="bg-white p-6 rounded-lg shadow">
-            @Html.AntiForgeryToken()
-            <div class="mb-4">
-                <label asp-for="CityId" class="block text-sm font-medium text-gray-700">@Localizer["City"]</label>
-                <select asp-for="CityId" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" asp-items="@Model.Cities">
-                    <option value="">@Localizer["Select"]</option>
-                </select>
-                <span asp-validation-for="CityId" class="text-red-500 text-sm"></span>
-            </div>
-            <div class="mb-4">
-                <label asp-for="MealType" class="block text-sm font-medium text-gray-700">@Localizer["MealType"]</label>
-                <select asp-for="MealType" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <option value="">@Localizer["Select"]</option>
-                    <option value="Breakfast">@Localizer["Morning"]</option>
-                    <option value="Dinner">@Localizer["Evening"]</option>
-                </select>
-                <span asp-validation-for="MealType" class="text-red-500 text-sm"></span>
-            </div>
-            <div class="mb-4">
-                <label asp-for="Date" class="block text-sm font-medium text-gray-700">@Localizer["Date"]</label>
-                <input asp-for="Date" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" type="date" />
-                <span asp-validation-for="Date" class="text-red-500 text-sm"></span>
-            </div>
-            <div class="mb-4">
-                <label asp-for="Energy" class="block text-sm font-medium text-gray-700">@Localizer["EnergyCalories"]</label>
-                <input asp-for="Energy" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                <span asp-validation-for="Energy" class="text-red-500 text-sm"></span>
+<!-- Page Header -->
+<div class="mb-6">
+    <div class="flex items-center justify-between">
+        <div>
+            <h1 class="text-2xl font-bold text-gray-900">@Localizer["AddNewMenu"]</h1>
+            <p class="text-gray-600 mt-1">Yurt menüsü için yeni bir öğün ekleyin</p>
+        </div>
+        <a asp-area="Admin" asp-controller="AdminMenu" asp-action="Index" 
+           class="inline-flex items-center px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+            <i class="fas fa-arrow-left mr-2"></i>
+            Geri Dön
+        </a>
+    </div>
+</div>
+
+<!-- Error Messages -->
+@if (TempData["Error"] != null)
+{
+    <div class="mb-6 bg-red-50 border border-red-200 rounded-lg p-4 flex items-center">
+        <i class="fas fa-exclamation-circle text-red-500 mr-3"></i>
+        <span class="text-red-800 font-medium">@TempData["Error"]</span>
+    </div>
+}
+
+<!-- Create Form -->
+<form asp-area="Admin" asp-controller="AdminMenu" asp-action="Create" method="post" id="create-menu-form">
+    @Html.AntiForgeryToken()
+    
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Left Column - Basic Info -->
+        <div class="lg:col-span-2">
+            <div class="admin-card bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                    <i class="fas fa-info-circle text-blue-500 mr-2"></i>
+                    Temel Bilgiler
+                </h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- City Selection -->
+                    <div>
+                        <label asp-for="CityId" class="block text-sm font-medium text-gray-700 mb-2">
+                            <i class="fas fa-city mr-1"></i>
+                            @Localizer["City"] <span class="text-red-500">*</span>
+                        </label>
+                        <select asp-for="CityId" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" asp-items="@Model.Cities">
+                            <option value="">Şehir Seçiniz</option>
+                        </select>
+                        <span asp-validation-for="CityId" class="text-red-500 text-sm"></span>
+                    </div>
+
+                    <!-- Meal Type -->
+                    <div>
+                        <label asp-for="MealType" class="block text-sm font-medium text-gray-700 mb-2">
+                            <i class="fas fa-utensils mr-1"></i>
+                            Öğün Türü <span class="text-red-500">*</span>
+                        </label>
+                        <select asp-for="MealType" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                            <option value="">Öğün Türü Seçiniz</option>
+                            <option value="Breakfast">🌅 Kahvaltı</option>
+                            <option value="Dinner">🌙 Akşam Yemeği</option>
+                        </select>
+                        <span asp-validation-for="MealType" class="text-red-500 text-sm"></span>
+                    </div>
+
+                    <!-- Date -->
+                    <div>
+                        <label asp-for="Date" class="block text-sm font-medium text-gray-700 mb-2">
+                            <i class="fas fa-calendar mr-1"></i>
+                            Tarih <span class="text-red-500">*</span>
+                        </label>
+                        <input asp-for="Date" type="date" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" />
+                        <span asp-validation-for="Date" class="text-red-500 text-sm"></span>
+                    </div>
+
+                    <!-- Energy -->
+                    <div>
+                        <label asp-for="Energy" class="block text-sm font-medium text-gray-700 mb-2">
+                            <i class="fas fa-fire mr-1"></i>
+                            Enerji (kcal)
+                        </label>
+                        <input asp-for="Energy" type="text" placeholder="Örn: 450 kcal" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" />
+                        <span asp-validation-for="Energy" class="text-red-500 text-sm"></span>
+                    </div>
+                </div>
             </div>
 
-            <h4 class="text-lg font-semibold mb-4">@Localizer["MenuItems"]</h4>
-            <div id="menuItems">
-                @for (int i = 0; i < Model.Items.Count; i++)
-                {
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4 menu-item">
-                        <div>
-                            <label asp-for="Items[i].Category" class="block text-sm font-medium text-gray-700">@Localizer["Category"]</label>
-                            <input asp-for="Items[i].Category" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                            <span asp-validation-for="Items[i].Category" class="text-red-500 text-sm"></span>
+            <!-- Menu Items -->
+            <div class="admin-card bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold text-gray-900 flex items-center">
+                        <i class="fas fa-list text-green-500 mr-2"></i>
+                        Menü Öğeleri
+                    </h3>
+                    <button type="button" onclick="addMenuItem()" class="inline-flex items-center px-3 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
+                        <i class="fas fa-plus mr-2"></i>
+                        Öğe Ekle
+                    </button>
+                </div>
+
+                <div id="menu-items-container">
+                    @if (Model.Items != null && Model.Items.Any())
+                    {
+                        @for (int i = 0; i < Model.Items.Count; i++)
+                        {
+                            <div class="menu-item-row bg-gray-50 rounded-lg p-4 mb-3 border border-gray-200" data-index="@i">
+                                <div class="flex items-center justify-between mb-3">
+                                    <h4 class="font-medium text-gray-900">Öğe #@(i + 1)</h4>
+                                    @if (i > 0)
+                                    {
+                                        <button type="button" onclick="removeMenuItem(this)" class="text-red-600 hover:text-red-800 p-1">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    }
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Kategori</label>
+                                        <select name="Items[@i].Category" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                            <option value="">Kategori Seçiniz</option>
+                                            <option value="Ana Yemek" selected="@(Model.Items[i].Category == "Ana Yemek")">🍽️ Ana Yemek</option>
+                                            <option value="Çorba" selected="@(Model.Items[i].Category == "Çorba")">🍲 Çorba</option>
+                                            <option value="Salata" selected="@(Model.Items[i].Category == "Salata")">🥗 Salata</option>
+                                            <option value="Pilav" selected="@(Model.Items[i].Category == "Pilav")">🍚 Pilav</option>
+                                            <option value="Tatlı" selected="@(Model.Items[i].Category == "Tatlı")">🍰 Tatlı</option>
+                                            <option value="İçecek" selected="@(Model.Items[i].Category == "İçecek")">🥤 İçecek</option>
+                                            <option value="Ekmek" selected="@(Model.Items[i].Category == "Ekmek")">🍞 Ekmek</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Yemek Adı</label>
+                                        <input name="Items[@i].Name" value="@Model.Items[i].Name" type="text" placeholder="Örn: Mercimek Çorbası" 
+                                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" />
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Gram</label>
+                                        <input name="Items[@i].Gram" value="@Model.Items[i].Gram" type="text" placeholder="Örn: 250g" 
+                                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" />
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="menu-item-row bg-gray-50 rounded-lg p-4 mb-3 border border-gray-200" data-index="0">
+                            <div class="flex items-center justify-between mb-3">
+                                <h4 class="font-medium text-gray-900">Öğe #1</h4>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Kategori</label>
+                                    <select name="Items[0].Category" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                        <option value="">Kategori Seçiniz</option>
+                                        <option value="Ana Yemek">🍽️ Ana Yemek</option>
+                                        <option value="Çorba">🍲 Çorba</option>
+                                        <option value="Salata">🥗 Salata</option>
+                                        <option value="Pilav">🍚 Pilav</option>
+                                        <option value="Tatlı">🍰 Tatlı</option>
+                                        <option value="İçecek">🥤 İçecek</option>
+                                        <option value="Ekmek">🍞 Ekmek</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Yemek Adı</label>
+                                    <input name="Items[0].Name" type="text" placeholder="Örn: Mercimek Çorbası" 
+                                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" />
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Gram</label>
+                                    <input name="Items[0].Gram" type="text" placeholder="Örn: 250g" 
+                                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" />
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <label asp-for="Items[i].Name" class="block text-sm font-medium text-gray-700">@Localizer["Name"]</label>
-                            <input asp-for="Items[i].Name" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                            <span asp-validation-for="Items[i].Name" class="text-red-500 text-sm"></span>
-                        </div>
-                        <div>
-                            <label asp-for="Items[i].Gram" class="block text-sm font-medium text-gray-700">@Localizer["Grams"]</label>
-                            <input asp-for="Items[i].Gram" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                            <span asp-validation-for="Items[i].Gram" class="text-red-500 text-sm"></span>
-                        </div>
-                        <div class="flex items-end">
-                            <button type="button" class="bg-red-500 text-white px-3 py-2 rounded-lg hover:bg-red-600 remove-item pointer-events-auto">@Localizer["Delete"]</button>
+                    }
+                </div>
+
+                <div class="mt-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
+                    <div class="flex items-start">
+                        <i class="fas fa-info-circle text-blue-500 mr-2 mt-0.5"></i>
+                        <div class="text-sm text-blue-800">
+                            <p class="font-medium mb-1">💡 İpucu:</p>
+                            <ul class="list-disc list-inside space-y-1 text-blue-700">
+                                <li>En az bir menü öğesi eklemelisiniz</li>
+                                <li>Kategori ve yemek adı alanları zorunludur</li>
+                                <li>Gram bilgisi opsiyoneldir (örn: 250g, 1 porsiyon)</li>
+                            </ul>
                         </div>
                     </div>
-                }
+                </div>
             </div>
-            <button type="button" id="addItem" class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 mb-4 pointer-events-auto">@Localizer["AddItem"]</button>
+        </div>
 
-            <div class="flex gap-4">
-                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 pointer-events-auto">@Localizer["Save"]</button>
-                <a asp-area="Admin" asp-controller="AdminMenu" asp-action="Index" class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 pointer-events-auto">@Localizer["Back"]</a>
+        <!-- Right Column - Actions & Preview -->
+        <div>
+            <!-- Actions Card -->
+            <div class="admin-card bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                    <i class="fas fa-cogs text-purple-500 mr-2"></i>
+                    İşlemler
+                </h3>
+                
+                <div class="space-y-3">
+                    <button type="submit" class="w-full inline-flex items-center justify-center px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium">
+                        <i class="fas fa-save mr-2"></i>
+                        Menüyü Kaydet
+                    </button>
+                    
+                    <button type="button" onclick="previewMenu()" class="w-full inline-flex items-center justify-center px-4 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                        <i class="fas fa-eye mr-2"></i>
+                        Önizleme
+                    </button>
+                    
+                    <button type="reset" class="w-full inline-flex items-center justify-center px-4 py-3 border border-red-300 text-red-700 rounded-lg hover:bg-red-50 transition-colors">
+                        <i class="fas fa-undo mr-2"></i>
+                        Formu Sıfırla
+                    </button>
+                </div>
             </div>
-        </form>
+
+            <!-- Quick Templates -->
+            <div class="admin-card bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                    <i class="fas fa-magic text-orange-500 mr-2"></i>
+                    Hızlı Şablonlar
+                </h3>
+                
+                <div class="space-y-2">
+                    <button type="button" onclick="loadTemplate('breakfast')" class="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-yellow-50 hover:text-yellow-800 rounded-lg transition-colors">
+                        🌅 Kahvaltı Şablonu
+                    </button>
+                    <button type="button" onclick="loadTemplate('dinner')" class="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-800 rounded-lg transition-colors">
+                        🌙 Akşam Yemeği Şablonu
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
+</form>
 
+@section Scripts {
     <script>
-        $(document).ready(function () {
-            let itemIndex = @Model.Items.Count;
-            $("#addItem").click(function () {
-                const itemHtml = `
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4 menu-item">
+        let itemIndex = @(Model.Items?.Count ?? 1);
+
+        function addMenuItem() {
+            const container = document.getElementById('menu-items-container');
+            const newItem = `
+                <div class="menu-item-row bg-gray-50 rounded-lg p-4 mb-3 border border-gray-200 fade-in" data-index="${itemIndex}">
+                    <div class="flex items-center justify-between mb-3">
+                        <h4 class="font-medium text-gray-900">Öğe #${itemIndex + 1}</h4>
+                        <button type="button" onclick="removeMenuItem(this)" class="text-red-600 hover:text-red-800 p-1">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700">@Localizer["Category"]</label>
-                            <input name="Items[${itemIndex}].Category" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                            <span class="text-red-500 text-sm"></span>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Kategori</label>
+                            <select name="Items[${itemIndex}].Category" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                <option value="">Kategori Seçiniz</option>
+                                <option value="Ana Yemek">🍽️ Ana Yemek</option>
+                                <option value="Çorba">🍲 Çorba</option>
+                                <option value="Salata">🥗 Salata</option>
+                                <option value="Pilav">🍚 Pilav</option>
+                                <option value="Tatlı">🍰 Tatlı</option>
+                                <option value="İçecek">🥤 İçecek</option>
+                                <option value="Ekmek">🍞 Ekmek</option>
+                            </select>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700">@Localizer["Name"]</label>
-                            <input name="Items[${itemIndex}].Name" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                            <span class="text-red-500 text-sm"></span>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Yemek Adı</label>
+                            <input name="Items[${itemIndex}].Name" type="text" placeholder="Örn: Mercimek Çorbası" 
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" />
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700">@Localizer["Grams"]</label>
-                            <input name="Items[${itemIndex}].Gram" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                            <span class="text-red-500 text-sm"></span>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Gram</label>
+                            <input name="Items[${itemIndex}].Gram" type="text" placeholder="Örn: 250g" 
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" />
                         </div>
-                        <div class="flex items-end">
-                            <button type="button" class="bg-red-500 text-white px-3 py-2 rounded-lg hover:bg-red-600 remove-item pointer-events-auto">@Localizer["Delete"]</button>
+                    </div>
+                </div>
+            `;
+            
+            container.insertAdjacentHTML('beforeend', newItem);
+            itemIndex++;
+            showAdminNotification('Yeni menü öğesi eklendi!', 'success');
+        }
+
+        function removeMenuItem(button) {
+            const itemRow = button.closest('.menu-item-row');
+            itemRow.style.opacity = '0';
+            itemRow.style.transform = 'translateX(-100%)';
+            
+            setTimeout(() => {
+                itemRow.remove();
+                updateItemNumbers();
+                showAdminNotification('Menü öğesi silindi!', 'info');
+            }, 300);
+        }
+
+        function updateItemNumbers() {
+            const items = document.querySelectorAll('.menu-item-row');
+            items.forEach((item, index) => {
+                const title = item.querySelector('h4');
+                title.textContent = `Öğe #${index + 1}`;
+            });
+        }
+
+        function loadTemplate(type) {
+            const container = document.getElementById('menu-items-container');
+            
+            // Clear existing items
+            container.innerHTML = '';
+            itemIndex = 0;
+
+            let templates = [];
+            
+            if (type === 'breakfast') {
+                document.querySelector('[name="MealType"]').value = 'Breakfast';
+                templates = [
+                    { category: 'Ekmek', name: 'Beyaz Ekmek', gram: '2 dilim' },
+                    { category: 'İçecek', name: 'Çay', gram: '1 bardak' },
+                    { category: 'Ana Yemek', name: 'Menemen', gram: '1 porsiyon' },
+                    { category: 'Salata', name: 'Domates Salata', gram: '1 tabak' }
+                ];
+            } else if (type === 'dinner') {
+                document.querySelector('[name="MealType"]').value = 'Dinner';
+                templates = [
+                    { category: 'Çorba', name: 'Mercimek Çorbası', gram: '1 kase' },
+                    { category: 'Ana Yemek', name: 'Tavuk Şnitzel', gram: '1 porsiyon' },
+                    { category: 'Pilav', name: 'Bulgur Pilavı', gram: '1 porsiyon' },
+                    { category: 'Salata', name: 'Mevsim Salatası', gram: '1 tabak' },
+                    { category: 'İçecek', name: 'Ayran', gram: '1 bardak' }
+                ];
+            }
+
+            templates.forEach((template, index) => {
+                const newItem = `
+                    <div class="menu-item-row bg-gray-50 rounded-lg p-4 mb-3 border border-gray-200 fade-in" data-index="${index}">
+                        <div class="flex items-center justify-between mb-3">
+                            <h4 class="font-medium text-gray-900">Öğe #${index + 1}</h4>
+                            ${index > 0 ? '<button type="button" onclick="removeMenuItem(this)" class="text-red-600 hover:text-red-800 p-1"><i class="fas fa-trash"></i></button>' : ''}
                         </div>
-                    </div>`;
-                $("#menuItems").append(itemHtml);
-                itemIndex++;
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Kategori</label>
+                                <select name="Items[${index}].Category" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                    <option value="">Kategori Seçiniz</option>
+                                    <option value="Ana Yemek" ${template.category === 'Ana Yemek' ? 'selected' : ''}>🍽️ Ana Yemek</option>
+                                    <option value="Çorba" ${template.category === 'Çorba' ? 'selected' : ''}>🍲 Çorba</option>
+                                    <option value="Salata" ${template.category === 'Salata' ? 'selected' : ''}>🥗 Salata</option>
+                                    <option value="Pilav" ${template.category === 'Pilav' ? 'selected' : ''}>🍚 Pilav</option>
+                                    <option value="Tatlı" ${template.category === 'Tatlı' ? 'selected' : ''}>🍰 Tatlı</option>
+                                    <option value="İçecek" ${template.category === 'İçecek' ? 'selected' : ''}>🥤 İçecek</option>
+                                    <option value="Ekmek" ${template.category === 'Ekmek' ? 'selected' : ''}>🍞 Ekmek</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Yemek Adı</label>
+                                <input name="Items[${index}].Name" value="${template.name}" type="text" placeholder="Örn: Mercimek Çorbası" 
+                                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Gram</label>
+                                <input name="Items[${index}].Gram" value="${template.gram}" type="text" placeholder="Örn: 250g" 
+                                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" />
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', newItem);
             });
 
-            $("#menuItems").on("click", ".remove-item", function () {
-                $(this).closest(".menu-item").remove();
-            });
+            itemIndex = templates.length;
+            showAdminNotification(`${type === 'breakfast' ? 'Kahvaltı' : 'Akşam yemeği'} şablonu yüklendi!`, 'success');
+        }
 
-            $("form").validate({
-                errorElement: "span",
-                errorClass: "text-red-500 text-sm",
-                highlight: function(element) {
-                    $(element).addClass("border-red-500");
-                },
-                unhighlight: function(element) {
-                    $(element).removeClass("border-red-500");
+        function previewMenu() {
+            // Implementation for menu preview
+            showAdminNotification('Menü önizlemesi açılıyor...', 'info');
+        }
+
+        // Set today's date as default
+        document.addEventListener('DOMContentLoaded', function() {
+            const dateInput = document.querySelector('input[type="date"]');
+            if (!dateInput.value) {
+                const today = new Date().toISOString().split('T')[0];
+                dateInput.value = today;
+            }
+        });
+
+        // Form validation
+        document.getElementById('create-menu-form').addEventListener('submit', function(e) {
+            const items = document.querySelectorAll('.menu-item-row');
+            let hasValidItem = false;
+
+            items.forEach(item => {
+                const category = item.querySelector('select[name*="Category"]').value;
+                const name = item.querySelector('input[name*="Name"]').value;
+                
+                if (category && name) {
+                    hasValidItem = true;
                 }
             });
+
+            if (!hasValidItem) {
+                e.preventDefault();
+                showAdminNotification('En az bir menü öğesi eklemeli ve kategori ile yemek adını belirtmelisiniz!', 'error');
+            }
         });
     </script>
-</body>
-</html>
+}

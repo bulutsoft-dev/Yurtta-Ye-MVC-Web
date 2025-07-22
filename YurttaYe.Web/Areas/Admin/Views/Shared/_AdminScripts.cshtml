@@ -129,8 +129,8 @@
                 `;
                 resultsContainer.classList.remove('hidden');
 
-                // Simulate API call (replace with actual search endpoint)
-                const response = await fetch(`/Admin/Search?q=${encodeURIComponent(query)}`);
+                // Real API call to search endpoint
+                const response = await fetch(`/Admin/AdminMenu/Search?q=${encodeURIComponent(query)}`);
                 const results = await response.json();
 
                 this.displaySearchResults(results, resultsContainer);

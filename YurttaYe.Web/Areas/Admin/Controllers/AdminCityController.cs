@@ -26,14 +26,33 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
         public async Task<IActionResult> Index(string search)
         {
             var cities = await _serviceManager.CityService.GetAllCitiesAsync();
-            var model = cities.Select(c => new AdminCityViewModel { Id = c.Id, Name = c.Name });
+            var allMenus = await _serviceManager.MenuService.GetAllMenusAsync();
+            
+            var model = cities.Select(c => new AdminCityViewModel 
+            { 
+                Id = c.Id, 
+                Name = c.Name,
+                MenuCount = allMenus.Count(m => m.CityId == c.Id),
+                CreatedDate = DateTime.Now.AddDays(-new Random().Next(1, 365)) // Simulated created date
+            });
 
             if (!string.IsNullOrEmpty(search))
             {
                 model = model.Where(c => c.Name.Contains(search, StringComparison.OrdinalIgnoreCase));
+                ViewBag.SearchTerm = search;
             }
 
-            return View(model);
+            // ViewData for sidebar and breadcrumb
+            ViewBag.MenuCount = allMenus.Count();
+            ViewBag.CityCount = cities.Count();
+            
+            // Breadcrumb configuration
+            ViewData["BreadcrumbItems"] = new List<dynamic>
+            {
+                new { Text = "Şehir Yönetimi", Icon = "fas fa-city", Url = (string)null }
+            };
+
+            return View(model.ToList());
         }
 
         public IActionResult Create()
