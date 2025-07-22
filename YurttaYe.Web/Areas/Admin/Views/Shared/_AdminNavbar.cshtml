@@ -1,161 +1,168 @@
 <!-- Admin Top Navigation Bar -->
-<header class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-30 lg:ml-64">
-    <div class="flex items-center justify-between px-6 py-4">
-        <!-- Left Section -->
-        <div class="flex items-center space-x-4">
-            <!-- Mobile Menu Button -->
-            <button id="mobile-menu-button" class="lg:hidden p-2 rounded-lg bg-admin-primary text-white hover:bg-admin-secondary transition-colors">
-                <i class="fas fa-bars"></i>
-            </button>
-            
-            <!-- Page Title -->
-            <div class="flex items-center space-x-2">
-                <h1 class="text-2xl font-bold text-gray-900">@ViewData["Title"]</h1>
-                @if (ViewData["Subtitle"] != null)
-                {
-                    <span class="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded-md">@ViewData["Subtitle"]</span>
-                }
-            </div>
-        </div>
-        
-        <!-- Right Section -->
-        <div class="flex items-center space-x-4">
-            <!-- Search Bar -->
-            <div class="relative hidden md:block">
-                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <i class="fas fa-search text-gray-400"></i>
-                </div>
-                <input type="text" 
-                       id="global-search"
-                       placeholder="Menü, şehir ara..." 
-                       class="w-80 pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-admin-primary focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white">
-                <!-- Search Results Dropdown -->
-                <div id="search-results" class="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg hidden max-h-96 overflow-y-auto">
-                    <!-- Search results will be populated here -->
-                </div>
-            </div>
-            
-            <!-- Quick Actions -->
-            <div class="hidden lg:flex items-center space-x-2">
-                <a asp-area="Admin" asp-controller="AdminMenu" asp-action="Create" 
-                   class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-admin-primary hover:bg-admin-secondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-admin-primary transition-colors">
-                    <i class="fas fa-plus mr-1"></i>
-                    Yeni Menü
-                </a>
-            </div>
-            
-            <!-- Notifications -->
-            <div class="relative">
-                <button id="notifications-button" class="relative p-2 text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-admin-primary focus:ring-offset-2 rounded-lg transition-colors">
-                    <i class="fas fa-bell text-lg"></i>
-                    <span class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-pulse"></span>
-                    <span class="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center font-bold">3</span>
+<header class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-30">
+    <!-- Mobile overlay için background -->
+    <div class="lg:ml-64 relative">
+        <div class="flex items-center justify-between px-6 py-4">
+            <!-- Left Section -->
+            <div class="flex items-center space-x-4">
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="lg:hidden p-2 rounded-lg bg-admin-primary text-white hover:bg-admin-secondary transition-colors">
+                    <i class="fas fa-bars"></i>
                 </button>
                 
-                <!-- Notifications Dropdown -->
-                <div id="notifications-dropdown" class="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-200 hidden">
-                    <div class="p-4 border-b border-gray-200">
-                        <div class="flex items-center justify-between">
-                            <h3 class="text-lg font-semibold text-gray-900">Bildirimler</h3>
-                            <button class="text-sm text-admin-primary hover:text-admin-secondary">
-                                Tümünü okundu işaretle
-                            </button>
-                        </div>
-                    </div>
-                    <div class="max-h-64 overflow-y-auto">
-                        <!-- Notification Items -->
-                        <div class="p-4 border-b border-gray-100 hover:bg-gray-50 cursor-pointer">
-                            <div class="flex items-start space-x-3">
-                                <div class="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                                <div class="flex-1">
-                                    <p class="text-sm font-medium text-gray-900">Yeni menü eklendi</p>
-                                    <p class="text-sm text-gray-500">İstanbul için akşam menüsü güncellendi</p>
-                                    <p class="text-xs text-gray-400 mt-1">5 dakika önce</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="p-4 border-b border-gray-100 hover:bg-gray-50 cursor-pointer">
-                            <div class="flex items-start space-x-3">
-                                <div class="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
-                                <div class="flex-1">
-                                    <p class="text-sm font-medium text-gray-900">Şehir güncellendi</p>
-                                    <p class="text-sm text-gray-500">Ankara şehir bilgileri düzenlendi</p>
-                                    <p class="text-xs text-gray-400 mt-1">15 dakika önce</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="p-4 hover:bg-gray-50 cursor-pointer">
-                            <div class="flex items-start space-x-3">
-                                <div class="w-2 h-2 bg-yellow-500 rounded-full mt-2 flex-shrink-0"></div>
-                                <div class="flex-1">
-                                    <p class="text-sm font-medium text-gray-900">Sistem güncellemesi</p>
-                                    <p class="text-sm text-gray-500">Yeni özellikler eklendi</p>
-                                    <p class="text-xs text-gray-400 mt-1">1 saat önce</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-4 border-t border-gray-200 bg-gray-50">
-                        <a href="#" class="text-sm text-admin-primary hover:text-admin-secondary font-medium">
-                            Tüm bildirimleri görüntüle
-                        </a>
-                    </div>
+                <!-- Page Title -->
+                <div class="flex items-center space-x-2">
+                    <h1 class="text-2xl font-bold text-gray-900">@ViewData["Title"]</h1>
+                    @if (ViewData["Subtitle"] != null)
+                    {
+                        <span class="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded-md">@ViewData["Subtitle"]</span>
+                    }
                 </div>
             </div>
             
-            <!-- User Menu -->
-            <div class="relative">
-                <button id="user-menu-button" class="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-admin-primary focus:ring-offset-2 transition-colors">
-                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" 
-                         alt="Admin Profile" 
-                         class="w-8 h-8 rounded-full border-2 border-gray-200">
-                    <div class="hidden md:block text-left">
-                        <p class="text-sm font-medium text-gray-700">Admin User</p>
-                        <p class="text-xs text-gray-500">admin@yurttaye.com</p>
+            <!-- Right Section -->
+            <div class="flex items-center space-x-4">
+                <!-- Search Bar -->
+                <div class="relative hidden md:block">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i class="fas fa-search text-gray-400"></i>
                     </div>
-                    <i class="fas fa-chevron-down text-gray-400 text-xs"></i>
-                </button>
+                    <input type="text" 
+                           id="global-search"
+                           placeholder="Menü, şehir ara..." 
+                           class="w-80 pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-admin-primary focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white">
+                    <!-- Search Results Dropdown -->
+                    <div id="search-results" class="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg hidden max-h-96 overflow-y-auto z-50">
+                        <!-- Search results will be populated here -->
+                    </div>
+                </div>
                 
-                <!-- User Dropdown Menu -->
-                <div id="user-dropdown" class="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 hidden">
-                    <div class="p-4 border-b border-gray-200">
-                        <div class="flex items-center space-x-3">
-                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" 
-                                 alt="Admin Profile" 
-                                 class="w-10 h-10 rounded-full">
-                            <div>
-                                <p class="text-sm font-medium text-gray-900">Admin User</p>
-                                <p class="text-xs text-gray-500">admin@yurttaye.com</p>
+                <!-- Quick Actions -->
+                <div class="hidden lg:flex items-center space-x-2">
+                    <a asp-area="Admin" asp-controller="AdminMenu" asp-action="Create" 
+                       class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-admin-primary hover:bg-admin-secondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-admin-primary transition-colors">
+                        <i class="fas fa-plus mr-1"></i>
+                        Yeni Menü
+                    </a>
+                    <a asp-area="Admin" asp-controller="AdminCity" asp-action="Create" 
+                       class="inline-flex items-center px-3 py-2 border border-gray-300 text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-admin-primary transition-colors">
+                        <i class="fas fa-map-marker-alt mr-1"></i>
+                        Yeni Şehir
+                    </a>
+                </div>
+                
+                <!-- Notifications -->
+                <div class="relative">
+                    <button id="notifications-button" class="relative p-2 text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-admin-primary focus:ring-offset-2 rounded-lg transition-colors">
+                        <i class="fas fa-bell text-lg"></i>
+                        <span class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-pulse"></span>
+                        <span class="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center font-bold">3</span>
+                    </button>
+                    
+                    <!-- Notifications Dropdown -->
+                    <div id="notifications-dropdown" class="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-200 hidden z-50">
+                        <div class="p-4 border-b border-gray-200">
+                            <div class="flex items-center justify-between">
+                                <h3 class="text-lg font-semibold text-gray-900">Bildirimler</h3>
+                                <button class="text-sm text-admin-primary hover:text-admin-secondary">
+                                    Tümünü okundu işaretle
+                                </button>
                             </div>
                         </div>
+                        <div class="max-h-64 overflow-y-auto">
+                            <!-- Notification Items -->
+                            <div class="p-4 border-b border-gray-100 hover:bg-gray-50 cursor-pointer">
+                                <div class="flex items-start space-x-3">
+                                    <div class="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                                    <div class="flex-1">
+                                        <p class="text-sm font-medium text-gray-900">Yeni menü eklendi</p>
+                                        <p class="text-sm text-gray-500">İstanbul için akşam menüsü güncellendi</p>
+                                        <p class="text-xs text-gray-400 mt-1">5 dakika önce</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-4 border-b border-gray-100 hover:bg-gray-50 cursor-pointer">
+                                <div class="flex items-start space-x-3">
+                                    <div class="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
+                                    <div class="flex-1">
+                                        <p class="text-sm font-medium text-gray-900">Şehir güncellendi</p>
+                                        <p class="text-sm text-gray-500">Ankara şehir bilgileri düzenlendi</p>
+                                        <p class="text-xs text-gray-400 mt-1">15 dakika önce</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-4 hover:bg-gray-50 cursor-pointer">
+                                <div class="flex items-start space-x-3">
+                                    <div class="w-2 h-2 bg-yellow-500 rounded-full mt-2 flex-shrink-0"></div>
+                                    <div class="flex-1">
+                                        <p class="text-sm font-medium text-gray-900">Sistem güncellemesi</p>
+                                        <p class="text-sm text-gray-500">Yeni özellikler eklendi</p>
+                                        <p class="text-xs text-gray-400 mt-1">1 saat önce</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 border-t border-gray-200 bg-gray-50">
+                            <a href="#" class="text-sm text-admin-primary hover:text-admin-secondary font-medium">
+                                Tüm bildirimleri görüntüle
+                            </a>
+                        </div>
                     </div>
-                    <div class="py-2">
-                        <a href="#" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
-                            <i class="fas fa-user mr-3 text-gray-400"></i>
-                            Profil Ayarları
-                        </a>
-                        <a href="#" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
-                            <i class="fas fa-cog mr-3 text-gray-400"></i>
-                            Hesap Ayarları
-                        </a>
-                        <a href="#" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
-                            <i class="fas fa-shield-alt mr-3 text-gray-400"></i>
-                            Güvenlik
-                        </a>
-                        <a href="#" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
-                            <i class="fas fa-question-circle mr-3 text-gray-400"></i>
-                            Yardım
-                        </a>
-                    </div>
-                    <div class="py-2 border-t border-gray-200">
-                        <a href="#" class="flex items-center px-4 py-2 text-sm text-red-600 hover:bg-red-50">
-                            <i class="fas fa-sign-out-alt mr-3 text-red-500"></i>
-                            Çıkış Yap
-                        </a>
+                </div>
+                
+                <!-- User Menu -->
+                <div class="relative">
+                    <button id="user-menu-button" class="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-admin-primary focus:ring-offset-2 transition-colors">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" 
+                             alt="Admin Profile" 
+                             class="w-8 h-8 rounded-full border-2 border-gray-200">
+                        <div class="hidden md:block text-left">
+                            <p class="text-sm font-medium text-gray-700">Admin User</p>
+                            <p class="text-xs text-gray-500">admin@yurttaye.com</p>
+                        </div>
+                        <i class="fas fa-chevron-down text-gray-400 text-xs"></i>
+                    </button>
+                    
+                    <!-- User Dropdown Menu -->
+                    <div id="user-dropdown" class="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 hidden z-50">
+                        <div class="p-4 border-b border-gray-200">
+                            <div class="flex items-center space-x-3">
+                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" 
+                                     alt="Admin Profile" 
+                                     class="w-10 h-10 rounded-full">
+                                <div>
+                                    <p class="text-sm font-medium text-gray-900">Admin User</p>
+                                    <p class="text-xs text-gray-500">admin@yurttaye.com</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="py-2">
+                            <a href="#" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
+                                <i class="fas fa-user mr-3 text-gray-400"></i>
+                                Profil Ayarları
+                            </a>
+                            <a href="#" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
+                                <i class="fas fa-cog mr-3 text-gray-400"></i>
+                                Hesap Ayarları
+                            </a>
+                            <a href="#" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
+                                <i class="fas fa-shield-alt mr-3 text-gray-400"></i>
+                                Güvenlik
+                            </a>
+                            <a href="#" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
+                                <i class="fas fa-question-circle mr-3 text-gray-400"></i>
+                                Yardım
+                            </a>
+                        </div>
+                        <div class="py-2 border-t border-gray-200">
+                            <a href="#" class="flex items-center px-4 py-2 text-sm text-red-600 hover:bg-red-50">
+                                <i class="fas fa-sign-out-alt mr-3 text-red-500"></i>
+                                Çıkış Yap
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </header>
-
