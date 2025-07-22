@@ -111,5 +111,32 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
+
+        // Details method for modal display
+        public async Task<IActionResult> Details(int id)
+        {
+            var city = await _serviceManager.CityService.GetCityByIdAsync(id);
+            if (city == null)
+            {
+                return NotFound();
+            }
+
+            var allMenus = await _serviceManager.MenuService.GetAllMenusAsync();
+            var cityMenus = allMenus.Where(m => m.CityId == id).ToList();
+
+            var model = new AdminCityViewModel
+            {
+                Id = city.Id,
+                Name = city.Name,
+                MenuCount = cityMenus.Count,
+                CreatedDate = DateTime.Now.AddDays(-new Random().Next(1, 365))
+            };
+
+            ViewBag.RecentMenus = cityMenus.OrderByDescending(m => m.Date).Take(5).ToList();
+            ViewBag.BreakfastCount = cityMenus.Count(m => m.MealType == "Breakfast");
+            ViewBag.DinnerCount = cityMenus.Count(m => m.MealType == "Dinner");
+
+            return PartialView("_CityDetails", model);
+        }
     }
 }

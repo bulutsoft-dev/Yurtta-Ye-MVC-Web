@@ -30,6 +30,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXMvQWRtaW4vVmlld3MvQWRtaW5DaXR5L0luZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/Areas/Admin/Views/AdminCity/_CityDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvQWRtaW4vVmlld3MvQWRtaW5DaXR5L19DaXR5RGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/Areas/Admin/Views/AdminMenu/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXMvQWRtaW4vVmlld3MvQWRtaW5NZW51L0NyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -44,6 +48,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/Areas/Admin/Views/AdminMenu/Upload.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXMvQWRtaW4vVmlld3MvQWRtaW5NZW51L1VwbG9hZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/Areas/Admin/Views/AdminMenu/_MenuDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvQWRtaW4vVmlld3MvQWRtaW5NZW51L19NZW51RGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/Areas/Admin/Views/Home/Index.cshtml]

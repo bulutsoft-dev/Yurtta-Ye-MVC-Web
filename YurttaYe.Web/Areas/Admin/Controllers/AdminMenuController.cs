@@ -333,6 +333,32 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
                 return Json(new { error = "Arama sırasında hata oluştu" });
             }
         }
+
+        // Details method for modal display
+        public async Task<IActionResult> Details(int id)
+        {
+            var menu = await _serviceManager.MenuService.GetMenuByIdAsync(id);
+            if (menu == null) 
+            {
+                return NotFound();
+            }
+
+            var model = new AdminMenuViewModel
+            {
+                Id = menu.Id,
+                CityName = menu.City.Name,
+                MealType = menu.MealType,
+                Date = menu.Date,
+                Energy = menu.Energy,
+                Items = menu.Items.Select(i => new AdminMenuItemViewModel
+                {
+                    Category = i.Category,
+                    Name = i.Name,
+                    Gram = i.Gram
+                }).ToList()
+            };
+
+            return PartialView("_MenuDetails", model);
+        }
     }
 }
-
