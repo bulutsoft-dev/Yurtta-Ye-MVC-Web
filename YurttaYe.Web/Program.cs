@@ -25,6 +25,12 @@ builder.Services.AddControllersWithViews()
             factory.Create(typeof(YurttaYe.Web.Resources.SharedControllerResources));
     });
 
+// Area desteği ekle
+builder.Services.Configure<Microsoft.AspNetCore.Mvc.MvcOptions>(options =>
+{
+    options.EnableEndpointRouting = true;
+});
+
 
 // 2. EF Core (SQLite)
 //builder.Services.AddDbContext<AppDbContext>(options =>

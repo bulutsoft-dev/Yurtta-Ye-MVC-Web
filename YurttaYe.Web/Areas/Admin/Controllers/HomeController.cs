@@ -5,8 +5,7 @@ using YurttaYe.Core.Models.ViewModels;
 using YurttaYe.Core.Services.Interfaces;
 using System;
 
-namespace YurttaYe.Web.Areas.Admin.Controllers
-{
+
     [Area("Admin")]
     public class HomeController : Controller
     {
@@ -39,4 +38,3 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
             return View(model);
         }
     }
-} 
