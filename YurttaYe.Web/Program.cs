@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Localization;
 using System.Globalization;
 using System.Collections.Generic;
 using Microsoft.Extensions.Options;
+using YurttaYe.Core.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 DotNetEnv.Env.Load();
@@ -85,6 +86,7 @@ builder.Services.AddScoped<IMenuService, MenuService>();
 builder.Services.AddScoped<ICityService, CityService>();
 builder.Services.AddScoped<IMenuRepository, MenuRepository>();
 builder.Services.AddScoped<ICityRepository, CityRepository>();
+builder.Services.AddScoped<IServiceManager, ServiceManager>();
 builder.Services.AddHttpClient<ApiService>();
 
 // 6. Swagger

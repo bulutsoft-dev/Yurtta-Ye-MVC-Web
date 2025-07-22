@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using YurttaYe.Core.Models.Dtos;
 using YurttaYe.Core.Services;
+using YurttaYe.Core.Services.Interfaces;
 
 namespace YurttaYe.Web.Controllers.Api
 {
@@ -9,17 +10,17 @@ namespace YurttaYe.Web.Controllers.Api
     [ApiController]
     public class MenuController : ControllerBase
     {
-        private readonly IMenuService _menuService;
+        private readonly IServiceManager _serviceManager;
 
-        public MenuController(IMenuService menuService)
+        public MenuController(IServiceManager serviceManager)
         {
-            _menuService = menuService;
+            _serviceManager = serviceManager;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] int? cityId, [FromQuery] string? mealType, [FromQuery] string? date)
         {
-            var menus = await _menuService.GetAllMenusAsync();
+            var menus = await _serviceManager.MenuService.GetAllMenusAsync();
             var dtos = menus.Select(m => new MenuDto
             {
                 Id = m.Id,

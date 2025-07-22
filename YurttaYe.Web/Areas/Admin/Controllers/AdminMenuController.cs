@@ -9,6 +9,7 @@ using YurttaYe.Core.Models.ViewModels;
 using YurttaYe.Core.Services;
 using System.IO;
 using OfficeOpenXml;
+using YurttaYe.Core.Services.Interfaces;
 using YurttaYe.Web.Resources;
 
 namespace YurttaYe.Web.Areas.Admin.Controllers
@@ -17,20 +18,18 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
     [Authorize(Roles = "Admin")]
     public class AdminMenuController : Controller
     {
-        private readonly IMenuService _menuService;
-        private readonly ICityService _cityService;
+        private readonly IServiceManager _serviceManager;
         private readonly IStringLocalizer<SharedControllerResources> _localizer;
 
-        public AdminMenuController(IMenuService menuService, ICityService cityService, IStringLocalizer<SharedControllerResources> localizer)
+        public AdminMenuController(IServiceManager serviceManager, IStringLocalizer<SharedControllerResources> localizer)
         {
-            _menuService = menuService;
-            _cityService = cityService;
+            _serviceManager = serviceManager;
             _localizer = localizer;
         }
 
         public async Task<IActionResult> Index(string cityFilter, string mealTypeFilter, string dateFilter)
         {
-            var menus = await _menuService.GetAllMenusAsync();
+            var menus = await _serviceManager.MenuService.GetAllMenusAsync();
             var model = menus.Select(m => new AdminMenuViewModel
             {
                 Id = m.Id,
@@ -50,10 +49,10 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
                 model = model.Where(m => m.CityName.Contains(cityFilter, StringComparison.OrdinalIgnoreCase));
             if (!string.IsNullOrEmpty(mealTypeFilter))
                 model = model.Where(m => m.MealType == mealTypeFilter);
-            if (!string.IsNullOrEmpty(dateFilter) && DateTime.TryParse(dateFilter, out var date))
+            if (dateFilter != null && DateTime.TryParse(dateFilter, out var date))
                 model = model.Where(m => m.Date.Date == date.Date);
 
-            ViewBag.Cities = (await _cityService.GetAllCitiesAsync())
+            ViewBag.Cities = (await _serviceManager.CityService.GetAllCitiesAsync())
                 .Select(c => new SelectListItem { Value = c.Name, Text = c.Name });
             ViewBag.MealTypes = new List<SelectListItem>
             {
@@ -68,7 +67,7 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
         {
             var model = new AdminMenuViewModel
             {
-                Cities = (await _cityService.GetAllCitiesAsync())
+                Cities = (await _serviceManager.CityService.GetAllCitiesAsync())
                     .Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Name }),
                 Items = new List<AdminMenuItemViewModel> { new AdminMenuItemViewModel() }
             };
@@ -93,12 +92,12 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
                         Gram = i.Gram
                     }).ToList()
                 };
-                await _menuService.AddMenuAsync(menu);
+                await _serviceManager.MenuService.AddMenuAsync(menu);
                 TempData["Success"] = string.Format(_localizer["EntityAddedSuccessfully"], _localizer["Menu"]);
                 return RedirectToAction(nameof(Index));
             }
 
-            model.Cities = (await _cityService.GetAllCitiesAsync())
+            model.Cities = (await _serviceManager.CityService.GetAllCitiesAsync())
                 .Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Name });
             TempData["Error"] = _localizer["ValidationError"];
             return View(model);
@@ -106,7 +105,7 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
-            var menu = await _menuService.GetMenuByIdAsync(id);
+            var menu = await _serviceManager.MenuService.GetMenuByIdAsync(id);
             if (menu == null) return NotFound();
 
             var model = new AdminMenuViewModel
@@ -116,7 +115,7 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
                 MealType = menu.MealType,
                 Date = menu.Date,
                 Energy = menu.Energy,
-                Cities = (await _cityService.GetAllCitiesAsync())
+                Cities = (await _serviceManager.CityService.GetAllCitiesAsync())
                     .Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Name }),
                 Items = menu.Items.Select(i => new AdminMenuItemViewModel
                 {
@@ -147,12 +146,12 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
                         Gram = i.Gram
                     }).ToList()
                 };
-                await _menuService.UpdateMenuAsync(menu);
+                await _serviceManager.MenuService.UpdateMenuAsync(menu);
                 TempData["Success"] = string.Format(_localizer["EntityUpdatedSuccessfully"], _localizer["Menu"]);
                 return RedirectToAction(nameof(Index));
             }
 
-            model.Cities = (await _cityService.GetAllCitiesAsync())
+            model.Cities = (await _serviceManager.CityService.GetAllCitiesAsync())
                 .Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Name });
             TempData["Error"] = _localizer["ValidationError"];
             return View(model);
@@ -163,7 +162,7 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
         {
             try
             {
-                await _menuService.DeleteMenuAsync(id);
+                await _serviceManager.MenuService.DeleteMenuAsync(id);
                 TempData["Success"] = string.Format(_localizer["EntityDeletedSuccessfully"], _localizer["Menu"]);
             }
             catch
@@ -195,7 +194,7 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
                 var worksheet = package.Workbook.Worksheets[0];
                 var rowCount = worksheet.Dimension.Rows;
 
-                var cities = await _cityService.GetAllCitiesAsync();
+                var cities = await _serviceManager.CityService.GetAllCitiesAsync();
                 for (int row = 2; row <= rowCount; row++)
                 {
                     var cityName = worksheet.Cells[row, 1].Value?.ToString();
@@ -232,7 +231,7 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
                         }
                     }
 
-                    await _menuService.AddMenuAsync(menu);
+                    await _serviceManager.MenuService.AddMenuAsync(menu);
                 }
 
                 TempData["Success"] = string.Format(_localizer["UploadSuccess"], _localizer["Menus"]);

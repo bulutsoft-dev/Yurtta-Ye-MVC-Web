@@ -11,26 +11,25 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Localization;
 using System.Diagnostics;
 using YurttaYe.Core.Models.Dtos;
+using YurttaYe.Core.Services.Interfaces;
 
 
 namespace YurttaYe.Web.Controllers.Web
 {
     public class HomeController : Controller
     {
-        private readonly IMenuService _menuService;
-        private readonly ICityService _cityService;
+        private readonly IServiceManager _serviceManager;
         private readonly IConfiguration _configuration;
 
-        public HomeController(IMenuService menuService, ICityService cityService, IConfiguration configuration)
+        public HomeController(IServiceManager serviceManager, IConfiguration configuration)
         {
-            _menuService = menuService;
-            _cityService = cityService;
+            _serviceManager = serviceManager;
             _configuration = configuration;
         }
 
         public async Task<IActionResult> Index()
         {
-            var cities = await _cityService.GetAllCitiesAsync();
+            var cities = await _serviceManager.CityService.GetAllCitiesAsync();
             var cityList = cities.Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Name }).ToList();
             cityList.Insert(0, new SelectListItem { Value = "0", Text = "Şehir Seçin" });
 
@@ -53,7 +52,7 @@ namespace YurttaYe.Web.Controllers.Web
             {
                 try
                 {
-                    var breakfastMenuEntity = await _menuService.GetMenuAsync(model.CityId, "Kahvaltı", model.Date);
+                    var breakfastMenuEntity = await _serviceManager.MenuService.GetMenuAsync(model.CityId, "Kahvaltı", model.Date);
                     if (breakfastMenuEntity != null)
                     {
                         model.BreakfastMenu = new MenuDto
@@ -67,7 +66,7 @@ namespace YurttaYe.Web.Controllers.Web
 
                 try
                 {
-                    var dinnerMenuEntity = await _menuService.GetMenuAsync(model.CityId, "Akşam Yemeği", model.Date);
+                    var dinnerMenuEntity = await _serviceManager.MenuService.GetMenuAsync(model.CityId, "Akşam Yemeği", model.Date);
                     if (dinnerMenuEntity != null)
                     {
                         model.DinnerMenu = new MenuDto
@@ -87,7 +86,7 @@ namespace YurttaYe.Web.Controllers.Web
         [HttpPost]
         public async Task<IActionResult> Index(MenuViewModel model)
         {
-            var cities = await _cityService.GetAllCitiesAsync();
+            var cities = await _serviceManager.CityService.GetAllCitiesAsync();
             var cityList = cities.Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Name }).ToList();
             cityList.Insert(0, new SelectListItem { Value = "0", Text = "Şehir Seçin" });
             model.Cities = cityList;
@@ -105,7 +104,7 @@ namespace YurttaYe.Web.Controllers.Web
             {
                 try
                 {
-                    var breakfastMenu = await _menuService.GetMenuAsync(model.CityId, "Kahvaltı", model.Date);
+                    var breakfastMenu = await _serviceManager.MenuService.GetMenuAsync(model.CityId, "Kahvaltı", model.Date);
                     if(breakfastMenu != null)
                     {
                         model.BreakfastMenu = new MenuDto
@@ -114,7 +113,7 @@ namespace YurttaYe.Web.Controllers.Web
                             Energy = breakfastMenu.Energy
                         };
                     }
-                    var dinnerMenu = await _menuService.GetMenuAsync(model.CityId, "Akşam Yemeği", model.Date);
+                    var dinnerMenu = await _serviceManager.MenuService.GetMenuAsync(model.CityId, "Akşam Yemeği", model.Date);
                     if(dinnerMenu != null)
                     {
                         model.DinnerMenu = new MenuDto

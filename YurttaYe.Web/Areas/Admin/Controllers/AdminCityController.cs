@@ -5,6 +5,7 @@ using Microsoft.Extensions.Localization;
 using YurttaYe.Core.Models.Entities;
 using YurttaYe.Core.Models.ViewModels;
 using YurttaYe.Core.Services;
+using YurttaYe.Core.Services.Interfaces;
 using YurttaYe.Web.Resources;
 
 namespace YurttaYe.Web.Areas.Admin.Controllers
@@ -13,18 +14,18 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
     [Authorize(Roles = "Admin")]
     public class AdminCityController : Controller
     {
-        private readonly ICityService _cityService;
+        private readonly IServiceManager _serviceManager;
         private readonly IStringLocalizer<SharedControllerResources> _localizer;
 
-        public AdminCityController(ICityService cityService, IStringLocalizer<SharedControllerResources> localizer)
+        public AdminCityController(IServiceManager serviceManager, IStringLocalizer<SharedControllerResources> localizer)
         {
-            _cityService = cityService;
+            _serviceManager = serviceManager;
             _localizer = localizer;
         }
 
         public async Task<IActionResult> Index(string search)
         {
-            var cities = await _cityService.GetAllCitiesAsync();
+            var cities = await _serviceManager.CityService.GetAllCitiesAsync();
             var model = cities.Select(c => new AdminCityViewModel { Id = c.Id, Name = c.Name });
 
             if (!string.IsNullOrEmpty(search))
@@ -46,7 +47,7 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 var city = new City { Name = model.Name };
-                await _cityService.AddCityAsync(city);
+                await _serviceManager.CityService.AddCityAsync(city);
                 TempData["Success"] = string.Format(_localizer["EntityAddedSuccessfully"], _localizer["City"]);
                 return RedirectToAction(nameof(Index));
             }
@@ -56,7 +57,7 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
-            var city = await _cityService.GetCityByIdAsync(id);
+            var city = await _serviceManager.CityService.GetCityByIdAsync(id);
             if (city == null) return NotFound();
 
             var model = new AdminCityViewModel { Id = city.Id, Name = city.Name };
@@ -69,7 +70,7 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 var city = new City { Id = model.Id, Name = model.Name };
-                await _cityService.UpdateCityAsync(city);
+                await _serviceManager.CityService.UpdateCityAsync(city);
                 TempData["Success"] = string.Format(_localizer["EntityUpdatedSuccessfully"], _localizer["City"]);
                 return RedirectToAction(nameof(Index));
             }
@@ -82,7 +83,7 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
         {
             try
             {
-                await _cityService.DeleteCityAsync(id);
+                await _serviceManager.CityService.DeleteCityAsync(id);
                 TempData["Success"] = string.Format(_localizer["EntityDeletedSuccessfully"], _localizer["City"]);
             }
             catch

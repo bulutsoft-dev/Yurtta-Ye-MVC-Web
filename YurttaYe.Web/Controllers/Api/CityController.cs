@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using YurttaYe.Core.Models.Dtos;
 using YurttaYe.Core.Services;
+using YurttaYe.Core.Services.Interfaces;
 
 namespace YurttaYe.Web.Controllers.Api
 {
@@ -9,17 +10,17 @@ namespace YurttaYe.Web.Controllers.Api
     [ApiController]
     public class CityController : ControllerBase
     {
-        private readonly ICityService _cityService;
+        private readonly IServiceManager _serviceManager;
 
-        public CityController(ICityService cityService)
+        public CityController(IServiceManager serviceManager)
         {
-            _cityService = cityService;
+            _serviceManager = serviceManager;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var cities = await _cityService.GetAllCitiesAsync();
+            var cities = await _serviceManager.CityService.GetAllCitiesAsync();
             var dtos = cities.Select(c => new CityDto
             {
                 Id = c.Id,
