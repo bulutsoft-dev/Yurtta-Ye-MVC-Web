@@ -8,8 +8,6 @@ namespace YurttaYe.Core.Models.ViewModels
         public int TotalMenus { get; set; }
         public int TotalCities { get; set; }
         public List<RecentMenuViewModel> RecentMenus { get; set; } = new();
-        public List<string> ChartLabels { get; set; } = new();
-        public List<int> ChartData { get; set; } = new();
     }
 
     public class RecentMenuViewModel

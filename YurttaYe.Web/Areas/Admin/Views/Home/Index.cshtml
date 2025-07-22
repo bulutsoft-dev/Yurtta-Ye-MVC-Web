@@ -1,5 +1,4 @@
 @model YurttaYe.Core.Models.ViewModels.DashboardViewModel
-@using System.Text.Json;
 @{
     ViewData["Title"] = "Admin Dashboard";
 }
@@ -28,24 +27,19 @@
         </div>
     </div>
 
-    <div class="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div class="bg-white p-6 rounded-lg shadow-md">
-            <h2 class="text-xl font-semibold mb-4">Menus Added in Last 7 Days</h2>
-            <canvas id="dailyMenuChart"></canvas>
-        </div>
-        <div class="bg-white p-6 rounded-lg shadow-md">
-            <h2 class="text-xl font-semibold mb-4">Recent Menus</h2>
-            <div class="overflow-x-auto">
-                <table class="w-full text-left">
-                    <thead class="bg-gray-200">
+    <div class="mt-8 bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-xl font-semibold mb-4">Recent Menus</h2>
+        <div class="overflow-x-auto">
+            <table class="w-full text-left">
+                <thead class="bg-gray-200">
                     <tr>
                         <th class="p-3">City</th>
                         <th class="p-3">Meal Type</th>
                         <th class="p-3">Date</th>
                         <th class="p-3">Actions</th>
                     </tr>
-                    </thead>
-                    <tbody>
+                </thead>
+                <tbody>
                     @foreach (var menu in Model.RecentMenus)
                     {
                         <tr class="border-b">
@@ -57,43 +51,8 @@
                             </td>
                         </tr>
                     }
-                    </tbody>
-                </table>
-            </div>
+                </tbody>
+            </table>
         </div>
     </div>
-</div>
-
-@section Scripts
-{
-    <script>
-        const ctx = document.getElementById('dailyMenuChart');
-        const chartLabels = @Html.Raw(JsonSerializer.Serialize(Model.ChartLabels));
-        const chartData = @Html.Raw(JsonSerializer.Serialize(Model.ChartData));
-
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: chartLabels,
-                datasets: [{
-                    label: '# of Menus',
-                    data: chartData,
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    borderWidth: 2,
-                    fill: true,
-                    tension: 0.4
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                },
-                responsive: true,
-                maintainAspectRatio: false
-            }
-        });
-    </script>
-} 
+</div> 

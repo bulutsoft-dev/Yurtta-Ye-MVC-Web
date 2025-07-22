@@ -2,26 +2,42 @@
 @inject IViewLocalizer Localizer
 @model YurttaYe.Core.Models.ViewModels.AdminCityViewModel
 @{
+    Layout = "_AdminLayout";
     ViewData["Title"] = Localizer["EditCity"];
 }
-<h2>@Localizer["EditCity"]</h2>
-<form asp-area="Admin" asp-controller="AdminCity" asp-action="Edit" method="post">
-    <input type="hidden" asp-for="Id" />
-    <div class="form-group">
-        <label asp-for="Name">@Localizer["CityName"]</label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger"></span>
-    </div>
-    <button type="submit" class="btn btn-primary">@Localizer["Save"]</button>
-</form>
+
+<div class="bg-white p-6 rounded-lg shadow-md">
+    <form asp-area="Admin" asp-controller="AdminCity" asp-action="Edit" method="post">
+        <input type="hidden" asp-for="Id" />
+        <div class="mb-4">
+            <label asp-for="Name" class="block text-gray-700 text-sm font-bold mb-2">@Localizer["CityName"]</label>
+            <input asp-for="Name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+            <span asp-validation-for="Name" class="text-red-500 text-xs italic"></span>
+        </div>
+        <div class="flex items-center justify-between">
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                @Localizer["Save"]
+            </button>
+            <a asp-area="Admin" asp-controller="AdminCity" asp-action="Index" class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800">
+                @Localizer["BackToList"]
+            </a>
+        </div>
+    </form>
+</div>
 
 @if (TempData["Success"] != null)
 {
-    <div class="alert alert-success mt-3">@TempData["Success"]</div>
+    <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mt-4 rounded">
+        @TempData["Success"]
+    </div>
 }
 @if (TempData["Error"] != null)
 {
-    <div class="alert alert-danger mt-3">@TempData["Error"]</div>
+    <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mt-4 rounded">
+        @TempData["Error"]
+    </div>
 }
 
+@section Scripts {
     <partial name="_ValidationScriptsPartial" />
+}
