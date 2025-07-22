@@ -22,14 +22,10 @@
                     <i class="fab fa-google-play text-xl"></i>
                     <span class="hidden lg:inline ml-2 font-semibold">@Localizer["DownloadOnGooglePlay"]</span>
                 </a>
-                <form asp-controller="Home" asp-action="SetLanguage" method="post" class="inline">
-                    <input type="hidden" name="culture" value="@(isTr ? "en" : "tr")" />
-                    <input type="hidden" name="returnUrl" value="@Context.Request.Path@Context.Request.QueryString" />
-                    <button type="submit" class="nav-link p-2 lg:px-4 lg:py-2" title="@Localizer["ChangeLanguage"]">
-                        <i class="fas fa-language text-xl"></i>
-                        <span class="hidden lg:inline ml-2 font-semibold">@Localizer["ChangeLanguage"]</span>
-                    </button>
-                </form>
+                <a href="@Url.Action("SetLanguage", "Home", new { culture = (isTr ? "en" : "tr"), returnUrl = Context.Request.Path + Context.Request.QueryString })" class="nav-link p-2 lg:px-4 lg:py-2" title="@Localizer["ChangeLanguage"]">
+                    <i class="fas fa-language text-xl"></i>
+                    <span class="hidden lg:inline ml-2 font-semibold">@Localizer["ChangeLanguage"]</span>
+                </a>
             </div>
 
             <!-- Centered Brand (All screens) -->
@@ -76,13 +72,9 @@
                 <li><a class="nav-link !w-full !justify-start" asp-controller="Home" asp-action="Index"><i class="fas fa-home text-xl w-8 text-center mr-3"></i>@Localizer["HomePage"]</a></li>
                 <li><a class="nav-link !w-full !justify-start" href="https://play.google.com/store/apps/details?id=com.yurttaye.yurttaye" target="_blank"><i class="fab fa-google-play text-xl w-8 text-center mr-3"></i>@Localizer["DownloadOnGooglePlay"]</a></li>
                 <li>
-                    <form asp-controller="Home" asp-action="SetLanguage" method="post" class="w-full">
-                        <input type="hidden" name="culture" value="@(isTr ? "en" : "tr")" />
-                        <input type="hidden" name="returnUrl" value="@Context.Request.Path@Context.Request.QueryString" />
-                        <button type="submit" class="nav-link !w-full !justify-start">
-                            <i class="fas fa-language text-xl w-8 text-center mr-3"></i>@Localizer["ChangeLanguage"]
-                        </button>
-                    </form>
+                    <a href="@Url.Action("SetLanguage", "Home", new { culture = (isTr ? "en" : "tr"), returnUrl = Context.Request.Path + Context.Request.QueryString })" class="nav-link !w-full !justify-start">
+                        <i class="fas fa-language text-xl w-8 text-center mr-3"></i>@Localizer["ChangeLanguage"]
+                    </a>
                 </li>
                 @if (User.IsInRole("Admin"))
                 {

@@ -8,6 +8,9 @@ using YurttaYe.Core.Models.ViewModels;
 using YurttaYe.Core.Services;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Localization;
+using System.Diagnostics;
+
 
 namespace YurttaYe.Web.Controllers.Web
 {
@@ -131,17 +134,22 @@ namespace YurttaYe.Web.Controllers.Web
             return View(model);
         }
 
-        [HttpPost]
-        public IActionResult SetLanguage(string culture, string? returnUrl = null)
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        
+        [HttpGet]
+        public IActionResult SetLanguage(string culture, string returnUrl)
         {
             Response.Cookies.Append(
                 CookieRequestCultureProvider.DefaultCookieName,
                 CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
                 new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
             );
-            if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
-                return LocalRedirect(returnUrl);
-            return Redirect(Request.Headers["Referer"].ToString() ?? "/");
+
+            return LocalRedirect(returnUrl);
         }
 
         private string GetTimeOfDayTheme(string? mealType = null)

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "BCbghCG5+QJxbUlHBvl0XdodGpylfAc0FuRJjrU1xuA=",
+  "Hash": "fQTw5UPtp2Am/QAnv/UmATWZdFQNFA7L9DAv2tUT4KE=",
   "Source": "YurttaYe.Web",
   "BasePath": "_content/YurttaYe.Web",
   "Mode": "Default",
@@ -91,6 +91,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/ChatGPT Image May 21, 2025, 02_09_42 PM.png"
+    },
+    {
+      "Identity": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/wwwroot/css/login.css",
+      "SourceId": "YurttaYe.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/wwwroot/",
+      "BasePath": "_content/YurttaYe.Web",
+      "RelativePath": "css/login.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/css/login.css"
     },
     {
       "Identity": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/wwwroot/css/site.css",

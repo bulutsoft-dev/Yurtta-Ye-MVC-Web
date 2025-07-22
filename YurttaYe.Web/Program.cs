@@ -9,6 +9,7 @@ using YurttaYe.Web.Middleware;
 using YurttaYe.Web.Services;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
+using System.Collections.Generic;
 using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -70,7 +71,12 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
     options.DefaultRequestCulture = new RequestCulture("tr");
     options.SupportedCultures = supportedCultures;
     options.SupportedUICultures = supportedCultures;
-    options.RequestCultureProviders.Insert(0, new CookieRequestCultureProvider());
+    options.RequestCultureProviders = new List<IRequestCultureProvider>
+    {
+        new QueryStringRequestCultureProvider(),
+        new CookieRequestCultureProvider(),
+        new AcceptLanguageHeaderRequestCultureProvider()
+    };
 });
 
 
@@ -97,13 +103,11 @@ if (app.Environment.IsDevelopment())
 app.UseMiddleware<ExceptionMiddleware>();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
+
 app.UseRouting();
 
-// Enable localization middleware
-var locOptions = app.Services.GetService<IOptions<RequestLocalizationOptions>>();
-if (locOptions != null) app.UseRequestLocalization(locOptions.Value);
-
-app.UseCors("AllowFlutter");
 app.UseAuthentication();
 app.UseAuthorization();
 
