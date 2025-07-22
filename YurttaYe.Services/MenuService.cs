@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using YurttaYe.Core.Models.Dtos;
 using YurttaYe.Core.Models.Entities;
+using YurttaYe.Core.Services.Interfaces;
 using YurttaYe.Data.Repositories;
 
 namespace YurttaYe.Services
@@ -18,7 +19,9 @@ namespace YurttaYe.Services
 
         public async Task<MenuDto> GetMenuAsync(int cityId, string mealType, DateTime date)
         {
-            var menu = await _menuRepository.GetMenuAsync(cityId, mealType, date);
+            var menu = await _menuRepository.GetAsync(cityId, mealType, date);
+            if (menu == null) return null;
+
             return new MenuDto
             {
                 Id = menu.Id,
@@ -28,7 +31,6 @@ namespace YurttaYe.Services
                 Energy = menu.Energy,
                 Items = menu.Items.Select(i => new MenuItemDto
                 {
-                    Id = i.Id,
                     Category = i.Category,
                     Name = i.Name,
                     Gram = i.Gram
@@ -38,28 +40,33 @@ namespace YurttaYe.Services
 
         public async Task<Menu> GetMenuByIdAsync(int id)
         {
-            return await _menuRepository.GetMenuByIdAsync(id)
+            return await _menuRepository.GetByIdAsync(id)
                    ?? throw new Exception("Menü bulunamadı.");
         }
 
         public async Task<List<Menu>> GetAllMenusAsync()
         {
-            return await _menuRepository.GetAllMenusAsync();
+            return await _menuRepository.GetAllAsync();
         }
 
         public async Task AddMenuAsync(Menu menu)
         {
-            await _menuRepository.AddMenuAsync(menu);
+            await _menuRepository.AddAsync(menu);
         }
 
         public async Task UpdateMenuAsync(Menu menu)
         {
-            await _menuRepository.UpdateMenuAsync(menu);
+            await _menuRepository.UpdateAsync(menu);
         }
 
         public async Task DeleteMenuAsync(int id)
         {
-            await _menuRepository.DeleteMenuAsync(id);
+            await _menuRepository.DeleteAsync(id);
+        }
+
+        public async Task<List<Menu>> GetRecentMenusAsync(int count)
+        {
+            return await _menuRepository.GetRecentMenusAsync(count);
         }
     }
 }

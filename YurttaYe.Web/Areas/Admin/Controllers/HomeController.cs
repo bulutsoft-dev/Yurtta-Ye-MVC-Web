@@ -1,4 +1,7 @@
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using YurttaYe.Core.Models.ViewModels;
 using YurttaYe.Core.Services.Interfaces;
 
 namespace YurttaYe.Web.Areas.Admin.Controllers
@@ -17,10 +20,22 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
         {
             var allMenus = await _serviceManager.MenuService.GetAllMenusAsync();
             var allCities = await _serviceManager.CityService.GetAllCitiesAsync();
+            var recentMenus = await _serviceManager.MenuService.GetRecentMenusAsync(5);
 
-            ViewBag.TotalMenus = allMenus.Count();
-            ViewBag.TotalCities = allCities.Count();
-            return View();
+            var model = new DashboardViewModel
+            {
+                TotalMenus = allMenus.Count(),
+                TotalCities = allCities.Count(),
+                RecentMenus = recentMenus.Select(m => new RecentMenuViewModel
+                {
+                    Id = m.Id,
+                    CityName = m.City.Name,
+                    MealType = m.MealType,
+                    Date = m.Date
+                }).ToList()
+            };
+
+            return View(model);
         }
     }
 } 

@@ -7,11 +7,12 @@ namespace YurttaYe.Data.Repositories
 {
     public interface IMenuRepository
     {
-        Task<Menu> GetMenuAsync(int cityId, string mealType, DateTime date);
-        Task<Menu> GetMenuByIdAsync(int id);
-        Task<List<Menu>> GetAllMenusAsync();
-        Task AddMenuAsync(Menu menu);
-        Task UpdateMenuAsync(Menu menu);
-        Task DeleteMenuAsync(int id);
+        Task<List<Menu>> GetAllAsync();
+        Task<Menu> GetByIdAsync(int id);
+        Task<Menu> GetAsync(int cityId, string mealType, DateTime date);
+        Task AddAsync(Menu menu);
+        Task UpdateAsync(Menu menu);
+        Task DeleteAsync(int id);
+        Task<List<Menu>> GetRecentMenusAsync(int count);
     }
 }

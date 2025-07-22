@@ -1,3 +1,4 @@
+@model YurttaYe.Core.Models.ViewModels.DashboardViewModel
 @{
     ViewData["Title"] = "Admin Dashboard";
 }
@@ -10,7 +11,7 @@
             </div>
             <div>
                 <h2 class="text-xl font-semibold">Total Menus</h2>
-                <p class="text-3xl font-bold">@ViewBag.TotalMenus</p>
+                <p class="text-3xl font-bold">@Model.TotalMenus</p>
                 <a asp-area="Admin" asp-controller="AdminMenu" asp-action="Index" class="text-blue-500 hover:underline mt-2 inline-block">Manage Menus</a>
             </div>
         </div>
@@ -20,10 +21,38 @@
             </div>
             <div>
                 <h2 class="text-xl font-semibold">Total Cities</h2>
-                <p class="text-3xl font-bold">@ViewBag.TotalCities</p>
+                <p class="text-3xl font-bold">@Model.TotalCities</p>
                 <a asp-area="Admin" asp-controller="AdminCity" asp-action="Index" class="text-green-500 hover:underline mt-2 inline-block">Manage Cities</a>
             </div>
         </div>
-        <!-- Add more cards for other management sections as needed -->
+    </div>
+
+    <div class="mt-8 bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-xl font-semibold mb-4">Recent Menus</h2>
+        <div class="overflow-x-auto">
+            <table class="w-full text-left">
+                <thead class="bg-gray-200">
+                    <tr>
+                        <th class="p-3">City</th>
+                        <th class="p-3">Meal Type</th>
+                        <th class="p-3">Date</th>
+                        <th class="p-3">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var menu in Model.RecentMenus)
+                    {
+                        <tr class="border-b">
+                            <td class="p-3">@menu.CityName</td>
+                            <td class="p-3">@menu.MealType</td>
+                            <td class="p-3">@menu.Date.ToString("dd.MM.yyyy")</td>
+                            <td class="p-3">
+                                <a asp-area="Admin" asp-controller="AdminMenu" asp-action="Edit" asp-route-id="@menu.Id" class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600">Edit</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
 </div> 
