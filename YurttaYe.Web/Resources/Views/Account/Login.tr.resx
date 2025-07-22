@@ -135,4 +135,50 @@
   <data name="UsernamePlaceholder" xml:space="preserve">
     <value>kullanici.adi</value>
   </data>
-</root> 
+  <!-- Yeni eklenen lokalizasyon anahtarları -->
+  <data name="AdminPanel" xml:space="preserve">
+    <value>Admin Paneli</value>
+  </data>
+  <data name="AdminPanelDescription" xml:space="preserve">
+    <value>Yurt yemek menülerini yönetmek için giriş yapın</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Kullanıcı Adı</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Şifre</value>
+  </data>
+  <data name="ForgotPassword" xml:space="preserve">
+    <value>Şifrenizi mi unuttunuz?</value>
+  </data>
+  <data name="LoginButton" xml:space="preserve">
+    <value>Admin Paneline Giriş</value>
+  </data>
+  <data name="LoginInProgress" xml:space="preserve">
+    <value>Giriş yapılıyor...</value>
+  </data>
+  <data name="DemoLogin" xml:space="preserve">
+    <value>Demo ile Giriş Yap</value>
+  </data>
+  <data name="DemoCredentialsLoaded" xml:space="preserve">
+    <value>Demo bilgileri yüklendi! Giriş yapabilirsiniz.</value>
+  </data>
+  <data name="AdminPanelFeatures" xml:space="preserve">
+    <value>Admin Panel Özellikleri</value>
+  </data>
+  <data name="ManageDormMenus" xml:space="preserve">
+    <value>Yurt menülerini yönetebilirsiniz</value>
+  </data>
+  <data name="AddCityLocation" xml:space="preserve">
+    <value>Şehir ve lokasyon ekleyebilirsiniz</value>
+  </data>
+  <data name="BulkDataUpload" xml:space="preserve">
+    <value>Excel'den toplu veri yükleyebilirsiniz</value>
+  </data>
+  <data name="CompanyName" xml:space="preserve">
+    <value>YurttaYe - Yurt Yemek Sistemi</value>
+  </data>
+  <data name="Privacy" xml:space="preserve">
+    <value>Gizlilik</value>
+  </data>
+</root>

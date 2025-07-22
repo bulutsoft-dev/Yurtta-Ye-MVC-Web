@@ -6,36 +6,50 @@
     Layout = "~/Views/Shared/_LoginLayout.cshtml";
 }
 
-<div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-md w-full space-y-8">
+<div class="min-h-screen bg-gradient-to-br from-blue-600 via-blue-700 to-purple-800 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 opacity-10">
+        <div class="absolute top-10 left-10 w-32 h-32 bg-white rounded-full opacity-20 animate-pulse"></div>
+        <div class="absolute top-1/4 right-20 w-24 h-24 bg-white rounded-full opacity-15 animate-bounce" style="animation-delay: 0.5s;"></div>
+        <div class="absolute bottom-32 left-1/4 w-16 h-16 bg-white rounded-full opacity-25 animate-pulse" style="animation-delay: 1s;"></div>
+        <div class="absolute bottom-20 right-1/3 w-20 h-20 bg-white rounded-full opacity-20 animate-bounce" style="animation-delay: 1.5s;"></div>
+    </div>
+    
+    <div class="max-w-md w-full space-y-8 relative z-10">
         <!-- Logo and Header -->
         <div class="text-center">
-            <div class="mx-auto h-20 w-20 bg-white rounded-full flex items-center justify-center shadow-lg logo-bounce">
-                <img src="~/logo-yurttaye.png" alt="YurttaYe Logo" class="h-16 w-16 object-contain" />
+            <div class="mx-auto h-24 w-24 bg-white rounded-2xl flex items-center justify-center shadow-2xl transform hover:scale-105 transition-transform duration-300">
+                <div class="text-center">
+                    <i class="fas fa-utensils text-3xl text-blue-600 mb-1"></i>
+                    <div class="text-xs font-bold text-gray-700">YurttaYe</div>
+                </div>
             </div>
             <h2 class="mt-6 text-center text-3xl font-extrabold text-white">
-                @localizer["Header"]
+                <i class="fas fa-user-shield mr-2"></i>
+                @localizer["AdminPanel"]
             </h2>
-            <p class="mt-2 text-center text-sm text-gray-200">
-                @localizer["SubHeader"]
+            <p class="mt-2 text-center text-sm text-blue-100">
+                @localizer["AdminPanelDescription"]
             </p>
         </div>
 
         <!-- Login Form -->
-        <div class="login-card rounded-2xl shadow-2xl p-8 space-y-6">
+        <div class="bg-white/95 backdrop-blur-lg rounded-2xl shadow-2xl p-8 space-y-6 border border-white/20">
             <form asp-action="Login" asp-controller="Account" method="post" class="space-y-6" x-data="loginForm()">
                 @Html.AntiForgeryToken()
                 
                 <!-- Error Messages -->
                 @if (ViewData.ModelState.ErrorCount > 0)
                 {
-                    <div class="login-error rounded-lg p-4 mb-4">
+                    <div class="bg-red-50 border-l-4 border-red-400 p-4 rounded-lg">
                         <div class="flex items-center">
-                            <i class="fas fa-exclamation-triangle mr-2"></i>
-                            <div>
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-exclamation-triangle text-red-400"></i>
+                            </div>
+                            <div class="ml-3">
                                 @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
                                 {
-                                    <p class="text-sm">@error.ErrorMessage</p>
+                                    <p class="text-sm text-red-700">@error.ErrorMessage</p>
                                 }
                             </div>
                         </div>
@@ -45,56 +59,64 @@
                 <!-- Success Message -->
                 @if (TempData["SuccessMessage"] != null)
                 {
-                    <div class="login-success rounded-lg p-4 mb-4">
+                    <div class="bg-green-50 border-l-4 border-green-400 p-4 rounded-lg">
                         <div class="flex items-center">
-                            <i class="fas fa-check-circle mr-2"></i>
-                            <p class="text-sm">@TempData["SuccessMessage"]</p>
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-check-circle text-green-400"></i>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm text-green-700">@TempData["SuccessMessage"]</p>
+                            </div>
                         </div>
                     </div>
                 }
 
                 <!-- Username Field -->
-                <div class="relative">
-                    <label for="Username" class="block text-sm font-medium text-login-primary mb-2">
-                        <i class="fas fa-user mr-2"></i>
-                        @localizer["UsernameLabel"]
+                <div class="space-y-2">
+                    <label for="Username" class="block text-sm font-semibold text-gray-700">
+                        <i class="fas fa-user mr-2 text-blue-500"></i>
+                        @localizer["Username"]
                     </label>
-                    <input asp-for="Username" 
-                           type="text" 
-                           required 
-                           class="login-input w-full px-4 py-3 pl-12 rounded-lg text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                           placeholder="@localizer["UsernamePlaceholder"]"
-                           x-model="username"
-                           x-on:input="validateUsername()">
-                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none mt-8">
-                        <i class="fas fa-user text-gray-400"></i>
+                    <div class="relative">
+                        <input asp-for="Username" 
+                               type="text" 
+                               required 
+                               class="w-full px-4 py-3 pl-12 pr-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-gray-50 focus:bg-white"
+                               placeholder="@localizer["UsernamePlaceholder"]"
+                               x-model="username"
+                               x-on:input="validateUsername()">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fas fa-user text-gray-400"></i>
+                        </div>
                     </div>
-                    <span asp-validation-for="Username" class="text-red-500 text-xs mt-1 block"></span>
+                    <span asp-validation-for="Username" class="text-red-500 text-xs"></span>
                 </div>
 
                 <!-- Password Field -->
-                <div class="relative" x-data="{ showPassword: false }">
-                    <label for="Password" class="block text-sm font-medium text-login-primary mb-2">
-                        <i class="fas fa-lock mr-2"></i>
-                        @localizer["PasswordLabel"]
+                <div class="space-y-2" x-data="{ showPassword: false }">
+                    <label for="Password" class="block text-sm font-semibold text-gray-700">
+                        <i class="fas fa-lock mr-2 text-blue-500"></i>
+                        @localizer["Password"]
                     </label>
-                    <input asp-for="Password" 
-                           x-bind:type="showPassword ? 'text' : 'password'"
-                           required 
-                           class="login-input w-full px-4 py-3 pl-12 pr-12 rounded-lg text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                           placeholder="@localizer["PasswordPlaceholder"]"
-                           x-model="password"
-                           x-on:input="validatePassword()">
-                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none mt-8">
-                        <i class="fas fa-lock text-gray-400"></i>
+                    <div class="relative">
+                        <input asp-for="Password" 
+                               x-bind:type="showPassword ? 'text' : 'password'"
+                               required 
+                               class="w-full px-4 py-3 pl-12 pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-gray-50 focus:bg-white"
+                               placeholder="@localizer["PasswordPlaceholder"]"
+                               x-model="password"
+                               x-on:input="validatePassword()">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fas fa-lock text-gray-400"></i>
+                        </div>
+                        <button type="button" 
+                                class="absolute inset-y-0 right-0 pr-3 flex items-center"
+                                x-on:click="showPassword = !showPassword">
+                            <i x-show="!showPassword" class="fas fa-eye text-gray-400 hover:text-gray-600 transition-colors"></i>
+                            <i x-show="showPassword" class="fas fa-eye-slash text-gray-400 hover:text-gray-600 transition-colors" style="display: none;"></i>
+                        </button>
                     </div>
-                    <button type="button" 
-                            class="absolute inset-y-0 right-0 pr-3 flex items-center mt-8"
-                            x-on:click="showPassword = !showPassword">
-                        <i x-show="!showPassword" class="fas fa-eye text-gray-400 hover:text-gray-600"></i>
-                        <i x-show="showPassword" class="fas fa-eye-slash text-gray-400 hover:text-gray-600" style="display: none;"></i>
-                    </button>
-                    <span asp-validation-for="Password" class="text-red-500 text-xs mt-1 block"></span>
+                    <span asp-validation-for="Password" class="text-red-500 text-xs"></span>
                 </div>
 
                 <!-- Remember Me -->
@@ -103,7 +125,7 @@
                         <input id="remember_me" name="remember_me"
                                type="checkbox" 
                                class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
-                        <label for="remember_me" class="ml-2 block text-sm text-login-secondary">
+                        <label for="remember_me" class="ml-2 block text-sm text-gray-700">
                             @localizer["RememberMe"]
                         </label>
                     </div>
@@ -115,9 +137,9 @@
                 </div>
 
                 <!-- Submit Button -->
-                <div>
+                <div class="space-y-4">
                     <button type="submit" 
-                            class="login-btn group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                            class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-[1.02] transition-all duration-200 shadow-lg"
                             x-bind:disabled="!isFormValid || isLoading"
                             x-on:click="submitForm()">
                         <span x-show="!isLoading" class="flex items-center">
@@ -125,45 +147,62 @@
                             @localizer["LoginButton"]
                         </span>
                         <span x-show="isLoading" class="flex items-center" style="display: none;">
-                            <i class="fas fa-spinner loading-spinner mr-2"></i>
-                            @localizer["LoggingInButton"]
+                            <i class="fas fa-spinner animate-spin mr-2"></i>
+                            @localizer["LoginInProgress"]
                         </span>
                     </button>
-                </div>
 
-                <!-- Divider -->
-                <div class="relative">
-                    <div class="absolute inset-0 flex items-center">
-                        <div class="w-full border-t border-gray-300"></div>
-                    </div>
-                    <div class="relative flex justify-center text-sm">
-                        <span class="px-2 bg-white text-gray-500">@localizer["Or"]</span>
-                    </div>
-                </div>
-
-                <!-- Demo Login Button -->
-                <div>
+                    <!-- Demo Login Button -->
                     <button type="button" 
-                            class="w-full flex justify-center py-3 px-4 border-2 border-dashed border-gray-300 text-sm font-medium rounded-lg text-gray-700 bg-gray-50 hover:bg-gray-100 transition-colors duration-200"
+                            class="w-full flex justify-center py-3 px-4 border-2 border-dashed border-blue-300 text-sm font-medium rounded-lg text-blue-700 bg-blue-50 hover:bg-blue-100 transition-colors duration-200"
                             x-on:click="fillDemoCredentials()">
                         <i class="fas fa-user-cog mr-2"></i>
-                        @localizer["DemoLoginButton"]
+                        @localizer["DemoLogin"]
                     </button>
                 </div>
             </form>
+            
+            <!-- Quick Info -->
+            <div class="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-info-circle text-blue-400"></i>
+                    </div>
+                    <div class="ml-3">
+                        <h3 class="text-sm font-medium text-blue-800">@localizer["AdminPanelFeatures"]</h3>
+                        <div class="mt-2 text-sm text-blue-700">
+                            <ul class="list-disc list-inside space-y-1">
+                                <li>@localizer["ManageDormMenus"]</li>
+                                <li>@localizer["AddCityLocation"]</li>
+                                <li>@localizer["BulkDataUpload"]</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Footer -->
         <div class="text-center">
-            <p class="text-xs text-gray-300">
-                @localizer["Copyright"]
+            <p class="text-xs text-blue-100">
+                <i class="fas fa-copyright mr-1"></i>
+                @DateTime.Now.Year @localizer["CompanyName"]
             </p>
-            <div class="mt-2 flex justify-center space-x-4 text-xs text-gray-400">
-                <a href="#" class="hover:text-white transition-colors duration-200">@localizer["PrivacyPolicy"]</a>
+            <div class="mt-2 flex justify-center space-x-4 text-xs text-blue-200">
+                <a href="#" class="hover:text-white transition-colors duration-200 flex items-center">
+                    <i class="fas fa-shield-alt mr-1"></i>
+                    @localizer["Privacy"]
+                </a>
                 <span>•</span>
-                <a href="#" class="hover:text-white transition-colors duration-200">@localizer["TermsOfUse"]</a>
+                <a href="#" class="hover:text-white transition-colors duration-200 flex items-center">
+                    <i class="fas fa-file-contract mr-1"></i>
+                    @localizer["TermsOfUse"]
+                </a>
                 <span>•</span>
-                <a href="#" class="hover:text-white transition-colors duration-200">@localizer["Support"]</a>
+                <a href="#" class="hover:text-white transition-colors duration-200 flex items-center">
+                    <i class="fas fa-life-ring mr-1"></i>
+                    @localizer["Support"]
+                </a>
             </div>
         </div>
     </div>
@@ -200,6 +239,9 @@
                     // Fill actual form fields
                     document.getElementById('Username').value = this.username;
                     document.getElementById('Password').value = this.password;
+                    
+                    // Show success message
+                    this.showNotification('@localizer["DemoCredentialsLoaded"]', 'success');
                 },
                 
                 submitForm() {
@@ -208,12 +250,40 @@
                     this.isLoading = true;
                     
                     // The form will be submitted naturally
-                    // This is just for UI feedback
                     setTimeout(() => {
-                        if (this.isLoading) { // Still loading after 10 seconds
+                        if (this.isLoading) {
                             this.isLoading = false;
                         }
                     }, 10000);
+                },
+
+                showNotification(message, type) {
+                    // Simple notification system
+                    const notification = document.createElement('div');
+                    notification.className = `fixed top-4 right-4 z-50 max-w-sm p-4 rounded-lg shadow-lg transition-all duration-300 transform translate-x-full`;
+                    
+                    const bgColor = type === 'success' ? 'bg-green-500' : 'bg-blue-500';
+                    notification.classList.add(bgColor);
+                    
+                    notification.innerHTML = `
+                        <div class="flex items-center space-x-2 text-white">
+                            <i class="fas fa-${type === 'success' ? 'check' : 'info'}-circle"></i>
+                            <p class="text-sm font-medium">${message}</p>
+                        </div>
+                    `;
+
+                    document.body.appendChild(notification);
+
+                    // Animate in
+                    setTimeout(() => {
+                        notification.classList.remove('translate-x-full');
+                    }, 100);
+
+                    // Auto remove after 3 seconds
+                    setTimeout(() => {
+                        notification.classList.add('translate-x-full');
+                        setTimeout(() => notification.remove(), 300);
+                    }, 3000);
                 }
             }
         }
@@ -243,13 +313,30 @@
             @if (ViewData.ModelState.ErrorCount > 0)
             {
                 <text>
-                const loginCard = document.querySelector('.login-card');
+                const loginCard = document.querySelector('.bg-white\\/95');
                 loginCard.style.animation = 'shake 0.5s ease-in-out';
                 setTimeout(() => {
-                    loginCard.style.animation = 'slideInUp 0.8s ease-out';
+                    loginCard.style.animation = '';
                 }, 500);
                 </text>
             }
+
+            // Add floating animation to background elements
+            const floatingElements = document.querySelectorAll('[class*="animate-"]');
+            floatingElements.forEach((element, index) => {
+                element.style.animationDelay = `${index * 0.5}s`;
+            });
         });
+
+        // CSS Animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @@keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                10%, 30%, 50%, 70%, 90% { transform: translateX(-8px); }
+                20%, 40%, 60%, 80% { transform: translateX(8px); }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 }

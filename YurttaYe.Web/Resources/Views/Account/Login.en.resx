@@ -135,4 +135,50 @@
   <data name="UsernamePlaceholder" xml:space="preserve">
     <value>username</value>
   </data>
-</root> 
+  <!-- New localization keys -->
+  <data name="AdminPanel" xml:space="preserve">
+    <value>Admin Panel</value>
+  </data>
+  <data name="AdminPanelDescription" xml:space="preserve">
+    <value>Login to manage dormitory meal menus</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="ForgotPassword" xml:space="preserve">
+    <value>Forgot your password?</value>
+  </data>
+  <data name="LoginButton" xml:space="preserve">
+    <value>Login to Admin Panel</value>
+  </data>
+  <data name="LoginInProgress" xml:space="preserve">
+    <value>Logging in...</value>
+  </data>
+  <data name="DemoLogin" xml:space="preserve">
+    <value>Login with Demo</value>
+  </data>
+  <data name="DemoCredentialsLoaded" xml:space="preserve">
+    <value>Demo credentials loaded! You can login now.</value>
+  </data>
+  <data name="AdminPanelFeatures" xml:space="preserve">
+    <value>Admin Panel Features</value>
+  </data>
+  <data name="ManageDormMenus" xml:space="preserve">
+    <value>You can manage dormitory menus</value>
+  </data>
+  <data name="AddCityLocation" xml:space="preserve">
+    <value>You can add cities and locations</value>
+  </data>
+  <data name="BulkDataUpload" xml:space="preserve">
+    <value>You can upload bulk data from Excel</value>
+  </data>
+  <data name="CompanyName" xml:space="preserve">
+    <value>YurttaYe - Dormitory Meal System</value>
+  </data>
+  <data name="Privacy" xml:space="preserve">
+    <value>Privacy</value>
+  </data>
+</root>
