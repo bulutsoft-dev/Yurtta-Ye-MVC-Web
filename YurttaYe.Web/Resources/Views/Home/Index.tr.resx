@@ -52,7 +52,7 @@
     <value>Önemli Bilgilendirme</value>
   </data>
   <data name="InfoNote" xml:space="preserve">
-    <value>Menüler, Kredi ve Yurtlar Kurumu (KYK) tarafından sağlanan verilere dayanmaktadır. Menülerde değişiklik olabilir, en güncel bilgi için lütfen yurt duyurularını takip edin.</value>
+    <value>Bu platformda sunulan menü bilgileri, yurt yönetimleri tarafından sağlanan veya kullanıcılar tarafından yapılan katkılara dayanmaktadır. Menüler; yurda, tarihe veya öğün saatine göre farklılık gösterebilir ve verilerde zaman zaman yanlışlıklar olabilir. Uygulamamız, gösterilen bilgilerin doğruluğunu garanti etmez ve bu verilerden kaynaklanabilecek herhangi bir sorumluluk kabul etmez.</value>
   </data>
   <data name="TotalEnergy" xml:space="preserve">
     <value>Toplam Enerji</value>

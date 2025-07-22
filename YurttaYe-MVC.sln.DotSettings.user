@@ -18,6 +18,6 @@
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=YurttaYe_002EWeb_002FResources_002FViews_002FShared_002F_005FLayout/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=YurttaYe_002EWeb_002FResources_002FViews_002FShared_002F_005FMenuCard/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=YurttaYe_002EWeb_002FResources_002FViews_002FShared_002F_005FNavbar/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=YurttaYe_002EWeb_002FResources_002FViews_002FShared_002F_005FNoMenuCard/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=YurttaYe_002EWeb_002FResources_002FViews_002FShared_002F_005FNoMenuCard/@EntryIndexedValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/Initialized/@EntryValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/ShowOnlyErrors/@EntryValue">False</s:Boolean></wpf:ResourceDictionary>
