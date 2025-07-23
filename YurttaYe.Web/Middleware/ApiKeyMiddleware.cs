@@ -28,7 +28,7 @@ namespace YurttaYe.Web.Middleware
                     return;
                 }
 
-                var apiKey = _configuration.GetValue<string>("ApiSettings:ApiKey");
+                var apiKey = _configuration.GetSection("ApiSettings:ApiKey").Value;
 
                 if (string.IsNullOrEmpty(apiKey) || !apiKey.Equals(extractedApiKey))
                 {

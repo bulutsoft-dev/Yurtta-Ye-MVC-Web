@@ -143,3 +143,6 @@ using (var scope = app.Services.CreateScope())
 
 
 app.Run();
+
+// Test projesi için Program sınıfını erişilebilir hale getir
+public partial class Program { }
