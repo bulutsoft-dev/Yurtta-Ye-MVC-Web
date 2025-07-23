@@ -6,8 +6,10 @@
         this.$watch('darkMode', value => {
             if (value) {
                 document.documentElement.classList.add('dark');
+                localStorage.setItem('darkMode', 'true');
             } else {
                 document.documentElement.classList.remove('dark');
+                localStorage.setItem('darkMode', 'false');
             }
         });
         // Apply initial theme
@@ -18,10 +20,13 @@
 }" x-bind:class="{ 'dark': darkMode }">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
     <meta name="description" content="YurttaYe Yönetim Paneli - Güvenli Giriş" />
     <meta name="author" content="YurttaYe Ekibi" />
     <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#1E3A8A" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
     <title>@ViewData["Title"] - YurttaYe Admin</title>
     
@@ -55,17 +60,23 @@
     
     <!-- Custom Login Styles -->
     <link rel="stylesheet" href="~/css/login.css" />
+    
+    <!-- Microsoft Validation Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
 </head>
 
-<body>
+<body class="font-inter">
     <!-- Top-right controls -->
-    <div class="absolute top-6 right-6 z-50 flex items-center space-x-4">
+    <div class="absolute top-4 right-4 sm:top-6 sm:right-6 z-50 flex items-center space-x-2 sm:space-x-4">
         <!-- Language Switcher -->
         <div x-data="{ open: false }" class="relative">
             <button x-on:click="open = !open" 
-                    class="bg-white/20 dark:bg-gray-800/30 backdrop-blur-md border border-white/30 dark:border-gray-700/50 text-white dark:text-gray-200 p-3 rounded-full transition-all duration-300 hover:scale-110 hover:bg-white/30 dark:hover:bg-gray-700/40" 
-                    title="Dil Değiştir">
-                <i class="fas fa-globe text-lg"></i>
+                    class="bg-white/20 dark:bg-gray-800/30 backdrop-blur-md border border-white/30 dark:border-gray-700/50 text-white dark:text-gray-200 p-2 sm:p-3 rounded-full transition-all duration-300 hover:scale-110 hover:bg-white/30 dark:hover:bg-gray-700/40" 
+                    title="Dil Değiştir"
+                    aria-label="Dil Değiştir">
+                <i class="fas fa-globe text-sm sm:text-lg"></i>
             </button>
             <div x-show="open" 
                  x-on:click.away="open = false" 
@@ -77,11 +88,13 @@
                  x-transition:leave-end="opacity-0 transform scale-95"
                  class="absolute right-0 mt-2 w-32 bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden border border-gray-200 dark:border-gray-700"
                  style="display: none;">
-                <a href="@Url.Action("SetLanguage", "Home", new { culture = "tr", returnUrl = Context.Request.Path + Context.Request.QueryString })" class="flex items-center px-4 py-3 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200">
+                <a href="@Url.Action("SetLanguage", "Home", new { culture = "tr", returnUrl = Context.Request.Path + Context.Request.QueryString })" 
+                   class="flex items-center px-4 py-3 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200">
                     <img src="https://flagcdn.com/w20/tr.png" alt="Türkçe" class="w-5 h-5 mr-3 rounded-sm">
                     Türkçe
                 </a>
-                <a href="@Url.Action("SetLanguage", "Home", new { culture = "en", returnUrl = Context.Request.Path + Context.Request.QueryString })" class="flex items-center px-4 py-3 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200">
+                <a href="@Url.Action("SetLanguage", "Home", new { culture = "en", returnUrl = Context.Request.Path + Context.Request.QueryString })" 
+                   class="flex items-center px-4 py-3 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200">
                     <img src="https://flagcdn.com/w20/gb.png" alt="English" class="w-5 h-5 mr-3 rounded-sm">
                     English
                 </a>
@@ -89,114 +102,80 @@
         </div>
         
         <!-- Dark Mode Toggle -->
-        <button x-on:click="darkMode = !darkMode; localStorage.setItem('darkMode', darkMode.toString())"
-                class="bg-white/20 dark:bg-gray-800/30 backdrop-blur-md border border-white/30 dark:border-gray-700/50 text-white dark:text-gray-200 p-3 rounded-full transition-all duration-300 hover:scale-110 hover:bg-white/30 dark:hover:bg-gray-700/40 shadow-lg"
+        <button x-on:click="darkMode = !darkMode"
+                class="bg-white/20 dark:bg-gray-800/30 backdrop-blur-md border border-white/30 dark:border-gray-700/50 text-white dark:text-gray-200 p-2 sm:p-3 rounded-full transition-all duration-300 hover:scale-110 hover:bg-white/30 dark:hover:bg-gray-700/40 shadow-lg"
                 title="Tema Değiştir"
+                aria-label="Tema Değiştir"
                 type="button">
-            <i x-show="!darkMode" class="fas fa-moon text-lg transition-all duration-300"></i>
-            <i x-show="darkMode" class="fas fa-sun text-lg transition-all duration-300" x-cloak></i>
+            <i x-show="!darkMode" class="fas fa-moon text-sm sm:text-lg transition-all duration-300"></i>
+            <i x-show="darkMode" class="fas fa-sun text-sm sm:text-lg transition-all duration-300" x-cloak style="display: none;"></i>
         </button>
     </div>
 
-    <!-- Animated Background -->
-    <div class="login-bg">
-        <!-- Floating Shapes -->
-        <div class="shape">
-            <i class="fas fa-utensils text-6xl text-white"></i>
-        </div>
-        <div class="shape">
-            <i class="fas fa-cookie-bite text-5xl text-white"></i>
-        </div>
-        <div class="shape">
-            <i class="fas fa-pizza-slice text-4xl text-white"></i>
-        </div>
-
-        <!-- Main Content -->
-        <main class="relative z-10">
-            @RenderBody()
-        </main>
-    </div>
+    <!-- Main Content -->
+    <main role="main" class="relative">
+        @RenderBody()
+    </main>
 
     <!-- Scripts -->
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    @await RenderSectionAsync("Scripts", required: false)
-
     <script>
-        // Simple fallback theme management
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize theme immediately
-            const savedTheme = localStorage.getItem('darkMode');
-            const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            const shouldBeDark = savedTheme === 'true' || (!savedTheme && systemDark);
-            
-            if (shouldBeDark) {
-                document.documentElement.classList.add('dark');
-            } else {
-                document.documentElement.classList.remove('dark');
+        // Mobile viewport height fix
+        function setViewportHeight() {
+            const vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', vh + 'px');
+        }
+
+        // Set initial viewport height
+        setViewportHeight();
+
+        // Update on resize and orientation change
+        window.addEventListener('resize', setViewportHeight);
+        window.addEventListener('orientationchange', setViewportHeight);
+
+        // Prevent zoom on iOS
+        document.addEventListener('touchstart', function(event) {
+            if (event.touches.length > 1) {
+                event.preventDefault();
             }
-
-            // Enhanced animations and interactions
-            // Smooth scroll behavior
-            document.documentElement.style.scrollBehavior = 'smooth';
-            
-            // Add entrance animation to main content
-            const mainContent = document.querySelector('main');
-            if (mainContent) {
-                mainContent.style.opacity = '0';
-                mainContent.style.transform = 'translateY(20px)';
-                
-                setTimeout(() => {
-                    mainContent.style.transition = 'all 0.8s ease-out';
-                    mainContent.style.opacity = '1';
-                    mainContent.style.transform = 'translateY(0)';
-                }, 100);
-            }
-
-            // Form validation enhancements
-            const inputs = document.querySelectorAll('.login-input');
-            inputs.forEach(input => {
-                input.addEventListener('focus', function() {
-                    this.parentElement.querySelector('label')?.classList.add('text-blue-500');
-                });
-                
-                input.addEventListener('blur', function() {
-                    if (!this.value) {
-                        this.parentElement.querySelector('label')?.classList.remove('text-blue-500');
-                    }
-                });
-            });
-
-            // Prevent right-click on login page for security
-            document.addEventListener('contextmenu', function(e) {
-                e.preventDefault();
-            });
-
-            // Disable F12 and other dev tools shortcuts for security
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'F12' || 
-                    (e.ctrlKey && e.shiftKey && e.key === 'I') ||
-                    (e.ctrlKey && e.shiftKey && e.key === 'C') ||
-                    (e.ctrlKey && e.key === 'u')) {
-                    e.preventDefault();
-                }
-            });
-
-            // Auto-hide alerts after 5 seconds
-            setTimeout(() => {
-                const alerts = document.querySelectorAll('.login-error, .login-success');
-                alerts.forEach(alert => {
-                    alert.style.transition = 'opacity 0.5s ease-out';
-                    alert.style.opacity = '0';
-                    setTimeout(() => alert.remove(), 500);
-                });
-            }, 5000);
         });
 
-        // ...existing code...
+        // Handle touch events for better mobile experience
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function(event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+
+        // Preload theme preference
+        (function() {
+            const theme = localStorage.getItem('darkMode');
+            if (theme === 'true' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            }
+        })();
+
+        // Error handling for external resources
+        window.addEventListener('error', function(e) {
+            if (e.target.tagName === 'LINK' || e.target.tagName === 'SCRIPT') {
+                console.warn('Resource failed to load:', e.target.src || e.target.href);
+            }
+        });
+
+        // Service Worker registration for PWA features (optional)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js').then(function(registration) {
+                    console.log('SW registered: ', registration);
+                }).catch(function(registrationError) {
+                    console.log('SW registration failed: ', registrationError);
+                });
+            });
+        }
     </script>
-    
-    <style>
-        [x-cloak] { display: none !important; }
-    </style>
+
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

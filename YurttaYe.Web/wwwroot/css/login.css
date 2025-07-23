@@ -321,8 +321,147 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
-/* Enhanced focus styles for accessibility */
-.dark *:focus {
-    outline: 2px solid #60A5FA;
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+    .min-h-screen {
+        min-height: 100vh;
+        padding: 1rem !important;
+    }
+    
+    .max-w-md {
+        max-width: 100% !important;
+        margin: 0 auto;
+        padding: 0 !important;
+    }
+    
+    .bg-white\/95 {
+        margin: 1rem 0;
+        padding: 1.5rem !important;
+    }
+    
+    .h-24.w-24 {
+        height: 4rem !important;
+        width: 4rem !important;
+    }
+    
+    .text-3xl {
+        font-size: 1.5rem !important;
+    }
+    
+    .py-3 {
+        padding-top: 0.875rem !important;
+        padding-bottom: 0.875rem !important;
+    }
+    
+    /* Input field optimizations for mobile */
+    input[type="text"], input[type="password"] {
+        font-size: 16px !important; /* Prevent zoom on iOS */
+        -webkit-appearance: none;
+        -webkit-border-radius: 0;
+        border-radius: 0.5rem;
+    }
+    
+    /* Button size optimization */
+    button {
+        min-height: 44px; /* iOS touch target minimum */
+        touch-action: manipulation;
+    }
+    
+    /* Background pattern adjustments for mobile */
+    .absolute.top-10.left-10 { display: none; }
+    .absolute.top-1\/4.right-20 { display: none; }
+    .absolute.bottom-32.left-1\/4 { display: none; }
+    .absolute.bottom-20.right-1\/3 { display: none; }
+}
+
+@media (max-width: 480px) {
+    .py-12 {
+        padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
+    }
+    
+    .space-y-8 > * + * {
+        margin-top: 1rem !important;
+    }
+    
+    .p-8 {
+        padding: 1rem !important;
+    }
+    
+    .text-sm {
+        font-size: 0.75rem !important;
+    }
+}
+
+/* Prevent horizontal scroll on mobile */
+@media (max-width: 768px) {
+    html, body {
+        overflow-x: hidden;
+        width: 100%;
+    }
+}
+
+/* Loading animation improvements */
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Error message styling improvements */
+.bg-red-50 {
+    animation: slideInDown 0.3s ease-out;
+}
+
+.bg-green-50 {
+    animation: slideInDown 0.3s ease-out;
+}
+
+@keyframes slideInDown {
+    from {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Focus improvements for accessibility */
+input:focus, button:focus {
+    outline: 2px solid #3B82F6;
     outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .bg-white\/95 {
+        background-color: white !important;
+        border: 2px solid black !important;
+    }
+    
+    .text-gray-700, .text-gray-300 {
+        color: black !important;
+    }
+    
+    .dark .text-gray-700, .dark .text-gray-300 {
+        color: white !important;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .animate-pulse, .animate-bounce {
+        animation: none !important;
+    }
 }
