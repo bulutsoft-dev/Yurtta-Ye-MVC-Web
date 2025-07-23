@@ -68,7 +68,7 @@ namespace YurttaYe.Data.Repositories
 
         public async Task DeleteAsync(int id)
         {
-            var menu = await GetByIdAsync(id);
+            var menu = await _context.Menus.FindAsync(id);
             if (menu != null)
             {
                 _context.Menus.Remove(menu);

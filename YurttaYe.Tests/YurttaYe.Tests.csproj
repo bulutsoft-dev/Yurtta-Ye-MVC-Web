@@ -27,7 +27,6 @@
 
     <ItemGroup>
       <Folder Include="UnitTests\Services\" />
-      <Folder Include="UnitTests\Repositories\" />
       <Folder Include="UnitTests\Controllers\" />
     </ItemGroup>
 
