@@ -15,9 +15,9 @@ namespace YurttaYe.Web.Controllers.Web
 
         public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IStringLocalizer<AccountController> localizer)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
-            _localizer = localizer;
+            _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
+            _signInManager = signInManager ?? throw new ArgumentNullException(nameof(signInManager));
+            _localizer = localizer ?? throw new ArgumentNullException(nameof(localizer));
         }
 
         [HttpGet]

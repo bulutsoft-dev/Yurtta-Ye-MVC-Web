@@ -23,6 +23,7 @@
         <ProjectReference Include="..\YurttaYe.Core\YurttaYe.Core.csproj" />
         <ProjectReference Include="..\YurttaYe.Data\YurttaYe.Data.csproj" />
         <ProjectReference Include="..\YurttaYe.Services\YurttaYe.Services.csproj" />
+        <ProjectReference Include="..\YurttaYe.Web\YurttaYe.Web.csproj" />
     </ItemGroup>
 
     <ItemGroup>
