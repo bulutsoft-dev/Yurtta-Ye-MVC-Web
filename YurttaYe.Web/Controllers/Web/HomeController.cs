@@ -23,8 +23,8 @@ namespace YurttaYe.Web.Controllers.Web
 
         public HomeController(IServiceManager serviceManager, IConfiguration configuration)
         {
-            _serviceManager = serviceManager;
-            _configuration = configuration;
+            _serviceManager = serviceManager ?? throw new ArgumentNullException(nameof(serviceManager));
+            _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         }
 
         public async Task<IActionResult> Index()

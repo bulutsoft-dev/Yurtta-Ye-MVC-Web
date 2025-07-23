@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using YurttaYe.Core.Models.Dtos;
@@ -14,7 +15,7 @@ namespace YurttaYe.Web.Controllers.Api
 
         public MenuController(IServiceManager serviceManager)
         {
-            _serviceManager = serviceManager;
+            _serviceManager = serviceManager ?? throw new ArgumentNullException(nameof(serviceManager));
         }
 
         [HttpGet]

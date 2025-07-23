@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using YurttaYe.Core.Models.Dtos;
 using YurttaYe.Core.Services;
 using YurttaYe.Core.Services.Interfaces;
+using System;
 
 namespace YurttaYe.Web.Controllers.Api
 {
@@ -14,7 +15,7 @@ namespace YurttaYe.Web.Controllers.Api
 
         public CityController(IServiceManager serviceManager)
         {
-            _serviceManager = serviceManager;
+            _serviceManager = serviceManager ?? throw new ArgumentNullException(nameof(serviceManager));
         }
 
         [HttpGet]

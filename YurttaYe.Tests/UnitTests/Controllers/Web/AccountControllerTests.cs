@@ -1,6 +1,8 @@
 using FluentAssertions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Extensions.Localization;
 using Moq;
 using System;
@@ -40,6 +42,10 @@ namespace YurttaYe.Tests.UnitTests.Controllers.Web
             _mockLocalizer.Setup(l => l["SystemError"]).Returns(systemError);
 
             _controller = new AccountController(_mockUserManager.Object, _mockSignInManager.Object, _mockLocalizer.Object);
+            
+            // Setup TempData mock
+            var tempData = new TempDataDictionary(new DefaultHttpContext(), Mock.Of<ITempDataProvider>());
+            _controller.TempData = tempData;
         }
 
         [Fact]
