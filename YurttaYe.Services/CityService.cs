@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using YurttaYe.Core.Models.Entities;
@@ -12,7 +13,7 @@ namespace YurttaYe.Services
 
         public CityService(ICityRepository cityRepository)
         {
-            _cityRepository = cityRepository;
+            _cityRepository = cityRepository ?? throw new ArgumentNullException(nameof(cityRepository));
         }
 
         public async Task<List<City>> GetAllCitiesAsync()

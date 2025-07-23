@@ -14,7 +14,7 @@ namespace YurttaYe.Services
 
         public MenuService(IMenuRepository menuRepository)
         {
-            _menuRepository = menuRepository;
+            _menuRepository = menuRepository ?? throw new ArgumentNullException(nameof(menuRepository));
         }
 
         public async Task<MenuDto> GetMenuAsync(int cityId, string mealType, DateTime date)
