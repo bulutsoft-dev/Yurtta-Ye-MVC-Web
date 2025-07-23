@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
 using YurttaYe.Core.Models.Entities;
+using YurttaYe.Core.Services;
 using YurttaYe.Data.Repositories;
 using YurttaYe.Services;
 

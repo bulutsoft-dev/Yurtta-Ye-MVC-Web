@@ -335,7 +335,7 @@ namespace YurttaYe.Tests.UnitTests.Services
             using var httpClient = new HttpClient();
             
             // Act
-            var apiService = new ApiService(httpClient);
+            using var apiService = new ApiService(httpClient);
             
             // Assert
             httpClient.BaseAddress.Should().NotBeNull();
@@ -343,11 +343,11 @@ namespace YurttaYe.Tests.UnitTests.Services
         }
 
         [Fact]
-        public void Dispose_Should_Dispose_HttpClient()
+        public void Dispose_Should_Not_Throw_Exception()
         {
             // Arrange
-            var mockHttpClient = new Mock<HttpClient>();
-            var apiService = new ApiService(mockHttpClient.Object);
+            using var httpClient = new HttpClient();
+            var apiService = new ApiService(httpClient);
             
             // Act & Assert
             apiService.Should().BeAssignableTo<IDisposable>();
