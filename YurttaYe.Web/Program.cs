@@ -109,6 +109,7 @@ if (app.Environment.IsDevelopment())
 
 // 8. Middleware pipeline
 app.UseMiddleware<ExceptionMiddleware>();
+app.UseMiddleware<ApiKeyMiddleware>(); // API Key doğrulaması
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
