@@ -223,3 +223,5 @@
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/obj/Debug/net8.0/YurttaYe.Web.Resources.Views.Shared._MenuCard.tr.resources
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/obj/Debug/net8.0/YurttaYe.Web.Resources.Views.Shared._NoMenuCard.en.resources
 /home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/obj/Debug/net8.0/YurttaYe.Web.Resources.Views.Shared._NoMenuCard.tr.resources
+/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/obj/Debug/net8.0/YurttaYe.Web.Resources.Controllers.Web.AccountController.en.resources
+/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Web/obj/Debug/net8.0/YurttaYe.Web.Resources.Controllers.Web.AccountController.tr.resources

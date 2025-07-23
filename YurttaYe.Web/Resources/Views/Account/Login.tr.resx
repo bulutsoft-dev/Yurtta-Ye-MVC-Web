@@ -1,28 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
-    Microsoft ResX Schema 
-    
-    Version 2.0
-    
-    The primary components of this schema are:
-    - FDL: File Data Language Properties
-    - DATA: A collection of name/value pairs
-    
-    Each name/value pair contains a name, and a value. The row also contains a 
-    type or mimetype. Type corresponds to a .NET class that support based on 
-    the XML schema. Mimetype is used for serialized data, and tells the ReX 
-    reader how to depersist the data. Both are optional.
-    
-    Common values for type are:
-    - System.String, System.Int32, System.Boolean, System.Char, System.Byte, ...
-    - System.Drawing.Color, System.Drawing.Point, System.Drawing.Size, ...
-    
-    Common values for mimetype are:
-    - text/microsoft-urt, application/x-microsoft.net.object.binary.base64, ...
-    
-    The schema contains a encoding parameter. This is the encoding of the file. 
-    -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
@@ -51,9 +28,9 @@
                 <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
                 <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
               <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
@@ -62,7 +39,7 @@
               <xsd:sequence>
                 <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="name" use="required" type="xsd:string" />
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -70,7 +47,7 @@
     </xsd:element>
   </xsd:schema>
   <resheader name="resmimetype">
-    <value>text/microsoft-urt</value>
+    <value>text/microsoft-resx</value>
   </resheader>
   <resheader name="version">
     <value>2.0</value>
@@ -81,104 +58,64 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Copyright" xml:space="preserve">
-    <value>© 2025 YurttaYe. Tüm hakları saklıdır.</value>
-  </data>
-  <data name="DemoLoginButton" xml:space="preserve">
-    <value>Demo Hesabı ile Giriş</value>
-  </data>
-  <data name="ForgotPassword" xml:space="preserve">
-    <value>Şifremi unuttum?</value>
-  </data>
-  <data name="Header" xml:space="preserve">
-    <value>YurttaYe Admin Paneli</value>
-  </data>
-  <data name="InvalidLoginAttempt" xml:space="preserve">
-    <value>Geçersiz kullanıcı adı veya şifre.</value>
-  </data>
-  <data name="LoginButton" xml:space="preserve">
-    <value>Giriş Yap</value>
-  </data>
-  <data name="LoggingInButton" xml:space="preserve">
-    <value>Giriş yapılıyor...</value>
-  </data>
-  <data name="Or" xml:space="preserve">
-    <value>veya</value>
-  </data>
-  <data name="PasswordLabel" xml:space="preserve">
-    <value>Şifre</value>
-  </data>
-  <data name="PasswordPlaceholder" xml:space="preserve">
-    <value>••••••••</value>
-  </data>
-  <data name="PrivacyPolicy" xml:space="preserve">
-    <value>Gizlilik Politikası</value>
-  </data>
-  <data name="RememberMe" xml:space="preserve">
-    <value>Beni hatırla</value>
-  </data>
-  <data name="SubHeader" xml:space="preserve">
-    <value>Güvenli giriş yapın</value>
-  </data>
-  <data name="Support" xml:space="preserve">
-    <value>Destek</value>
-  </data>
-  <data name="TermsOfUse" xml:space="preserve">
-    <value>Kullanım Şartları</value>
-  </data>
   <data name="Title" xml:space="preserve">
     <value>Giriş Yap</value>
   </data>
-  <data name="UsernameLabel" xml:space="preserve">
-    <value>Kullanıcı Adı</value>
-  </data>
-  <data name="UsernamePlaceholder" xml:space="preserve">
-    <value>kullanici.adi</value>
-  </data>
-  <!-- Yeni eklenen lokalizasyon anahtarları -->
   <data name="AdminPanel" xml:space="preserve">
-    <value>Admin Paneli</value>
+    <value>Yönetici Paneli</value>
   </data>
   <data name="AdminPanelDescription" xml:space="preserve">
-    <value>Yurt yemek menülerini yönetmek için giriş yapın</value>
+    <value>Güvenli yönetim paneline erişim</value>
   </data>
   <data name="Username" xml:space="preserve">
     <value>Kullanıcı Adı</value>
   </data>
+  <data name="UsernamePlaceholder" xml:space="preserve">
+    <value>Kullanıcı adınızı giriniz</value>
+  </data>
   <data name="Password" xml:space="preserve">
     <value>Şifre</value>
   </data>
+  <data name="PasswordPlaceholder" xml:space="preserve">
+    <value>Şifrenizi giriniz</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Beni Hatırla</value>
+  </data>
   <data name="ForgotPassword" xml:space="preserve">
-    <value>Şifrenizi mi unuttunuz?</value>
+    <value>Şifremi Unuttum</value>
   </data>
   <data name="LoginButton" xml:space="preserve">
-    <value>Admin Paneline Giriş</value>
+    <value>Giriş Yap</value>
   </data>
   <data name="LoginInProgress" xml:space="preserve">
     <value>Giriş yapılıyor...</value>
   </data>
   <data name="DemoLogin" xml:space="preserve">
-    <value>Demo ile Giriş Yap</value>
-  </data>
-  <data name="DemoCredentialsLoaded" xml:space="preserve">
-    <value>Demo bilgileri yüklendi! Giriş yapabilirsiniz.</value>
+    <value>Demo Giriş</value>
   </data>
   <data name="AdminPanelFeatures" xml:space="preserve">
-    <value>Admin Panel Özellikleri</value>
+    <value>Yönetici Panel Özellikleri</value>
   </data>
   <data name="ManageDormMenus" xml:space="preserve">
-    <value>Yurt menülerini yönetebilirsiniz</value>
+    <value>Yurt menülerini yönet</value>
   </data>
   <data name="AddCityLocation" xml:space="preserve">
-    <value>Şehir ve lokasyon ekleyebilirsiniz</value>
+    <value>Şehir ve konum ekle</value>
   </data>
   <data name="BulkDataUpload" xml:space="preserve">
-    <value>Excel'den toplu veri yükleyebilirsiniz</value>
+    <value>Toplu veri yükleme</value>
   </data>
   <data name="CompanyName" xml:space="preserve">
-    <value>YurttaYe - Yurt Yemek Sistemi</value>
+    <value>YurttaYe - Tüm hakları saklıdır</value>
   </data>
   <data name="Privacy" xml:space="preserve">
     <value>Gizlilik</value>
+  </data>
+  <data name="TermsOfUse" xml:space="preserve">
+    <value>Kullanım Koşulları</value>
+  </data>
+  <data name="Support" xml:space="preserve">
+    <value>Destek</value>
   </data>
 </root>
