@@ -270,7 +270,7 @@ BEGIN
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
         (menu_id,'Ana Yemek','Sade Omlet','150 g'),
-        (menu_id,'Yan Yemek',,'Poğaca Çeşitli','1 adet'),
+        (menu_id,'Yan Yemek','Poğaca Çeşitli','1 adet'),
         (menu_id,'Peynir','Labne/Beyaz Peynir','40 g'),
         (menu_id,'Zeytin','Siyah/Yeşil Zeytin','30 g'),
         (menu_id,'Sürülebilir','Tahinli Pekmez','20 g'),
