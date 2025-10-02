@@ -47,10 +47,11 @@ BEGIN
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
         (menu_id,'Çorba','Ezogelin Çorbası','250 g'),
-        (menu_id,'Ana Yemek','Tavuk Köfteli Domates (Fırın/Biber)','200 g'),
+        (menu_id,'Çorba','Toyga Çorbası','250 g'),
+        (menu_id,'Ana Yemek','Nohut Yemeği','200 g'),
         (menu_id,'Ana Yemek','Tavuk Külbastı (alternatif)','200 g'),
         (menu_id,'Yan Yemek','Makarna (sos/yoğurt ile)','200 g'),
-        (menu_id,'Salata','Ege Salata','150 g'),
+        (menu_id,'Tatlı','Supangle','150 g'),
         (menu_id,'Ekmek','Çeyrek Ekmek',''),
         (menu_id,'İçecek','Su','500 ml');
 
@@ -65,6 +66,7 @@ BEGIN
         (menu_id,'Ana Yemek','Sulu Köfte','200 g'),
         (menu_id,'Ana Yemek','Mücver (alternatif)','150 g'),
         (menu_id,'Pilav','Şehriyeli Pilav','150 g'),
+        (menu_id,'Salata','Karışık Salata','150 g'),
         (menu_id,'Ekmek','Çeyrek Ekmek',''),
         (menu_id,'İçecek','Su','500 ml');
 
@@ -75,9 +77,10 @@ BEGIN
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
         (menu_id,'Çorba','Mercimek Çorbası','250 g'),
+        (menu_id,'Çorba','Yüksük Çorbası','250 g'),
         (menu_id,'Ana Yemek','Tavuk Şiş (elma dilim patates ile)','200 g'),
-        (menu_id,'Ana Yemek','Izgara Köfte (alternatif)','200 g'),
-        (menu_id,'Yan Yemek','Bezelye Yemeği','200 g'),
+
+        (menu_id,'Ana Yemek','Bezelye Yemeği','200 g'),
         (menu_id,'Pilav','Makarna','120 g'),
         (menu_id,'Tatlı','Yoğurt','100 g'),
         (menu_id,'İçecek','Su','500 ml');
@@ -89,10 +92,11 @@ BEGIN
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
         (menu_id,'Çorba','Tavuksuyu Çorbası','250 g'),
-        (menu_id,'Çorba','Mahlepli Çorba','200 g'),
+        (menu_id,'Çorba','Mahluta Çorba','200 g'),
         (menu_id,'Ana Yemek','Kuru Fasulye','200 g'),
-        (menu_id,'Ana Yemek','Tavuk Kavurma (alternatif)','200 g'),
+        (menu_id,'Ana Yemek','Karışık Sebze Graten','200 g'),
         (menu_id,'Pilav','Şehriyeli Pilav','150 g'),
+        (menu_id,'Tatlı','Cevizli Baklava','150 g'),
         (menu_id,'Ekmek','Çeyrek Ekmek',''),
         (menu_id,'İçecek','Su','500 ml');
 
@@ -105,8 +109,9 @@ BEGIN
         (menu_id,'Çorba','Tarhana Çorbası','250 g'),
         (menu_id,'Çorba','Mercimek Çorbası','250 g'),
         (menu_id,'Ana Yemek','Tavuk Çökertme','200 g'),
-        (menu_id,'Ana Yemek','Köfte (alternatif)','200 g'),
+        (menu_id,'Ana Yemek','Taze Fasulye Yemeği (alternatif)','200 g'),
         (menu_id,'Pilav','Bulgur Pilavı','150 g'),
+        (menu_id,'Ekstra','Havuç Tarator','150 g'),
         (menu_id,'Ekmek','Çeyrek Ekmek',''),
         (menu_id,'İçecek','Su','500 ml');
 
@@ -119,8 +124,8 @@ BEGIN
         (menu_id,'Çorba','Ezogelin Çorbası','250 g'),
         (menu_id,'Çorba','Şehriye Çorbası','250 g'),
         (menu_id,'Ana Yemek','Soslu Mıtte Köfte','200 g'),
-        (menu_id,'Ana Yemek','Sulu Köfte (alternatif)','200 g'),
-        (menu_id,'Yan Yemek','Havuç Tarator','100 g'),
+        (menu_id,'Ana Yemek','Karıpık Dolma (alternatif)','200 g'),
+        (menu_id,'Yan Yemek','Makarna','100 g'),
         (menu_id,'Tatlı','Meyveli Pasta','120 g'),
         (menu_id,'İçecek','Su','500 ml');
 
@@ -133,8 +138,9 @@ BEGIN
         (menu_id,'Çorba','Yayla Çorbası','250 g'),
         (menu_id,'Çorba','Domates Çorbası','250 g'),
         (menu_id,'Ana Yemek','Çoban Kavurma (patates kızartması ile)','200 g'),
-        (menu_id,'Ana Yemek','Kuzu/Et (alternatif)','200 g'),
+        (menu_id,'Ana Yemek','Karışık Kızartma (alternatif)','200 g'),
         (menu_id,'Pilav','Pirinç Pilavı','150 g'),
+        (menu_id,'Salata','Karışık Salata','150 g'),
         (menu_id,'Ekmek','Çeyrek Ekmek',''),
         (menu_id,'İçecek','Su','500 ml');
 
@@ -145,10 +151,11 @@ BEGIN
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
         (menu_id,'Çorba','Mercimek Çorbası','250 g'),
+        (menu_id,'Çorba','Yüksük Çorbası','250 g'),
         (menu_id,'Ana Yemek','Köri Soslu Tavuk','200 g'),
-        (menu_id,'Ana Yemek','Nohut Yemeği (alternatif)','200 g'),
-        (menu_id,'Yan Yemek','Pirinç (ya da makarna)','150 g'),
-        (menu_id,'Yan Yemek','Yoğurtlu Kabak','100 g'),
+        (menu_id,'Ana Yemek','Patates Yemeği','200 g'),
+        (menu_id,'Yan Yemek','Spagetti ( makarna)','150 g'),
+        (menu_id,'Yan Yemek','Yoğurtlu Kırmızı Köz Biber','100 g'),
         (menu_id,'Ekmek','Çeyrek Ekmek',''),
         (menu_id,'İçecek','Su','500 ml');
 
@@ -159,9 +166,12 @@ BEGIN
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
         (menu_id,'Çorba','Domates Çorbası','250 g'),
-        (menu_id,'Ana Yemek','Tavuk Sote','200 g'),
+        (menu_id,'Çorba','Tavuksuyu Çorbası','250 g'),
+        (menu_id,'Ana Yemek','Nohut Yemeği','200 g'),
         (menu_id,'Ana Yemek','Mücver (alternatif)','150 g'),
         (menu_id,'Pilav','Şehriyeli Pilav','150 g'),
+        (menu_id,'Tatlı','Haşhaşlı Revani','150 g'),
+        (menu_id,'Turşu','Karışık Turşu','150 g'),
         (menu_id,'Ekmek','Çeyrek Ekmek',''),
         (menu_id,'İçecek','Su','500 ml');
 
@@ -172,10 +182,11 @@ BEGIN
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
         (menu_id,'Çorba','Tarhana Çorbası','250 g'),
+        (menu_id,'Çorba','Sebze  Çorbası','250 g'),
         (menu_id,'Ana Yemek','Akçabat Köfte','200 g'),
         (menu_id,'Ana Yemek','Mevsim Türlü (ikincil)','200 g'),
-        (menu_id,'Yan Yemek','Mevsim Türlü','200 g'),
         (menu_id,'Pilav','Pirinç Pilavı','150 g'),
+        (menu_id,'Ekstra','Haydari','150 g'),
         (menu_id,'Ekmek','Çeyrek Ekmek',''),
         (menu_id,'İçecek','Su','500 ml');
 
@@ -186,10 +197,11 @@ BEGIN
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
         (menu_id,'Çorba','Ezogelin Çorbası','250 g'),
+        (menu_id,'Çorba','Şehriye Çorbası','250 g'),
         (menu_id,'Ana Yemek','Tavuk Kavurma (patates kızartması ile)','200 g'),
-        (menu_id,'Ana Yemek','Akçabat Köfte (alternatif)','200 g'),
-        (menu_id,'Yan Yemek','Karışık Sebze Graten','200 g'),
-        (menu_id,'Pilav','Şehriyeli Pilav','150 g'),
+        (menu_id,'Ana Yemek','Karışık Dolma','200 g'),
+        (menu_id,'Pilav','Erişte','150 g'),
+        (menu_id,'Tatlı','Yoğurt','150 g'),
         (menu_id,'Ekmek','Çeyrek Ekmek',''),
         (menu_id,'İçecek','Su','500 ml');
 
@@ -199,11 +211,12 @@ BEGIN
     WHERE NOT EXISTS (SELECT 1 FROM public."Menus" WHERE "CityId"=(SELECT "Id" FROM public."Cities" WHERE "Name"='Manisa') AND "MealType"='Akşam Yemeği' AND "Date"='2025-10-13') RETURNING "Id" INTO menu_id;
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
-        (menu_id,'Çorba','Mahlepli Çorba','250 g'),
+        (menu_id,'Çorba','Mahluta Çorba','250 g'),
         (menu_id,'Çorba','Yoğurt Çorbası','250 g'),
         (menu_id,'Ana Yemek','Hünkar Beğendi','200 g'),
         (menu_id,'Ana Yemek','Kuru Fasulye (alternatif)','200 g'),
         (menu_id,'Pilav','Pirinç Pilavı','200 g'),
+        (menu_id,'Tatlı','Damla Sakızlı Muhallebi','200 g'),
         (menu_id,'Ekmek','Çeyrek Ekmek',''),
         (menu_id,'İçecek','Su','500 ml');
 
@@ -214,10 +227,11 @@ BEGIN
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
         (menu_id,'Çorba','Mercimek Çorbası','250 g'),
+        (menu_id,'Çorba','Yüksük Çorbası','250 g'),
         (menu_id,'Ana Yemek','Tavuklu Orman Kebabı','200 g'),
-        (menu_id,'Ana Yemek','Kuru Fasulye (alternatif)','200 g'),
-        (menu_id,'Yan Yemek','Kuru Fasulye','200 g'),
-        (menu_id,'Pilav','Pirinç Pilavı','150 g'),
+        (menu_id,'Ana Yemek','Karışık Kızartma (alternatif)','200 g'),
+        (menu_id,'Yan Yemek','Makarna','200 g'),
+        (menu_id,'Salata','Havuç Aysberg Salata','150 g'),
         (menu_id,'Ekmek','Çeyrek Ekmek',''),
         (menu_id,'İçecek','Su','500 ml');
 
@@ -228,10 +242,11 @@ BEGIN
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
         (menu_id,'Çorba','Sebze Çorbası','250 g'),
+        (menu_id,'Çorba','Domates Çorbası','250 g'),
         (menu_id,'Ana Yemek','İzmir Köfte','200 g'),
-        (menu_id,'Ana Yemek','Sebze Sote (ikincil)','150 g'),
-        (menu_id,'Yan Yemek','Sebze Sote','150 g'),
+        (menu_id,'Ana Yemek','Sebze Sote','150 g'),
         (menu_id,'Pilav','Pirinç Pilavı','150 g'),
+        (menu_id,'Tatlı','Bisküvili Pasta','150 g'),
         (menu_id,'Ekmek','Çeyrek Ekmek',''),
         (menu_id,'İçecek','Su','500 ml');
 
@@ -242,10 +257,11 @@ BEGIN
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
         (menu_id,'Çorba','Ezogelin Çorbası','250 g'),
-        (menu_id,'Çorba','Yoğurt Çorbası','250 g'),
-        (menu_id,'Ana Yemek','Izgara Köfte','200 g'),
-        (menu_id,'Ana Yemek','Bezeleyemegi (alternatif)','200 g'),
-        (menu_id,'Pilav','Sebzeli Bulgur Pilavı','150 g'),
+        (menu_id,'Çorba','Toyga Çorbası','250 g'),
+        (menu_id,'Ana Yemek','Çıtır Tavuk Patates','200 g'),
+        (menu_id,'Ana Yemek','Bezelye yemegi (alternatif)','200 g'),
+        (menu_id,'Pilav','Şehriye Pilavı','150 g'),
+        (menu_id,'Tatlı','Kuru Cacık','150 g'),
         (menu_id,'Ekmek','Çeyrek Ekmek',''),
         (menu_id,'İçecek','Su','500 ml');
 
@@ -256,12 +272,13 @@ BEGIN
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
         (menu_id,'Çorba','Sebze Çorbası','250 g'),
+        (menu_id,'Çorba','Tarhana Çorbası','250 g'),
         (menu_id,'Ana Yemek','Izgara Köfte / Patates','200 g'),
-        (menu_id,'Ana Yemek','Spagetti (ana alternatif)','150 g'),
-        (menu_id,'Yan Yemek','Spagetti (sos/yoğurt ile)','150 g'),
-        (menu_id,'Tatlı','Cevizli Baklava','100 g'),
+        (menu_id,'Ana Yemek','Lahana Sarması (ana alternatif)','150 g'),
+        (menu_id,'Yan Yemek','Makarna (sos/yoğurt ile)','150 g'),
         (menu_id,'Ekmek','Çeyrek Ekmek',''),
-        (menu_id,'İçecek','Su','500 ml');
+        (menu_id,'İçecek','Su','500 ml'),
+        (menu_id,'İçecek','Ayran','500 ml');
 
     -- 18 Ekim 2025
     INSERT INTO public."Menus" ("CityId","MealType","Date","Energy")
@@ -269,11 +286,12 @@ BEGIN
     WHERE NOT EXISTS (SELECT 1 FROM public."Menus" WHERE "CityId"=(SELECT "Id" FROM public."Cities" WHERE "Name"='Manisa') AND "MealType"='Akşam Yemeği' AND "Date"='2025-10-18') RETURNING "Id" INTO menu_id;
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
+        (menu_id,'Çorba','Mercimek Çorbası','250 g'),
         (menu_id,'Çorba','Domates Çorbası','250 g'),
         (menu_id,'Ana Yemek','Tavuk Sote','200 g'),
         (menu_id,'Ana Yemek','Karışık Sebze Graten (ikincil)','200 g'),
-        (menu_id,'Yan Yemek','Karışık Sebze Graten','200 g'),
         (menu_id,'Pilav','Bulgur Pilavı','150 g'),
+        (menu_id,'Salata','Çoban Salata','150 g'),
         (menu_id,'Ekmek','Çeyrek Ekmek',''),
         (menu_id,'İçecek','Su','500 ml');
 
@@ -283,11 +301,12 @@ BEGIN
     WHERE NOT EXISTS (SELECT 1 FROM public."Menus" WHERE "CityId"=(SELECT "Id" FROM public."Cities" WHERE "Name"='Manisa') AND "MealType"='Akşam Yemeği' AND "Date"='2025-10-19') RETURNING "Id" INTO menu_id;
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
-        (menu_id,'Çorba','Yayla Çorbası','250 g'),
+        (menu_id,'Çorba','Mahluta Çorbası','250 g'),
         (menu_id,'Çorba','Tavuksuyu Çorbası','250 g'),
         (menu_id,'Ana Yemek','Kuru Fasulye','200 g'),
         (menu_id,'Ana Yemek','Mücver (alternatif)','150 g'),
-        (menu_id,'Yan Yemek','Mücver (yoğurt ile)','150 g'),
+        (menu_id,'Yan Yemek','Şehriyeli Pirinç Pilavı','150 g'),
+        (menu_id,'Tatlı','Cevizli Kadayıf','150 g'),
         (menu_id,'Ekmek','Çeyrek Ekmek',''),
         (menu_id,'İçecek','Su','500 ml');
 
@@ -301,7 +320,8 @@ BEGIN
         (menu_id,'Çorba','Sebze Çorbası','250 g'),
         (menu_id,'Ana Yemek','Tavuk Fajita','200 g'),
         (menu_id,'Ana Yemek','Patates Yemeği (ikincil)','150 g'),
-        (menu_id,'Yan Yemek','Patates Yemeği','150 g'),
+        (menu_id,'Yan Yemek','Makarna Yemeği','150 g'),
+        (menu_id,'Tatlı','Cacık Yemeği','150 g'),
         (menu_id,'Ekmek','Çeyrek Ekmek',''),
         (menu_id,'İçecek','Su','500 ml');
 
@@ -314,8 +334,9 @@ BEGIN
         (menu_id,'Çorba','Şehriye Çorbası','250 g'),
         (menu_id,'Çorba','Tarhana Çorbası','250 g'),
         (menu_id,'Ana Yemek','Karnıyarık','200 g'),
-        (menu_id,'Ana Yemek','Pirinç Pilavı (ikincil)','150 g'),
+        (menu_id,'Ana Yemek','Barbunya Yemeği (ikincil)','150 g'),
         (menu_id,'Pilav','Pirinç Pilavı','150 g'),
+        (menu_id,'Tatlı','Haydari','150 g'),
         (menu_id,'Ekmek','Çeyrek Ekmek',''),
         (menu_id,'İçecek','Su','500 ml');
 
@@ -325,11 +346,12 @@ BEGIN
     WHERE NOT EXISTS (SELECT 1 FROM public."Menus" WHERE "CityId"=(SELECT "Id" FROM public."Cities" WHERE "Name"='Manisa') AND "MealType"='Akşam Yemeği' AND "Date"='2025-10-22') RETURNING "Id" INTO menu_id;
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
-        (menu_id,'Çorba','Mahlepli Çorba','250 g'),
+        (menu_id,'Çorba','Mahluta Çorba','250 g'),
         (menu_id,'Çorba','Mercimek Çorbası','250 g'),
         (menu_id,'Ana Yemek','Köri Soslu Tavuk','200 g'),
-        (menu_id,'Ana Yemek','Tas Kebabı (ikincil)','200 g'),
-        (menu_id,'Pilav','Şehriyeli Pilav','150 g'),
+        (menu_id,'Ana Yemek','Karışık Kızartma','200 g'),
+        (menu_id,'Pilav','Makarna ','150 g'),
+        (menu_id,'Tatlı','Un/İrmik Helvası ','150 g'),
         (menu_id,'Ekmek','Çeyrek Ekmek',''),
         (menu_id,'İçecek','Su','500 ml');
 
@@ -341,9 +363,10 @@ BEGIN
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
         (menu_id,'Çorba','Domates Çorbası','250 g'),
         (menu_id,'Çorba','Yoğurt Çorbası','250 g'),
-        (menu_id,'Ana Yemek','Tas Kebabı','200 g'),
-        (menu_id,'Ana Yemek','Sebzeli Bulgur Pilavı (ikincil)','150 g'),
-        (menu_id,'Pilav','Sebzeli Bulgur Pilavı','150 g'),
+        (menu_id,'Ana Yemek','Et Sote','200 g'),
+        (menu_id,'Ana Yemek','Taze Fasulye Yemeği(ikincil)','150 g'),
+        (menu_id,'Pilav','Sebzeli Pirinç Pilavı','150 g'),
+        (menu_id,'Salata','Karışık Salata','150 g'),
         (menu_id,'Ekmek','Çeyrek Ekmek',''),
         (menu_id,'İçecek','Su','500 ml');
 
@@ -355,9 +378,10 @@ BEGIN
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
         (menu_id,'Çorba','Yayla Çorbası','250 g'),
         (menu_id,'Çorba','Yüksük Çorbası','250 g'),
-        (menu_id,'Ana Yemek','Izgara Köfte/Patates','200 g'),
-        (menu_id,'Ana Yemek','Sebzeli Bulgur Pilavı (ikincil)','150 g'),
-        (menu_id,'Pilav','Şehriyeli Pilav','150 g'),
+        (menu_id,'Ana Yemek','Çıtır Tavuk','200 g'),
+        (menu_id,'Ana Yemek','Ispanak Yemeği(ikincil)','150 g'),
+        (menu_id,'Pilav','Sebzeli Bulgur Pilav','150 g'),
+        (menu_id,'Tatlı','Tulumbası Tatlısı','150 g'),
         (menu_id,'Ekmek','Çeyrek Ekmek',''),
         (menu_id,'İçecek','Su','500 ml');
 
@@ -369,8 +393,8 @@ BEGIN
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
         (menu_id,'Çorba','Sebze Çorbası','250 g'),
         (menu_id,'Çorba','Tavuksuyu Çorbası','250 g'),
-        (menu_id,'Ana Yemek','Tavuksuyu (et/alternatif)','250 g'),
-        (menu_id,'Ana Yemek','Tavuklu Makarna (ikincil)','200 g'),
+        (menu_id,'Ana Yemek','Nohutlu Yemeği','250 g'),
+        (menu_id,'Ana Yemek','Mücver','200 g'),
         (menu_id,'Yan Yemek','Çoban Salata','100 g'),
         (menu_id,'Ekmek','Çeyrek Ekmek',''),
         (menu_id,'İçecek','Su','500 ml');
@@ -381,11 +405,12 @@ BEGIN
     WHERE NOT EXISTS (SELECT 1 FROM public."Menus" WHERE "CityId"=(SELECT "Id" FROM public."Cities" WHERE "Name"='Manisa') AND "MealType"='Akşam Yemeği' AND "Date"='2025-10-26') RETURNING "Id" INTO menu_id;
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
-        (menu_id,'Çorba','Ezogelin Çorbası','250 g'),
+        (menu_id,'Çorba','Mercimek Çorbası','250 g'),
         (menu_id,'Çorba','Yoğurt Çorbası','250 g'),
         (menu_id,'Ana Yemek','Manisa Kebabı','200 g'),
         (menu_id,'Ana Yemek','Sebze Graten (ikincil)','200 g'),
-        (menu_id,'Yan Yemek','Sebze Graten','200 g'),
+        (menu_id,'Yan Yemek','Makarna','200 g'),
+        (menu_id,'Tatlı','Yoğurtlu Tartor','200 g'),
         (menu_id,'Ekmek','Çeyrek Ekmek',''),
         (menu_id,'İçecek','Su','500 ml');
 
@@ -396,9 +421,11 @@ BEGIN
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
         (menu_id,'Çorba','Mercimek Çorbası','250 g'),
+        (menu_id,'Çorba','Tarhana Çorbası','250 g'),
         (menu_id,'Ana Yemek','Tavuk Kavurma','200 g'),
-        (menu_id,'Ana Yemek','Pirinç Pilavı (ikincil)','150 g'),
+        (menu_id,'Ana Yemek','Bamya Yemeği (ikincil)','150 g'),
         (menu_id,'Yan Yemek','Pirinç Pilavı','150 g'),
+        (menu_id,'Tatlı','Islak Kek','150 g'),
         (menu_id,'Ekmek','Çeyrek Ekmek',''),
         (menu_id,'İçecek','Su','500 ml');
 
@@ -408,11 +435,12 @@ BEGIN
     WHERE NOT EXISTS (SELECT 1 FROM public."Menus" WHERE "CityId"=(SELECT "Id" FROM public."Cities" WHERE "Name"='Manisa') AND "MealType"='Akşam Yemeği' AND "Date"='2025-10-28') RETURNING "Id" INTO menu_id;
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
-        (menu_id,'Çorba','Mahlepli Çorba','250 g'),
-        (menu_id,'Ana Yemek','Toğa Çorbası / Tavuklu alternatif','250 g'),
+        (menu_id,'Çorba','Mahluta Çorba','250 g'),
+        (menu_id,'Çorba','Toyga Çorba','250 g'),
+        (menu_id,'Ana Yemek','Karışık Dolma','250 g'),
         (menu_id,'Ana Yemek','Sulu Köfte (ikincil)','200 g'),
-        (menu_id,'Yan Yemek','Sulu Köfte','200 g'),
-        (menu_id,'Yan Yemek','Kuru Fasulye','200 g'),
+        (menu_id,'Yan Yemek','Makarna','200 g'),
+        (menu_id,'Yan Yemek','Kuru Cacık','200 g'),
         (menu_id,'Ekmek','Çeyrek Ekmek',''),
         (menu_id,'İçecek','Su','500 ml');
 
@@ -423,9 +451,11 @@ BEGIN
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
         (menu_id,'Çorba','Domates Çorbası','250 g'),
+        (menu_id,'Çorba','Yoğurt Çorbası','250 g'),
         (menu_id,'Ana Yemek','Çökertme Kebap','250 g'),
-        (menu_id,'Ana Yemek','Kuru Fasulye (ikincil)','200 g'),
+        (menu_id,'Ana Yemek','Mevsim Türlü (ikincil)','200 g'),
         (menu_id,'Yan Yemek','Sebzeli Bulgur Pilavı','150 g'),
+        (menu_id,'Salata','Mevsim Salata','150 g'),
         (menu_id,'Ekmek','Çeyrek Ekmek',''),
         (menu_id,'İçecek','Su','500 ml');
 
@@ -436,9 +466,10 @@ BEGIN
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
         (menu_id,'Çorba','Ezogelin Çorbası','250 g'),
+        (menu_id,'Çorba','Yüksük Çorbası','250 g'),
         (menu_id,'Ana Yemek','Tavuk Külbastı (Fırın Patates ile)','200 g'),
-        (menu_id,'Ana Yemek','Patates Yemeği (ikincil)','150 g'),
-        (menu_id,'Yan Yemek','Patates Yemeği','150 g'),
+        (menu_id,'Ana Yemek','Kurufasulye Yemeği (ikincil)','150 g'),
+        (menu_id,'Yan Yemek','Haydari','150 g'),
         (menu_id,'Pilav','Pirinç Pilavı','150 g'),
         (menu_id,'Ekmek','Çeyrek Ekmek',''),
         (menu_id,'İçecek','Su','500 ml');
@@ -450,10 +481,11 @@ BEGIN
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
         (menu_id,'Çorba','Şehriye Çorbası','250 g'),
+        (menu_id,'Çorba','Mercimek Çorbası','250 g'),
         (menu_id,'Ana Yemek','Izgara Köfte / Patates','200 g'),
-        (menu_id,'Ana Yemek','Makarna (ikincil)','150 g'),
+        (menu_id,'Ana Yemek','Patates Yemeği (ikincil)','150 g'),
         (menu_id,'Yan Yemek','Makarna (sos/yoğurt ile)','150 g'),
-        (menu_id,'Tatlı','Haydari','100 g'),
+        (menu_id,'İçecek','Ayran','100 g'),
         (menu_id,'Ekmek','Çeyrek Ekmek',''),
         (menu_id,'İçecek','Su','500 ml');
 
