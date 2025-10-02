@@ -61,9 +61,9 @@ BEGIN
     WHERE NOT EXISTS (SELECT 1 FROM public."Menus" WHERE "CityId"=(SELECT "Id" FROM public."Cities" WHERE "Name"='Manisa') AND "MealType"='Kahvaltı' AND "Date"='2025-10-03') RETURNING "Id" INTO menu_id;
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
-        (menu_id,'Ana Yemek','Sucuklu Yumurta','1 porsiyon'),
+        (menu_id,'Ana Yemek','Karışık Pizza','1 porsiyon'),
         (menu_id,'Yan Yemek','Haşlanmış Yumurta','1 adet'),
-        (menu_id,'Peynir','Tulum Peynir','30 g'),
+        (menu_id,'Peynir','Peynir','30 g'),
         (menu_id,'Zeytin','Siyah/Yeşil Zeytin','30 g'),
         (menu_id,'Sürülebilir','Tahinli Pekmez','20 g'),
         (menu_id,'Sebze','Salatalık/Domates','100 g'),
@@ -77,8 +77,8 @@ BEGIN
     WHERE NOT EXISTS (SELECT 1 FROM public."Menus" WHERE "CityId"=(SELECT "Id" FROM public."Cities" WHERE "Name"='Manisa') AND "MealType"='Kahvaltı' AND "Date"='2025-10-04') RETURNING "Id" INTO menu_id;
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
-        (menu_id,'Ana Yemek','Menemen','150 g'),
-        (menu_id,'Yan Yemek','Simit','1 adet'),
+        (menu_id,'Ana Yemek','Sucuklu Yumurta','150 g'),
+        (menu_id,'Yan Yemek','Açma Çeşitleri','1 adet'),
         (menu_id,'Peynir','Kaşar Peynir','30 g'),
         (menu_id,'Zeytin','Siyah/Yeşil Zeytin','30 g'),
         (menu_id,'Sürülebilir','Bal/Reçel','20 g'),
@@ -93,8 +93,8 @@ BEGIN
     WHERE NOT EXISTS (SELECT 1 FROM public."Menus" WHERE "CityId"=(SELECT "Id" FROM public."Cities" WHERE "Name"='Manisa') AND "MealType"='Kahvaltı' AND "Date"='2025-10-05') RETURNING "Id" INTO menu_id;
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
-        (menu_id,'Ana Yemek','Peynirli Omlet','1 porsiyon'),
-        (menu_id,'Yan Yemek','Poğaça/Açma','1 adet'),
+        (menu_id,'Ana Yemek','Patates Kızarmta','1 porsiyon'),
+        (menu_id,'Yan Yemek','Haslanmış Yumurta','1 adet'),
         (menu_id,'Peynir','Beyaz Peynir','40 g'),
         (menu_id,'Zeytin','Siyah/Yeşil Zeytin','30 g'),
         (menu_id,'Sürülebilir','Tahinli Pekmez/Reçel','20 g'),
@@ -109,8 +109,8 @@ BEGIN
     WHERE NOT EXISTS (SELECT 1 FROM public."Menus" WHERE "CityId"=(SELECT "Id" FROM public."Cities" WHERE "Name"='Manisa') AND "MealType"='Kahvaltı' AND "Date"='2025-10-06') RETURNING "Id" INTO menu_id;
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
-        (menu_id,'Ana Yemek','Sosisli Omlet','1 porsiyon'),
-        (menu_id,'Yan Yemek','Haşlanmış Yumurta','1 adet'),
+        (menu_id,'Ana Yemek','Menemen','1 porsiyon'),
+        (menu_id,'Yan Yemek','Milföy Börek','1 adet'),
         (menu_id,'Peynir','Labne','30 g'),
         (menu_id,'Zeytin','Siyah/Yeşil Zeytin','30 g'),
         (menu_id,'Sürülebilir','Bal/Reçel','20 g'),
@@ -125,8 +125,8 @@ BEGIN
     WHERE NOT EXISTS (SELECT 1 FROM public."Menus" WHERE "CityId"=(SELECT "Id" FROM public."Cities" WHERE "Name"='Manisa') AND "MealType"='Kahvaltı' AND "Date"='2025-10-07') RETURNING "Id" INTO menu_id;
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
-        (menu_id,'Ana Yemek','Kaşarlı Omlet','1 porsiyon'),
-        (menu_id,'Yan Yemek','Mozaik Kek','1 dilim'),
+        (menu_id,'Ana Yemek','Sosis Koktely','1 porsiyon'),
+        (menu_id,'Yan Yemek','Haşlanmış Yumurta','1 dilim'),
         (menu_id,'Peynir','Beyaz Peynir','40 g'),
         (menu_id,'Zeytin','Siyah/Yeşil Zeytin','30 g'),
         (menu_id,'Sürülebilir','Tahinli Pekmez','20 g'),
@@ -141,8 +141,8 @@ BEGIN
     WHERE NOT EXISTS (SELECT 1 FROM public."Menus" WHERE "CityId"=(SELECT "Id" FROM public."Cities" WHERE "Name"='Manisa') AND "MealType"='Kahvaltı' AND "Date"='2025-10-08') RETURNING "Id" INTO menu_id;
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
-        (menu_id,'Ana Yemek','Patates Kavurma','150 g'),
-        (menu_id,'Yan Yemek','Haşlanmış Yumurta','1 adet'),
+        (menu_id,'Ana Yemek','Kaşarlı Omlet','150 g'),
+        (menu_id,'Yan Yemek','Mozaik Kek','1 adet'),
         (menu_id,'Peynir','Kaşar/Beyaz Peynir','40 g'),
         (menu_id,'Zeytin','Siyah/Yeşil Zeytin','30 g'),
         (menu_id,'Sürülebilir','Helva/Reçel','20 g'),
@@ -157,8 +157,8 @@ BEGIN
     WHERE NOT EXISTS (SELECT 1 FROM public."Menus" WHERE "CityId"=(SELECT "Id" FROM public."Cities" WHERE "Name"='Manisa') AND "MealType"='Kahvaltı' AND "Date"='2025-10-09') RETURNING "Id" INTO menu_id;
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
-        (menu_id,'Ana Yemek','Peynirli Omlet','1 porsiyon'),
-        (menu_id,'Yan Yemek','Simit','1 adet'),
+        (menu_id,'Ana Yemek','Halanmış Yumurta','1 porsiyon'),
+        (menu_id,'Yan Yemek','Patates Kızartması','1 adet'),
         (menu_id,'Peynir','Kaşar Peynir','40 g'),
         (menu_id,'Zeytin','Siyah/Yeşil Zeytin','30 g'),
         (menu_id,'Sürülebilir','Tahinli Pekmez','20 g'),
@@ -173,8 +173,8 @@ BEGIN
     WHERE NOT EXISTS (SELECT 1 FROM public."Menus" WHERE "CityId"=(SELECT "Id" FROM public."Cities" WHERE "Name"='Manisa') AND "MealType"='Kahvaltı' AND "Date"='2025-10-10') RETURNING "Id" INTO menu_id;
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
-        (menu_id,'Ana Yemek','Menemen','150 g'),
-        (menu_id,'Yan Yemek','Haşlanmış Yumurta','1 adet'),
+        (menu_id,'Ana Yemek','Peynirli Omlet','150 g'),
+        (menu_id,'Yan Yemek','Simit','1 adet'),
         (menu_id,'Peynir','Beyaz Peynir','40 g'),
         (menu_id,'Zeytin','Siyah/Yeşil Zeytin','30 g'),
         (menu_id,'Sürülebilir','Reçel/Bal','20 g'),
@@ -189,7 +189,7 @@ BEGIN
     WHERE NOT EXISTS (SELECT 1 FROM public."Menus" WHERE "CityId"=(SELECT "Id" FROM public."Cities" WHERE "Name"='Manisa') AND "MealType"='Kahvaltı' AND "Date"='2025-10-11') RETURNING "Id" INTO menu_id;
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
-        (menu_id,'Ana Yemek','Tavuklu Börek / Börek Çeşitleri','120 g'),
+        (menu_id,'Ana Yemek','Patates Kızartması','120 g'),
         (menu_id,'Yan Yemek','Haşlanmış Yumurta','1 adet'),
         (menu_id,'Peynir','Tulum/Beyaz Peynir','40 g'),
         (menu_id,'Zeytin','Siyah/Yeşil Zeytin','30 g'),
@@ -205,7 +205,7 @@ BEGIN
     WHERE NOT EXISTS (SELECT 1 FROM public."Menus" WHERE "CityId"=(SELECT "Id" FROM public."Cities" WHERE "Name"='Manisa') AND "MealType"='Kahvaltı' AND "Date"='2025-10-12') RETURNING "Id" INTO menu_id;
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
-        (menu_id,'Ana Yemek','Menemen veya Sucuklu Yumurta','150 g'),
+        (menu_id,'Ana Yemek','Sade Omlet','150 g'),
         (menu_id,'Yan Yemek','Açma/Poğaça','1 adet'),
         (menu_id,'Peynir','Beyaz Peynir','40 g'),
         (menu_id,'Zeytin','Siyah/Yeşil Zeytin','30 g'),
@@ -221,7 +221,7 @@ BEGIN
     WHERE NOT EXISTS (SELECT 1 FROM public."Menus" WHERE "CityId"=(SELECT "Id" FROM public."Cities" WHERE "Name"='Manisa') AND "MealType"='Kahvaltı' AND "Date"='2025-10-13') RETURNING "Id" INTO menu_id;
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
-        (menu_id,'Ana Yemek','Hünkar Beğendi (kahvaltılığa uygun küçük porsiyon)','120 g'),
+        (menu_id,'Ana Yemek','Börek Çeşitleri','120 g'),
         (menu_id,'Yan Yemek','Haşlanmış Yumurta','1 adet'),
         (menu_id,'Peynir','Kaşar/Beyaz Peynir','40 g'),
         (menu_id,'Zeytin','Siyah/Yeşil Zeytin','30 g'),
@@ -237,8 +237,8 @@ BEGIN
     WHERE NOT EXISTS (SELECT 1 FROM public."Menus" WHERE "CityId"=(SELECT "Id" FROM public."Cities" WHERE "Name"='Manisa') AND "MealType"='Kahvaltı' AND "Date"='2025-10-14') RETURNING "Id" INTO menu_id;
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
-        (menu_id,'Ana Yemek','Patates Kızartması / Fırın Patates','150 g'),
-        (menu_id,'Yan Yemek','Haşlanmış Yumurta','1 adet'),
+        (menu_id,'Ana Yemek','Peynirli veya Çikolatlı Milföy Börek','150 g'),
+        (menu_id,'Yan Yemek','Sucuklu yumurta','1 adet'),
         (menu_id,'Peynir','Beyaz Peynir','40 g'),
         (menu_id,'Zeytin','Siyah/Yeşil Zeytin','30 g'),
         (menu_id,'Sürülebilir','Tahinli Pekmez','20 g'),
@@ -253,8 +253,8 @@ BEGIN
     WHERE NOT EXISTS (SELECT 1 FROM public."Menus" WHERE "CityId"=(SELECT "Id" FROM public."Cities" WHERE "Name"='Manisa') AND "MealType"='Kahvaltı' AND "Date"='2025-10-15') RETURNING "Id" INTO menu_id;
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
-        (menu_id,'Ana Yemek','Sucuklu Yumurta','1 porsiyon'),
-        (menu_id,'Yan Yemek','Poğaça/Açma','1 adet'),
+        (menu_id,'Ana Yemek','PAtates Kızarması','1 porsiyon'),
+        (menu_id,'Yan Yemek','Haşlanmış Yumurta','1 adet'),
         (menu_id,'Peynir','Kaşar Peynir','40 g'),
         (menu_id,'Zeytin','Siyah/Yeşil Zeytin','30 g'),
         (menu_id,'Sürülebilir','Helva/Reçel','20 g'),
@@ -269,8 +269,8 @@ BEGIN
     WHERE NOT EXISTS (SELECT 1 FROM public."Menus" WHERE "CityId"=(SELECT "Id" FROM public."Cities" WHERE "Name"='Manisa') AND "MealType"='Kahvaltı' AND "Date"='2025-10-16') RETURNING "Id" INTO menu_id;
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
-        (menu_id,'Ana Yemek','Menemen','150 g'),
-        (menu_id,'Yan Yemek','Haşlanmış Yumurta','1 adet'),
+        (menu_id,'Ana Yemek','Sade Omlet','150 g'),
+        (menu_id,'Yan Yemek',,'Poğaca Çeşitli','1 adet'),
         (menu_id,'Peynir','Labne/Beyaz Peynir','40 g'),
         (menu_id,'Zeytin','Siyah/Yeşil Zeytin','30 g'),
         (menu_id,'Sürülebilir','Tahinli Pekmez','20 g'),
@@ -285,8 +285,8 @@ BEGIN
     WHERE NOT EXISTS (SELECT 1 FROM public."Menus" WHERE "CityId"=(SELECT "Id" FROM public."Cities" WHERE "Name"='Manisa') AND "MealType"='Kahvaltı' AND "Date"='2025-10-17') RETURNING "Id" INTO menu_id;
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
-        (menu_id,'Ana Yemek','Peynirli Omlet','1 porsiyon'),
-        (menu_id,'Yan Yemek','Simit','1 adet'),
+        (menu_id,'Ana Yemek','Karışık Kızartma','1 porsiyon'),
+        (menu_id,'Yan Yemek','Haşlanmıs Yumurta','1 adet'),
         (menu_id,'Peynir','Kaşar/Beyaz Peynir','40 g'),
         (menu_id,'Zeytin','Siyah/Yeşil Zeytin','30 g'),
         (menu_id,'Sürülebilir','Bal/Reçel','20 g'),
@@ -302,7 +302,7 @@ BEGIN
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
         (menu_id,'Ana Yemek','Menemen','150 g'),
-        (menu_id,'Yan Yemek','Haşlanmış Yumurta','1 adet'),
+        (menu_id,'Yan Yemek','Simit','1 adet'),
         (menu_id,'Peynir','Tulum/Beyaz Peynir','40 g'),
         (menu_id,'Zeytin','Siyah/Yeşil Zeytin','30 g'),
         (menu_id,'Sürülebilir','Tahinli Pekmez/Reçel','20 g'),
@@ -317,8 +317,8 @@ BEGIN
     WHERE NOT EXISTS (SELECT 1 FROM public."Menus" WHERE "CityId"=(SELECT "Id" FROM public."Cities" WHERE "Name"='Manisa') AND "MealType"='Kahvaltı' AND "Date"='2025-10-19') RETURNING "Id" INTO menu_id;
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
-        (menu_id,'Ana Yemek','Haşlanmış Yumurta + Peynir','1 adet + 30 g'),
-        (menu_id,'Yan Yemek','Simit/Poğaça','1 adet'),
+        (menu_id,'Ana Yemek','Karışık Pizza','1 adet + 30 g'),
+        (menu_id,'Yan Yemek','Haşlanmış Yumurta','1 adet'),
         (menu_id,'Peynir','Beyaz Peynir','40 g'),
         (menu_id,'Zeytin','Siyah/Yeşil Zeytin','30 g'),
         (menu_id,'Sürülebilir','Bal/Reçel','20 g'),
@@ -333,8 +333,8 @@ BEGIN
     WHERE NOT EXISTS (SELECT 1 FROM public."Menus" WHERE "CityId"=(SELECT "Id" FROM public."Cities" WHERE "Name"='Manisa') AND "MealType"='Kahvaltı' AND "Date"='2025-10-20') RETURNING "Id" INTO menu_id;
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
-        (menu_id,'Ana Yemek','Menemen','150 g'),
-        (menu_id,'Yan Yemek','Haşlanmış Yumurta','1 adet'),
+        (menu_id,'Ana Yemek','Sade Omlet','150 g'),
+        (menu_id,'Yan Yemek','Haşlanmış Patates','1 adet'),
         (menu_id,'Peynir','Kaşar/Beyaz Peynir','40 g'),
         (menu_id,'Zeytin','Siyah/Yeşil Zeytin','30 g'),
         (menu_id,'Sürülebilir','Tahinli Pekmez','20 g'),
@@ -349,8 +349,8 @@ BEGIN
     WHERE NOT EXISTS (SELECT 1 FROM public."Menus" WHERE "CityId"=(SELECT "Id" FROM public."Cities" WHERE "Name"='Manisa') AND "MealType"='Kahvaltı' AND "Date"='2025-10-21') RETURNING "Id" INTO menu_id;
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
-        (menu_id,'Ana Yemek','Peynirli Börek','120 g'),
-        (menu_id,'Yan Yemek','Haşlanmış Yumurta','1 adet'),
+        (menu_id,'Ana Yemek','Sosşis Koktely','120 g'),
+        (menu_id,'Yan Yemek','Haşlanmış YHumurta','1 adet'),
         (menu_id,'Peynir','Beyaz Peynir','40 g'),
         (menu_id,'Zeytin','Siyah/Yeşil Zeytin','30 g'),
         (menu_id,'Sürülebilir','Bal/Reçel','20 g'),
@@ -365,8 +365,8 @@ BEGIN
     WHERE NOT EXISTS (SELECT 1 FROM public."Menus" WHERE "CityId"=(SELECT "Id" FROM public."Cities" WHERE "Name"='Manisa') AND "MealType"='Kahvaltı' AND "Date"='2025-10-22') RETURNING "Id" INTO menu_id;
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
-        (menu_id,'Ana Yemek','Omlet / Menemen','150 g'),
-        (menu_id,'Yan Yemek','Simit/Poğaça','1 adet'),
+        (menu_id,'Ana Yemek','Patatesli Yumurta','150 g'),
+        (menu_id,'Yan Yemek','sade Poğaça','1 adet'),
         (menu_id,'Peynir','Kaşar/Beyaz Peynir','40 g'),
         (menu_id,'Zeytin','Siyah/Yeşil Zeytin','30 g'),
         (menu_id,'Sürülebilir','Tahinli Pekmez','20 g'),
@@ -381,8 +381,8 @@ BEGIN
     WHERE NOT EXISTS (SELECT 1 FROM public."Menus" WHERE "CityId"=(SELECT "Id" FROM public."Cities" WHERE "Name"='Manisa') AND "MealType"='Kahvaltı' AND "Date"='2025-10-23') RETURNING "Id" INTO menu_id;
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
-        (menu_id,'Ana Yemek','Peynirli Omlet','1 porsiyon'),
-        (menu_id,'Yan Yemek','Açma/Poğaça','1 adet'),
+        (menu_id,'Ana Yemek','Sucuklu Yumurta','1 porsiyon'),
+        (menu_id,'Yan Yemek','Milföy Börek','1 adet'),
         (menu_id,'Peynir','Beyaz Peynir','40 g'),
         (menu_id,'Zeytin','Siyah/Yeşil Zeytin','30 g'),
         (menu_id,'Sürülebilir','Reçel/Bal','20 g'),
@@ -397,7 +397,7 @@ BEGIN
     WHERE NOT EXISTS (SELECT 1 FROM public."Menus" WHERE "CityId"=(SELECT "Id" FROM public."Cities" WHERE "Name"='Manisa') AND "MealType"='Kahvaltı' AND "Date"='2025-10-24') RETURNING "Id" INTO menu_id;
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
-        (menu_id,'Ana Yemek','Menemen','150 g'),
+        (menu_id,'Ana Yemek','Zeytin/Peynirli Açma','150 g'),
         (menu_id,'Yan Yemek','Haşlanmış Yumurta','1 adet'),
         (menu_id,'Peynir','Kaşar/Beyaz Peynir','40 g'),
         (menu_id,'Zeytin','Siyah/Yeşil Zeytin','30 g'),
@@ -413,8 +413,8 @@ BEGIN
     WHERE NOT EXISTS (SELECT 1 FROM public."Menus" WHERE "CityId"=(SELECT "Id" FROM public."Cities" WHERE "Name"='Manisa') AND "MealType"='Kahvaltı' AND "Date"='2025-10-25') RETURNING "Id" INTO menu_id;
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
-        (menu_id,'Ana Yemek','Peynirli Omlet','1 porsiyon'),
-        (menu_id,'Yan Yemek','Simit','1 adet'),
+        (menu_id,'Ana Yemek','Patates Kızartması','1 porsiyon'),
+        (menu_id,'Yan Yemek','Haşlanmış Yumurta','1 adet'),
         (menu_id,'Peynir','Beyaz Peynir','40 g'),
         (menu_id,'Zeytin','Siyah/Yeşil Zeytin','30 g'),
         (menu_id,'Sürülebilir','Reçel/Bal','20 g'),
@@ -430,7 +430,7 @@ BEGIN
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
         (menu_id,'Ana Yemek','Menemen','150 g'),
-        (menu_id,'Yan Yemek','Haşlanmış Yumurta','1 adet'),
+        (menu_id,'Yan Yemek','Poğaca Çeşitleri','1 adet'),
         (menu_id,'Peynir','Kaşar/Beyaz Peynir','40 g'),
         (menu_id,'Zeytin','Siyah/Yeşil Zeytin','30 g'),
         (menu_id,'Sürülebilir','Tahinli Pekmez','20 g'),
@@ -445,8 +445,8 @@ BEGIN
     WHERE NOT EXISTS (SELECT 1 FROM public."Menus" WHERE "CityId"=(SELECT "Id" FROM public."Cities" WHERE "Name"='Manisa') AND "MealType"='Kahvaltı' AND "Date"='2025-10-27') RETURNING "Id" INTO menu_id;
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
-        (menu_id,'Ana Yemek','Sade Omlet','1 adet'),
-        (menu_id,'Yan Yemek','Poğaça/Açma','1 adet'),
+        (menu_id,'Ana Yemek','Simit','1 adet'),
+        (menu_id,'Yan Yemek','Haşlanmış yumurta','1 adet'),
         (menu_id,'Peynir','Beyaz Peynir','40 g'),
         (menu_id,'Zeytin','Siyah/Yeşil Zeytin','30 g'),
         (menu_id,'Sürülebilir','Bal/Reçel','20 g'),
@@ -461,8 +461,8 @@ BEGIN
     WHERE NOT EXISTS (SELECT 1 FROM public."Menus" WHERE "CityId"=(SELECT "Id" FROM public."Cities" WHERE "Name"='Manisa') AND "MealType"='Kahvaltı' AND "Date"='2025-10-28') RETURNING "Id" INTO menu_id;
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
-        (menu_id,'Ana Yemek','Patates Kızartması / Fırın Patates','150 g'),
-        (menu_id,'Yan Yemek','Haşlanmış Yumurta','1 adet'),
+        (menu_id,'Ana Yemek','Peynirli Omlet','150 g'),
+        (menu_id,'Yan Yemek','Meyveli Kek','1 adet'),
         (menu_id,'Peynir','Kaşar/Beyaz Peynir','40 g'),
         (menu_id,'Zeytin','Siyah/Yeşil Zeytin','30 g'),
         (menu_id,'Sürülebilir','Tahinli Pekmez','20 g'),
@@ -477,8 +477,8 @@ BEGIN
     WHERE NOT EXISTS (SELECT 1 FROM public."Menus" WHERE "CityId"=(SELECT "Id" FROM public."Cities" WHERE "Name"='Manisa') AND "MealType"='Kahvaltı' AND "Date"='2025-10-29') RETURNING "Id" INTO menu_id;
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
-        (menu_id,'Ana Yemek','Omlet / Menemen','150 g'),
-        (menu_id,'Yan Yemek','Simit','1 adet'),
+        (menu_id,'Ana Yemek','Patates Kızartması','150 g'),
+        (menu_id,'Yan Yemek','Haşlanmış Yumurta','1 adet'),
         (menu_id,'Peynir','Beyaz Peynir','40 g'),
         (menu_id,'Zeytin','Siyah/Yeşil Zeytin','30 g'),
         (menu_id,'Sürülebilir','Reçel/Bal','20 g'),
@@ -493,8 +493,8 @@ BEGIN
     WHERE NOT EXISTS (SELECT 1 FROM public."Menus" WHERE "CityId"=(SELECT "Id" FROM public."Cities" WHERE "Name"='Manisa') AND "MealType"='Kahvaltı' AND "Date"='2025-10-30') RETURNING "Id" INTO menu_id;
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
-        (menu_id,'Ana Yemek','Peynirli Omlet','1 porsiyon'),
-        (menu_id,'Yan Yemek','Açma/Poğaça','1 adet'),
+        (menu_id,'Ana Yemek','Kaşarlı Omlet','1 porsiyon'),
+        (menu_id,'Yan Yemek','Simit','1 adet'),
         (menu_id,'Peynir','Kaşar/Beyaz Peynir','40 g'),
         (menu_id,'Zeytin','Siyah/Yeşil Zeytin','30 g'),
         (menu_id,'Sürülebilir','Tahinli Pekmez','20 g'),
@@ -509,7 +509,7 @@ BEGIN
     WHERE NOT EXISTS (SELECT 1 FROM public."Menus" WHERE "CityId"=(SELECT "Id" FROM public."Cities" WHERE "Name"='Manisa') AND "MealType"='Kahvaltı' AND "Date"='2025-10-31') RETURNING "Id" INTO menu_id;
 
     INSERT INTO public."MenuItems" ("MenuId","Category","Name","Gram") VALUES
-        (menu_id,'Ana Yemek','Menemen / Omlet','150 g'),
+        (menu_id,'Ana Yemek','Börek Çeşitleri','150 g'),
         (menu_id,'Yan Yemek','Haşlanmış Yumurta','1 adet'),
         (menu_id,'Peynir','Beyaz Peynir','40 g'),
         (menu_id,'Zeytin','Siyah/Yeşil Zeytin','30 g'),
