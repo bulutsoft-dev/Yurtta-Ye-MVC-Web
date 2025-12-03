@@ -720,11 +720,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Core/YurttaYe.Core.csproj",
+      "projectUniqueName": "/home/furkanblt/Documents/Insighttech/Yurtta-Ye-MVC-Web/YurttaYe.Core/YurttaYe.Core.csproj",
       "projectName": "YurttaYe.Core",
-      "projectPath": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Core/YurttaYe.Core.csproj",
+      "projectPath": "/home/furkanblt/Documents/Insighttech/Yurtta-Ye-MVC-Web/YurttaYe.Core/YurttaYe.Core.csproj",
       "packagesPath": "/home/furkanblt/.nuget/packages/",
-      "outputPath": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Core/obj/",
+      "outputPath": "/home/furkanblt/Documents/Insighttech/Yurtta-Ye-MVC-Web/YurttaYe.Core/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/furkanblt/.nuget/NuGet/NuGet.Config"
@@ -745,11 +745,6 @@
         "warnAsError": [
           "NU1605"
         ]
-      },
-      "restoreAuditProperties": {
-        "enableAudit": "true",
-        "auditLevel": "low",
-        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -780,7 +775,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/home/furkanblt/.dotnet/sdk/8.0.411/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/var/run/host/usr/lib/dotnet/sdk/8.0.121/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
