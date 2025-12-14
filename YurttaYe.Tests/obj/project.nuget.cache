@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "M5z6F9Y1iIk=",
+  "dgSpecHash": "g0ZVNIc0KbI=",
   "success": true,
-  "projectFilePath": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Tests/YurttaYe.Tests.csproj",
+  "projectFilePath": "/home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Tests/YurttaYe.Tests.csproj",
   "expectedPackageFiles": [
     "/home/furkanblt/.nuget/packages/azure.core/1.35.0/azure.core.1.35.0.nupkg.sha512",
     "/home/furkanblt/.nuget/packages/azure.identity/1.10.3/azure.identity.1.10.3.nupkg.sha512",

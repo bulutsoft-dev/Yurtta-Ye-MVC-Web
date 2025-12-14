@@ -42,6 +42,8 @@
     };
 }
 
+@Html.AntiForgeryToken()
+
 <!-- Success/Error Messages -->
 @if (TempData["Success"] != null)
 {
@@ -98,8 +100,8 @@
                 </label>
                 <select name="mealTypeFilter" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
                     <option value="">Tüm Öğünler</option>
-                    <option value="Breakfast" selected="@(ViewBag.MealTypeFilter == "Breakfast" ? "selected" : null)">Kahvaltı</option>
-                    <option value="Dinner" selected="@(ViewBag.MealTypeFilter == "Dinner" ? "selected" : null)">Akşam Yemeği</option>
+                    <option value="Kahvaltı" selected="@(ViewBag.MealTypeFilter == "Kahvaltı" ? "selected" : null)">Kahvaltı</option>
+                    <option value="Akşam Yemeği" selected="@(ViewBag.MealTypeFilter == "Akşam Yemeği" ? "selected" : null)">Akşam Yemeği</option>
                 </select>
             </div>
 
@@ -170,7 +172,7 @@
             <i class="fas fa-coffee text-2xl mr-3"></i>
             <div>
                 <p class="text-purple-100 text-sm">Kahvaltı</p>
-                <p class="text-2xl font-bold">@Model.Count(m => m.MealType == "Breakfast")</p>
+                <p class="text-2xl font-bold">@Model.Count(m => m.MealType == "Kahvaltı")</p>
             </div>
         </div>
     </div>
@@ -180,7 +182,7 @@
             <i class="fas fa-moon text-2xl mr-3"></i>
             <div>
                 <p class="text-orange-100 text-sm">Akşam</p>
-                <p class="text-2xl font-bold">@Model.Count(m => m.MealType == "Dinner")</p>
+                <p class="text-2xl font-bold">@Model.Count(m => m.MealType == "Akşam Yemeği")</p>
             </div>
         </div>
     </div>
@@ -255,9 +257,9 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <span class="inline-flex px-3 py-1 text-xs font-semibold rounded-full 
-                                      @(menu.MealType == "Breakfast" ? "bg-yellow-100 text-yellow-800" : "bg-blue-100 text-blue-800")">
-                                    <i class="fas @(menu.MealType == "Breakfast" ? "fa-coffee" : "fa-moon") mr-1"></i>
-                                    @(menu.MealType == "Breakfast" ? "Kahvaltı" : "Akşam")
+                                      @(menu.MealType == "Kahvaltı" ? "bg-yellow-100 text-yellow-800" : "bg-blue-100 text-blue-800")">
+                                    <i class="fas @(menu.MealType == "Kahvaltı" ? "fa-coffee" : "fa-moon") mr-1"></i>
+                                    @(menu.MealType == "Kahvaltı" ? "Kahvaltı" : "Akşam")
                                 </span>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -386,9 +388,36 @@
             if (selectedMenus.length === 0) return;
             
             if (confirmAdminDelete(`${selectedMenus.length} menüyü silmek istediğinizden emin misiniz?`)) {
-                // Implement bulk delete logic
                 showAdminNotification(`${selectedMenus.length} menü siliniyor...`, 'info');
-                // Add AJAX call here for bulk delete
+                
+                fetch('/Admin/AdminMenu/BulkDelete', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]')?.value
+                    },
+                    body: JSON.stringify(selectedMenus.map(id => parseInt(id)))
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        showAdminNotification(data.message, 'success');
+                        // Remove deleted rows from table
+                        selectedMenus.forEach(id => {
+                            const row = document.querySelector(`[data-menu-id="${id}"]`);
+                            if (row) row.remove();
+                        });
+                        selectedMenus = [];
+                        updateSelectedMenus();
+                        // Reload page after a short delay
+                        setTimeout(() => location.reload(), 1500);
+                    } else {
+                        showAdminNotification(data.message, 'error');
+                    }
+                })
+                .catch(error => {
+                    showAdminNotification('Menüler silinirken bir hata oluştu!', 'error');
+                });
             }
         }
 

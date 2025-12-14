@@ -112,6 +112,43 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> BulkDelete([FromBody] List<int> ids)
+        {
+            if (ids == null || !ids.Any())
+            {
+                return Json(new { success = false, message = "Silinecek şehir seçilmedi." });
+            }
+
+            try
+            {
+                int deletedCount = 0;
+                foreach (var id in ids)
+                {
+                    try
+                    {
+                        await _serviceManager.CityService.DeleteCityAsync(id);
+                        deletedCount++;
+                    }
+                    catch
+                    {
+                        // Log error but continue with other deletions
+                    }
+                }
+                
+                return Json(new { 
+                    success = true, 
+                    message = $"{deletedCount} şehir başarıyla silindi.",
+                    deletedCount = deletedCount 
+                });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = "Şehirler silinirken bir hata oluştu." });
+            }
+        }
+
         // Details method for modal display
         public async Task<IActionResult> Details(int id)
         {
@@ -133,8 +170,8 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
             };
 
             ViewBag.RecentMenus = cityMenus.OrderByDescending(m => m.Date).Take(5).ToList();
-            ViewBag.BreakfastCount = cityMenus.Count(m => m.MealType == "Breakfast");
-            ViewBag.DinnerCount = cityMenus.Count(m => m.MealType == "Dinner");
+            ViewBag.BreakfastCount = cityMenus.Count(m => m.MealType == "Kahvaltı");
+            ViewBag.DinnerCount = cityMenus.Count(m => m.MealType == "Akşam Yemeği");
 
             return PartialView("_CityDetails", model);
         }

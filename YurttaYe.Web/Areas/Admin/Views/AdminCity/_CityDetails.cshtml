@@ -94,12 +94,12 @@
                     <div class="p-3 hover:bg-gray-50 transition-colors">
                         <div class="flex items-center justify-between">
                             <div class="flex items-center">
-                                <div class="w-8 h-8 rounded-lg @(menu.MealType == "Breakfast" ? "bg-yellow-100" : "bg-indigo-100") flex items-center justify-center mr-3">
-                                    <i class="fas @(menu.MealType == "Breakfast" ? "fa-coffee text-yellow-600" : "fa-moon text-indigo-600") text-xs"></i>
+                                <div class="w-8 h-8 rounded-lg @(menu.MealType == "Kahvaltı" ? "bg-yellow-100" : "bg-indigo-100") flex items-center justify-center mr-3">
+                                    <i class="fas @(menu.MealType == "Kahvaltı" ? "fa-coffee text-yellow-600" : "fa-moon text-indigo-600") text-xs"></i>
                                 </div>
                                 <div>
                                     <p class="text-sm font-medium text-gray-900">
-                                        @(menu.MealType == "Breakfast" ? "Kahvaltı" : "Akşam Yemeği")
+                                        @(menu.MealType == "Kahvaltı" ? "Kahvaltı" : "Akşam Yemeği")
                                     </p>
                                     <p class="text-xs text-gray-500">@menu.Date.ToString("dd.MM.yyyy")</p>
                                 </div>

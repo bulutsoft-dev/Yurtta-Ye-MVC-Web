@@ -92,8 +92,8 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
             ViewBag.Cities = allCities.Select(c => new SelectListItem { Value = c.Name, Text = c.Name });
             ViewBag.MealTypes = new List<SelectListItem>
             {
-                new SelectListItem { Value = "Breakfast", Text = _localizer["Morning"] },
-                new SelectListItem { Value = "Dinner", Text = _localizer["Evening"] }
+                new SelectListItem { Value = "Kahvaltı", Text = _localizer["Morning"] },
+                new SelectListItem { Value = "Akşam Yemeği", Text = _localizer["Evening"] }
             };
 
             return View(model.ToList());
@@ -206,6 +206,43 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
                 TempData["Error"] = string.Format(_localizer["DeletionError"], _localizer["Menu"]);
             }
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> BulkDelete([FromBody] List<int> ids)
+        {
+            if (ids == null || !ids.Any())
+            {
+                return Json(new { success = false, message = "Silinecek menü seçilmedi." });
+            }
+
+            try
+            {
+                int deletedCount = 0;
+                foreach (var id in ids)
+                {
+                    try
+                    {
+                        await _serviceManager.MenuService.DeleteMenuAsync(id);
+                        deletedCount++;
+                    }
+                    catch
+                    {
+                        // Log error but continue with other deletions
+                    }
+                }
+                
+                return Json(new { 
+                    success = true, 
+                    message = $"{deletedCount} menü başarıyla silindi.",
+                    deletedCount = deletedCount 
+                });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = "Menüler silinirken bir hata oluştu." });
+            }
         }
 
         public IActionResult Upload()

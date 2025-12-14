@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "IYWIuS5UL2w=",
+  "dgSpecHash": "Hw8cgh2eMJM=",
   "success": true,
-  "projectFilePath": "/home/furkanblt/RiderProjects/YurttaYe-MVC/YurttaYe.Core/YurttaYe.Core.csproj",
+  "projectFilePath": "/home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Core/YurttaYe.Core.csproj",
   "expectedPackageFiles": [
     "/home/furkanblt/.nuget/packages/microsoft.entityframeworkcore/8.0.8/microsoft.entityframeworkcore.8.0.8.nupkg.sha512",
     "/home/furkanblt/.nuget/packages/microsoft.entityframeworkcore.abstractions/8.0.8/microsoft.entityframeworkcore.abstractions.8.0.8.nupkg.sha512",
