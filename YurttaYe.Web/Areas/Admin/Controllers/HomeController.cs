@@ -1,6 +1,8 @@
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using YurttaYe.Core.Models.ViewModels;
 using YurttaYe.Core.Services.Interfaces;
 using System;
@@ -11,10 +13,12 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
     public class HomeController : Controller
     {
         private readonly IServiceManager _serviceManager;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public HomeController(IServiceManager serviceManager)
+        public HomeController(IServiceManager serviceManager, UserManager<IdentityUser> userManager)
         {
             _serviceManager = serviceManager;
+            _userManager = userManager;
         }
 
         public async Task<IActionResult> Index()
@@ -39,6 +43,7 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
             // ViewData'ları sidebar ve breadcrumb için ayarla
             ViewBag.MenuCount = allMenus.Count();
             ViewBag.CityCount = allCities.Count();
+            ViewBag.UserCount = await _userManager.Users.CountAsync();
             
             // Breadcrumb için
             ViewData["BreadcrumbItems"] = new List<dynamic>

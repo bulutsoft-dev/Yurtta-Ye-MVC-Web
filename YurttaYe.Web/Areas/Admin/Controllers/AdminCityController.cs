@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Localization;
 using YurttaYe.Core.Models.Entities;
@@ -16,11 +18,13 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
     {
         private readonly IServiceManager _serviceManager;
         private readonly IStringLocalizer<SharedControllerResources> _localizer;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public AdminCityController(IServiceManager serviceManager, IStringLocalizer<SharedControllerResources> localizer)
+        public AdminCityController(IServiceManager serviceManager, IStringLocalizer<SharedControllerResources> localizer, UserManager<IdentityUser> userManager)
         {
             _serviceManager = serviceManager;
             _localizer = localizer;
+            _userManager = userManager;
         }
 
         public async Task<IActionResult> Index(string search)
@@ -45,6 +49,7 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
             // ViewData for sidebar and breadcrumb
             ViewBag.MenuCount = allMenus.Count();
             ViewBag.CityCount = cities.Count();
+            ViewBag.UserCount = await _userManager.Users.CountAsync();
             
             // Breadcrumb configuration
             ViewData["BreadcrumbItems"] = new List<dynamic>
