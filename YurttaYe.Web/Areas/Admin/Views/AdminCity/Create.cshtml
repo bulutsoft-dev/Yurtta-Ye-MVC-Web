@@ -2,39 +2,129 @@
 @inject IViewLocalizer Localizer
 @model YurttaYe.Core.Models.ViewModels.AdminCityViewModel
 @{
-    Layout = "_AdminLayout";
-    ViewData["Title"] = Localizer["NewCity"];
+    ViewData["Title"] = "Yeni Şehir Ekle";
+    ViewData["BreadcrumbItems"] = new List<dynamic>
+    {
+        new { Text = "Şehir Yönetimi", Icon = "fas fa-city", Url = Url.Action("Index", "AdminCity", new { area = "Admin" }) },
+        new { Text = "Yeni Şehir", Icon = "fas fa-plus", Url = (string)null }
+    };
 }
 
-<div class="bg-white p-6 rounded-lg shadow-md">
-    <form asp-area="Admin" asp-controller="AdminCity" asp-action="Create" method="post">
-        <div class="mb-4">
-            <label asp-for="Name" class="block text-gray-700 text-sm font-bold mb-2">@Localizer["CityName"]</label>
-            <input asp-for="Name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-            <span asp-validation-for="Name" class="text-red-500 text-xs italic"></span>
+@Html.AntiForgeryToken()
+
+<!-- Main Content -->
+<div class="max-w-2xl mx-auto">
+    <!-- Info Card -->
+    <div class="admin-card bg-gradient-to-r from-purple-50 to-indigo-50 rounded-xl p-6 mb-6 border border-purple-200">
+        <div class="flex items-center">
+            <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-xl flex items-center justify-center mr-4">
+                <i class="fas fa-map-marker-alt text-white text-xl"></i>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold text-gray-900">Yeni Şehir Oluştur</h3>
+                <p class="text-sm text-gray-600">Yeni bir şehir ekleyerek menü yönetimini genişletin.</p>
+            </div>
         </div>
-        <div class="flex items-center justify-between">
-            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                @Localizer["Save"]
-            </button>
-            <a asp-area="Admin" asp-controller="AdminCity" asp-action="Index" class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800">
-                @Localizer["BackToList"]
-            </a>
+    </div>
+
+    <!-- Form Card -->
+    <div class="admin-card bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
+        <div class="bg-gradient-to-r from-purple-600 to-indigo-600 px-6 py-4">
+            <h2 class="text-xl font-bold text-white flex items-center">
+                <i class="fas fa-city mr-3"></i>
+                Şehir Bilgileri
+            </h2>
         </div>
-    </form>
+
+        <form asp-area="Admin" asp-controller="AdminCity" asp-action="Create" method="post" class="p-6">
+            @Html.AntiForgeryToken()
+            
+            <!-- City Name -->
+            <div class="mb-6">
+                <label asp-for="Name" class="block text-sm font-semibold text-gray-700 mb-2">
+                    <i class="fas fa-building text-purple-500 mr-2"></i>
+                    @Localizer["CityName"]
+                </label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i class="fas fa-map-pin text-gray-400"></i>
+                    </div>
+                    <input asp-for="Name" 
+                           class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors text-gray-900" 
+                           placeholder="Örn: İstanbul, Ankara, İzmir..." />
+                </div>
+                <span asp-validation-for="Name" class="text-red-500 text-sm mt-1"></span>
+                <p class="text-xs text-gray-500 mt-2">
+                    <i class="fas fa-info-circle mr-1"></i>
+                    Şehir adını Türkçe karakterler kullanarak yazın.
+                </p>
+            </div>
+
+            <!-- Divider -->
+            <div class="border-t border-gray-200 my-6"></div>
+
+            <!-- Action Buttons -->
+            <div class="flex items-center justify-between">
+                <a asp-area="Admin" asp-controller="AdminCity" asp-action="Index" 
+                   class="inline-flex items-center px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                    <i class="fas fa-arrow-left mr-2"></i>
+                    @Localizer["BackToList"]
+                </a>
+                
+                <div class="flex items-center space-x-3">
+                    <button type="reset" 
+                            class="inline-flex items-center px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                        <i class="fas fa-undo mr-2"></i>
+                        Temizle
+                    </button>
+                    <button type="submit" 
+                            class="inline-flex items-center px-6 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-lg hover:from-purple-700 hover:to-indigo-700 transition-all shadow-lg transform hover:scale-105">
+                        <i class="fas fa-save mr-2"></i>
+                        @Localizer["Save"]
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Help Card -->
+    <div class="admin-card bg-white rounded-xl shadow-sm border border-gray-200 p-6 mt-6">
+        <h4 class="text-sm font-semibold text-gray-900 mb-3 flex items-center">
+            <i class="fas fa-lightbulb text-yellow-500 mr-2"></i>
+            İpuçları
+        </h4>
+        <ul class="text-sm text-gray-600 space-y-2">
+            <li class="flex items-start">
+                <i class="fas fa-check-circle text-green-500 mr-2 mt-0.5"></i>
+                Şehir eklendikten sonra o şehir için menüler oluşturabilirsiniz.
+            </li>
+            <li class="flex items-start">
+                <i class="fas fa-check-circle text-green-500 mr-2 mt-0.5"></i>
+                Şehir adları benzersiz olmalıdır.
+            </li>
+            <li class="flex items-start">
+                <i class="fas fa-check-circle text-green-500 mr-2 mt-0.5"></i>
+                Mobil uygulamada kullanıcılar şehirlerine göre menüleri filtreleyebilir.
+            </li>
+        </ul>
+    </div>
 </div>
 
 @if (TempData["Success"] != null)
 {
-    <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mt-4 rounded">
-        @TempData["Success"]
-    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            showAdminNotification('@TempData["Success"]', 'success');
+        });
+    </script>
 }
 @if (TempData["Error"] != null)
 {
-    <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mt-4 rounded">
-        @TempData["Error"]
-    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            showAdminNotification('@TempData["Error"]', 'error');
+        });
+    </script>
 }
 
 @section Scripts {

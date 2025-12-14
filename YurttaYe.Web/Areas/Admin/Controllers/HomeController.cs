@@ -69,5 +69,45 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
 
             return View(model);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetChartData(string period = "6months")
+        {
+            var allMenus = await _serviceManager.MenuService.GetAllMenusAsync();
+            
+            // Determine date range based on period
+            var endDate = DateTime.Now;
+            var startDate = period == "1year" ? endDate.AddMonths(-12) : endDate.AddMonths(-6);
+            
+            // Group menus by month and meal type
+            var menusByMonth = allMenus
+                .Where(m => m.Date >= startDate && m.Date <= endDate)
+                .GroupBy(m => new { m.Date.Year, m.Date.Month })
+                .OrderBy(g => g.Key.Year)
+                .ThenBy(g => g.Key.Month)
+                .Select(g => new 
+                {
+                    Month = new DateTime(g.Key.Year, g.Key.Month, 1).ToString("MMM"),
+                    Breakfast = g.Count(m => m.MealType == "Kahvaltı"),
+                    Dinner = g.Count(m => m.MealType == "Akşam Yemeği")
+                })
+                .ToList();
+
+            return Json(new 
+            {
+                labels = menusByMonth.Select(m => m.Month).ToList(),
+                breakfast = menusByMonth.Select(m => m.Breakfast).ToList(),
+                dinner = menusByMonth.Select(m => m.Dinner).ToList()
+            });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetTodayMenuCount()
+        {
+            var allMenus = await _serviceManager.MenuService.GetAllMenusAsync();
+            var todayCount = allMenus.Count(m => m.Date.Date == DateTime.Today);
+            
+            return Json(new { count = todayCount });
+        }
     }
 }

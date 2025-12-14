@@ -22,6 +22,8 @@
     };
 }
 
+@Html.AntiForgeryToken()
+
 <!-- Success/Error Messages -->
 @if (TempData["Success"] != null)
 {
@@ -268,7 +270,35 @@
             
             if (confirmAdminDelete(`${selectedCities.length} şehri silmek istediğinizden emin misiniz?`)) {
                 showAdminNotification(`${selectedCities.length} şehir siliniyor...`, 'info');
-                // Add AJAX call here for bulk delete
+                
+                fetch('/Admin/AdminCity/BulkDelete', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]')?.value
+                    },
+                    body: JSON.stringify(selectedCities.map(id => parseInt(id)))
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        showAdminNotification(data.message, 'success');
+                        // Remove deleted rows from table
+                        selectedCities.forEach(id => {
+                            const row = document.querySelector(`[data-city-id="${id}"]`);
+                            if (row) row.remove();
+                        });
+                        selectedCities = [];
+                        updateSelectedCities();
+                        // Reload page after a short delay
+                        setTimeout(() => location.reload(), 1500);
+                    } else {
+                        showAdminNotification(data.message, 'error');
+                    }
+                })
+                .catch(error => {
+                    showAdminNotification('Şehirler silinirken bir hata oluştu!', 'error');
+                });
             }
         }
 

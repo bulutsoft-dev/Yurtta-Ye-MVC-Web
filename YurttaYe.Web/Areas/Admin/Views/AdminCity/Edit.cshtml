@@ -2,40 +2,150 @@
 @inject IViewLocalizer Localizer
 @model YurttaYe.Core.Models.ViewModels.AdminCityViewModel
 @{
-    Layout = "_AdminLayout";
-    ViewData["Title"] = Localizer["EditCity"];
+    ViewData["Title"] = "Şehir Düzenle";
+    ViewData["BreadcrumbItems"] = new List<dynamic>
+    {
+        new { Text = "Şehir Yönetimi", Icon = "fas fa-city", Url = Url.Action("Index", "AdminCity", new { area = "Admin" }) },
+        new { Text = "Şehir Düzenle", Icon = "fas fa-edit", Url = (string)null }
+    };
 }
 
-<div class="bg-white p-6 rounded-lg shadow-md">
-    <form asp-area="Admin" asp-controller="AdminCity" asp-action="Edit" method="post">
-        <input type="hidden" asp-for="Id" />
-        <div class="mb-4">
-            <label asp-for="Name" class="block text-gray-700 text-sm font-bold mb-2">@Localizer["CityName"]</label>
-            <input asp-for="Name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-            <span asp-validation-for="Name" class="text-red-500 text-xs italic"></span>
+@Html.AntiForgeryToken()
+
+<!-- Main Content -->
+<div class="max-w-2xl mx-auto">
+    <!-- Info Card -->
+    <div class="admin-card bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-6 mb-6 border border-green-200">
+        <div class="flex items-center">
+            <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl flex items-center justify-center mr-4">
+                <i class="fas fa-edit text-white text-xl"></i>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold text-gray-900">Şehir Bilgilerini Düzenle</h3>
+                <p class="text-sm text-gray-600">
+                    <span class="font-medium text-green-700">@Model.Name</span> şehrinin bilgilerini güncelleyin.
+                </p>
+            </div>
         </div>
-        <div class="flex items-center justify-between">
-            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                @Localizer["Save"]
-            </button>
-            <a asp-area="Admin" asp-controller="AdminCity" asp-action="Index" class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800">
-                @Localizer["BackToList"]
+    </div>
+
+    <!-- Form Card -->
+    <div class="admin-card bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
+        <div class="bg-gradient-to-r from-green-600 to-emerald-600 px-6 py-4">
+            <h2 class="text-xl font-bold text-white flex items-center">
+                <i class="fas fa-city mr-3"></i>
+                Şehir Bilgileri
+            </h2>
+        </div>
+
+        <form asp-area="Admin" asp-controller="AdminCity" asp-action="Edit" method="post" class="p-6">
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="Id" />
+            
+            <!-- City Name -->
+            <div class="mb-6">
+                <label asp-for="Name" class="block text-sm font-semibold text-gray-700 mb-2">
+                    <i class="fas fa-building text-green-500 mr-2"></i>
+                    @Localizer["CityName"]
+                </label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i class="fas fa-map-pin text-gray-400"></i>
+                    </div>
+                    <input asp-for="Name" 
+                           class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-colors text-gray-900" 
+                           placeholder="Örn: İstanbul, Ankara, İzmir..." />
+                </div>
+                <span asp-validation-for="Name" class="text-red-500 text-sm mt-1"></span>
+            </div>
+
+            <!-- Stats Info -->
+            @if (Model.MenuCount.HasValue && Model.MenuCount > 0)
+            {
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+                    <div class="flex items-center">
+                        <i class="fas fa-info-circle text-blue-500 mr-3"></i>
+                        <div>
+                            <p class="text-sm text-blue-800">
+                                Bu şehirde <span class="font-bold">@Model.MenuCount</span> adet menü bulunmaktadır.
+                            </p>
+                            <p class="text-xs text-blue-600 mt-1">
+                                Şehir adını değiştirmek mevcut menüleri etkilemez.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <!-- Divider -->
+            <div class="border-t border-gray-200 my-6"></div>
+
+            <!-- Action Buttons -->
+            <div class="flex items-center justify-between">
+                <a asp-area="Admin" asp-controller="AdminCity" asp-action="Index" 
+                   class="inline-flex items-center px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                    <i class="fas fa-arrow-left mr-2"></i>
+                    @Localizer["BackToList"]
+                </a>
+                
+                <div class="flex items-center space-x-3">
+                    <button type="button" onclick="history.back()" 
+                            class="inline-flex items-center px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                        <i class="fas fa-times mr-2"></i>
+                        İptal
+                    </button>
+                    <button type="submit" 
+                            class="inline-flex items-center px-6 py-2 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-lg hover:from-green-700 hover:to-emerald-700 transition-all shadow-lg transform hover:scale-105">
+                        <i class="fas fa-save mr-2"></i>
+                        @Localizer["Save"]
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Quick Actions Card -->
+    <div class="admin-card bg-white rounded-xl shadow-sm border border-gray-200 p-6 mt-6">
+        <h4 class="text-sm font-semibold text-gray-900 mb-4 flex items-center">
+            <i class="fas fa-bolt text-orange-500 mr-2"></i>
+            Hızlı İşlemler
+        </h4>
+        <div class="grid grid-cols-2 gap-3">
+            <a asp-area="Admin" asp-controller="AdminMenu" asp-action="Index" asp-route-cityFilter="@Model.Name"
+               class="flex items-center p-3 bg-blue-50 border border-blue-200 rounded-lg hover:bg-blue-100 transition-colors">
+                <i class="fas fa-utensils text-blue-600 mr-3"></i>
+                <div>
+                    <div class="text-sm font-medium text-blue-900">Menüleri Görüntüle</div>
+                    <div class="text-xs text-blue-600">Bu şehrin menülerini listele</div>
+                </div>
+            </a>
+            <a asp-area="Admin" asp-controller="AdminMenu" asp-action="Create"
+               class="flex items-center p-3 bg-green-50 border border-green-200 rounded-lg hover:bg-green-100 transition-colors">
+                <i class="fas fa-plus text-green-600 mr-3"></i>
+                <div>
+                    <div class="text-sm font-medium text-green-900">Menü Ekle</div>
+                    <div class="text-xs text-green-600">Yeni menü oluştur</div>
+                </div>
             </a>
         </div>
-    </form>
+    </div>
 </div>
 
 @if (TempData["Success"] != null)
 {
-    <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mt-4 rounded">
-        @TempData["Success"]
-    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            showAdminNotification('@TempData["Success"]', 'success');
+        });
+    </script>
 }
 @if (TempData["Error"] != null)
 {
-    <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mt-4 rounded">
-        @TempData["Error"]
-    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            showAdminNotification('@TempData["Error"]', 'error');
+        });
+    </script>
 }
 
 @section Scripts {

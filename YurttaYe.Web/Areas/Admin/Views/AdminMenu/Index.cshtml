@@ -42,6 +42,8 @@
     };
 }
 
+@Html.AntiForgeryToken()
+
 <!-- Success/Error Messages -->
 @if (TempData["Success"] != null)
 {
@@ -386,9 +388,36 @@
             if (selectedMenus.length === 0) return;
             
             if (confirmAdminDelete(`${selectedMenus.length} menüyü silmek istediğinizden emin misiniz?`)) {
-                // Implement bulk delete logic
                 showAdminNotification(`${selectedMenus.length} menü siliniyor...`, 'info');
-                // Add AJAX call here for bulk delete
+                
+                fetch('/Admin/AdminMenu/BulkDelete', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]')?.value
+                    },
+                    body: JSON.stringify(selectedMenus.map(id => parseInt(id)))
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        showAdminNotification(data.message, 'success');
+                        // Remove deleted rows from table
+                        selectedMenus.forEach(id => {
+                            const row = document.querySelector(`[data-menu-id="${id}"]`);
+                            if (row) row.remove();
+                        });
+                        selectedMenus = [];
+                        updateSelectedMenus();
+                        // Reload page after a short delay
+                        setTimeout(() => location.reload(), 1500);
+                    } else {
+                        showAdminNotification(data.message, 'error');
+                    }
+                })
+                .catch(error => {
+                    showAdminNotification('Menüler silinirken bir hata oluştu!', 'error');
+                });
             }
         }
 
