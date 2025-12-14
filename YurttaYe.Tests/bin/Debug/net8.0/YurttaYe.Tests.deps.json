@@ -2629,10 +2629,7 @@
           "Npgsql.EntityFrameworkCore.PostgreSQL": "8.0.8"
         },
         "runtime": {
-          "YurttaYe.Core.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "YurttaYe.Core.dll": {}
         },
         "compile": {
           "YurttaYe.Core.dll": {}
@@ -2647,10 +2644,7 @@
           "YurttaYe.Core": "1.0.0"
         },
         "runtime": {
-          "YurttaYe.Data.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "YurttaYe.Data.dll": {}
         },
         "compile": {
           "YurttaYe.Data.dll": {}
@@ -2663,10 +2657,7 @@
           "YurttaYe.Data": "1.0.0"
         },
         "runtime": {
-          "YurttaYe.Services.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "YurttaYe.Services.dll": {}
         },
         "compile": {
           "YurttaYe.Services.dll": {}
@@ -2685,17 +2676,14 @@
           "YurttaYe.Services": "1.0.0"
         },
         "runtime": {
-          "YurttaYe.Web.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "YurttaYe.Web.dll": {}
         },
         "resources": {
-          "tr/YurttaYe.Web.resources.dll": {
-            "locale": "tr"
-          },
           "en/YurttaYe.Web.resources.dll": {
             "locale": "en"
+          },
+          "tr/YurttaYe.Web.resources.dll": {
+            "locale": "tr"
           }
         },
         "compile": {

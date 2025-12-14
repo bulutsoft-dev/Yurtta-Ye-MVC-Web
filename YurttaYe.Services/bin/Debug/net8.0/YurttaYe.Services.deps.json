@@ -598,10 +598,7 @@
           "Npgsql.EntityFrameworkCore.PostgreSQL": "8.0.8"
         },
         "runtime": {
-          "YurttaYe.Core.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "YurttaYe.Core.dll": {}
         }
       },
       "YurttaYe.Data/1.0.0": {
@@ -613,10 +610,7 @@
           "YurttaYe.Core": "1.0.0"
         },
         "runtime": {
-          "YurttaYe.Data.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "YurttaYe.Data.dll": {}
         }
       }
     }

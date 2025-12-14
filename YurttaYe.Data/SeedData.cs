@@ -62,7 +62,7 @@ namespace YurttaYe.Data
                     {
                         CityId = istanbul.Id,
                         Date = new DateTime(2025, 5, 15),
-                        MealType = "Dinner",
+                        MealType = "Akşam Yemeği",
                         Energy = "850-1100 kkal",
                         Items = new()
                         {
@@ -78,7 +78,7 @@ namespace YurttaYe.Data
                     {
                         CityId = istanbul.Id,
                         Date = new DateTime(2025, 5, 16),
-                        MealType = "Dinner",
+                        MealType = "Akşam Yemeği",
                         Energy = "900-1150 kkal",
                         Items = new()
                         {
@@ -94,7 +94,7 @@ namespace YurttaYe.Data
                     {
                         CityId = istanbul.Id,
                         Date = new DateTime(2025, 5, 17),
-                        MealType = "Dinner",
+                        MealType = "Akşam Yemeği",
                         Energy = "800-1000 kkal",
                         Items = new()
                         {
@@ -110,7 +110,7 @@ namespace YurttaYe.Data
                     {
                         CityId = istanbul.Id,
                         Date = new DateTime(2025, 5, 18),
-                        MealType = "Dinner",
+                        MealType = "Akşam Yemeği",
                         Energy = "850-1100 kkal",
                         Items = new()
                         {
@@ -126,7 +126,7 @@ namespace YurttaYe.Data
                     {
                         CityId = istanbul.Id,
                         Date = new DateTime(2025, 5, 19),
-                        MealType = "Dinner",
+                        MealType = "Akşam Yemeği",
                         Energy = "870-1120 kkal",
                         Items = new()
                         {
@@ -142,7 +142,7 @@ namespace YurttaYe.Data
                     {
                         CityId = istanbul.Id,
                         Date = new DateTime(2025, 5, 20),
-                        MealType = "Dinner",
+                        MealType = "Akşam Yemeği",
                         Energy = "890-1170 kkal",
                         Items = new()
                         {
@@ -160,7 +160,7 @@ namespace YurttaYe.Data
                     {
                         CityId = istanbul.Id,
                         Date = new DateTime(2025, 5, 21),
-                        MealType = "Dinner",
+                        MealType = "Akşam Yemeği",
                         Energy = "880-1120 kkal",
                         Items = new()
                         {

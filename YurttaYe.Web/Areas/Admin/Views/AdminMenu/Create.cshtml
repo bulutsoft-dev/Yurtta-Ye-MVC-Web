@@ -69,8 +69,8 @@
                         </label>
                         <select asp-for="MealType" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
                             <option value="">Öğün Türü Seçiniz</option>
-                            <option value="Breakfast">🌅 Kahvaltı</option>
-                            <option value="Dinner">🌙 Akşam Yemeği</option>
+                            <option value="Kahvaltı">🌅 Kahvaltı</option>
+                            <option value="Akşam Yemeği">🌙 Akşam Yemeği</option>
                         </select>
                         <span asp-validation-for="MealType" class="text-red-500 text-sm"></span>
                     </div>
@@ -134,9 +134,13 @@
                                             <option value="Çorba" selected="@(Model.Items[i].Category == "Çorba")">🍲 Çorba</option>
                                             <option value="Salata" selected="@(Model.Items[i].Category == "Salata")">🥗 Salata</option>
                                             <option value="Pilav" selected="@(Model.Items[i].Category == "Pilav")">🍚 Pilav</option>
+                                            <option value="Garnitür" selected="@(Model.Items[i].Category == "Garnitür")">🍳 Garnitür</option>
+                                            <option value="Makarna" selected="@(Model.Items[i].Category == "Makarna")">🍝 Makarna</option>
                                             <option value="Tatlı" selected="@(Model.Items[i].Category == "Tatlı")">🍰 Tatlı</option>
                                             <option value="İçecek" selected="@(Model.Items[i].Category == "İçecek")">🥤 İçecek</option>
                                             <option value="Ekmek" selected="@(Model.Items[i].Category == "Ekmek")">🍞 Ekmek</option>
+                                            <option value="Kahvaltılık" selected="@(Model.Items[i].Category == "Kahvaltılık")">🍳 Kahvaltılık</option>
+                                            <option value="Ekstra" selected="@(Model.Items[i].Category == "Ekstra")">➕ Ekstra</option>
                                         </select>
                                     </div>
                                     <div>
@@ -168,9 +172,13 @@
                                         <option value="Çorba">🍲 Çorba</option>
                                         <option value="Salata">🥗 Salata</option>
                                         <option value="Pilav">🍚 Pilav</option>
+                                        <option value="Garnitür">🍳 Garnitür</option>
+                                        <option value="Makarna">🍝 Makarna</option>
                                         <option value="Tatlı">🍰 Tatlı</option>
                                         <option value="İçecek">🥤 İçecek</option>
                                         <option value="Ekmek">🍞 Ekmek</option>
+                                        <option value="Kahvaltılık">🍳 Kahvaltılık</option>
+                                        <option value="Ekstra">➕ Ekstra</option>
                                     </select>
                                 </div>
                                 <div>
@@ -274,9 +282,13 @@
                                 <option value="Çorba">🍲 Çorba</option>
                                 <option value="Salata">🥗 Salata</option>
                                 <option value="Pilav">🍚 Pilav</option>
+                                <option value="Garnitür">🍳 Garnitür</option>
+                                <option value="Makarna">🍝 Makarna</option>
                                 <option value="Tatlı">🍰 Tatlı</option>
                                 <option value="İçecek">🥤 İçecek</option>
                                 <option value="Ekmek">🍞 Ekmek</option>
+                                <option value="Kahvaltılık">🍳 Kahvaltılık</option>
+                                <option value="Ekstra">➕ Ekstra</option>
                             </select>
                         </div>
                         <div>
@@ -328,7 +340,7 @@
             let templates = [];
             
             if (type === 'breakfast') {
-                document.querySelector('[name="MealType"]').value = 'Breakfast';
+                document.querySelector('[name="MealType"]').value = 'Kahvaltı';
                 templates = [
                     { category: 'Ekmek', name: 'Beyaz Ekmek', gram: '2 dilim' },
                     { category: 'İçecek', name: 'Çay', gram: '1 bardak' },
@@ -336,7 +348,7 @@
                     { category: 'Salata', name: 'Domates Salata', gram: '1 tabak' }
                 ];
             } else if (type === 'dinner') {
-                document.querySelector('[name="MealType"]').value = 'Dinner';
+                document.querySelector('[name="MealType"]').value = 'Akşam Yemeği';
                 templates = [
                     { category: 'Çorba', name: 'Mercimek Çorbası', gram: '1 kase' },
                     { category: 'Ana Yemek', name: 'Tavuk Şnitzel', gram: '1 porsiyon' },
@@ -362,9 +374,13 @@
                                     <option value="Çorba" ${template.category === 'Çorba' ? 'selected' : ''}>🍲 Çorba</option>
                                     <option value="Salata" ${template.category === 'Salata' ? 'selected' : ''}>🥗 Salata</option>
                                     <option value="Pilav" ${template.category === 'Pilav' ? 'selected' : ''}>🍚 Pilav</option>
+                                    <option value="Garnitür" ${template.category === 'Garnitür' ? 'selected' : ''}>🍳 Garnitür</option>
+                                    <option value="Makarna" ${template.category === 'Makarna' ? 'selected' : ''}>🍝 Makarna</option>
                                     <option value="Tatlı" ${template.category === 'Tatlı' ? 'selected' : ''}>🍰 Tatlı</option>
                                     <option value="İçecek" ${template.category === 'İçecek' ? 'selected' : ''}>🥤 İçecek</option>
                                     <option value="Ekmek" ${template.category === 'Ekmek' ? 'selected' : ''}>🍞 Ekmek</option>
+                                    <option value="Kahvaltılık" ${template.category === 'Kahvaltılık' ? 'selected' : ''}>🍳 Kahvaltılık</option>
+                                    <option value="Ekstra" ${template.category === 'Ekstra' ? 'selected' : ''}>➕ Ekstra</option>
                                 </select>
                             </div>
                             <div>

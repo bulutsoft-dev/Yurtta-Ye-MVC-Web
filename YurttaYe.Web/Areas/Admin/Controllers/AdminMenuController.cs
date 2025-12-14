@@ -92,8 +92,8 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
             ViewBag.Cities = allCities.Select(c => new SelectListItem { Value = c.Name, Text = c.Name });
             ViewBag.MealTypes = new List<SelectListItem>
             {
-                new SelectListItem { Value = "Breakfast", Text = _localizer["Morning"] },
-                new SelectListItem { Value = "Dinner", Text = _localizer["Evening"] }
+                new SelectListItem { Value = "Kahvaltı", Text = _localizer["Morning"] },
+                new SelectListItem { Value = "Akşam Yemeği", Text = _localizer["Evening"] }
             };
 
             return View(model.ToList());

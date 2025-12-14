@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/furkanblt/Documents/Insighttech/Yurtta-Ye-MVC-Web/YurttaYe.Services/YurttaYe.Services.csproj": {}
+    "/home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Services/YurttaYe.Services.csproj": {}
   },
   "projects": {
-    "/home/furkanblt/Documents/Insighttech/Yurtta-Ye-MVC-Web/YurttaYe.Core/YurttaYe.Core.csproj": {
+    "/home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Core/YurttaYe.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/furkanblt/Documents/Insighttech/Yurtta-Ye-MVC-Web/YurttaYe.Core/YurttaYe.Core.csproj",
+        "projectUniqueName": "/home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Core/YurttaYe.Core.csproj",
         "projectName": "YurttaYe.Core",
-        "projectPath": "/home/furkanblt/Documents/Insighttech/Yurtta-Ye-MVC-Web/YurttaYe.Core/YurttaYe.Core.csproj",
+        "projectPath": "/home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Core/YurttaYe.Core.csproj",
         "packagesPath": "/home/furkanblt/.nuget/packages/",
-        "outputPath": "/home/furkanblt/Documents/Insighttech/Yurtta-Ye-MVC-Web/YurttaYe.Core/obj/",
+        "outputPath": "/home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Core/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/furkanblt/.nuget/NuGet/NuGet.Config"
@@ -62,18 +62,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/var/run/host/usr/lib/dotnet/sdk/8.0.121/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/var/run/host/usr/lib/dotnet/sdk/8.0.122/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "/home/furkanblt/Documents/Insighttech/Yurtta-Ye-MVC-Web/YurttaYe.Data/YurttaYe.Data.csproj": {
+    "/home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Data/YurttaYe.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/furkanblt/Documents/Insighttech/Yurtta-Ye-MVC-Web/YurttaYe.Data/YurttaYe.Data.csproj",
+        "projectUniqueName": "/home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Data/YurttaYe.Data.csproj",
         "projectName": "YurttaYe.Data",
-        "projectPath": "/home/furkanblt/Documents/Insighttech/Yurtta-Ye-MVC-Web/YurttaYe.Data/YurttaYe.Data.csproj",
+        "projectPath": "/home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Data/YurttaYe.Data.csproj",
         "packagesPath": "/home/furkanblt/.nuget/packages/",
-        "outputPath": "/home/furkanblt/Documents/Insighttech/Yurtta-Ye-MVC-Web/YurttaYe.Data/obj/",
+        "outputPath": "/home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Data/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/furkanblt/.nuget/NuGet/NuGet.Config"
@@ -88,8 +88,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/home/furkanblt/Documents/Insighttech/Yurtta-Ye-MVC-Web/YurttaYe.Core/YurttaYe.Core.csproj": {
-                "projectPath": "/home/furkanblt/Documents/Insighttech/Yurtta-Ye-MVC-Web/YurttaYe.Core/YurttaYe.Core.csproj"
+              "/home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Core/YurttaYe.Core.csproj": {
+                "projectPath": "/home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Core/YurttaYe.Core.csproj"
               }
             }
           }
@@ -147,18 +147,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/var/run/host/usr/lib/dotnet/sdk/8.0.121/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/var/run/host/usr/lib/dotnet/sdk/8.0.122/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "/home/furkanblt/Documents/Insighttech/Yurtta-Ye-MVC-Web/YurttaYe.Services/YurttaYe.Services.csproj": {
+    "/home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Services/YurttaYe.Services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/furkanblt/Documents/Insighttech/Yurtta-Ye-MVC-Web/YurttaYe.Services/YurttaYe.Services.csproj",
+        "projectUniqueName": "/home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Services/YurttaYe.Services.csproj",
         "projectName": "YurttaYe.Services",
-        "projectPath": "/home/furkanblt/Documents/Insighttech/Yurtta-Ye-MVC-Web/YurttaYe.Services/YurttaYe.Services.csproj",
+        "projectPath": "/home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Services/YurttaYe.Services.csproj",
         "packagesPath": "/home/furkanblt/.nuget/packages/",
-        "outputPath": "/home/furkanblt/Documents/Insighttech/Yurtta-Ye-MVC-Web/YurttaYe.Services/obj/",
+        "outputPath": "/home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Services/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/furkanblt/.nuget/NuGet/NuGet.Config"
@@ -173,11 +173,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/home/furkanblt/Documents/Insighttech/Yurtta-Ye-MVC-Web/YurttaYe.Core/YurttaYe.Core.csproj": {
-                "projectPath": "/home/furkanblt/Documents/Insighttech/Yurtta-Ye-MVC-Web/YurttaYe.Core/YurttaYe.Core.csproj"
+              "/home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Core/YurttaYe.Core.csproj": {
+                "projectPath": "/home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Core/YurttaYe.Core.csproj"
               },
-              "/home/furkanblt/Documents/Insighttech/Yurtta-Ye-MVC-Web/YurttaYe.Data/YurttaYe.Data.csproj": {
-                "projectPath": "/home/furkanblt/Documents/Insighttech/Yurtta-Ye-MVC-Web/YurttaYe.Data/YurttaYe.Data.csproj"
+              "/home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Data/YurttaYe.Data.csproj": {
+                "projectPath": "/home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Data/YurttaYe.Data.csproj"
               }
             }
           }
@@ -213,7 +213,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/var/run/host/usr/lib/dotnet/sdk/8.0.121/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/var/run/host/usr/lib/dotnet/sdk/8.0.122/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

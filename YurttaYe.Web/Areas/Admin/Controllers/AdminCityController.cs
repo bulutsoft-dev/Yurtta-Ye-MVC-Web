@@ -133,8 +133,8 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
             };
 
             ViewBag.RecentMenus = cityMenus.OrderByDescending(m => m.Date).Take(5).ToList();
-            ViewBag.BreakfastCount = cityMenus.Count(m => m.MealType == "Breakfast");
-            ViewBag.DinnerCount = cityMenus.Count(m => m.MealType == "Dinner");
+            ViewBag.BreakfastCount = cityMenus.Count(m => m.MealType == "Kahvaltı");
+            ViewBag.DinnerCount = cityMenus.Count(m => m.MealType == "Akşam Yemeği");
 
             return PartialView("_CityDetails", model);
         }
