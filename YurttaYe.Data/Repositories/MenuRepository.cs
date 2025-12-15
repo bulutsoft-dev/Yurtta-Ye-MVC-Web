@@ -24,6 +24,15 @@ namespace YurttaYe.Data.Repositories
                 .ToListAsync();
         }
 
+        public async Task<List<Menu>> GetListAsync(System.Linq.Expressions.Expression<Func<Menu, bool>> predicate)
+        {
+            return await _context.Menus
+                .Include(m => m.City)
+                .Include(m => m.Items)
+                .Where(predicate)
+                .ToListAsync();
+        }
+
         public async Task<Menu> GetByIdAsync(int id)
         {
             return await _context.Menus

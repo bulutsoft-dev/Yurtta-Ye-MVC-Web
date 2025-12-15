@@ -49,6 +49,15 @@ namespace YurttaYe.Services
             return await _menuRepository.GetAllAsync();
         }
 
+        public async Task<List<Menu>> GetMenusAsync(int? cityId, string mealType, DateTime? date)
+        {
+            return await _menuRepository.GetListAsync(m => 
+                (!cityId.HasValue || m.CityId == cityId) &&
+                (string.IsNullOrEmpty(mealType) || m.MealType == mealType) &&
+                (!date.HasValue || m.Date >= date.Value) // Performance optimization: Filter by date if provided
+            );
+        }
+
         public async Task AddMenuAsync(Menu menu)
         {
             await _menuRepository.AddAsync(menu);

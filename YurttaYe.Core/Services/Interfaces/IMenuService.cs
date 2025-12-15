@@ -9,6 +9,7 @@ namespace YurttaYe.Core.Services.Interfaces
     public interface IMenuService
     {
         Task<List<Menu>> GetAllMenusAsync();
+        Task<List<Menu>> GetMenusAsync(int? cityId, string mealType, DateTime? date);
         Task<Menu> GetMenuByIdAsync(int id);
         Task<MenuDto> GetMenuAsync(int cityId, string mealType, DateTime date);
         Task AddMenuAsync(Menu menu);
