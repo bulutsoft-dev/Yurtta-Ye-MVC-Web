@@ -105,6 +105,28 @@
     </div>
 </div>
 
+<!-- Menu Distribution Chart (Added missing section) -->
+<div class="admin-card bg-white rounded-xl shadow-lg border border-gray-100 mb-8">
+    <div class="p-6 border-b border-gray-100 flex justify-between items-center">
+        <h3 class="text-xl font-bold text-gray-900 flex items-center">
+            <div class="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-600 rounded-lg flex items-center justify-center mr-3">
+                <i class="fas fa-chart-pie text-white text-sm"></i>
+            </div>
+            Menü Dağılımı (Zaman Çizelgesi)
+        </h3>
+        <div class="flex space-x-2">
+            <button onclick="updateChartPeriod('6months')" class="chart-period-btn active px-3 py-1 text-sm rounded-lg bg-blue-100 text-blue-700 font-medium transition-colors">6 Ay</button>
+            <button onclick="updateChartPeriod('1year')" class="chart-period-btn px-3 py-1 text-sm rounded-lg bg-gray-100 text-gray-600 font-medium hover:bg-gray-200 transition-colors">1 Yıl</button>
+        </div>
+    </div>
+    <div class="p-6 relative h-80">
+        <div id="chart-loading" class="absolute inset-0 bg-white bg-opacity-80 flex items-center justify-center z-10 hidden">
+            <div class="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600"></div>
+        </div>
+        <canvas id="menuDistributionChart"></canvas>
+    </div>
+</div>
+
 <!-- Enhanced Recent Menus Table -->
 <div class="admin-card bg-white rounded-xl shadow-lg border border-gray-100">
     <div class="p-6 border-b border-gray-100">
@@ -287,79 +309,83 @@
                             {
                                 label: 'Kahvaltı',
                                 data: breakfast,
-                            borderColor: '#3B82F6',
-                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
-                            borderWidth: 3,
-                            tension: 0.4,
-                            fill: true,
-                            pointBackgroundColor: '#3B82F6',
-                            pointBorderColor: '#ffffff',
-                            pointBorderWidth: 2,
-                            pointRadius: 6
-                        },
+                                borderColor: '#3B82F6',
+                                backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                                borderWidth: 3,
+                                tension: 0.4,
+                                fill: true,
+                                pointBackgroundColor: '#3B82F6',
+                                pointBorderColor: '#ffffff',
+                                pointBorderWidth: 2,
+                                pointRadius: 6
+                            },
                             {
                                 label: 'Akşam Yemeği',
                                 data: dinner,
-                            borderColor: '#8B5CF6',
-                            backgroundColor: 'rgba(139, 92, 246, 0.1)',
-                            borderWidth: 3,
-                            tension: 0.4,
-                            fill: true,
-                            pointBackgroundColor: '#8B5CF6',
-                            pointBorderColor: '#ffffff',
-                            pointBorderWidth: 2,
-                            pointRadius: 6
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    interaction: {
-                        intersect: false,
-                        mode: 'index'
-                    },
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        tooltip: {
-                            backgroundColor: 'rgba(17, 24, 39, 0.9)',
-                            titleColor: '#F9FAFB',
-                            bodyColor: '#F9FAFB',
-                            borderColor: '#374151',
-                            borderWidth: 1,
-                            cornerRadius: 8
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            grid: {
-                                color: 'rgba(156, 163, 175, 0.2)',
-                                drawBorder: false
-                            },
-                            ticks: {
-                                color: '#6B7280',
-                                font: {
-                                    size: 12
-                                }
+                                borderColor: '#8B5CF6',
+                                backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                                borderWidth: 3,
+                                tension: 0.4,
+                                fill: true,
+                                pointBackgroundColor: '#8B5CF6',
+                                pointBorderColor: '#ffffff',
+                                pointBorderWidth: 2,
+                                pointRadius: 6
                             }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        interaction: {
+                            intersect: false,
+                            mode: 'index'
                         },
-                        x: {
-                            grid: {
+                        plugins: {
+                            legend: {
                                 display: false
                             },
-                            ticks: {
-                                color: '#6B7280',
-                                font: {
-                                    size: 12,
-                                    weight: '500'
+                            tooltip: {
+                                backgroundColor: 'rgba(17, 24, 39, 0.9)',
+                                titleColor: '#F9FAFB',
+                                bodyColor: '#F9FAFB',
+                                borderColor: '#374151',
+                                borderWidth: 1,
+                                cornerRadius: 8
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: {
+                                    color: 'rgba(156, 163, 175, 0.2)',
+                                    drawBorder: false
+                                },
+                                ticks: {
+                                    color: '#6B7280',
+                                    font: {
+                                        size: 12
+                                    }
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    display: false
+                                },
+                                ticks: {
+                                    color: '#6B7280',
+                                    font: {
+                                        size: 12,
+                                        weight: '500'
+                                    }
                                 }
                             }
                         }
                     }
                 });
+            } catch (error) {
+                console.error('Chart verileri yüklenemedi:', error);
+            }
         }
         
         // Update Chart Period
@@ -381,23 +407,19 @@
         // Refresh Chart
         function refreshChart() {
             const loadingEl = document.getElementById('chart-loading');
-            loadingEl.classList.remove('hidden');
+            if(loadingEl) loadingEl.classList.remove('hidden');
             
             setTimeout(() => {
-                // Simulate data loading
-                initializeChart();
-                loadingEl.classList.add('hidden');
-            }, 1000);
-                    }
+                initializeChart().then(() => {
+                    if(loadingEl) loadingEl.classList.add('hidden');
                 });
-            } catch (error) {
-                console.error('Chart verileri yüklenemedi:', error);
-            }
+            }, 500);
         }
         
         // Dashboard Functions
         async function refreshTodayMenus() {
             const el = document.getElementById('today-menus');
+            if(!el) return;
             el.style.opacity = '0.5';
             
             try {
@@ -414,6 +436,7 @@
         
         function checkSystemHealth() {
             const el = document.getElementById('system-health');
+            if(!el) return;
             el.style.opacity = '0.5';
             
             setTimeout(() => {
@@ -427,6 +450,7 @@
         
         function refreshMenuTable() {
             const table = document.getElementById('recent-menus-table');
+            if(!table) return;
             table.style.opacity = '0.5';
             
             setTimeout(() => {
