@@ -13,6 +13,7 @@ namespace YurttaYe.Data.Repositories
         Task AddAsync(Menu menu);
         Task UpdateAsync(Menu menu);
         Task DeleteAsync(int id);
+        Task<List<Menu>> GetListAsync(System.Linq.Expressions.Expression<Func<Menu, bool>> predicate);
         Task<List<Menu>> GetRecentMenusAsync(int count);
     }
 }

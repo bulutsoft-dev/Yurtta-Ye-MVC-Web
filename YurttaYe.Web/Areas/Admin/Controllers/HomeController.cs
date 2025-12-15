@@ -35,8 +35,10 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
                 {
                     Id = m.Id,
                     CityName = m.City.Name,
+                    Location = "Merkez Kampüs", // Placeholder as no location data in entity
                     MealType = m.MealType,
-                    Date = m.Date
+                    Date = m.Date,
+                    MenuContent = string.Join(", ", m.Items.Select(i => i.Name))
                 }).ToList()
             };
 

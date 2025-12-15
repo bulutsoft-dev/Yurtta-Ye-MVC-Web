@@ -21,7 +21,16 @@ namespace YurttaYe.Web.Controllers.Api
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] int? cityId, [FromQuery] string? mealType, [FromQuery] string? date)
         {
-            var menus = await _serviceManager.MenuService.GetAllMenusAsync();
+            DateTime? filterDate = null;
+            if (!string.IsNullOrEmpty(date) && DateTime.TryParse(date, out var parsedDate))
+            {
+                filterDate = parsedDate;
+            }
+
+            // Optimization: GetMenusAsync now performs filtering at the database level
+            // Note: 'date' parameter is treated as 'Start Date' (>=) for this optimization
+            var menus = await _serviceManager.MenuService.GetMenusAsync(cityId, mealType, filterDate);
+            
             var dtos = menus.Select(m => new MenuDto
             {
                 Id = m.Id,
@@ -36,13 +45,6 @@ namespace YurttaYe.Web.Controllers.Api
                     Gram = i.Gram
                 }).ToList()
             });
-
-            if (cityId.HasValue)
-                dtos = dtos.Where(m => m.CityId == cityId.Value);
-            if (!string.IsNullOrEmpty(mealType))
-                dtos = dtos.Where(m => m.MealType == mealType);
-            if (!string.IsNullOrEmpty(date) && DateTime.TryParse(date, out var parsedDate))
-                dtos = dtos.Where(m => DateTime.Parse(m.Date).Date == parsedDate.Date);
 
             return Ok(dtos);
         }
