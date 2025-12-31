@@ -17,7 +17,8 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Date navigation
+    // Date navigation - MOVED TO menu-interface.js
+    /*
     if (prevDateBtn) {
         prevDateBtn.addEventListener('click', function () {
             const currentDate = new Date(dateInput.value);
@@ -96,4 +97,5 @@ document.addEventListener('DOMContentLoaded', function () {
             body.classList.add('theme-evening');
         }
     }
+    */
 });
