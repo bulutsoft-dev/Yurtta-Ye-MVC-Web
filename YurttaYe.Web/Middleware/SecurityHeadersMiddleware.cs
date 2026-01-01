@@ -34,17 +34,17 @@ namespace YurttaYe.Web.Middleware
             context.Response.Headers["Permissions-Policy"] = "geolocation=(), microphone=(), camera=()";
             
             // Content-Security-Policy: XSS ve injection saldırılarına karşı koruma
-            // Not: Uygulamanın ihtiyaçlarına göre ayarlanmalı
-            // Geliştirme ve Production için esnek CSP
+            // Not: CDN'lerin çalışması için esnek CSP kullanılıyor
+            // Tüm CDN kaynaklarına izin veriliyor
             context.Response.Headers["Content-Security-Policy"] = 
-                "default-src 'self'; " +
-                "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://unpkg.com; " +
-                "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https:; " +
-                "font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com https:; " +
-                "img-src 'self' data: blob: https:; " +
-                "connect-src 'self' https: wss:; " +
-                "media-src 'self' https:; " +
-                "frame-ancestors 'none';";
+                "default-src * 'self' data: blob:; " +
+                "script-src * 'self' 'unsafe-inline' 'unsafe-eval' data: blob:; " +
+                "style-src * 'self' 'unsafe-inline' data: blob:; " +
+                "font-src * 'self' data: blob:; " +
+                "img-src * 'self' data: blob:; " +
+                "connect-src * 'self' data: blob: wss: ws:; " +
+                "media-src * 'self' data: blob:; " +
+                "frame-ancestors 'self';";
             
             // Cache-Control for sensitive pages
             if (context.Request.Path.StartsWithSegments("/Admin") || 

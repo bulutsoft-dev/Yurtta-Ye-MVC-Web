@@ -105,52 +105,24 @@ builder.Services.ConfigureApplicationCookie(options =>
 
 
 // ==========================================
-// 4. CORS (Güvenli Yapılandırma)
+// 4. CORS (Esnek Yapılandırma)
 // ==========================================
-// Production domain ve mobil uygulama desteği
-var productionOrigins = new[] 
-{ 
-    "https://yurttaye.onrender.com",
-    "https://yurttaye.com", 
-    "https://www.yurttaye.com" 
-};
-
-// Environment variable'dan ek origin'ler alınabilir
-var additionalOrigins = Environment.GetEnvironmentVariable("ALLOWED_ORIGINS")?.Split(',') ?? Array.Empty<string>();
-var allowedOrigins = productionOrigins.Concat(additionalOrigins).Distinct().ToArray();
-
 builder.Services.AddCors(options =>
 {
-    // Web uygulaması için güvenli politika
+    // Ana politika - Tüm kaynaklara izin ver
     options.AddPolicy("SecurePolicy", policy =>
     {
-        if (builder.Environment.IsDevelopment())
-        {
-            // Development ortamında localhost'a izin ver
-            policy.WithOrigins("http://localhost:5000", "http://localhost:5107", "http://localhost:3000", "https://localhost:5000", "https://localhost:5107")
-                .AllowAnyMethod()
-                .AllowAnyHeader()
-                .AllowCredentials();
-        }
-        else
-        {
-            // Production ortamında belirli domainlere izin ver
-            policy.WithOrigins(allowedOrigins)
-                .AllowAnyMethod()
-                .AllowAnyHeader()
-                .AllowCredentials();
-        }
+        policy.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader();
     });
     
     // Mobil uygulama (Flutter) için API politikası
-    // Mobil uygulamalar origin göndermez, bu yüzden API endpoint'leri için
-    // daha esnek bir politika gerekiyor
     options.AddPolicy("MobileApiPolicy", policy =>
     {
-        policy.AllowAnyOrigin() // Mobil uygulamalar için gerekli
+        policy.AllowAnyOrigin()
             .AllowAnyMethod()
             .AllowAnyHeader();
-        // Not: AllowCredentials() ile AllowAnyOrigin() birlikte kullanılamaz
     });
 });
 
