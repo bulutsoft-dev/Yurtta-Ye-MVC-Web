@@ -102,29 +102,50 @@ builder.Services.ConfigureApplicationCookie(options =>
 // ==========================================
 // 4. CORS (Güvenli Yapılandırma)
 // ==========================================
-var allowedOrigins = Environment.GetEnvironmentVariable("ALLOWED_ORIGINS")?.Split(',') 
-    ?? new[] { "https://yurttaye.com", "https://www.yurttaye.com" };
+// Production domain ve mobil uygulama desteği
+var productionOrigins = new[] 
+{ 
+    "https://yurttaye.onrender.com",
+    "https://yurttaye.com", 
+    "https://www.yurttaye.com" 
+};
+
+// Environment variable'dan ek origin'ler alınabilir
+var additionalOrigins = Environment.GetEnvironmentVariable("ALLOWED_ORIGINS")?.Split(',') ?? Array.Empty<string>();
+var allowedOrigins = productionOrigins.Concat(additionalOrigins).Distinct().ToArray();
 
 builder.Services.AddCors(options =>
 {
+    // Web uygulaması için güvenli politika
     options.AddPolicy("SecurePolicy", policy =>
     {
         if (builder.Environment.IsDevelopment())
         {
             // Development ortamında localhost'a izin ver
-            policy.WithOrigins("http://localhost:5000", "http://localhost:5107", "http://localhost:3000")
+            policy.WithOrigins("http://localhost:5000", "http://localhost:5107", "http://localhost:3000", "https://localhost:5000", "https://localhost:5107")
                 .AllowAnyMethod()
                 .AllowAnyHeader()
                 .AllowCredentials();
         }
         else
         {
-            // Production ortamında sadece belirli domainlere izin ver
+            // Production ortamında belirli domainlere izin ver
             policy.WithOrigins(allowedOrigins)
                 .AllowAnyMethod()
                 .AllowAnyHeader()
                 .AllowCredentials();
         }
+    });
+    
+    // Mobil uygulama (Flutter) için API politikası
+    // Mobil uygulamalar origin göndermez, bu yüzden API endpoint'leri için
+    // daha esnek bir politika gerekiyor
+    options.AddPolicy("MobileApiPolicy", policy =>
+    {
+        policy.AllowAnyOrigin() // Mobil uygulamalar için gerekli
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+        // Not: AllowCredentials() ile AllowAnyOrigin() birlikte kullanılamaz
     });
 });
 
