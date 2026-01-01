@@ -12,12 +12,20 @@ using System.Globalization;
 using System.Collections.Generic;
 using Microsoft.Extensions.Options;
 using YurttaYe.Core.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
 DotNetEnv.Env.Load();
 
-// 1. MVC + Razor View desteği
-builder.Services.AddControllersWithViews()
+// ==========================================
+// 1. MVC + Razor View desteği + Global CSRF
+// ==========================================
+builder.Services.AddControllersWithViews(options =>
+{
+    // Global CSRF koruması - Tüm POST isteklerinde AntiForgeryToken doğrulaması
+    options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+})
     .AddViewLocalization(Microsoft.AspNetCore.Mvc.Razor.LanguageViewLocationExpanderFormat.Suffix)
     .AddDataAnnotationsLocalization(options =>
     {
@@ -32,40 +40,178 @@ builder.Services.Configure<Microsoft.AspNetCore.Mvc.MvcOptions>(options =>
 });
 
 
-// 2. EF Core (SQLite)
-//builder.Services.AddDbContext<AppDbContext>(options =>
-//    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-// PostgreSQL Database Connection String
+// ==========================================
+// 2. EF Core - PostgreSQL Database
+// ==========================================
 var connectionString = Environment.GetEnvironmentVariable("DATABASE_CONNECTION_STRING");
+if (string.IsNullOrEmpty(connectionString))
+{
+    throw new InvalidOperationException("DATABASE_CONNECTION_STRING environment variable is not set.");
+}
+
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    options.UseNpgsql(connectionString); // PostgreSQL için Npgsql kullanılıyor
+    options.UseNpgsql(connectionString);
 });
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 
-// 3. Identity + Cookie Authentication
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+// ==========================================
+// 3. Identity + Cookie Authentication (Güvenlik İyileştirmeleri)
+// ==========================================
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+{
+    // Password Policy - Güçlendirilmiş şifre gereksinimleri
+    options.Password.RequiredLength = 8;
+    options.Password.RequireDigit = true;
+    options.Password.RequireLowercase = true;
+    options.Password.RequireUppercase = true;
+    options.Password.RequireNonAlphanumeric = true;
+    options.Password.RequiredUniqueChars = 4;
+    
+    // Lockout Policy - Brute-force koruması
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
+    options.Lockout.MaxFailedAccessAttempts = 5;
+    options.Lockout.AllowedForNewUsers = true;
+    
+    // User settings
+    options.User.RequireUniqueEmail = true;
+})
     .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
 
+// Cookie Authentication Güvenlik Ayarları
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = "/Account/Login";
     options.AccessDeniedPath = "/Account/AccessDenied";
+    options.LogoutPath = "/Account/Logout";
+    
+    // Cookie güvenlik ayarları
+    options.Cookie.HttpOnly = true; // JavaScript erişimini engelle
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always; // Sadece HTTPS
+    options.Cookie.SameSite = SameSiteMode.Strict; // CSRF koruması
+    options.Cookie.Name = "YurttaYe.Auth";
+    
+    // Session timeout
+    options.ExpireTimeSpan = TimeSpan.FromHours(8);
+    options.SlidingExpiration = true;
 });
 
-// 4. CORS (Flutter için)
+
+// ==========================================
+// 4. CORS (Güvenli Yapılandırma)
+// ==========================================
+// Production domain ve mobil uygulama desteği
+var productionOrigins = new[] 
+{ 
+    "https://yurttaye.onrender.com",
+    "https://yurttaye.com", 
+    "https://www.yurttaye.com" 
+};
+
+// Environment variable'dan ek origin'ler alınabilir
+var additionalOrigins = Environment.GetEnvironmentVariable("ALLOWED_ORIGINS")?.Split(',') ?? Array.Empty<string>();
+var allowedOrigins = productionOrigins.Concat(additionalOrigins).Distinct().ToArray();
+
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowFlutter", policy =>
-        policy.AllowAnyOrigin() // Geliştirme için tüm origin'lere izin ver
+    // Web uygulaması için güvenli politika
+    options.AddPolicy("SecurePolicy", policy =>
+    {
+        if (builder.Environment.IsDevelopment())
+        {
+            // Development ortamında localhost'a izin ver
+            policy.WithOrigins("http://localhost:5000", "http://localhost:5107", "http://localhost:3000", "https://localhost:5000", "https://localhost:5107")
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials();
+        }
+        else
+        {
+            // Production ortamında belirli domainlere izin ver
+            policy.WithOrigins(allowedOrigins)
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials();
+        }
+    });
+    
+    // Mobil uygulama (Flutter) için API politikası
+    // Mobil uygulamalar origin göndermez, bu yüzden API endpoint'leri için
+    // daha esnek bir politika gerekiyor
+    options.AddPolicy("MobileApiPolicy", policy =>
+    {
+        policy.AllowAnyOrigin() // Mobil uygulamalar için gerekli
             .AllowAnyMethod()
-            .AllowAnyHeader());
+            .AllowAnyHeader();
+        // Not: AllowCredentials() ile AllowAnyOrigin() birlikte kullanılamaz
+    });
 });
 
-// Add localization services
+
+// ==========================================
+// 5. Rate Limiting (DDoS/Brute-force koruması)
+// ==========================================
+builder.Services.AddRateLimiter(options =>
+{
+    options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+    
+    // Global rate limit - IP bazlı
+    options.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(context =>
+    {
+        // API endpoint'leri için daha sıkı limit
+        if (context.Request.Path.StartsWithSegments("/api"))
+        {
+            return RateLimitPartition.GetFixedWindowLimiter(
+                partitionKey: $"api_{context.Connection.RemoteIpAddress?.ToString() ?? "anonymous"}",
+                factory: _ => new FixedWindowRateLimiterOptions
+                {
+                    AutoReplenishment = true,
+                    PermitLimit = 60,
+                    Window = TimeSpan.FromMinutes(1)
+                });
+        }
+        
+        // Login endpoint için daha sıkı limit
+        if (context.Request.Path.StartsWithSegments("/Account/Login"))
+        {
+            return RateLimitPartition.GetFixedWindowLimiter(
+                partitionKey: $"login_{context.Connection.RemoteIpAddress?.ToString() ?? "anonymous"}",
+                factory: _ => new FixedWindowRateLimiterOptions
+                {
+                    AutoReplenishment = true,
+                    PermitLimit = 5,
+                    Window = TimeSpan.FromMinutes(5)
+                });
+        }
+        
+        // Diğer istekler için genel limit
+        return RateLimitPartition.GetFixedWindowLimiter(
+            partitionKey: context.Connection.RemoteIpAddress?.ToString() ?? "anonymous",
+            factory: _ => new FixedWindowRateLimiterOptions
+            {
+                AutoReplenishment = true,
+                PermitLimit = 100,
+                Window = TimeSpan.FromMinutes(1)
+            });
+    });
+    
+    options.OnRejected = async (context, token) =>
+    {
+        context.HttpContext.Response.StatusCode = StatusCodes.Status429TooManyRequests;
+        await context.HttpContext.Response.WriteAsJsonAsync(new 
+        { 
+            error = "Çok fazla istek gönderdiniz. Lütfen bir süre bekleyin.",
+            retryAfter = "60 saniye sonra tekrar deneyin"
+        }, cancellationToken: token);
+    };
+});
+
+
+// ==========================================
+// 6. Localization Services
+// ==========================================
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 
 builder.Services.Configure<RequestLocalizationOptions>(options =>
@@ -87,7 +233,9 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
 });
 
 
-// 5. Dependency Injection
+// ==========================================
+// 7. Dependency Injection
+// ==========================================
 builder.Services.AddScoped<IMenuService, MenuService>();
 builder.Services.AddScoped<ICityService, CityService>();
 builder.Services.AddScoped<IMenuRepository, MenuRepository>();
@@ -95,33 +243,73 @@ builder.Services.AddScoped<ICityRepository, CityRepository>();
 builder.Services.AddScoped<IServiceManager, ServiceManager>();
 builder.Services.AddHttpClient<ApiService>();
 
-// 6. Swagger
-builder.Services.AddSwaggerGen();
 
+// ==========================================
+// 8. Swagger (Sadece Development)
+// ==========================================
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services.AddSwaggerGen();
+}
+
+
+// ==========================================
+// BUILD APPLICATION
+// ==========================================
 var app = builder.Build();
 
-// 7. Dev ortamında Swagger aç
+
+// ==========================================
+// MIDDLEWARE PIPELINE
+// ==========================================
+
+// 1. Exception handling (en üstte olmalı)
+app.UseMiddleware<ExceptionMiddleware>();
+
+// 2. Development ortamında Swagger
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+else
+{
+    // Production ortamında HSTS
+    app.UseHsts();
+}
 
-// 8. Middleware pipeline
-app.UseMiddleware<ExceptionMiddleware>();
-app.UseMiddleware<ApiKeyMiddleware>(); // API Key doğrulaması
+// 3. Security Headers
+app.UseSecurityHeaders();
+
+// 4. HTTPS yönlendirme
 app.UseHttpsRedirection();
+
+// 5. Static files
 app.UseStaticFiles();
 
+// 6. Rate Limiting
+app.UseRateLimiter();
+
+// 7. Localization
 app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
 
+// 8. Routing
 app.UseRouting();
 
+// 9. CORS
+app.UseCors("SecurePolicy");
+
+// 10. API Key doğrulaması
+app.UseMiddleware<ApiKeyMiddleware>();
+
+// 11. Authentication & Authorization
 app.UseAuthentication();
 app.UseAuthorization();
 
 
-// 9. Route tanımları
+// ==========================================
+// ROUTE DEFINITIONS
+// ==========================================
 app.MapControllerRoute(
     name: "areas",
     pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
@@ -130,7 +318,10 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-// 10. Seed verisi
+
+// ==========================================
+// DATABASE SEEDING
+// ==========================================
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;

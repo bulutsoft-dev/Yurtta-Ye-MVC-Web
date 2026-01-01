@@ -1,9 +1,12 @@
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer localizer
+@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment hostEnv
+@inject Microsoft.Extensions.Configuration.IConfiguration config
 @model YurttaYe.Core.Models.ViewModels.LoginViewModel
 @{
     ViewData["Title"] = localizer["Title"];
     Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    var isDemoEnabled = hostEnv.IsDevelopment() && config.GetValue<bool>("Security:EnableDemoLogin");
 }
 
 <div class="min-h-screen bg-gradient-to-br from-blue-600 via-blue-700 to-purple-800 dark:from-gray-800 dark:via-gray-900 dark:to-black flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden transition-colors duration-300">
@@ -163,13 +166,18 @@
                         </span>
                     </button>
 
-                    <!-- Demo Login Button -->
-                    <button type="button" 
-                            class="w-full flex justify-center py-3 px-4 border-2 border-dashed border-blue-300 dark:border-blue-600 text-sm font-medium rounded-lg text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors duration-200"
-                            x-on:click="fillDemoCredentials()">
-                        <i class="fas fa-user-cog mr-2"></i>
-                        @localizer["DemoLogin"]
-                    </button>
+                    @* Demo Login Button - Sadece Development ortamında göster *@
+                    @if (isDemoEnabled)
+                    {
+                        <button type="button" 
+                                id="demoLoginBtn"
+                                class="w-full flex justify-center py-3 px-4 border-2 border-dashed border-blue-300 dark:border-blue-600 text-sm font-medium rounded-lg text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors duration-200"
+                                x-on:click="fillDemoCredentials()">
+                            <i class="fas fa-user-cog mr-2"></i>
+                            @localizer["DemoLogin"]
+                            <span class="ml-2 text-xs bg-yellow-500 text-white px-2 py-0.5 rounded">DEV ONLY</span>
+                        </button>
+                    }
                 </div>
             </form>
             
@@ -224,22 +232,40 @@ function loginForm() {
     return {
         username: '',
         password: '',
+        isDemoEnabled: @Html.Raw(Json.Serialize(isDemoEnabled)),
         
         init() {
             // Initialize form
+            console.log('Login form initialized');
         },
         
         validateUsername() {
-            // Username validation
+            // Client-side username validation
+            if (this.username.length < 3) {
+                return false;
+            }
+            return true;
         },
         
         validatePassword() {
-            // Password validation
+            // Client-side password validation
+            if (this.password.length < 6) {
+                return false;
+            }
+            return true;
         },
         
         fillDemoCredentials() {
-            this.username = 'admin';
-            this.password = 'Admin123!';
+            // Demo credentials - sadece development ortamında çalışır
+            // Gerçek credentials sunucu tarafında kontrol edilir
+            if (!this.isDemoEnabled) {
+                console.warn('Demo login is disabled in this environment');
+                return;
+            }
+            // NOT: Bu değerler sadece geliştirme amaçlıdır
+            // Production'da bu buton görünmez
+            this.username = 'demo@@yurttaye.com';
+            this.password = 'DemoP@ss123';
         }
     };
 }

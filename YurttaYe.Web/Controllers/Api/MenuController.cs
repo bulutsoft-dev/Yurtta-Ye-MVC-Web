@@ -1,4 +1,5 @@
 using System;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using YurttaYe.Core.Models.Dtos;
@@ -9,6 +10,7 @@ namespace YurttaYe.Web.Controllers.Api
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("MobileApiPolicy")] // Mobil uygulama desteği
     public class MenuController : ControllerBase
     {
         private readonly IServiceManager _serviceManager;

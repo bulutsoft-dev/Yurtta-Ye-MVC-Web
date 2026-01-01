@@ -29,8 +29,8 @@
 /home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Services/obj/Debug/net8.0/YurttaYe.Services.AssemblyInfo.cs
 /home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Services/obj/Debug/net8.0/YurttaYe.Services.csproj.CoreCompileInputs.cache
 /home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Services/obj/Debug/net8.0/YurttaYe.Services.sourcelink.json
-/home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Services/obj/Debug/net8.0/YurttaYe.Services.csproj.CopyComplete
 /home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Services/obj/Debug/net8.0/YurttaYe.Services.dll
 /home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Services/obj/Debug/net8.0/refint/YurttaYe.Services.dll
 /home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Services/obj/Debug/net8.0/YurttaYe.Services.pdb
 /home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Services/obj/Debug/net8.0/ref/YurttaYe.Services.dll
+/home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Services/obj/Debug/net8.0/YurttaYe.53D2B2F0.Up2Date

@@ -66,6 +66,7 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(AdminCityViewModel model)
         {
             if (ModelState.IsValid)
@@ -89,6 +90,7 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(AdminCityViewModel model)
         {
             if (ModelState.IsValid)
@@ -103,6 +105,7 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
             try

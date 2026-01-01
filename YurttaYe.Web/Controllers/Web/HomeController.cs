@@ -84,6 +84,7 @@ namespace YurttaYe.Web.Controllers.Web
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index(MenuViewModel model)
         {
             var cities = await _serviceManager.CityService.GetAllCitiesAsync();

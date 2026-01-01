@@ -1,5 +1,6 @@
 using System;
 using System.Net.Http.Json;
+using System.Web;
 using YurttaYe.Core.Models.Entities;
 using YurttaYe.Web;
 
@@ -8,13 +9,17 @@ namespace YurttaYe.Web.Services
     public class ApiService : IDisposable
     {
         private readonly HttpClient _httpClient;
-        private readonly string _apiUrl = "http://localhost:5107/api"; // Domain: https://yurttaye.com/api
+        private readonly string _apiUrl;
         private bool _disposed = false;
 
         public ApiService(HttpClient httpClient)
         {
             _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
-            _httpClient.BaseAddress = new Uri("http://localhost:5107/");
+            
+            // API URL'i environment variable'dan al, yoksa localhost kullan
+            var baseUrl = Environment.GetEnvironmentVariable("API_BASE_URL") ?? "https://localhost:5107";
+            _apiUrl = $"{baseUrl}/api";
+            _httpClient.BaseAddress = new Uri(baseUrl);
         }
 
         public async Task<List<City>> GetCities()
@@ -34,9 +39,15 @@ namespace YurttaYe.Web.Services
             try
             {
                 var query = new List<string>();
-                if (cityId.HasValue) query.Add($"cityId={cityId}");
-                if (!string.IsNullOrEmpty(mealType)) query.Add($"mealType={mealType}");
-                if (!string.IsNullOrEmpty(date)) query.Add($"date={date}");
+                
+                // URL encode parameters to prevent injection
+                if (cityId.HasValue) 
+                    query.Add($"cityId={cityId}");
+                if (!string.IsNullOrEmpty(mealType)) 
+                    query.Add($"mealType={HttpUtility.UrlEncode(mealType)}");
+                if (!string.IsNullOrEmpty(date)) 
+                    query.Add($"date={HttpUtility.UrlEncode(date)}");
+                
                 var url = $"{_apiUrl}/Menu" + (query.Any() ? $"?{string.Join("&", query)}" : "");
                 return await _httpClient.GetFromJsonAsync<List<Menu>>(url) ?? new List<Menu>();
             }

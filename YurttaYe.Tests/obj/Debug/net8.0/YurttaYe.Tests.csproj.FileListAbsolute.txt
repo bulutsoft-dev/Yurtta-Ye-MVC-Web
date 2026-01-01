@@ -1006,9 +1006,9 @@
 /home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Tests/obj/Debug/net8.0/YurttaYe.Tests.AssemblyInfo.cs
 /home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Tests/obj/Debug/net8.0/YurttaYe.Tests.csproj.CoreCompileInputs.cache
 /home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Tests/obj/Debug/net8.0/YurttaYe.Tests.sourcelink.json
-/home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Tests/obj/Debug/net8.0/YurttaYe.Tests.csproj.CopyComplete
 /home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Tests/obj/Debug/net8.0/YurttaYe.Tests.dll
 /home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Tests/obj/Debug/net8.0/refint/YurttaYe.Tests.dll
 /home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Tests/obj/Debug/net8.0/YurttaYe.Tests.pdb
 /home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Tests/obj/Debug/net8.0/YurttaYe.Tests.genruntimeconfig.cache
 /home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Tests/obj/Debug/net8.0/ref/YurttaYe.Tests.dll
+/home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Tests/obj/Debug/net8.0/YurttaYe.AC8D4D71.Up2Date
