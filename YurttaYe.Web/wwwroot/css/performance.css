@@ -9,13 +9,19 @@
     --text: #1E293B;
 }
 
-/* Font Loading Optimization */
+/* Font Loading Optimization - Google Fonts CDN */
+/* Inter font yüklenmezse sistem fontlarına düşer */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Fallback font-face tanımı */
 @font-face {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400 700;
     font-display: swap;
-    src: url('/fonts/inter-var.woff2') format('woff2');
+    src: local('Inter'), 
+         local('Inter-Regular'),
+         url('https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50ujQw.woff2') format('woff2');
 }
 
 /* Minimize Layout Shift */

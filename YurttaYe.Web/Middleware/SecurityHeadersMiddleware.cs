@@ -35,13 +35,15 @@ namespace YurttaYe.Web.Middleware
             
             // Content-Security-Policy: XSS ve injection saldırılarına karşı koruma
             // Not: Uygulamanın ihtiyaçlarına göre ayarlanmalı
+            // Geliştirme ve Production için esnek CSP
             context.Response.Headers["Content-Security-Policy"] = 
                 "default-src 'self'; " +
-                "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; " +
-                "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://fonts.googleapis.com; " +
-                "font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; " +
-                "img-src 'self' data: https:; " +
-                "connect-src 'self'; " +
+                "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://unpkg.com; " +
+                "style-src 'self' 'unsafe-inline' https:; " +
+                "font-src 'self' data: https:; " +
+                "img-src 'self' data: blob: https:; " +
+                "connect-src 'self' https: wss:; " +
+                "media-src 'self' https:; " +
                 "frame-ancestors 'none';";
             
             // Cache-Control for sensitive pages

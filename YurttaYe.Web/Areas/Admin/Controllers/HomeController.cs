@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,7 +10,13 @@ using System;
 
 namespace YurttaYe.Web.Areas.Admin.Controllers
 {
+    /// <summary>
+    /// Admin Panel Ana Sayfa Controller'ı
+    /// Bu controller admin dashboard'ı ve genel istatistikleri gösterir.
+    /// Sadece "Admin" rolüne sahip kullanıcılar erişebilir.
+    /// </summary>
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class HomeController : Controller
     {
         private readonly IServiceManager _serviceManager;
