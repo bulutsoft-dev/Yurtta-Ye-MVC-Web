@@ -38,9 +38,9 @@ namespace YurttaYe.Web.Middleware
             // Geliştirme ve Production için esnek CSP
             context.Response.Headers["Content-Security-Policy"] = 
                 "default-src 'self'; " +
-                "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://unpkg.com; " +
-                "style-src 'self' 'unsafe-inline' https:; " +
-                "font-src 'self' data: https:; " +
+                "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://unpkg.com; " +
+                "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https:; " +
+                "font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com https:; " +
                 "img-src 'self' data: blob: https:; " +
                 "connect-src 'self' https: wss:; " +
                 "media-src 'self' https:; " +
