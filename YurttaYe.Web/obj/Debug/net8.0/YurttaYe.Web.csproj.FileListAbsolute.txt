@@ -446,9 +446,9 @@
 /home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Web/obj/Debug/net8.0/scopedcss/Views/Shared/_Layout.cshtml.rz.scp.css
 /home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Web/obj/Debug/net8.0/scopedcss/bundle/YurttaYe.Web.styles.css
 /home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Web/obj/Debug/net8.0/scopedcss/projectbundle/YurttaYe.Web.bundle.scp.css
-/home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Web/obj/Debug/net8.0/YurttaYe.Web.csproj.CopyComplete
 /home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Web/obj/Debug/net8.0/YurttaYe.Web.dll
 /home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Web/obj/Debug/net8.0/refint/YurttaYe.Web.dll
 /home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Web/obj/Debug/net8.0/YurttaYe.Web.pdb
 /home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Web/obj/Debug/net8.0/YurttaYe.Web.genruntimeconfig.cache
 /home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Web/obj/Debug/net8.0/ref/YurttaYe.Web.dll
+/home/furkanblt/Documents/Bulutsoft/YurttaYe/Yurtta-Ye-MVC-Web/YurttaYe.Web/obj/Debug/net8.0/YurttaYe.A66095F0.Up2Date

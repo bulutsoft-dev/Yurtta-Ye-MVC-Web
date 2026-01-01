@@ -2629,7 +2629,10 @@
           "Npgsql.EntityFrameworkCore.PostgreSQL": "8.0.8"
         },
         "runtime": {
-          "YurttaYe.Core.dll": {}
+          "YurttaYe.Core.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         },
         "compile": {
           "YurttaYe.Core.dll": {}
@@ -2644,7 +2647,10 @@
           "YurttaYe.Core": "1.0.0"
         },
         "runtime": {
-          "YurttaYe.Data.dll": {}
+          "YurttaYe.Data.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         },
         "compile": {
           "YurttaYe.Data.dll": {}
@@ -2657,7 +2663,10 @@
           "YurttaYe.Data": "1.0.0"
         },
         "runtime": {
-          "YurttaYe.Services.dll": {}
+          "YurttaYe.Services.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         },
         "compile": {
           "YurttaYe.Services.dll": {}
@@ -2676,7 +2685,10 @@
           "YurttaYe.Services": "1.0.0"
         },
         "runtime": {
-          "YurttaYe.Web.dll": {}
+          "YurttaYe.Web.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         },
         "resources": {
           "en/YurttaYe.Web.resources.dll": {

@@ -116,6 +116,7 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(AdminMenuViewModel model)
         {
             if (ModelState.IsValid)
@@ -169,6 +170,7 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(AdminMenuViewModel model)
         {
             if (ModelState.IsValid)
@@ -199,6 +201,7 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -256,6 +259,7 @@ namespace YurttaYe.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Upload(IFormFile file)
         {
             if (file == null || file.Length == 0)
