@@ -89,8 +89,13 @@ builder.Services.ConfigureApplicationCookie(options =>
     
     // Cookie güvenlik ayarları
     options.Cookie.HttpOnly = true; // JavaScript erişimini engelle
-    options.Cookie.SecurePolicy = CookieSecurePolicy.Always; // Sadece HTTPS
-    options.Cookie.SameSite = SameSiteMode.Strict; // CSRF koruması
+    
+    // Development ortamında HTTP kullanılabilir, Production'da sadece HTTPS
+    options.Cookie.SecurePolicy = builder.Environment.IsDevelopment() 
+        ? CookieSecurePolicy.SameAsRequest 
+        : CookieSecurePolicy.Always;
+    
+    options.Cookie.SameSite = SameSiteMode.Lax; // Cross-site request'lerde çalışabilir
     options.Cookie.Name = "YurttaYe.Auth";
     
     // Session timeout
@@ -274,15 +279,13 @@ if (app.Environment.IsDevelopment())
 }
 else
 {
-    // Production ortamında HSTS
+    // Production ortamında HSTS ve HTTPS zorunlu
     app.UseHsts();
+    app.UseHttpsRedirection();
 }
 
 // 3. Security Headers
 app.UseSecurityHeaders();
-
-// 4. HTTPS yönlendirme
-app.UseHttpsRedirection();
 
 // 5. Static files
 app.UseStaticFiles();
