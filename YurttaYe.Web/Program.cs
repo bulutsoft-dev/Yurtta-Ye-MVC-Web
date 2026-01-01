@@ -231,6 +231,19 @@ if (builder.Environment.IsDevelopment())
 
 
 // ==========================================
+// 9. Forwarded Headers (Proxy Support for Render.com)
+// ==========================================
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders = Microsoft.AspNetCore.HttpOverrides.ForwardedHeaders.XForwardedFor | 
+                             Microsoft.AspNetCore.HttpOverrides.ForwardedHeaders.XForwardedProto;
+    // Cloud ortamlarında proxy IP'si değişken olabilir, bu yüzden bu listeleri temizliyoruz
+    options.KnownNetworks.Clear();
+    options.KnownProxies.Clear();
+});
+
+
+// ==========================================
 // BUILD APPLICATION
 // ==========================================
 var app = builder.Build();
@@ -240,10 +253,13 @@ var app = builder.Build();
 // MIDDLEWARE PIPELINE
 // ==========================================
 
-// 1. Exception handling (en üstte olmalı)
+// 1. Forwarded Headers (En üstte olmalı - Proxy desteği)
+app.UseForwardedHeaders();
+
+// 2. Exception handling
 app.UseMiddleware<ExceptionMiddleware>();
 
-// 2. Development ortamında Swagger
+// 3. Development ortamında Swagger
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
